@@ -6,14 +6,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
 
-export default function FloatingImage({
+interface FloatingImageProps {
+  imageUrl: string;
+  alt: string;
+  annotation: string;
+  className?: string;
+  animationDelay?: number;
+  initialRotation?: number;
+}
+
+const FloatingImage: React.FC<FloatingImageProps> = ({
   imageUrl,
   alt,
   annotation,
-  className, // For custom positioning
+  className = "",
   animationDelay = 0,
   initialRotation = 0,
-}) {
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -55,4 +64,6 @@ export default function FloatingImage({
       </AnimatePresence>
     </motion.div>
   );
-}
+};
+
+export default FloatingImage;

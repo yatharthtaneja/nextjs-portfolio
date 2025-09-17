@@ -4,6 +4,11 @@
 
 import { useState, useRef } from 'react';
 
+interface InteractiveNameProps {
+  name: string;
+  colorIndexes?: { [key: number]: string };
+}
+
 const fonts = [
   'font-family-hover-one',
   'font-family-hover-two',
@@ -11,21 +16,21 @@ const fonts = [
 ];
 const defaultFont = 'font-family-default';
 
-export default function InteractiveName({ name , colorIndexes = {} }) {
-  const [hoveredIndexes, setHoveredIndexes] = useState({});
-  const [fontCycleIndexes, setFontCycleIndexes] = useState({});
-  const intervalRefs = useRef({});
-  const timeoutRefs = useRef({});
+export default function InteractiveName({ name, colorIndexes = {} }: InteractiveNameProps) {
+  const [hoveredIndexes, setHoveredIndexes] = useState<{ [key: number]: boolean }>({});
+  const [fontCycleIndexes, setFontCycleIndexes] = useState<{ [key: number]: number }>({});
+  const intervalRefs = useRef<{ [key: number]: NodeJS.Timeout | null }>({});
+  const timeoutRefs = useRef<{ [key: number]: NodeJS.Timeout | null }>({});
 
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index: number) => {
     setHoveredIndexes((prev) => ({ ...prev, [index]: true }));
     setFontCycleIndexes((prev) => ({ ...prev, [index]: 0 }));
 
     if (timeoutRefs.current[index]) {
-      clearTimeout(timeoutRefs.current[index]);
+      clearTimeout(timeoutRefs.current[index]!);
       timeoutRefs.current[index] = null;
     }
-    if (intervalRefs.current[index]) clearInterval(intervalRefs.current[index]);
+    if (intervalRefs.current[index]) clearInterval(intervalRefs.current[index]!);
 
     intervalRefs.current[index] = setInterval(() => {
       setFontCycleIndexes((prev) => ({
@@ -35,9 +40,9 @@ export default function InteractiveName({ name , colorIndexes = {} }) {
     }, 300);
   };
 
-  const handleMouseLeave = (index) => {
+  const handleMouseLeave = (index: number) => {
     if (intervalRefs.current[index]) {
-      clearInterval(intervalRefs.current[index]);
+      clearInterval(intervalRefs.current[index]!);
       intervalRefs.current[index] = null;
     }
     // Wait 2 seconds before resetting
