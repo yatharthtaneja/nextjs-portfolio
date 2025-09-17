@@ -1,5 +1,9 @@
-@import "tailwindcss";
 
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Elite&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+@import "tailwindcss";
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,17 +14,53 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-family-default: "Bowlby One SC", sans-serif;
+  --font-family-hover-one: "Roboto", sans-serif;
+  --font-family-hover-two: "Playfair Display", serif;
+  --font-family-hover-three: "Special Elite";
 }
+
+
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background:  #ededed;
+    --foreground: #0a0a0a;
+    --purplebackground: #402cc3;
+    --maroontext: #AB4967;
   }
 }
 
+.purplebackground {
+  color: var(--purplebackground);
+}
+
+.custom-black {
+  color: #171717; /* or your preferred black shade */
+}
+
+
+.double-border {
+  box-shadow:
+    0 0 0 6px #402cc3,   
+    0 0 0 23px  #AB4967 ;/* purple border */
+  background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><rect width='20' height='20' fill='%23f7f7f7'/><path d='M0 10 Q5 15 10 10 T20 10' stroke='%23e0e0e0' stroke-width='1' fill='none'/></svg>");
+  background-repeat: repeat;
+}
+
+.special-elite-regular {
+  font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.maroontext {
+  color: var(--maroontext);
+}
+
 body {
-  background: var(--background);
+  background: var(--purplebackground);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  padding: 1rem;
 }
