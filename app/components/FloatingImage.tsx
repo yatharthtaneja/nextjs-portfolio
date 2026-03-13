@@ -9,7 +9,7 @@ import Image from 'next/image';
 interface FloatingImageProps {
   imageUrl: string;
   alt: string;
-  annotation: string;
+  // annotation: string;
   className?: string;
   animationDelay?: number;
   initialRotation?: number;
@@ -18,7 +18,7 @@ interface FloatingImageProps {
 const FloatingImage: React.FC<FloatingImageProps> = ({
   imageUrl,
   alt,
-  annotation,
+  // annotation,
   className = "",
   animationDelay = 0,
   initialRotation = 0,
@@ -49,7 +49,7 @@ const FloatingImage: React.FC<FloatingImageProps> = ({
       </motion.div>
 
       {/* The annotation logic remains the same and correctly tied to the parent's hover state */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isHovered && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -61,7 +61,7 @@ const FloatingImage: React.FC<FloatingImageProps> = ({
             {annotation}
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </motion.div>
   );
 };

@@ -17,7 +17,8 @@ export const metadata: Metadata = {
   title: "Yatharth Taneja",
   description: "Created by Yatharth Taneja, a passionate builder and designer. Explore my portfolio to see my work and projects.",
 icons: {
-    icon: "/public/images/ytlogo.svg",
+    icon: "/ytlogo.ico",
+    apple: "/ytlogo.ico",
   },
 };
 
