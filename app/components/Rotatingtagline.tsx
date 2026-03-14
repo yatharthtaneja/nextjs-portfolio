@@ -1,6 +1,9 @@
 "use client";
+import { Geist, Geist_Mono , Bowlby_One , Roboto , Playfair_Display , Special_Elite } from "next/font/google";
 
 import { useState, useEffect } from "react";
+
+const roboto = Roboto({ subsets: ["latin"], weight: ["700"] });
 
 const taglines = [
   {
@@ -54,12 +57,11 @@ export default function RotatingTagline() {
 
   return (
     <div
-      className="absolute bottom-8 left-8"
+      className={`${roboto.className} absolute bottom-8 left-8`}
       style={{ maxWidth: "540px" }}
     >
       <p
         style={{
-          fontFamily: "'Roboto', sans-serif",
           fontWeight: 700,
           fontSize: "clamp(1.4rem, 4vw, 6rem)",
           lineHeight: "0.9",
