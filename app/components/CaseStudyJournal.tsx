@@ -65,12 +65,6 @@ function Journal({ project, index }: { project: JournalProject; index: number })
         {/* ── Media zone ── */}
         <div className="cover-media">
           {project.insetImages && project.insetImages.length > 0 ? (
-            <div style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: 10,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.12)",
-                }}>
             <div className="inset-front">
               <Image
                 src={project.insetImages[0]}
@@ -80,7 +74,6 @@ function Journal({ project, index }: { project: JournalProject; index: number })
                 sizes="340px"
               />
             </div>
-        </div>      
           ) : (
             <div className="inset-placeholder">
               <span className="placeholder-icon">▶</span>
@@ -118,9 +111,9 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           display: flex;
           flex-direction: row;
           position: relative;
-          /* Book proportions matching the reference: ~420×600 */
-          width: 380px;
-          height: 560px;
+          /* Fluid on mobile, fixed on desktop */
+          width: min(380px, 88vw);
+          height: calc(min(380px, 88vw) * 1.47);
           text-decoration: none;
           animation: journalFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
           transition: transform 0.38s cubic-bezier(0.22,1,0.36,1),
@@ -265,13 +258,11 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           overflow: hidden;
         }
         .inset-front {
-            position: absolute;
-            inset: 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22),
-              0 2px 8px  rgba(0, 0, 0, 0.12);
-}
+          position: absolute;
+          inset: 0;
+          border-radius: 10px;
+          overflow: hidden;
+        }
         .inset-img {
           object-fit: cover;
         }
@@ -352,13 +343,26 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           display: flex;
           gap: 40px;
           flex-wrap: wrap;
-          /* FIX: center the row of journals */
           justify-content: center;
           align-items: flex-end;
         }
-        /* Organic stagger — middle card sits slightly higher */
-        .journals-grid .journal-wrapper:nth-child(2) {
-          margin-top: -20px;
+        /* Stack vertically on mobile, side-by-side on desktop */
+        @media (max-width: 768px) {
+          .journals-grid {
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+          }
+          /* Remove stagger offset on mobile — all same size */
+          .journals-grid .journal-wrapper:nth-child(2) {
+            margin-top: 0 !important;
+          }
+        }
+        /* Organic stagger on desktop only */
+        @media (min-width: 769px) {
+          .journals-grid .journal-wrapper:nth-child(2) {
+            margin-top: -20px;
+          }
         }
       `}</style>
 
