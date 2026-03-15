@@ -263,46 +263,50 @@ export default function Home() {
       >
         <div style={{ height: 3, background: "#4030C3" }} />
 
-        <div className="max-w-5xl mx-auto px-6 md:px-8 py-12 md:py-20">
-
-          <div className="mb-10 md:mb-16">
-            <p style={{
+        {/* Heading — stays constrained */}
+      <div className="max-w-5xl mx-auto px-6 md:px-8 pt-12 md:pt-20 pb-8 md:pb-12">
+        <div className="mb-10 md:mb-16">
+          <p style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase" as const,
+            color: "#AB4967",
+            marginBottom: 8,
+          }}>
+            Selected Work
+          </p>
+          <p style={{
               fontFamily: "'Roboto', sans-serif",
-              fontSize: 11,
               fontWeight: 700,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase" as const,
-              color: "#AB4967",
-              marginBottom: 8,
-            }}>
-              Selected Work
-            </p>
-            <h2 style={{
-              fontFamily: "'Roboto', sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(1rem, 1vw, 4.5rem)",
+              fontSize: "clamp(0.85rem, 1.5vw, 1.1rem)",        // ← whatever size you want, completely fixed
               lineHeight: 1.0,
               color: "#27174E",
               margin: 0,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase" as const,
             }}>
-              CASE STUDIES
-            </h2>
-            <p style={{
-              fontFamily: "'Roboto', sans-serif",
-              fontSize: 15,
-              lineHeight: 1.65,
-              color: "#171717",
-              opacity: 0.75,
-              marginTop: 16,
-              marginBottom: 0,
-            }}>
-              Enterprise products, industrial tooling, and published research — each shaped by rigorous mixed-methods UX. Two are NDA-protected.
+              Case Studies
             </p>
-          </div>
-
-          <CaseStudyJournals projects={projects} />
-
+          <p style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontSize: 15,
+            lineHeight: 1.65,
+            color: "#171717",
+            opacity: 0.75,
+            marginTop: 16,
+            marginBottom: 0,
+          }}>
+            Heads up! These case studies are a bit lengthy. I share a lot about my approach and design thinking. Not a ton of pictures, but hopefully plenty of insights. Two are NDA-protected. Thanks for stopping by—I hope you find something useful.
+          </p>
         </div>
+      </div>
+
+{/* Journals — full width, no max-w clipping */}
+<div style={{ width: "100%", overflow: "visible", paddingBottom: "80px" }}>
+  <CaseStudyJournals projects={projects} />
+</div>
       </section>
 
     </main>

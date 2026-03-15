@@ -66,5 +66,7 @@ body {
   background: var(--purplebackground);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  padding: 1rem;
+  padding: 0;
+  overflow-x: clip;
+  overflow-y: visible;
 }
