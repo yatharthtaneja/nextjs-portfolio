@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -22,9 +22,34 @@ export interface JournalProject {
 function Journal({ project, index }: { project: JournalProject; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
+  const [scrollOpen, setScrollOpen] = useState(false);
+  const wrapperRef = useRef<HTMLAnchorElement>(null);
+
+  // Scroll-triggered open — MOBILE ONLY (no pointer/hover device)
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    // Only activate on touch/mobile — skip on desktop (pointer: fine = mouse)
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (!isTouchDevice) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.4) setScrollOpen(true);
+        else if (entry.intersectionRatio < 0.15) setScrollOpen(false);
+      },
+      { threshold: [0, 0.15, 0.4, 0.75, 1] }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // On touch devices use scroll state, on pointer devices use hover state
+  const isOpen = hovered || scrollOpen;
 
   return (
     <Link
+      ref={wrapperRef}
       href={project.nda ? "#" : `/work/${project.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setPressed(false); }}
@@ -41,7 +66,7 @@ function Journal({ project, index }: { project: JournalProject; index: number })
       <div
         className="journal-cover"
         style={{ background: project.coverColor }}
-        data-hovered={hovered}
+        data-hovered={isOpen}
         data-pressed={pressed}
       >
         {/* ── Row 1: logo + NDA + readtime ── */}
@@ -119,6 +144,8 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           transition: transform 0.38s cubic-bezier(0.22,1,0.36,1),
                       filter 0.38s ease;
           filter: drop-shadow(0 12px 32px rgba(0,0,0,0.18));
+          /* Allow rotated cover to render outside its own box */
+          overflow: visible;
         }
         .journal-wrapper:hover {
           transform: translateY(-14px) rotate(-1.5deg);
@@ -345,6 +372,9 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           flex-wrap: wrap;
           justify-content: center;
           align-items: flex-end;
+          overflow: visible;
+          /* Extra side padding absorbs the perspective rotation bleed */
+          padding: 0 20px 20px 20px;
         }
         /* Stack vertically on mobile, side-by-side on desktop */
         @media (max-width: 768px) {
@@ -352,10 +382,17 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
             flex-direction: column;
             align-items: center;
             gap: 28px;
+            /* Enough horizontal room for the rotated cover not to clip */
+            padding: 0 24px;
+            overflow: visible;
           }
           /* Remove stagger offset on mobile — all same size */
           .journals-grid .journal-wrapper:nth-child(2) {
             margin-top: 0 !important;
+          }
+          /* On mobile, scroll-open is subtle — less rotation to avoid overflow */
+          .journal-cover[data-hovered="true"] {
+            transform: perspective(900px) rotateY(-4deg) !important;
           }
         }
         /* Organic stagger on desktop only */
