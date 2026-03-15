@@ -1,6 +1,5 @@
 "use client";
-import { Geist, Geist_Mono , Bowlby_One , Roboto , Playfair_Display , Special_Elite } from "next/font/google";
-
+import { Roboto } from "next/font/google";
 import { useState, useEffect } from "react";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["700"] });
@@ -20,29 +19,22 @@ const taglines = [
   },
 ];
 
-export default function RotatingTagline() {
+// ✅ ADD: mobile prop — when true, renders as flow element (no absolute positioning)
+export default function RotatingTagline({ mobile = false }: { mobile?: boolean }) {
   const [index, setIndex] = useState(0);
-  const [animState, setAnimState] = useState<"visible" | "exit" | "enter">(
-    "visible"
-  );
+  const [animState, setAnimState] = useState<"visible" | "exit" | "enter">("visible");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Step 1: start exit animation
       setAnimState("exit");
-
-      // Step 2: swap text mid-fade, then enter
       setTimeout(() => {
         setIndex((prev) => (prev + 1) % taglines.length);
         setAnimState("enter");
       }, 350);
-
-      // Step 3: settle to visible
       setTimeout(() => {
         setAnimState("visible");
       }, 700);
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -57,22 +49,29 @@ export default function RotatingTagline() {
 
   return (
     <div
-      className={`${roboto.className} absolute bottom-8 left-8`}
-      style={{ maxWidth: "540px" }}
+      className={roboto.className}
+      style={{
+        maxWidth: "540px",
+        // ✅ CHANGE: absolute on desktop, static flow on mobile
+        ...(mobile
+          ? {}
+          : { position: "absolute", bottom: 32, left: 32 }),
+      }}
     >
       <p
         style={{
           fontWeight: 700,
-          fontSize: "clamp(1.4rem, 4vw, 6rem)",
+          // ✅ CHANGE: smaller clamp on mobile so it fits the card
+          fontSize: mobile
+            ? "clamp(1.1rem, 5.5vw, 1.6rem)"
+            : "clamp(1.4rem, 4vw, 6rem)",
           lineHeight: "0.9",
           letterSpacing: "-0.01em",
           transition: "opacity 0.35s ease, transform 0.35s ease",
           ...animStyle,
         }}
       >
-        {/* First word(s) in Figma purple */}
         <span style={{ color: "#493972" }}>{current.highlight}</span>
-        {/* Rest in near-black */}
         <span style={{ color: "#0C1713" }}>{current.rest}</span>
       </p>
     </div>

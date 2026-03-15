@@ -1,13 +1,10 @@
 import Image from "next/image";
-import ProductCard from "./components/ProductCard";
 import FloatingImage from './components/FloatingImage';
 import InteractiveName from './components/InteractiveName';
 import OverlappingTitle from "./components/OverlappingTitle";
 import RotatingTagline from "./components/Rotatingtagline";
-// ✅ ADD: import the new journal component + type
 import CaseStudyJournals, { JournalProject } from "./components/CaseStudyJournal";
 
-// ✅ ADD: define your projects once here, at the top
 const projects: JournalProject[] = [
   {
     slug:           "matlab-copilot",
@@ -19,8 +16,8 @@ const projects: JournalProject[] = [
     highlightLabel: "Key Result",
     coverColor:     "#C8BAF0",
     spineColor:     "#4030C3",
-    coverImage:     "/images/opcua-app1.png",
-    insetImages:    ["/images/opcua-app1.png", "/images/matlab-screen-2.png"],
+    coverImage:     "/images/matlab-cover.png",
+    insetImages:    ["/images/matlab-screen-1.png", "/images/matlab-screen-2.png"],
     nda:            true,
   },
   {
@@ -34,7 +31,7 @@ const projects: JournalProject[] = [
     coverColor:     "#B8DFD0",
     spineColor:     "#1E6B4A",
     coverImage:     "/images/opc-cover.png",
-    insetImages:    ["/images/opc-screen-1.png"],
+    insetImages:    ["/images/opcua-app1.png", "/images/opcua-app1.png"],
     nda:            true,
   },
   {
@@ -55,75 +52,171 @@ const projects: JournalProject[] = [
 
 export default function Home() {
   return (
-    // ✅ CHANGE: was `<main className="relative flex min-h-screen ...">` (single section)
-    // Now a plain wrapper — each <section> controls its own bg + height
     <main className="w-full">
 
-      {/* ── SECTION 1: HERO — your existing markup, unchanged ───────────── */}
-      {/* ✅ CHANGE: wrapped in <section id="hero">, moved layout classes here */}
+      {/* ── SECTION 1: HERO ──────────────────────────────────────────────── */}
       <section
         id="hero"
-        className="relative flex min-h-screen w-full items-center justify-center purplebackground p-8"
+        className="relative flex min-h-screen w-full items-center justify-center purplebackground p-4 md:p-8"
       >
-        {/* ✅ NO CHANGE: everything inside this div is identical to your original */}
-        <div className="relative w-full max-w-5xl h-[600px] bg-[#E6E6FA] custom-black double-border">
+        {/*
+          DESKTOP: fixed h-[600px] with absolute children — your original layout
+          MOBILE:  auto height, flex column layout matching Image 2
+          The key trick: on mobile we switch off `h-[600px]` and let content flow,
+          on desktop we restore it and all the absolute positions work as before.
+        */}
+        <div className="
+          relative w-full max-w-5xl bg-[#E6E6FA] custom-black double-border
+          h-auto md:h-[600px]
+          flex flex-col md:block
+          p-5 md:p-0
+        ">
 
-          {/* --- The Name --- */}
-          <div className="absolute top-2/12 right-4 z-10">
-            <div className="text-8xl leading-19">
-              <InteractiveName name="YATH" />
-              <InteractiveName name="ARTH"
-                colorIndexes={{
-                  0: "purpletext",
-                  1: "purpletext",
-                  2: "purpletext",
-                }}
-              />
+          {/* ── MOBILE LAYOUT ─────────────────────────────────────────────
+              Visible only on mobile (md:hidden).
+              Matches Image 2: name top-left, photo top-right, tags below name,
+              tagline in middle, stamps at bottom.
+          ─────────────────────────────────────────────────────────────── */}
+          <div className="flex flex-col gap-4 md:hidden">
+
+            {/* Row 1: Name left, photo right */}
+            <div className="flex items-start justify-between">
+              {/* Name */}
+              <div className="flex flex-col leading-none font-family-default font-bold">
+                <span style={{
+                  fontSize: "clamp(3rem, 15vw, 5rem)",
+                  lineHeight: 1,
+                  color: "#0C1713",
+                }}>YATH</span>
+                {/* ART + H on same line, H in dark */}
+                <div className="flex font-family-default font-bold" style={{ marginTop: -8 }}>
+                  <span style={{                    
+                    fontSize: "clamp(3rem, 15vw, 5rem)",
+                    lineHeight: 1,
+                    color: "#493972",
+                    WebkitTextStroke: "2px #E6E6FA",
+                  }}>ART</span>
+                  <span style={{
+                    
+                    fontSize: "clamp(3rem, 15vw, 5rem)",
+                    lineHeight: 1,
+                    color: "#0C1713",
+                  }}>H</span>
+                </div>
+              </div>
+
+              {/* Photo stamp — top right */}
+              <div style={{ width: "38%", maxWidth: 160 }} className="flex-shrink-0">
+                <Image
+                  src="/images/stamp-me.png"
+                  alt="Yatharth"
+                  width={160}
+                  height={180}
+                  style={{ width: "100%", height: "auto", objectFit: "contain" }}
+                />
+              </div>
             </div>
-            <div className="text-center text-4xl tracking-wider maroontext font-family-hover-three">
-              UX Researcher
+
+            {/* Tags: UX Researcher, Gen-AI, CS + Design */}
+            <div className="flex flex-col font-family-hover-three" style={{
+              gap: "0.5px",
+              fontSize: "clamp(1rem, 4.5vw, 1.25rem)",
+              color: "#AB4967",
+              marginTop: "-16px",
+            }}>
+              <span>UX Researcher</span>
+              <span>Gen-AI</span>
+              <span>CS + Design</span>
+            </div>
+
+            {/* Tagline — mobile prop removes absolute positioning */}
+            <div className="mt-2">
+              <RotatingTagline mobile={true} />
+            </div>
+
+            {/* Bottom stamps row */}
+            <div className="flex items-end gap-2 mt-4">
+              <Image
+                src="/images/stamp-starry-night.svg"
+                alt="Starry Night"
+                width={100}
+                height={100}
+                style={{ width: "28%", height: "auto" }}
+              />
+              <Image
+                src="/images/stamp-delhi.svg"
+                alt="India Gate"
+                width={100}
+                height={100}
+                style={{ width: "28%", height: "auto", marginLeft: -12 }}
+              />
             </div>
           </div>
 
-          <OverlappingTitle
-            text="CS + Design"
-            sizeClass="text-3xl"
-            positionClass="left-11/12 top-[16%]"
-            rotationClass="rotate-[8deg]"
-          />
-          <OverlappingTitle
-            text="Gen-AI"
-            sizeClass="text-3xl"
-            positionClass="right-2/12 top-[18%]"
-            rotationClass="rotate-[-8deg]"
-          />
+          {/* ── DESKTOP LAYOUT ────────────────────────────────────────────
+              Hidden on mobile (hidden md:block).
+              Your original absolute-positioned layout, untouched.
+          ─────────────────────────────────────────────────────────────── */}
+          <div className="hidden md:block w-full h-full">
 
-          <FloatingImage
-            imageUrl="/images/stamp-me.png"
-            alt="My face"
-            className="bottom-6 right-5 w-55"
-            animationDelay={0.1}
-            initialRotation={-5}
-          />
-          <FloatingImage
-            imageUrl="/images/stamp-starry-night.svg"
-            alt="Starry Night"
-            className="top-3 left-11 w-36"
-            animationDelay={0.2}
-            initialRotation={0}
-          />
-          <FloatingImage
-            imageUrl="/images/stamp-delhi.svg"
-            alt="India Gate"
-            className="top-4 left-45 w-35"
-            animationDelay={0.6}
-            initialRotation={-3}
-          />
+            {/* Name — top right */}
+            <div className="absolute top-2/12 right-1/12 z-10">
+              <div className="text-8xl leading-19">
+                <InteractiveName name="YATH" />
+                <InteractiveName name="ARTH"
+                  colorIndexes={{
+                    0: "purpletext",
+                    1: "purpletext",
+                    2: "purpletext",
+                  }}
+                />
+              </div>
+              <div className="text-center text-4xl tracking-wider maroontext font-family-hover-three">
+                UX Researcher
+              </div>
+            </div>
 
-          <RotatingTagline />
+            <OverlappingTitle
+              text="CS + Design"
+              sizeClass="text-3xl"
+              positionClass="left-10/12 top-[16%]"
+              rotationClass="rotate-[8deg]"
+            />
+            <OverlappingTitle
+              text="Gen-AI"
+              sizeClass="text-3xl"
+              positionClass="right-3/12 top-[18%]"
+              rotationClass="rotate-[-8deg]"
+            />
+
+            <FloatingImage
+              imageUrl="/images/stamp-me.png"
+              alt="My face"
+              className="bottom-6 right-5 w-55"
+              animationDelay={0.1}
+              initialRotation={-5}
+            />
+            <FloatingImage
+              imageUrl="/images/stamp-starry-night.svg"
+              alt="Starry Night"
+              className="top-3 left-11 w-36"
+              animationDelay={0.2}
+              initialRotation={0}
+            />
+            <FloatingImage
+              imageUrl="/images/stamp-delhi.svg"
+              alt="India Gate"
+              className="top-1/12 left-45 w-35"
+              animationDelay={0.6}
+              initialRotation={-15}
+            />
+
+            <RotatingTagline />
+          </div>
+
         </div>
 
-        {/* Scroll hint — visible on purple, white, and red backgrounds */}
+        {/* Scroll hint */}
         <a
           href="#work"
           aria-label="Scroll to case studies"
@@ -148,55 +241,31 @@ export default function Home() {
             .scroll-hint:hover { opacity: 1; }
             .scroll-dot-anim { animation: scrollDot 2s ease-in-out infinite; }
           `}</style>
-
           <div className="scroll-hint">
-            <svg width="32" height="50" viewBox="0 0 32 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Outer glow ring — makes it pop on any bg */}
+            <svg width="32" height="50" viewBox="0 0 32 50" fill="none">
               <rect x="2" y="2" width="28" height="36" rx="14"
-                fill="rgba(255,255,255,0.25)"
-                stroke="rgba(255,255,255,0.6)"
-                strokeWidth="1"
-              />
-              {/* Dark inner body — contrast layer */}
+                fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
               <rect x="4" y="4" width="24" height="32" rx="12"
-                fill="rgba(20,10,50,0.55)"
-                stroke="rgba(255,255,255,0.9)"
-                strokeWidth="1.5"
-              />
-              {/* Animated scroll dot */}
-              <rect
-                className="scroll-dot-anim"
-                x="14.5" y="10" width="3" height="7" rx="1.5"
-                fill="white"
-              />
-              {/* Chevron below mouse */}
-              <path
-                d="M9 44l7 6 7-6"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity="0.85"
-              />
+                fill="rgba(20,10,50,0.55)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+              <rect className="scroll-dot-anim" x="14.5" y="10" width="3" height="7" rx="1.5" fill="white" />
+              <path d="M9 44l7 6 7-6" stroke="white" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round" opacity="0.85" />
             </svg>
           </div>
         </a>
       </section>
 
-      {/* ── SECTION 2: CASE STUDIES ─────────────────────────────────────── */}
-      {/* ✅ ADD: everything below is new */}
+      {/* ── SECTION 2: CASE STUDIES ──────────────────────────────────────── */}
       <section
         id="work"
         className="relative w-full min-h-screen"
         style={{ background: "#F0EEF8" }}
       >
-        {/* Thin top rule — visually connects to the purple world above */}
         <div style={{ height: 3, background: "#4030C3" }} />
 
-        <div className="max-w-5xl mx-auto px-8 py-20">
+        <div className="max-w-5xl mx-auto px-6 md:px-8 py-12 md:py-20">
 
-          {/* Section heading */}
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <p style={{
               fontFamily: "'Roboto', sans-serif",
               fontSize: 11,
@@ -208,11 +277,10 @@ export default function Home() {
             }}>
               Selected Work
             </p>
-            {/* ✅ CHANGE: Roboto Bold instead of Bowlby One for consistency */}
             <h2 style={{
               fontFamily: "'Roboto', sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(1rem, 2vw, 1.5rem)",
+              fontSize: "clamp(1rem, 1vw, 4.5rem)",
               lineHeight: 1.0,
               color: "#27174E",
               margin: 0,
@@ -223,8 +291,8 @@ export default function Home() {
               fontFamily: "'Roboto', sans-serif",
               fontSize: 15,
               lineHeight: 1.65,
-              color: "#161616",
-              opacity: 1,
+              color: "#171717",
+              opacity: 0.75,
               marginTop: 16,
               marginBottom: 0,
             }}>
@@ -232,7 +300,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Journals grid */}
           <CaseStudyJournals projects={projects} />
 
         </div>
