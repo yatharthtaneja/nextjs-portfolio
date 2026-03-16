@@ -64,7 +64,7 @@ export default function RotatingTagline({ mobile = false }: { mobile?: boolean }
           // ✅ CHANGE: smaller clamp on mobile so it fits the card
           fontSize: mobile
             ? "clamp(1.1rem, 5.5vw, 1.6rem)"
-            : "clamp(1.4rem, 4vw, 6rem)",
+            : "clamp(1.4rem, 4vw, 4rem)",
           lineHeight: "0.9",
           letterSpacing: "-0.01em",
           transition: "opacity 0.35s ease, transform 0.35s ease",
