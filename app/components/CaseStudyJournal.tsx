@@ -35,10 +35,21 @@ function Journal({ project, index }: { project: JournalProject; index: number })
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.intersectionRatio >= 0.4) setScrollOpen(true);
-        else if (entry.intersectionRatio < 0.15) setScrollOpen(false);
+        const ratio = entry.intersectionRatio;
+        // Open when mostly in view, close as soon as less than half is visible.
+        // Simple hysteresis prevents rapid toggling at the boundary.
+        if (ratio >= 0.6) {
+          setScrollOpen(true);
+        } else if (ratio < 0.5) {
+          setScrollOpen(false);
+        }
       },
-      { threshold: [0, 0.15, 0.4, 0.75, 1] }
+      {
+        // Dense thresholds so the callback fires frequently while scrolling
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        // Fire slightly before element fully exits to animate the reset in time
+        rootMargin: '0px 0px -5% 0px',
+      }
     );
     observer.observe(el);
     return () => observer.disconnect();
