@@ -59,64 +59,88 @@ function Journal({ project, index }: { project: JournalProject; index: number })
       style={{ animationDelay: `${index * 140}ms` }}
       className="journal-wrapper"
     >
-      {/* ── SPINE ── */}
-      <div className="journal-spine" style={{ background: project.spineColor }} />
+      <div className="journal-book" data-hovered={isOpen} data-pressed={pressed}>
+        {/* ── FRONT FACE (COVER + SPINE) ── */}
+        <div className="journal-front">
+          <div className="journal-spine" style={{ background: project.spineColor }} />
 
-      {/* ── COVER ── */}
-      <div
-        className="journal-cover"
-        style={{ background: project.coverColor }}
-        data-hovered={isOpen}
-        data-pressed={pressed}
-      >
-        {/* ── Row 1: logo + NDA + readtime ── */}
-        <div className="cover-topbar">
-          <div className="cover-logo-dot" style={{ background: project.spineColor }} />
-          <div className="cover-topbar-right">
-            {project.nda && <span className="nda-pill">🔒 NDA</span>}
-            <span className="cover-readtime">{project.readTime}</span>
+          <div
+            className="journal-cover"
+            style={{ background: project.coverColor }}
+          >
+            {/* ── Row 1: logo + NDA + readtime ── */}
+            <div className="cover-topbar">
+              <div className="cover-logo-dot" style={{ background: project.spineColor }} />
+              <div className="cover-topbar-right">
+                {project.nda && <span className="nda-pill">🔒 NDA</span>}
+                <span className="cover-readtime">{project.readTime}</span>
+              </div>
+            </div>
+
+            <div className="cover-divider" />
+
+            {/* ── Title block ── */}
+            <div className="cover-title-block">
+              <h3 className="cover-title">{project.title}</h3>
+              <p className="cover-type">{project.type}</p>
+              <p className="cover-subtitle">{project.problem}</p>
+            </div>
+
+            {/* ── Media zone ── */}
+            <div className="cover-media">
+              {project.insetImages && project.insetImages.length > 0 ? (
+                <div className="inset-front">
+                  <Image
+                    src={project.insetImages[0]}
+                    alt=""
+                    fill
+                    className="inset-img"
+                    sizes="340px"
+                  />
+                </div>
+              ) : (
+                <div className="inset-placeholder">
+                  <span className="placeholder-icon">▶</span>
+                  <span>prototype / gif</span>
+                </div>
+              )}
+            </div>
+
+            {/* ── Key result pill ── */}
+            <div className="cover-highlight">
+              <span className="highlight-label">{project.highlightLabel}</span>
+              <span className="highlight-value">{project.highlight}</span>
+            </div>
+
+            {/* ── Hover overlay ── */}
+            <div className="cover-cta" aria-hidden="true">
+              {project.nda ? "Request Access" : "View Case Study"} →
+            </div>
           </div>
         </div>
 
-        <div className="cover-divider" />
+        {/* ── BACK FACE (Structural Base & Shadow) ── */}
+        <div className="journal-back" style={{ background: project.spineColor }} />
 
-        {/* ── Title block ── */}
-        <div className="cover-title-block">
-          <h3 className="cover-title">{project.title}</h3>
-          <p className="cover-type">{project.type}</p>
-          <p className="cover-subtitle">{project.problem}</p>
-        </div>
-
-        {/* ── Media zone ── */}
-        <div className="cover-media">
-          {project.insetImages && project.insetImages.length > 0 ? (
-            <div className="inset-front">
-              <Image
-                src={project.insetImages[0]}
-                alt=""
-                fill
-                className="inset-img"
-                sizes="340px"
-              />
-            </div>
-          ) : (
-            <div className="inset-placeholder">
-              <span className="placeholder-icon">▶</span>
-              <span>prototype / gif</span>
-            </div>
-          )}
-        </div>
-
-        {/* ── Key result pill ── */}
-        <div className="cover-highlight">
-          <span className="highlight-label">{project.highlightLabel}</span>
-          <span className="highlight-value">{project.highlight}</span>
-        </div>
-
-        {/* ── Hover overlay ── */}
-        <div className="cover-cta" aria-hidden="true">
-          {project.nda ? "Request Access" : "View Case Study"} →
-        </div>
+        {/* ── 3D EDGES (PAGES & SIDE SPINE) ── */}
+        {/* The right pages panel uses an inline gradient so the trailing edge (Z=0, the back)
+            shows coverColor — avoids z-sorting issues from a separate back-cover element.
+            'to left' direction because after rotateY(-90deg), the CSS-right end is at Z=0 (back)
+            which on screen appears CLOSER to the front cover edge. */}
+        <div
+          className="journal-pages-right"
+          style={{
+            backgroundImage: [
+              // Lines layer (on top) — run left-to-right so lines cross the pages edge
+              `repeating-linear-gradient(to left, rgba(0,0,0,0.07) 0, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 3px)`,
+              // Color layer: pages fill most of the depth, cover-color back rim at the far (Z=0) end
+              `linear-gradient(to left, #f0efee 0%, #f0efee 78%, ${project.coverColor} 78%, ${project.coverColor} 100%)`
+            ].join(', ')
+          }}
+        />
+        <div className="journal-pages-top" />
+        <div className="journal-pages-bottom" />
+        <div className="journal-spine-side" style={{ background: project.spineColor }} />
       </div>
     </Link>
   );
@@ -133,29 +157,130 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
 
         /* ── WRAPPER ──────────────────────────────────────────────────────── */
         .journal-wrapper {
-          display: flex;
-          flex-direction: row;
           position: relative;
           /* Fluid on mobile, fixed on desktop */
           width: min(380px, 88vw);
           height: calc(min(380px, 88vw) * 1.47);
           text-decoration: none;
           animation: journalFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
-          transition: transform 0.38s cubic-bezier(0.22,1,0.36,1),
-                      filter 0.38s ease;
-          filter: drop-shadow(0 12px 32px rgba(0,0,0,0.18));
-          /* Allow rotated cover to render outside its own box */
+          /* Add perspective to wrapper for 3D effect */
+          perspective: 1500px;
+          /* Allow rotated children to render outside */
           overflow: visible;
         }
-        .journal-wrapper:hover {
-          transform: translateY(-14px) rotate(-1.5deg);
-          filter: drop-shadow(0 28px 52px rgba(0,0,0,0.28));
+
+        /* ── 3D BOOK CONTAINER ────────────────────────────────────────────── */
+        .journal-book {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transform-style: preserve-3d;
+          transition: transform 0.42s cubic-bezier(0.22,1,0.36,1);
+          transform-origin: center center;
+          transform: translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
         }
-        .journal-wrapper:active {
-          transform: translateY(-8px) rotate(-0.5deg) scale(0.98);
+        .journal-book[data-hovered="true"] {
+          transform: translateY(-14px) rotateY(-20deg) rotateX(8deg) rotateZ(-2deg);
+        }
+        .journal-book[data-pressed="true"] {
+          transform: translateY(-8px) rotateY(-10deg) rotateX(4deg) rotateZ(-1deg) scale(0.98);
         }
 
-        /* ── SPINE ────────────────────────────────────────────────────────── */
+        /* ── FRONT FACE ───────────────────────────────────────────────────── */
+        .journal-front {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: row;
+          /* Book depth = 60px. Front face at Z=60. */
+          transform: translateZ(60px);
+          backface-visibility: hidden;
+          border-radius: 5px 12px 12px 5px;
+          overflow: hidden;
+        }
+
+        /* ── BACK FACE (Structural Base & Shadow) ─────────────────────────── */
+        .journal-back {
+          position: absolute;
+          inset: 0;
+          transform: translateZ(0) rotateY(180deg);
+          backface-visibility: hidden;
+          border-radius: 12px 5px 5px 12px;
+          box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+          transition: box-shadow 0.42s ease;
+        }
+        .journal-book[data-hovered="true"] .journal-back {
+          box-shadow: -20px -28px 52px rgba(0,0,0,0.28);
+        }
+        .journal-book[data-pressed="true"] .journal-back {
+          box-shadow: -10px -16px 36px rgba(0,0,0,0.22);
+        }
+
+        /* ── 3D EDGE PANELS (PAGES + SPINE SIDE) ──────────────────────────── */
+        /*
+          CORRECT CSS 3D BOX GEOMETRY (depth D = 60px):
+          - Front face:   translateZ(60px)                          <- Z = 60
+          - Back cover:   translateZ(1px)                           <- Z ~ 0
+          - Edge panels:  anchored at Z=0 edge, rotated to Z=60
+            * No translateZ — the rotation itself spans Z=0 → Z=60
+
+          Right edge:   right:0, width:60, origin right center, rotateY(-90deg)
+          Bottom edge:  bottom:0, height:60, origin bottom center, rotateX(-90deg)
+          Top edge:     top:0,    height:60, origin top center,    rotateX(90deg)
+          Left spine:   left:0,   width:60,  origin left center,   rotateY(90deg)
+        */
+        .journal-pages-right {
+          position: absolute;
+          right: 0;        /* Anchor on the right edge of the book at Z=0 */
+          top: 8px;        /* Back cover overhangs this edge — inset to show overhang */
+          bottom: 8px;
+          width: 60px;     /* equals book depth */
+          /* background comes from inline React style (a gradient that ends with coverColor) */
+          transform-origin: right center;
+          transform: rotateY(-90deg);   /* Left edge swings to Z=60 (front) */
+        }
+        .journal-pages-bottom {
+          position: absolute;
+          bottom: 0;       /* Anchor on the bottom edge of the book at Z=0 */
+          left: 22px;      /* Exclude spine area */
+          right: 8px;      /* Back cover overhangs right */
+          height: 60px;    /* equals book depth */
+          background-color: #eeedec;
+          background-image: repeating-linear-gradient(
+            to top,
+            rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 1px,
+            transparent 1px, transparent 3px
+          );
+          transform-origin: bottom center;
+          transform: rotateX(-90deg);   /* Top edge swings to Z=60 (front) */
+        }
+        .journal-pages-top {
+          position: absolute;
+          top: 0;          /* Anchor on the top edge of the book at Z=0 */
+          left: 22px;      /* Exclude spine area */
+          right: 8px;      /* Back cover overhangs right */
+          height: 60px;    /* equals book depth */
+          background-color: #f5f4f3;
+          background-image: repeating-linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 1px,
+            transparent 1px, transparent 3px
+          );
+          transform-origin: top center;
+          transform: rotateX(90deg);    /* Bottom edge swings to Z=60 (front) */
+        }
+        .journal-spine-side {
+          position: absolute;
+          left: 0;         /* Anchor on the left edge of the book at Z=0 */
+          top: 0;
+          bottom: 0;
+          width: 60px;     /* equals book depth */
+          transform-origin: left center;
+          transform: rotateY(90deg);    /* Right edge swings to Z=60 (front) */
+          border-radius: 8px 0 0 8px;
+        }
+
+        /* ── SPINE (Front Face) ───────────────────────────────────────────── */
         .journal-spine {
           width: 22px;
           height: 100%;
@@ -166,7 +291,7 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
                       inset 2px 0 4px rgba(255,255,255,0.15);
         }
 
-        /* ── COVER ────────────────────────────────────────────────────────── */
+        /* ── COVER (Front Face) ───────────────────────────────────────────── */
         .journal-cover {
           flex: 1;
           height: 100%;
@@ -176,20 +301,12 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           display: flex;
           flex-direction: column;
           padding: 24px 22px 20px 22px;
-          transform-origin: left center;
-          transition: transform 0.42s cubic-bezier(0.22,1,0.36,1);
           /* Subtle paper texture via gradient */
           background-image: linear-gradient(
             160deg,
             rgba(255,255,255,0.18) 0%,
             rgba(255,255,255,0) 60%
           );
-        }
-        .journal-cover[data-hovered="true"] {
-          transform: perspective(1000px) rotateY(-9deg);
-        }
-        .journal-cover[data-pressed="true"] {
-          transform: perspective(1000px) rotateY(-4deg);
         }
           /* Grain texture overlay */
         .journal-cover::after {
@@ -405,8 +522,8 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
             margin-top: 0 !important;
           }
           /* On mobile, scroll-open is subtle — less rotation to avoid overflow */
-          .journal-cover[data-hovered="true"] {
-            transform: perspective(900px) rotateY(-4deg) !important;
+          .journal-book[data-hovered="true"] {
+            transform: translateY(-8px) rotateY(-12deg) rotateX(4deg) !important;
           }
         }
         /* Organic stagger on desktop only */
