@@ -4,6 +4,7 @@ import InteractiveName from './components/InteractiveName';
 import OverlappingTitle from "./components/OverlappingTitle";
 import RotatingTagline from "./components/Rotatingtagline";
 import CaseStudyJournals, { JournalProject } from "./components/CaseStudyJournal";
+import AboutSection from "./components/AboutSection";
 
 const projects: JournalProject[] = [
   {
@@ -308,6 +309,9 @@ export default function Home() {
   <CaseStudyJournals projects={projects} />
 </div>
       </section>
+
+      {/* ── SECTION 3: ABOUT & CONNECT ──────────────────────────────────── */}
+      <AboutSection />
 
     </main>
   );
