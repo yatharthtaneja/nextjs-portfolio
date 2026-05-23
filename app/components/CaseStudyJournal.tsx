@@ -17,6 +17,7 @@ export interface JournalProject {
   coverImage: string;
   insetImages?: string[];
   nda: boolean;
+  statusTag?: string;
 }
 
 function Journal({ project, index }: { project: JournalProject; index: number }) {
@@ -61,7 +62,7 @@ function Journal({ project, index }: { project: JournalProject; index: number })
   return (
     <Link
       ref={wrapperRef}
-      href={project.nda ? "#" : `/work/${project.slug}`}
+      href={`/work/${project.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setPressed(false); }}
       onMouseDown={() => setPressed(true)}
@@ -79,9 +80,22 @@ function Journal({ project, index }: { project: JournalProject; index: number })
             className="journal-cover"
             style={{ background: project.coverColor }}
           >
-            {/* ── Row 1: logo + NDA + readtime ── */}
+            {/* ── Row 1: status tag + NDA + readtime ── */}
             <div className="cover-topbar">
-              <div className="cover-logo-dot" style={{ background: project.spineColor }} />
+              {project.statusTag ? (
+                <span
+                  className="status-tag"
+                  style={{
+                    background: `color-mix(in srgb, ${project.spineColor} 18%, white)`,
+                    color: project.spineColor,
+                    border: `1.5px solid color-mix(in srgb, ${project.spineColor} 30%, white)`,
+                  }}
+                >
+                  {project.statusTag}
+                </span>
+              ) : (
+                <div className="cover-logo-dot" style={{ background: project.spineColor }} />
+              )}
               <div className="cover-topbar-right">
                 {project.nda && <span className="nda-pill">🔒 NDA</span>}
                 <span className="cover-readtime">{project.readTime}</span>
@@ -435,6 +449,19 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
         .inset-img {
           object-fit: cover;
         }
+        .status-tag {
+          display: inline-flex;
+          align-items: center;
+          font-family: 'Roboto', sans-serif;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          padding: 4px 10px;
+          border-radius: 12px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
         .inset-placeholder {
           position: absolute;
           inset: 0;
@@ -537,8 +564,21 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
             transform: translateY(-8px) rotateY(-12deg) rotateX(4deg) !important;
           }
         }
-        /* Organic stagger on desktop only */
-        @media (min-width: 769px) {
+        /* Laptop (769–1639px): cap grid to 2 columns, journals keep natural width */
+        @media (min-width: 769px) and (max-width: 1639px) {
+          .journals-grid {
+            max-width: 840px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          /* stagger even columns in both rows */
+          .journals-grid .journal-wrapper:nth-child(2),
+          .journals-grid .journal-wrapper:nth-child(4) {
+            margin-top: -20px;
+          }
+        }
+        /* Large monitor (≥1640px): 4 in a row, natural flex */
+        @media (min-width: 1640px) {
           .journals-grid .journal-wrapper:nth-child(2) {
             margin-top: -20px;
           }
