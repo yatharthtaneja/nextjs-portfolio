@@ -84,30 +84,8 @@ export default function Home() {
           The key trick: on mobile we switch off `h-[600px]` and let content flow,
           on desktop we restore it and all the absolute positions work as before.
         */}
-        {/* Ambient glow orbs — blurred radial gradients behind the card */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div style={{
-            position: 'absolute', top: '-10%', left: '-8%',
-            width: '58%', height: '80%',
-            background: 'radial-gradient(ellipse, rgba(139,92,246,0.45) 0%, transparent 62%)',
-            filter: 'blur(80px)',
-          }} />
-          <div style={{
-            position: 'absolute', bottom: '-5%', right: '-5%',
-            width: '52%', height: '70%',
-            background: 'radial-gradient(ellipse, rgba(171,73,103,0.38) 0%, transparent 62%)',
-            filter: 'blur(72px)',
-          }} />
-          <div style={{
-            position: 'absolute', top: '35%', right: '18%',
-            width: '38%', height: '55%',
-            background: 'radial-gradient(ellipse, rgba(65,45,200,0.22) 0%, transparent 65%)',
-            filter: 'blur(90px)',
-          }} />
-        </div>
-
         <div className="
-          relative z-10 w-full max-w-5xl bg-[#E6E6FA] custom-black double-border
+          relative w-full max-w-5xl bg-[#E6E6FA] custom-black double-border
           h-auto md:h-[600px]
           flex flex-col md:block
           p-5 md:p-0
@@ -261,7 +239,7 @@ export default function Home() {
         <a
           href="#work"
           aria-label="Scroll to case studies"
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-20"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center"
           style={{ textDecoration: "none" }}
         >
           <style>{`
@@ -300,16 +278,9 @@ export default function Home() {
       <section
         id="work"
         className="relative w-full min-h-screen"
-        style={{ background: "linear-gradient(155deg, #E5DFF5 0%, #ECE7F6 45%, #F0EEF8 100%)" }}
+        style={{ background: "#F0EEF8" }}
       >
         <div style={{ height: 3, background: "#4030C3" }} />
-
-        {/* Corner glow */}
-        <div className="absolute top-0 right-0 pointer-events-none" aria-hidden="true" style={{
-          width: '42%', height: '340px',
-          background: 'radial-gradient(ellipse at top right, rgba(73,57,114,0.12) 0%, transparent 68%)',
-          filter: 'blur(50px)',
-        }} />
 
         {/* Heading — stays constrained */}
       <div className="max-w-5xl mx-auto px-6 md:px-8 pt-12 md:pt-20 pb-8 md:pb-12">
