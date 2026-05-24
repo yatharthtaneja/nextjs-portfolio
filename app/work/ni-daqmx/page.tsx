@@ -220,6 +220,13 @@ function NiDaqmxContent() {
           font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
           letter-spacing: 0.1em; color: ${A}; margin-bottom: 6px;
         }
+
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+        @media (max-width: 640px) { .chart-grid { grid-template-columns: 1fr; } }
+        .btw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 860px) { .btw-grid { grid-template-columns: 1fr; } }
+        .btw-card { display: flex; flex-direction: column; gap: 12px; }
+        .btw-caption { font-family: Inter, sans-serif; font-size: 13px; color: ${INK3}; line-height: 1.6; margin: 0; }
       `}</style>
 
       {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
@@ -479,6 +486,26 @@ function NiDaqmxContent() {
             </div>
           </div>
 
+          {/* Decision charts */}
+          <div className="chart-grid">
+            <div style={{ borderRadius: 8, overflow: 'hidden', border: `1px solid ${LINE}` }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/artifact-ease-of-use-chart.svg"
+                alt="Horizontal bar chart: ease-of-use rating 5-point Likert. Function-based 3.27, class-based 2.55."
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+            <div style={{ borderRadius: 8, overflow: 'hidden', border: `1px solid ${LINE}` }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/artifact-pain-points-chart.svg"
+                alt="Horizontal bar chart: distinct pain points coded by API style. Function-based 9, class-based 15. Lower is better."
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
+          </div>
+
           {/* Margin summary */}
           <div style={{
             marginTop: 32, padding: '20px 24px', background: AB,
@@ -631,7 +658,7 @@ function NiDaqmxContent() {
           </a>.
         </P>
         <P>The shipped design carries forward all four mitigations from the study:</P>
-        <ul style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, color: INK2, lineHeight: 1.75, paddingLeft: 24, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <ul style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, color: INK2, lineHeight: 1.75, paddingLeft: 24, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 10, listStyleType: 'disc' }}>
           <li>Wrapped error messages with valid-values hints for common enum arguments — the dispatcher catches the C error code and rewrites it with the MATLAB-side function name, the C-side property name, and (where the docs index supports it) the list of valid enum values.</li>
           <li>Tab-completable namespace as the primary discovery surface — the C function names are reachable from a single MATLAB entry point, so the entire library is one tab-completion away.</li>
           <li>Required arguments stay positional — the wrapper preserves the C signature&rsquo;s argument order, so engineers reading C examples can transliterate without rearranging.</li>
@@ -643,6 +670,40 @@ function NiDaqmxContent() {
         <P style={{ marginBottom: 0 }}>
           A small but real signal of the decision&rsquo;s correctness: the support tickets that have come in since <span className="mono">calldaqlib</span> shipped have been about hardware-specific edge cases (the C library&rsquo;s territory), not about the API shape. The API shape is no longer the friction; the hardware quirks are. That&rsquo;s the right kind of friction for a low-level API to have.
         </P>
+      </div>
+
+      <Divider />
+
+      {/* ── BEHIND THE WORK ─────────────────────────────────────────────── */}
+      <div className="prose">
+        <EyebrowLabel>Process</EyebrowLabel>
+        <H2>Behind the work</H2>
+        <P style={{ maxWidth: 640, marginBottom: 32 }}>
+          The artifacts the case-study summary doesn&rsquo;t show — for readers who want to see the craft underneath the outcome.
+        </P>
+        <div className="btw-grid">
+          <div className="btw-card">
+            <Artifact
+              label="Pseudo-doc snapshot — one page from the function-based prototype reference doc I authored to brief participants. Screenshot, 4:3."
+              height={180}
+            />
+            <p className="btw-caption">One of the two prototype reference docs I authored to brief participants. Function-based on the left, class-based as a companion. Same C library; different MATLAB wrappers.</p>
+          </div>
+          <div className="btw-card">
+            <Artifact
+              label="Miro affinity-mapping board — synthesis from 24 raw pain points to 4 high-priority themes. Color-coded by API style. Screenshot."
+              height={180}
+            />
+            <p className="btw-caption">Synthesis from 24 raw pain points to 4 high-priority themes. Color-coded by API style; clusters were cross-validated with a second coder.</p>
+          </div>
+          <div className="btw-card">
+            <Artifact
+              label="Survey instrument page — one page from the unmoderated study showing the task script and 5-point ease-of-use rating. Screenshot."
+              height={180}
+            />
+            <p className="btw-caption">One page from the unmoderated study instrument. Each participant ran the same workflow twice — once per API — with order randomized.</p>
+          </div>
+        </div>
       </div>
 
       <Divider />
