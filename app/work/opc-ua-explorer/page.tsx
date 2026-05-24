@@ -77,7 +77,7 @@ function EyebrowLabel({ children }: { children: string }) {
   );
 }
 
-function H2({ children }: { children: React.ReactNode }) {
+function H2({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <h2 style={{
       fontFamily: 'Inter, sans-serif',
@@ -87,6 +87,7 @@ function H2({ children }: { children: React.ReactNode }) {
       color: INK,
       margin: '0 0 24px',
       letterSpacing: '-0.01em',
+      ...style,
     }}>{children}</h2>
   );
 }
@@ -383,11 +384,15 @@ function OPCUAContent() {
 
       {/* ── 4. WHAT IS OPC UA ───────────────────────────────────────────── */}
       <div className="prose">
+        <style>{`@media (min-width: 769px) { .skip-ctx { display: inline !important; } }`}</style>
         <EyebrowLabel>Context</EyebrowLabel>
-        <H2>What is OPC UA, in plain terms</H2>
-        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: INK3, fontStyle: 'italic', margin: '0 0 28px' }}>
-          Skim this section if you&rsquo;re already industrial-automation-fluent.
-        </p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 8 }}>
+          <H2 style={{ margin: 0 }}>What is OPC UA, in plain terms</H2>
+          <a href="#why-mattered" className="skip-ctx" style={{
+            display: 'none', fontFamily: 'Inter, sans-serif', fontSize: 14,
+            color: A, textDecoration: 'none', borderBottom: `1px solid ${AS}`,
+          }}>Skip context →</a>
+        </div>
         <P>
           OPC UA is <strong>the language industrial machines speak to each other</strong>. A modern factory has thousands of sensors, motors, valves, controllers, and PLCs (programmable logic controllers — the small computers that run real-time hardware). They all need to share data: temperature, pressure, vibration, on/off state, fault codes. OPC UA is the standardized protocol that lets a sensor from one vendor and a controller from another talk without custom integration work.
         </P>
@@ -397,16 +402,25 @@ function OPCUAContent() {
         <P style={{ marginBottom: 32 }}>
           That&rsquo;s the whole vocabulary. Address space, node, subscription. The rest of this case study uses these three words a lot.
         </P>
-        <Artifact
-          label="Artifact #2 — Use-case sketch: ride sensors → digital twin → predictive alert (simple line illustration, no company names visible)"
-          height={200}
-        />
+        <div style={{
+          borderRadius: 12,
+          overflow: 'hidden',
+          border: `1px solid ${LINE}`,
+          marginTop: 8,
+        }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/artifact-digital-twin-flow.svg"
+            alt="Flow diagram: ride sensors → OPC UA Server → MATLAB Digital Twin → Predictive Alert"
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
       </div>
 
       <Divider />
 
       {/* ── 5. WHY THIS MATTERED ────────────────────────────────────────── */}
-      <div className="prose">
+      <div id="why-mattered" className="prose">
         <EyebrowLabel>Motivation</EyebrowLabel>
         <H2>Why this work mattered</H2>
         <P>
@@ -828,7 +842,7 @@ function OPCUAContent() {
             <p style={{ fontFamily: 'Inter', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: INK3, margin: '0 0 6px' }}>
               Next case study
             </p>
-            <Link href="/work/mqtt-survey" className="footer-link">MQTT Toolbox Survey →</Link>
+            <Link href="/work/ni-daqmx" className="footer-link">NI-DAQmx API Design →</Link>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: INK3, margin: '6px 0 0', lineHeight: 1.5 }}>
               57 respondents · an interactive dashboard · what strategic-partner research looks like before a project starts
             </p>

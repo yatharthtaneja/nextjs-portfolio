@@ -140,28 +140,29 @@ function NiDaqmxContent() {
           display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: start;
         }
         @media (max-width: 768px) { .hth-grid { grid-template-columns: 1fr; } }
-        .hth-panel { background: #f8fafc; border: 1px solid ${LINE}; border-radius: 12px; overflow: hidden; }
+        .hth-panel { background: #1e1e1e; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,0.28); }
         .hth-panel-label {
-          padding: 14px 20px; border-bottom: 1px solid ${LINE};
+          padding: 10px 16px; border-bottom: 1px solid #3a3a3a;
+          background: #2d2d2d;
           display: flex; align-items: center; justify-content: space-between;
           font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
-          text-transform: uppercase; letter-spacing: 0.08em; color: ${INK2};
+          text-transform: uppercase; letter-spacing: 0.08em; color: #d4d4d4;
         }
         .hth-winner {
-          background: ${AB}; color: ${A}; border: 1.5px solid ${AS};
+          background: ${A}; color: #fff; border: none;
           font-family: Inter, sans-serif; font-size: 10px; font-weight: 700;
           letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 9px; border-radius: 10px;
         }
         .hth-code {
           padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
-          line-height: 1.65; white-space: pre; overflow-x: auto; color: ${INK2}; margin: 0;
-          display: block;
+          line-height: 1.65; white-space: pre; overflow-x: auto; color: #D4D4D4; margin: 0;
+          display: block; background: #1e1e1e;
         }
-        .hth-score { padding: 16px 20px; border-top: 1px solid ${LINE}; }
+        .hth-score { padding: 16px 20px; border-top: 1px solid #3a3a3a; background: #252525; }
         .hth-score-num {
           font-family: Inter, sans-serif; font-size: 42px; font-weight: 800; line-height: 1;
         }
-        .hth-score-sub { font-family: Inter, sans-serif; font-size: 12px; color: ${INK3}; margin-top: 5px; }
+        .hth-score-sub { font-family: Inter, sans-serif; font-size: 12px; color: #9ca3af; margin-top: 5px; }
         .hth-vs {
           display: flex; align-items: center; justify-content: center;
           padding: 0 20px; min-width: 48px;
@@ -320,16 +321,21 @@ function NiDaqmxContent() {
         <P>
           That&rsquo;s API design. Two APIs that do the same thing, with different shapes, will produce different errors and different speeds of getting started. <strong>Picking which one to ship is a UX decision</strong> — the kind that should be tested with the people who&rsquo;ll drive it, not argued in a hallway.
         </P>
-        <P>The two API shapes in this study:</P>
+        <P>Both prototypes were thin MATLAB wrappers around the existing NI-DAQmx C library. The library was the engine; the wrapper was the steering wheel. The question was <em>which wheel</em>.</P>
         <ul style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, color: INK2, lineHeight: 1.75, paddingLeft: 24, margin: '0 0 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <li><strong style={{ color: INK }}>Function-based:</strong> a flat list of named functions called in sequence — <span className="mono">DAQmxCreateTask</span>, <span className="mono">DAQmxCreateAIVoltageChan</span>, <span className="mono">DAQmxStartTask</span>. Like a tiller: one tool, used in steps.</li>
-          <li><strong style={{ color: INK }}>Class-based:</strong> an object you construct, configure, and call methods on — <span className="mono">task = DAQmxTask(); task.AddVoltageChannel(); task.Start();</span>. Like a yoke: structured, with state held in the object.</li>
+          <li><strong style={{ color: INK }}>Function-based</strong> — one dispatcher function, <span className="mono">daqeval</span>, that takes the C function name as a string plus the original arguments. Each C call becomes one MATLAB call. Compact; you have to know the C function name.<br /><code style={{ display: 'block', fontFamily: '\'JetBrains Mono\', monospace', fontSize: 13, background: '#f8fafc', border: `1px solid ${LINE}`, borderRadius: 8, padding: '12px 16px', margin: '10px 0 0', whiteSpace: 'pre' }}>{`args3 = daqeval(daqobject, "DAQmx<FunctionName>", args1, args2)`}</code></li>
+          <li style={{ marginTop: 8 }}><strong style={{ color: INK }}>Class-based</strong> — helper classes (<span className="mono">niConfigOptions</span>, <span className="mono">niPropOptions</span>) that build a configuration object from name-value pairs, then verbs (<span className="mono">setconfig</span>, <span className="mono">setprop</span>, <span className="mono">getprop</span>, <span className="mono">resetprop</span>) to apply or query against the DAQ object. Each C call becomes two MATLAB calls. More verbose; parameter names are visible without knowing the C signature.<br /><code style={{ display: 'block', fontFamily: '\'JetBrains Mono\', monospace', fontSize: 13, background: '#f8fafc', border: `1px solid ${LINE}`, borderRadius: 8, padding: '12px 16px', margin: '10px 0 0', whiteSpace: 'pre' }}>{`configObj = niConfigOptions("<FunctionName>", Arg1=value1, Arg2=value2);\nsetconfig(daqobject, configObj);`}</code></li>
         </ul>
+        <P>Same engine, two steering wheels. Picking which one to ship is a UX decision.</P>
 
-        <Artifact
-          label="Artifact #2 — Steering-wheel analogy sketch: DAQ hardware + API (steering wheel) + engineer (driver). SVG, 1200×600."
-          height={220}
-        />
+        <div style={{ borderRadius: 12, overflow: 'hidden', border: `1px solid ${LINE}`, marginTop: 8 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/artifact-api-steering-wheel.svg"
+            alt="Flow diagram: NI-DAQmx C library (engine) forks into two MATLAB wrapper APIs — daqeval (round steering wheel, function-based) and niConfigOptions (yoke, class-based) — then merges to a MATLAB engineer (driver)"
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
       </div>
 
       <Divider />
@@ -342,7 +348,7 @@ function NiDaqmxContent() {
           The Data Acquisition Toolbox already shipped a high-level API for common workflows. But a meaningful slice of users — engineers in automotive, aerospace, biomedical, and academic labs — needed access to <strong>lower-level hardware features</strong> that the high-level API didn&rsquo;t expose: custom triggering, exotic clocking, vendor-specific extensions. They were either writing C code themselves or stitching together their own MEX wrappers. Both options were costly and brittle.
         </P>
         <P>
-          The team scoped a new low-level API that would expose the underlying NI-DAQmx C library directly from MATLAB. Two design styles came to the whiteboard immediately — function-based (mirror the C API) or class-based (wrap it in a more MATLAB-flavored object). The team had strong opinions on both sides and no data to break the tie.
+          The team scoped a new low-level API that would expose the underlying NI-DAQmx C library directly from MATLAB. Two design styles came to the whiteboard immediately — function-based (one MATLAB dispatcher function over the C API) or class-based (options-object helper classes). The team had strong opinions on both sides and no data to break the tie.
         </P>
         <P style={{ marginBottom: 0 }}>
           Picking the wrong style would mean shipping an API engineers complain about for the next decade. Style decisions like this are sticky — you can&rsquo;t quietly change them later without breaking every script written against the old shape. The cost of getting it right by testing was small. The cost of getting it wrong by intuition was years of accumulated annoyance and a steady churn of support tickets. So I scoped a comparative study to break the tie with evidence.
@@ -396,30 +402,45 @@ function NiDaqmxContent() {
           <EyebrowLabel>The Comparison</EyebrowLabel>
           <H2>The head-to-head</H2>
           <P>
-            Two prototype APIs, one task: list a DAQ device, configure an analog input channel, acquire 1 second of data. Each participant completed the workflow twice — once with each style, order randomized. After each attempt: a 5-point ease-of-use rating.
+            Two prototype wrappers, one C library underneath. To make the comparison fair, every participant ran the same NI-DAQmx C call through each wrapper. The example below uses <span className="mono">DAQmxCfgChangeDetectionTiming</span> — a configuration call that in raw C looks like:
           </P>
+          <div style={{ marginBottom: 20, borderRadius: 8, overflow: 'hidden', border: '1px solid #3a3a3a' }}>
+            <div style={{ background: '#2d2d2d', padding: '7px 14px', borderBottom: '1px solid #3a3a3a', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontFamily: '\'JetBrains Mono\', monospace', fontSize: 10, color: '#9ca3af', letterSpacing: '0.06em', textTransform: 'uppercase' }}>C · reference</span>
+            </div>
+            <code className="hth-code" style={{ borderRadius: 0 }}>
+              <span style={{ color: '#DCDCAA' }}>DAQmxCfgChangeDetectionTiming</span><span style={{ color: '#D4D4D4' }}>(</span><span style={{ color: '#9CDCFE' }}>taskHandle</span><span style={{ color: '#D4D4D4' }}>,</span>{'\n'}
+              {'    '}<span style={{ color: '#CE9178' }}>&quot;Dev1/port0/line0:7&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#CE9178' }}>&quot;Dev1/port0/line0:7&quot;</span><span style={{ color: '#D4D4D4' }}>,</span>{'\n'}
+              {'    '}<span style={{ color: '#4FC1FF' }}>DAQmx_Val_ContSamps</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#B5CEA8' }}>4</span><span style={{ color: '#D4D4D4' }}>)</span>
+            </code>
+          </div>
+          <P>Same call, two wrappers:</P>
 
           <div className="hth-grid" style={{ marginTop: 32 }}>
             {/* Function-based panel */}
             <div className="hth-panel">
               <div className="hth-panel-label">
-                <span>Function-based</span>
-                <span className="hth-winner">✓ Winner</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F57', display: 'inline-block' }} />
+                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FEBC2E', display: 'inline-block' }} />
+                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#28C840', display: 'inline-block' }} />
+                  </div>
+                  <span>Function-based</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontFamily: '\'JetBrains Mono\', monospace', fontSize: 10, color: '#6A9955', letterSpacing: '0.06em' }}>MATLAB</span>
+                  <span className="hth-winner">✓ Winner</span>
+                </div>
               </div>
-              <code className="hth-code">{`% List devices, create a task, configure, acquire
-devices = DAQmxGetSysDevNames();
-taskHandle = DAQmxCreateTask('myTask');
-DAQmxCreateAIVoltageChan(taskHandle, 'Dev1/ai0', '', ...
-    DAQmx_Val_Cfg_Default, -10, 10, ...
-    DAQmx_Val_Volts, '');
-DAQmxCfgSampClkTiming(taskHandle, '', 1000, ...
-    DAQmx_Val_Rising, DAQmx_Val_FiniteSamps, 1000);
-DAQmxStartTask(taskHandle);
-data = DAQmxReadAnalogF64(taskHandle, 1000, 10.0);
-DAQmxStopTask(taskHandle);
-DAQmxClearTask(taskHandle);`}</code>
+              <code className="hth-code">
+                <span style={{ color: '#6A9955', fontStyle: 'italic' }}>% Function-based — one MATLAB call mirrors one C call</span>{'\n'}
+                <span style={{ color: '#DCDCAA' }}>daqeval</span><span style={{ color: '#D4D4D4' }}>(</span><span style={{ color: '#9CDCFE' }}>dq</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#CE9178' }}>&quot;DAQmxCfgChangeDetectionTiming&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#569CD6' }}>...</span>{'\n'}
+                {'    '}<span style={{ color: '#CE9178' }}>&quot;Dev1/port0/line0:7&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#CE9178' }}>&quot;Dev1/port0/line0:7&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#569CD6' }}>...</span>{'\n'}
+                {'    '}<span style={{ color: '#9CDCFE' }}>daq</span><span style={{ color: '#D4D4D4' }}>.</span><span style={{ color: '#9CDCFE' }}>ni</span><span style={{ color: '#D4D4D4' }}>.</span><span style={{ color: '#9CDCFE' }}>NIDAQmx</span><span style={{ color: '#D4D4D4' }}>.</span><span style={{ color: '#4FC1FF' }}>DAQmx_Val_ContSamps</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#B5CEA8' }}>4</span><span style={{ color: '#D4D4D4' }}>);</span>
+              </code>
               <div className="hth-score">
-                <div className="hth-score-num" style={{ color: A }}>3.27</div>
+                <div className="hth-score-num" style={{ color: '#60a5fa' }}>3.27</div>
                 <div className="hth-score-sub">ease-of-use · 5-point scale</div>
               </div>
             </div>
@@ -432,25 +453,27 @@ DAQmxClearTask(taskHandle);`}</code>
             {/* Class-based panel */}
             <div className="hth-panel">
               <div className="hth-panel-label">
-                <span>Class-based</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F57', display: 'inline-block' }} />
+                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FEBC2E', display: 'inline-block' }} />
+                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#28C840', display: 'inline-block' }} />
+                  </div>
+                  <span>Class-based</span>
+                </div>
+                <span style={{ fontFamily: '\'JetBrains Mono\', monospace', fontSize: 10, color: '#6A9955', letterSpacing: '0.06em' }}>MATLAB</span>
               </div>
-              <code className="hth-code">{`% Same workflow, class-based
-task = DAQmxTask('myTask');
-task.AddAIVoltageChannel('Dev1/ai0', ...
-    'TerminalConfig', DAQmx.TerminalConfig.Default, ...
-    'MinVal', -10, 'MaxVal', 10, ...
-    'Units', DAQmx.Units.Volts);
-task.ConfigureSampleClockTiming( ...
-    'Rate', 1000, ...
-    'ActiveEdge', DAQmx.Edge.Rising, ...
-    'SampleMode', DAQmx.SampleMode.FiniteSamples, ...
-    'SamplesPerChannel', 1000);
-task.Start();
-data = task.ReadAnalogF64(1000, 10.0);
-task.Stop();
-task.Clear();`}</code>
+              <code className="hth-code">
+                <span style={{ color: '#6A9955', fontStyle: 'italic' }}>% Class-based — build options, then apply</span>{'\n'}
+                <span style={{ color: '#9CDCFE' }}>changeDetectionTiming</span><span style={{ color: '#D4D4D4' }}> = </span><span style={{ color: '#DCDCAA' }}>niConfigOptions</span><span style={{ color: '#D4D4D4' }}>(</span><span style={{ color: '#CE9178' }}>&quot;ChangeDetectionTiming&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#569CD6' }}>...</span>{'\n'}
+                {'    '}<span style={{ color: '#9CDCFE' }}>RisingEdgeChan</span><span style={{ color: '#D4D4D4' }}>=</span><span style={{ color: '#CE9178' }}>&quot;Dev1/port0/line0:7&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#569CD6' }}>...</span>{'\n'}
+                {'    '}<span style={{ color: '#9CDCFE' }}>FallingEdgeChan</span><span style={{ color: '#D4D4D4' }}>=</span><span style={{ color: '#CE9178' }}>&quot;Dev1/port0/line0:7&quot;</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#569CD6' }}>...</span>{'\n'}
+                {'    '}<span style={{ color: '#9CDCFE' }}>SampleMode</span><span style={{ color: '#D4D4D4' }}>=</span><span style={{ color: '#9CDCFE' }}>daq</span><span style={{ color: '#D4D4D4' }}>.</span><span style={{ color: '#9CDCFE' }}>ni</span><span style={{ color: '#D4D4D4' }}>.</span><span style={{ color: '#9CDCFE' }}>NIDAQmx</span><span style={{ color: '#D4D4D4' }}>.</span><span style={{ color: '#4FC1FF' }}>DAQmx_Val_ContSamps</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#569CD6' }}>...</span>{'\n'}
+                {'    '}<span style={{ color: '#9CDCFE' }}>sampsPerChan</span><span style={{ color: '#D4D4D4' }}>=</span><span style={{ color: '#B5CEA8' }}>4</span><span style={{ color: '#D4D4D4' }}>);</span>{'\n'}
+                <span style={{ color: '#DCDCAA' }}>setconfig</span><span style={{ color: '#D4D4D4' }}>(</span><span style={{ color: '#9CDCFE' }}>dq</span><span style={{ color: '#D4D4D4' }}>, </span><span style={{ color: '#9CDCFE' }}>changeDetectionTiming</span><span style={{ color: '#D4D4D4' }}>);</span>
+              </code>
               <div className="hth-score">
-                <div className="hth-score-num" style={{ color: INK3 }}>2.55</div>
+                <div className="hth-score-num" style={{ color: '#9ca3af' }}>2.55</div>
                 <div className="hth-score-sub">ease-of-use · 5-point scale</div>
               </div>
             </div>
@@ -525,7 +548,9 @@ task.Clear();`}</code>
               <p className="insight-eyebrow">Insight 2</p>
               <h3 className="insight-h3">Tab completion was the difference between &ldquo;stuck&rdquo; and &ldquo;fluent&rdquo;</h3>
               <SubLabel>Observation</SubLabel>
-              <p className="insight-body">Participants used tab completion as their primary way to discover what was possible. With the function-based API, typing <span className="mono">DAQmx</span> and pressing tab listed all available functions — they could scan and pick. With the class-based API, typing <span className="mono">task.</span> surfaced fewer methods than expected, because some configuration was done through name-value pairs that didn&rsquo;t appear in tab completion at all.</p>
+              <p className="insight-body">Participants used tab completion as their primary way to discover what was possible. With the function-based wrapper, typing <span className="mono">&quot;DAQmx</span> inside a <span className="mono">daqeval</span> call surfaced every available C function via tab completion on the string literal — they could scan and pick. With the class-based wrapper, tab-completing <span className="mono">setconfig(dq, </span> surfaced the verb but not the things it could operate on — you had to build the <span className="mono">niConfigOptions</span> object first before anything was visible. Several participants typed <span className="mono">setconfig(dq, </span> and stalled.</p>
+              <code className="hth-code" style={{ marginTop: 12, marginBottom: 6, borderRadius: 8, fontSize: 12 }}>{`% Tab on the string literal surfaces the C namespace\ndaqeval(dq, "DAQmxCfg|"   % cursor here → list appears`}</code>
+              <code className="hth-code" style={{ marginBottom: 16, borderRadius: 8, fontSize: 12 }}>{`% setconfig is visible; its argument is not\nsetconfig(dq, |            % cursor here → blank\nconfigObj = niConfigOptions("...");   % must build this first`}</code>
               <SubLabel>Insight</SubLabel>
               <p className="insight-body">Tab completion is the modern engineer&rsquo;s reading tool. APIs that surface their full surface area through tab completion feel learnable; APIs that hide functionality behind name-value pairs feel mysterious. This is a structural difference between the two design styles, not a bug to be fixed at the margin.</p>
               <SubLabel>Recommendation</SubLabel>
@@ -549,7 +574,8 @@ task.Clear();`}</code>
               <p className="insight-eyebrow">Insight 3</p>
               <h3 className="insight-h3">Long name-value pair lists felt like configuration files, not code</h3>
               <SubLabel>Observation</SubLabel>
-              <p className="insight-body">The class-based API used name-value pairs heavily for channel configuration: <span className="mono">&apos;TerminalConfig&apos;, X, &apos;MinVal&apos;, Y, &apos;MaxVal&apos;, Z, &apos;Units&apos;, W, …</span>. Three participants wrote the entire configuration as one line, then split it, then commented some pairs out, in a &ldquo;what&rsquo;s actually required here?&rdquo; loop. Two participants asked, &ldquo;Can I just write this as a struct and pass it in?&rdquo;</p>
+              <p className="insight-body">The class-based wrapper used name-value pairs as its <em>primary</em> configuration mechanism — not just for channel config, but for every configuration call: <span className="mono">niConfigOptions(&quot;ChangeDetectionTiming&quot;, RisingEdgeChan=…, FallingEdgeChan=…, SampleMode=…, sampsPerChan=…)</span>. Three participants wrote the entire options object as one line, then split it, then commented pairs out in a &ldquo;what&rsquo;s actually required here?&rdquo; loop. The C signature requires all four arguments; the MATLAB wrapper made them all look optional. Two participants asked, &ldquo;Can I just pass the C-style positional list?&rdquo;</p>
+              <code className="hth-code" style={{ marginTop: 12, marginBottom: 16, borderRadius: 8, fontSize: 12 }}>{`% Which of these are required? The MATLAB syntax doesn't tell you.\nconfigObj = niConfigOptions("ChangeDetectionTiming", ...\n    RisingEdgeChan="Dev1/port0/line0:7", ...\n    % FallingEdgeChan="Dev1/port0/line0:7", ...   <- commented out, errors\n    SampleMode=daq.ni.NIDAQmx.DAQmx_Val_ContSamps, ...\n    sampsPerChan=4);`}</code>
               <SubLabel>Insight</SubLabel>
               <p className="insight-body">Name-value pairs are great for optional arguments. They&rsquo;re awkward when the <em>required</em> arguments outnumber the optional ones — at that point, what looked like an ergonomic API turns into a configuration file that happens to live inside parentheses.</p>
               <SubLabel>Recommendation</SubLabel>
@@ -606,11 +632,14 @@ task.Clear();`}</code>
         </P>
         <P>The shipped design carries forward all four mitigations from the study:</P>
         <ul style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, color: INK2, lineHeight: 1.75, paddingLeft: 24, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <li>Wrapped error messages with valid-values hints for common enum arguments.</li>
-          <li>Tab-completable function namespace as the primary discovery surface.</li>
-          <li>Required arguments positional and explicit; name-value pairs constrained to optional arguments.</li>
-          <li>The docs page leads with a complete worked example before the reference table.</li>
+          <li>Wrapped error messages with valid-values hints for common enum arguments — the dispatcher catches the C error code and rewrites it with the MATLAB-side function name, the C-side property name, and (where the docs index supports it) the list of valid enum values.</li>
+          <li>Tab-completable namespace as the primary discovery surface — the C function names are reachable from a single MATLAB entry point, so the entire library is one tab-completion away.</li>
+          <li>Required arguments stay positional — the wrapper preserves the C signature&rsquo;s argument order, so engineers reading C examples can transliterate without rearranging.</li>
+          <li>The R2026a docs page leads with a complete worked example before the reference table.</li>
         </ul>
+        <P>
+          One thing the function-based wrapper preserves that&rsquo;s worth naming: <strong>engineers can paste a C example from the NI-DAQmx documentation, change the call wrapper, and have working MATLAB code.</strong> The class-based wrapper would have required them to learn a parallel taxonomy — which class wraps which family of calls — before they could move. Choosing the wrapper shape that kept the C documentation usable was a strategic call, not just an ergonomics one. NI-DAQmx has thousands of pages of C documentation; we couldn&rsquo;t out-document it, so we made our wrapper transparent to it.
+        </P>
         <P style={{ marginBottom: 0 }}>
           A small but real signal of the decision&rsquo;s correctness: the support tickets that have come in since <span className="mono">calldaqlib</span> shipped have been about hardware-specific edge cases (the C library&rsquo;s territory), not about the API shape. The API shape is no longer the friction; the hardware quirks are. That&rsquo;s the right kind of friction for a low-level API to have.
         </P>

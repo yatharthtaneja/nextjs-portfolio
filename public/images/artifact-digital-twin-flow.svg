@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" fill="none" font-family="Inter, system-ui, sans-serif">
+
+  <!-- Background -->
+  <rect width="1200" height="480" fill="#F0FAF6" rx="16"/>
+
+  <!-- ══════════════════════════════════════════════════
+       CARDS  (180 × 230 each, y=70)
+       x positions: 40 | 340 | 640 | 940
+       right edges:  220 | 520 | 820 | 1120
+  ══════════════════════════════════════════════════ -->
+
+  <!-- ── Card 1: Physical Asset ──────────────────────── -->
+  <g transform="translate(40,70)">
+    <rect width="180" height="230" rx="14" fill="white" stroke="#B8DFD0" stroke-width="1.5"/>
+    <!-- icon bg -->
+    <rect width="180" height="118" rx="14" fill="#E8F7F1"/>
+    <rect y="106" width="180" height="12" fill="#E8F7F1"/>
+    <!-- roller-coaster hill track -->
+    <path d="M 24 98 Q 50 28 90 56 Q 116 76 156 36"
+          stroke="#1E6B4A" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- cart -->
+    <rect x="74" y="46" width="28" height="16" rx="4" fill="#1E6B4A"/>
+    <circle cx="80"  cy="64" r="5" fill="#1E6B4A"/>
+    <circle cx="96"  cy="64" r="5" fill="#1E6B4A"/>
+    <!-- vibration waves -->
+    <path d="M 18 90 Q 22 82 26 90 Q 30 98 34 90" stroke="#1E6B4A" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 10 90 Q 16 76 22 90 Q 28 104 34 90" stroke="#1E6B4A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+    <!-- labels -->
+    <text x="90" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#1E6B4A">Physical Asset</text>
+    <text x="90" y="161" text-anchor="middle" font-size="12" fill="#6b7280">Roller coaster</text>
+    <text x="90" y="178" text-anchor="middle" font-size="12" fill="#6b7280">vibration sensors</text>
+  </g>
+
+  <!-- ── Card 2: OPC UA Server ───────────────────────── -->
+  <g transform="translate(340,70)">
+    <rect width="180" height="230" rx="14" fill="white" stroke="#B8DFD0" stroke-width="1.5"/>
+    <rect width="180" height="118" rx="14" fill="#E8F7F1"/>
+    <rect y="106" width="180" height="12" fill="#E8F7F1"/>
+    <!-- server racks -->
+    <rect x="30" y="16" width="120" height="24" rx="5" fill="#1E6B4A"/>
+    <rect x="30" y="46" width="120" height="24" rx="5" fill="#1E6B4A" opacity="0.6"/>
+    <rect x="30" y="76" width="120" height="22" rx="5" fill="#1E6B4A" opacity="0.3"/>
+    <!-- LED dots -->
+    <circle cx="138" cy="28" r="5" fill="#6EE7B7"/>
+    <circle cx="138" cy="58" r="5" fill="#6EE7B7" opacity="0.7"/>
+    <circle cx="138" cy="87" r="5" fill="#6EE7B7" opacity="0.4"/>
+    <!-- labels -->
+    <text x="90" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#1E6B4A">OPC UA Server</text>
+    <text x="90" y="161" text-anchor="middle" font-size="12" fill="#6b7280">Standardised</text>
+    <text x="90" y="178" text-anchor="middle" font-size="12" fill="#6b7280">industrial protocol</text>
+  </g>
+
+  <!-- ── Card 3: MATLAB Digital Twin ────────────────── -->
+  <g transform="translate(640,70)">
+    <rect width="180" height="230" rx="14" fill="white" stroke="#B8DFD0" stroke-width="1.5"/>
+    <rect width="180" height="118" rx="14" fill="#E8F7F1"/>
+    <rect y="106" width="180" height="12" fill="#E8F7F1"/>
+    <!-- integrator block -->
+    <rect x="22" y="26" width="52" height="52" rx="5" fill="white" stroke="#1E6B4A" stroke-width="2"/>
+    <text x="48" y="58" text-anchor="middle" font-size="24" fill="#1E6B4A" font-weight="700">∫</text>
+    <!-- arrow between blocks -->
+    <line x1="74" y1="52" x2="92" y2="52" stroke="#1E6B4A" stroke-width="2"/>
+    <polygon points="92,47 106,52 92,57" fill="#1E6B4A"/>
+    <!-- gain (triangle) block -->
+    <polygon points="106,26 158,52 106,78" fill="none" stroke="#1E6B4A" stroke-width="2"/>
+    <!-- labels: split "MATLAB Digital Twin" across two lines -->
+    <text x="90" y="133" text-anchor="middle" font-size="14" font-weight="700" fill="#1E6B4A">MATLAB</text>
+    <text x="90" y="151" text-anchor="middle" font-size="14" font-weight="700" fill="#1E6B4A">Digital Twin</text>
+    <text x="90" y="171" text-anchor="middle" font-size="12" fill="#6b7280">Simulink model mirrors</text>
+    <text x="90" y="188" text-anchor="middle" font-size="12" fill="#6b7280">physical state</text>
+  </g>
+
+  <!-- ── Card 4: Predictive Alert ────────────────────── -->
+  <g transform="translate(940,70)">
+    <rect width="180" height="230" rx="14" fill="white" stroke="#f9c74f" stroke-width="1.5"/>
+    <rect width="180" height="118" rx="14" fill="#FEF9C3"/>
+    <rect y="106" width="180" height="12" fill="#FEF9C3"/>
+    <!-- bell — narrow, well-proportioned, centered at (90,52) -->
+    <!-- bell body: 72px wide × 64px tall -->
+    <path d="M 90 12 C 72 12 62 26 62 44 L 62 60 L 54 68 L 126 68 L 118 60 L 118 44 C 118 26 108 12 90 12 Z"
+          fill="none" stroke="#B45309" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- clapper -->
+    <path d="M 79 68 Q 79 80 90 80 Q 101 80 101 68" fill="none" stroke="#B45309" stroke-width="2.5"/>
+    <!-- alert badge — positioned tightly above right shoulder -->
+    <circle cx="118" cy="22" r="13" fill="#EF4444"/>
+    <text x="118" y="27" text-anchor="middle" font-size="14" font-weight="700" fill="white">!</text>
+    <!-- labels -->
+    <text x="90" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#B45309">Predictive Alert</text>
+    <text x="90" y="161" text-anchor="middle" font-size="12" fill="#6b7280">Maintenance flagged</text>
+    <text x="90" y="178" text-anchor="middle" font-size="12" fill="#6b7280">before failure occurs</text>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════
+       CONNECTOR ARROWS  (y=185 = card midpoint 70+115)
+       Labels sit ABOVE the line at y=170
+  ══════════════════════════════════════════════════ -->
+
+  <!-- Arrow 1: 220 → 340 -->
+  <text x="280" y="168" text-anchor="middle" font-size="11" fill="#9ca3af" letter-spacing="0.03em">live sensor data</text>
+  <line x1="222" y1="185" x2="336" y2="185" stroke="#1E6B4A" stroke-width="2" stroke-dasharray="7 5"/>
+  <polygon points="336,180 350,185 336,190" fill="#1E6B4A"/>
+
+  <!-- Arrow 2: 520 → 640 -->
+  <text x="580" y="168" text-anchor="middle" font-size="11" fill="#9ca3af" letter-spacing="0.03em">subscribed nodes</text>
+  <line x1="522" y1="185" x2="636" y2="185" stroke="#1E6B4A" stroke-width="2" stroke-dasharray="7 5"/>
+  <polygon points="636,180 650,185 636,190" fill="#1E6B4A"/>
+
+  <!-- Arrow 3: 820 → 940 -->
+  <text x="880" y="168" text-anchor="middle" font-size="11" fill="#9ca3af" letter-spacing="0.03em">anomaly detection</text>
+  <line x1="822" y1="185" x2="936" y2="185" stroke="#1E6B4A" stroke-width="2" stroke-dasharray="7 5"/>
+  <polygon points="936,180 950,185 936,190" fill="#1E6B4A"/>
+
+  <!-- ══════════════════════════════════════════════════
+       CAPTION
+  ══════════════════════════════════════════════════ -->
+  <text x="600" y="376" text-anchor="middle" font-size="15" font-weight="500" fill="#374151">
+    Canonical use-case: vibration data from a roller-coaster feeds a MATLAB digital twin, which triggers a maintenance alert before a failure occurs.
+  </text>
+  <text x="600" y="400" text-anchor="middle" font-size="13" fill="#9ca3af">
+    OPC UA Explorer closes the gap between the physical asset and the engineering model — without writing a single line of connection code.
+  </text>
+
+</svg>
