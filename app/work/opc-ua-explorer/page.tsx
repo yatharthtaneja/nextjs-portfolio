@@ -844,7 +844,7 @@ function OPCUAContent() {
             </p>
             <Link href="/work/ni-daqmx" className="footer-link">NI-DAQmx API Design →</Link>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: INK3, margin: '6px 0 0', lineHeight: 1.5 }}>
-              57 respondents · an interactive dashboard · what strategic-partner research looks like before a project starts
+              11 participants · function-based vs. class-based · shipped as calldaqlib in MATLAB R2026a
             </p>
           </div>
         </div>
