@@ -9,7 +9,7 @@ import AboutSection from "./components/AboutSection";
 const projects: JournalProject[] = [
   {
     slug:           "opc-ua-explorer",
-    title:          "How we decided what an OPC UA app for engineers should actually do.",
+    title:          "A factory has 10,000 sensors. Engineers had no way to explore them without writing code.",
     readTime:       "12 min read",
     type:           "Industrial IoT · B2B · MathWorks",
     problem:        "When engineers have never asked for an app, how do you decide what it should actually do?",
