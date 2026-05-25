@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import PasswordGate from '@/app/components/PasswordGate';
+import CaseStudyMenu from '@/app/components/CaseStudyMenu';
 
 const A = '#1E6B4A';       // accent (spine green)
 const AS = '#B8DFD0';      // accent soft (cover mint)
@@ -465,6 +466,7 @@ function FactoryHookSVG() {
 function OPCUAContent() {
   return (
     <div style={{ background: '#ffffff', color: '#111827', minHeight: '100vh' }}>
+      <CaseStudyMenu />
       <style>{`
         .hero-wrap { background: ${AB}; padding: 72px 24px 80px; }
         .hero-grid {

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import PasswordGate from '@/app/components/PasswordGate';
+import CaseStudyMenu from '@/app/components/CaseStudyMenu';
 
 const A   = '#1D4ED8';
 const AS  = '#C4D9F7';
@@ -78,16 +79,123 @@ function Divider() {
   return <hr style={{ height: 1, background: LINE, border: 'none', margin: 0 }} />;
 }
 
+function BeforeAfterHook() {
+  const kw = A;
+  const id = INK;
+  const str = '#b91c1c';
+  const num = '#15803d';
+  const punct = INK3;
+
+  return (
+    <div
+      role="img"
+      aria-label="A side-by-side comparison: a long block of dense C code on the left, three crisp MATLAB lines on the right, with naming alternatives shown below."
+    >
+      <div className="ba-stack">
+        <div className="ba-row">
+          {/* BEFORE — C */}
+          <div className="ba-block ba-before">
+            <div className="ba-label">Before · C · ~50 lines</div>
+            <code>{`#include "NIDAQmx.h"
+TaskHandle taskHandle = 0;
+char errBuff[2048] = {'\\0'};
+int32 read = 0;
+float64 data[1000];
+DAQmxErrChk(DAQmxCreateTask("", &taskHandle));
+DAQmxErrChk(DAQmxCreateAIVoltageChan(
+  taskHandle, "Dev1/ai0", "",
+  DAQmx_Val_Cfg_Default, -10.0, 10.0,
+  DAQmx_Val_Volts, NULL));
+DAQmxErrChk(DAQmxCfgSampClkTiming(
+  taskHandle, "", 1000.0,
+  DAQmx_Val_Rising, DAQmx_Val_FiniteSamps, 1000));
+DAQmxErrChk(DAQmxStartTask(taskHandle));
+DAQmxErrChk(DAQmxReadAnalogF64(
+  taskHandle, 1000, 10.0, ...`}</code>
+          </div>
+
+          {/* Arrow */}
+          <div className="ba-arrow" aria-hidden="true">
+            <span className="arr">→</span>
+            <span>became</span>
+          </div>
+
+          {/* AFTER — MATLAB */}
+          <div className="ba-block ba-after">
+            <div className="ba-label">After · MATLAB · 3 lines</div>
+            <code>
+              <span style={{ color: id }}>task</span>
+              <span style={{ color: punct }}> = </span>
+              <span style={{ color: kw, fontWeight: 600 }}>calldaqlib</span>
+              <span style={{ color: punct }}>(</span>
+              <span style={{ color: str }}>&#39;DAQmxCreateTask&#39;</span>
+              <span style={{ color: punct }}>, </span>
+              <span style={{ color: str }}>&#39;myTask&#39;</span>
+              <span style={{ color: punct }}>);</span>{'\n'}
+              <span style={{ color: kw, fontWeight: 600 }}>calldaqlib</span>
+              <span style={{ color: punct }}>(</span>
+              <span style={{ color: str }}>&#39;DAQmxCreateAIVoltageChan&#39;</span>
+              <span style={{ color: punct }}>, </span>
+              <span style={{ color: id }}>task</span>
+              <span style={{ color: punct }}>, </span>
+              <span style={{ color: str }}>&#39;Dev1/ai0&#39;</span>
+              <span style={{ color: punct }}>, ...);</span>{'\n'}
+              <span style={{ color: id }}>data</span>
+              <span style={{ color: punct }}> = </span>
+              <span style={{ color: kw, fontWeight: 600 }}>calldaqlib</span>
+              <span style={{ color: punct }}>(</span>
+              <span style={{ color: str }}>&#39;DAQmxReadAnalogF64&#39;</span>
+              <span style={{ color: punct }}>, </span>
+              <span style={{ color: id }}>task</span>
+              <span style={{ color: punct }}>, </span>
+              <span style={{ color: num }}>1000</span>
+              <span style={{ color: punct }}>, </span>
+              <span style={{ color: num }}>10.0</span>
+              <span style={{ color: punct }}>);</span>
+            </code>
+          </div>
+        </div>
+
+        <p className="naming-caption" style={{ margin: '2px 2px 0' }}>
+          Illustrative — actual C workflows varied by hardware and team.
+        </p>
+
+        {/* Naming alternatives inset */}
+        <div className="naming-card">
+          <p
+            style={{
+              fontFamily: 'Inter, sans-serif', fontSize: 10, fontWeight: 700,
+              letterSpacing: '0.12em', textTransform: 'uppercase', color: INK3,
+              margin: '0 0 8px',
+            }}
+          >
+            Considered for the read function
+          </p>
+          <div className="naming-row rej"><span className="ic">✗</span>daqRead()</div>
+          <div className="naming-row rej"><span className="ic">✗</span>acquireData()</div>
+          <div className="naming-row chosen"><span className="ic">✓</span>DAQmxReadAnalogF64()</div>
+          <p className="naming-caption">
+            Tested with 11 engineers across 5 industries. The chosen name was the closest match to the C library they already knew.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function NiDaqmxContent() {
   return (
     <div style={{ background: '#ffffff', color: INK, minHeight: '100vh' }}>
+      <CaseStudyMenu />
       <style>{`
         .hero-wrap { background: ${AB}; padding: 72px 24px 80px; }
         .hero-grid {
-          max-width: 1080px; margin: 0 auto;
-          display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+          max-width: 1180px; margin: 0 auto;
+          display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: start;
         }
-        @media (max-width: 768px) { .hero-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 1024px) { .hero-grid { gap: 40px; } }
+        @media (max-width: 768px)  { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
+        .hero-visual { width: 100%; max-width: 640px; margin: 0 auto; }
 
         .stat-row { display: flex; flex-wrap: wrap; gap: 6px 0; margin-top: 24px; }
         .stat-item { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: ${INK2}; }
@@ -227,13 +335,98 @@ function NiDaqmxContent() {
         @media (max-width: 860px) { .btw-grid { grid-template-columns: 1fr; } }
         .btw-card { display: flex; flex-direction: column; gap: 12px; }
         .btw-caption { font-family: Inter, sans-serif; font-size: 13px; color: ${INK3}; line-height: 1.6; margin: 0; }
+
+        /* ── HOOK — audience-first opening ── */
+        .hook-h1 {
+          font-family: Inter, sans-serif; font-weight: 800;
+          font-size: clamp(28px, 3.6vw, 46px); line-height: 1.1;
+          color: ${INK}; margin: 0 0 22px; letter-spacing: -0.02em;
+        }
+        .hook-kicker {
+          font-family: Inter, sans-serif; font-weight: 700;
+          font-size: clamp(17px, 1.8vw, 21px); line-height: 1.4;
+          color: ${INK}; margin: 28px 0 0; padding-top: 18px;
+          border-top: 2px solid ${A};
+        }
+        .hook-kicker em { color: ${A}; font-style: italic; }
+        .hook-transition {
+          max-width: 720px; margin: 0 auto; padding: 28px 24px 36px;
+          font-family: Inter, sans-serif; font-size: 14px; font-style: italic;
+          color: ${INK3}; text-align: center; line-height: 1.65;
+        }
+
+        /* ── BEFORE / AFTER visual ── */
+        .ba-stack { display: flex; flex-direction: column; gap: 14px; }
+        .ba-row {
+          display: grid; grid-template-columns: 1fr auto 1fr;
+          gap: 10px; align-items: stretch;
+        }
+        @media (max-width: 640px) {
+          .ba-row { grid-template-columns: 1fr; }
+          .ba-arrow { padding: 8px 0; }
+          .ba-arrow .arr { transform: rotate(90deg); }
+        }
+        .ba-block { border-radius: 10px; overflow: hidden; min-width: 0; }
+        .ba-label {
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+          letter-spacing: 0.1em; text-transform: uppercase; color: ${INK3};
+          padding: 8px 12px; background: #f3f4f6; border-bottom: 1px solid ${LINE};
+        }
+        .ba-before {
+          background: #fafafa; border: 1px dashed #d1d5db;
+          position: relative; max-height: 300px; overflow: hidden;
+        }
+        .ba-before::after {
+          content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px;
+          background: linear-gradient(transparent, #fafafa); pointer-events: none;
+        }
+        .ba-before code {
+          display: block; padding: 12px 14px;
+          font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.55;
+          color: ${INK3}; opacity: 0.55; white-space: pre; overflow: hidden;
+        }
+        .ba-after {
+          background: #ffffff; border: 1px solid ${LINE};
+          box-shadow: 0 4px 16px rgba(29, 78, 216, 0.08);
+        }
+        .ba-after code {
+          display: block; padding: 14px 16px;
+          font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8;
+          white-space: pre; overflow-x: auto;
+        }
+        .ba-arrow {
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          color: ${A}; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+          font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; gap: 4px;
+          padding: 0 4px;
+        }
+        .ba-arrow .arr { font-size: 24px; line-height: 1; font-weight: 400; }
+
+        /* ── Naming alternatives inset ── */
+        .naming-card {
+          background: #ffffff; border: 1px solid ${LINE}; border-radius: 10px;
+          padding: 18px 20px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+        }
+        .naming-row {
+          display: flex; align-items: center; gap: 10px; padding: 5px 0;
+          font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: ${INK2};
+        }
+        .naming-row .ic { width: 16px; display: inline-block; font-weight: 700; }
+        .naming-row.chosen { color: ${INK}; font-weight: 600; }
+        .naming-row.chosen .ic { color: ${A}; }
+        .naming-row.rej { color: ${INK3}; }
+        .naming-row.rej .ic { color: ${INK3}; }
+        .naming-caption {
+          font-family: Inter, sans-serif; font-size: 12px; color: ${INK3};
+          line-height: 1.55; margin: 12px 0 0; font-style: italic;
+        }
       `}</style>
 
-      {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+      {/* ── 1. OPENING HOOK ──────────────────────────────────────────────── */}
       <div className="hero-wrap">
         <div className="hero-grid">
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 24 }}>
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
               <Pill>✓ Shipped · MATLAB R2026a</Pill>
               <a href="https://www.mathworks.com/help/daq/calldaqlib.html"
                  target="_blank" rel="noopener noreferrer" className="docs-link">
@@ -241,33 +434,36 @@ function NiDaqmxContent() {
               </a>
             </div>
 
-            <h1 style={{
-              fontFamily: 'Inter, sans-serif', fontWeight: 800,
-              fontSize: 'clamp(24px, 3.2vw, 44px)', lineHeight: 1.1,
-              color: INK, margin: '0 0 18px', letterSpacing: '-0.02em',
-            }}>
-              Why we picked one API style over another — and why it matters that we ran the test instead of arguing about it
+            <h1 className="hook-h1">
+              We replaced 50 lines of C language<br />
+              with three lines of MATLAB.<br />
+              <span style={{ color: AD }}>Then we tested every word.</span>
             </h1>
 
+            <P>
+              To read a single voltage from a piece of measurement hardware, an engineer used to leave their MATLAB workflow, drop into C, write boilerplate, compile, debug, come back. <strong>Every measurement. Every time.</strong>
+            </P>
             <P style={{ marginBottom: 0 }}>
-              A comparative usability study of function-based vs. class-based API design for the Data Acquisition Toolbox, shipped as <span className="mono">calldaqlib</span> in MATLAB R2026a.
+              The work that mattered wasn&rsquo;t the reduction. It was deciding what each of those three lines should <em>say</em> — the function names, the argument order, whether you configured by position or by name. We tested two shapes with 11 engineers across 5 industries, and let the data decide what shipped.
             </P>
 
-            <div className="stat-row">
-              {['11 participants', '5 industries', '3.27 vs. 2.55', 'calldaqlib'].map((s, i, arr) => (
-                <span key={s} style={{ display: 'flex', alignItems: 'center' }}>
-                  <span className="stat-item">{s}</span>
-                  {i < arr.length - 1 && <span className="stat-sep">·</span>}
-                </span>
-              ))}
-            </div>
+            <p className="hook-kicker">
+              Not every interface lives on a screen.<br />
+              Some you type, <em>one word at a time.</em>
+            </p>
           </div>
 
-          <Artifact
-            label="Artifact #1 — Hero code excerpt: calldaqlib from public docs (mathworks.com/help/daq/calldaqlib.html), syntax-highlighted PNG 1600×900"
-            height={300}
-          />
+          <div className="hero-visual">
+            <BeforeAfterHook />
+          </div>
         </div>
+      </div>
+
+      {/* Transition strip — introduces the technical name after the reader is invested */}
+      <div style={{ background: AB }}>
+        <p className="hook-transition">
+          NI-DAQmx is the language MATLAB speaks to measurement hardware. This is the story of how we picked the words — and shipped them in <strong>MATLAB R2026a</strong>.
+        </p>
       </div>
 
       {/* ── 2. TL;DR ────────────────────────────────────────────────────── */}
@@ -352,13 +548,16 @@ function NiDaqmxContent() {
         <EyebrowLabel>Stakes</EyebrowLabel>
         <H2>Why this work mattered</H2>
         <P>
-          The Data Acquisition Toolbox already shipped a high-level API for common workflows. But a meaningful slice of users — engineers in automotive, aerospace, biomedical, and academic labs — needed access to <strong>lower-level hardware features</strong> that the high-level API didn&rsquo;t expose: custom triggering, exotic clocking, vendor-specific extensions. They were either writing C code themselves or stitching together their own MEX wrappers. Both options were costly and brittle.
+          A UI is the furniture in a room. If it doesn&rsquo;t work, you rearrange it. Bold ideas are welcome, mistakes are reversible, and you ship a v2.
         </P>
         <P>
-          The team scoped a new low-level API that would expose the underlying NI-DAQmx C library directly from MATLAB. Two design styles came to the whiteboard immediately — function-based (one MATLAB dispatcher function over the C API) or class-based (options-object helper classes). The team had strong opinions on both sides and no data to break the tie.
+          This wasn&rsquo;t that. What we design sits <em>behind the wall</em> — like the electrical outlets every appliance plugs into. Engineers across automotive, aerospace, biomedical, and academic labs build on top of it: test rigs, production lines, research scripts, regulated workflows. Change the shape of the outlet, and every plug in every house stops working overnight.
+        </P>
+        <P>
+          That changes the standard. With a UI, you ship, watch usage, iterate. With this kind of work, you ship once and live with it. A name we&rsquo;d regret six months in is a name we&rsquo;d live with for ten years — because every script ever written against it depends on it staying exactly the same. There&rsquo;s no quiet redesign. There&rsquo;s no &ldquo;we cleaned up the look.&rdquo; A customer whose script errored out yesterday doesn&rsquo;t get a chance to admire the new design — they get a phone call from their team saying nothing works.
         </P>
         <P style={{ marginBottom: 0 }}>
-          Picking the wrong style would mean shipping an API engineers complain about for the next decade. Style decisions like this are sticky — you can&rsquo;t quietly change them later without breaking every script written against the old shape. The cost of getting it right by testing was small. The cost of getting it wrong by intuition was years of accumulated annoyance and a steady churn of support tickets. So I scoped a comparative study to break the tie with evidence.
+          Two candidate shapes came to the whiteboard. Both worked, both had real engineers in the room defending them, and there was no data to break the tie — only conviction. So before anything was locked in, I scoped a comparative study. Eleven engineers across five industries ran the same workflow against each shape, and <strong>the data — not the loudest voice in the room — decided which one we&rsquo;d live with for the next decade.</strong>
         </P>
       </div>
 

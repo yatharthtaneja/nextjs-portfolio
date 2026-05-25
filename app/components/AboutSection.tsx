@@ -11,7 +11,7 @@ export default function AboutSection() {
     <section
       id="about"
       className="relative w-full"
-      style={{ background: "#F0EEF8" }}
+      style={{ background: "linear-gradient(180deg, #F0EEF8 0%, #EAE5F2 50%, #E5DFF5 100%)" }}
     >
       {/* Top divider */}
       <div

@@ -24,7 +24,7 @@ const projects: JournalProject[] = [
   },
   {
     slug:           "ni-daqmx",
-    title:          "A comparative usability study that settled an API design debate through evidence, not opinion.",
+    title:          "We replaced 50 lines of C language with three lines of MATLAB. Then we tested every word.",
     readTime:       "10 min read",
     type:           "API Design · Comparative Study · MathWorks",
     problem:        "Which API style do hardware engineers prefer — and why does it matter for a decade?",
@@ -300,7 +300,7 @@ export default function Home() {
       <section
         id="work"
         className="relative w-full min-h-screen"
-        style={{ background: "linear-gradient(155deg, #E5DFF5 0%, #ECE7F6 45%, #F0EEF8 100%)" }}
+        style={{ background: "linear-gradient(180deg, #ffffff 0%, #F8F6FC 50%, #F0EEF8 100%)" }}
       >
         <div style={{ height: 3, background: "#4030C3" }} />
 
