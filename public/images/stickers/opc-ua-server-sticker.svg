@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="opcuaServerStickerTitle">
+  <title id="opcuaServerStickerTitle">OPC UA Server workshop: three form-factor sticky notes — App, Library, and Simulink Block — with a red DECIDED stamp on the Block option.</title>
+
+  <defs>
+    <filter id="stickyShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#062d2c" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Paper background -->
+  <rect width="480" height="300" fill="#F4ECDB"/>
+
+  <!-- Faint paper rules -->
+  <g stroke="#CFC4A8" stroke-width="0.6" opacity="0.32">
+    <line x1="0" y1="58" x2="480" y2="58"/>
+    <line x1="0" y1="282" x2="480" y2="282"/>
+  </g>
+
+  <!-- Header eyebrow -->
+  <text x="240" y="32" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#0D6E6B" letter-spacing="0.18em" text-anchor="middle">
+    FORM-FACTOR WORKSHOP  ·  3 OPTIONS
+  </text>
+
+  <!-- ── Sticky 1: APP ─────────────────────────────────────── -->
+  <g transform="rotate(-3.5 88 178)" filter="url(#stickyShadow)">
+    <rect x="30" y="92" width="116" height="148" fill="#FFE893"/>
+    <!-- Tape -->
+    <rect x="60" y="84" width="56" height="14" fill="#9FD7D2" opacity="0.75"/>
+    <line x1="62" y1="86" x2="114" y2="86" stroke="white" stroke-width="0.8" opacity="0.5"/>
+    <!-- Title -->
+    <text x="88" y="132" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#5b4a18" text-anchor="middle">App</text>
+    <!-- Subtitle -->
+    <g font-family="Inter, sans-serif" font-size="9" fill="#5b4a18" opacity="0.78" text-anchor="middle">
+      <text x="88" y="152">standalone GUI</text>
+      <text x="88" y="164">install &amp; run</text>
+    </g>
+    <!-- Notes hatch -->
+    <g stroke="#5b4a18" stroke-width="0.8" opacity="0.32">
+      <line x1="44" y1="184" x2="132" y2="184"/>
+      <line x1="44" y1="196" x2="132" y2="196"/>
+      <line x1="44" y1="208" x2="132" y2="208"/>
+      <line x1="44" y1="220" x2="116" y2="220"/>
+    </g>
+  </g>
+
+  <!-- ── Sticky 2: LIBRARY ─────────────────────────────────── -->
+  <g transform="rotate(2.8 240 168)" filter="url(#stickyShadow)">
+    <rect x="182" y="82" width="116" height="148" fill="#F8C8DC"/>
+    <rect x="212" y="74" width="56" height="14" fill="#9FD7D2" opacity="0.75"/>
+    <line x1="214" y1="76" x2="266" y2="76" stroke="white" stroke-width="0.8" opacity="0.5"/>
+    <text x="240" y="122" font-family="Inter, sans-serif" font-size="18" font-weight="800" fill="#6A2740" text-anchor="middle">Library</text>
+    <g font-family="Inter, sans-serif" font-size="9" fill="#6A2740" opacity="0.78" text-anchor="middle">
+      <text x="240" y="142">m-files + funcs</text>
+      <text x="240" y="154">script-level</text>
+    </g>
+    <g stroke="#6A2740" stroke-width="0.8" opacity="0.32">
+      <line x1="196" y1="174" x2="284" y2="174"/>
+      <line x1="196" y1="186" x2="284" y2="186"/>
+      <line x1="196" y1="198" x2="262" y2="198"/>
+      <line x1="196" y1="210" x2="284" y2="210"/>
+    </g>
+  </g>
+
+  <!-- ── Sticky 3: SIMULINK BLOCK (chosen) ─────────────────── -->
+  <g transform="rotate(-1.6 392 180)" filter="url(#stickyShadow)">
+    <rect x="334" y="94" width="116" height="148" fill="#B8DFD0"/>
+    <rect x="364" y="86" width="56" height="14" fill="#9FD7D2" opacity="0.75"/>
+    <line x1="366" y1="88" x2="418" y2="88" stroke="white" stroke-width="0.8" opacity="0.5"/>
+    <text x="392" y="130" font-family="Inter, sans-serif" font-size="16" font-weight="800" fill="#0D6E6B" text-anchor="middle">Simulink</text>
+    <text x="392" y="148" font-family="Inter, sans-serif" font-size="16" font-weight="800" fill="#0D6E6B" text-anchor="middle">Block</text>
+    <g font-family="Inter, sans-serif" font-size="9" fill="#0D6E6B" opacity="0.78" text-anchor="middle">
+      <text x="392" y="168">drag-and-wire</text>
+    </g>
+    <g stroke="#0D6E6B" stroke-width="0.8" opacity="0.32">
+      <line x1="348" y1="186" x2="436" y2="186"/>
+      <line x1="348" y1="198" x2="436" y2="198"/>
+      <line x1="348" y1="210" x2="416" y2="210"/>
+    </g>
+  </g>
+
+  <!-- DECIDED stamp over the Block sticky -->
+  <g transform="rotate(-11 396 216)">
+    <rect x="334" y="200" width="124" height="36" rx="3" fill="none" stroke="#C2444C" stroke-width="2.6"/>
+    <rect x="338" y="204" width="116" height="28" rx="2" fill="none" stroke="#C2444C" stroke-width="1" opacity="0.55"/>
+    <text x="396" y="225" font-family="Inter, sans-serif" font-size="17" font-weight="900" fill="#C2444C" text-anchor="middle" letter-spacing="0.18em">DECIDED</text>
+  </g>
+</svg>

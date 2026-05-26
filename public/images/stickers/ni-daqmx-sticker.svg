@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="niDaqmxStickerTitle">
+  <title id="niDaqmxStickerTitle">NI-DAQmx comparative study: a tall card showing 50 lines of C ranked 2.55, next to a short card showing 3 lines of MATLAB ranked 3.27 with a winner check.</title>
+
+  <defs>
+    <filter id="ndCard" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0b1a3a" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Paper background -->
+  <rect width="480" height="300" fill="#F4ECDB"/>
+
+  <!-- Faint paper rules -->
+  <g stroke="#CFC4A8" stroke-width="0.6" opacity="0.32">
+    <line x1="0" y1="58" x2="480" y2="58"/>
+    <line x1="0" y1="290" x2="480" y2="290"/>
+  </g>
+
+  <!-- Header eyebrow -->
+  <text x="240" y="32" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#1D4ED8" letter-spacing="0.18em" text-anchor="middle">
+    EASE OF USE · 5-POINT SCALE
+  </text>
+
+  <!-- ── Card 1: C, 50 lines (left, tilted) ─────────────────── -->
+  <g transform="rotate(-3 128 178)" filter="url(#ndCard)">
+    <rect x="28" y="68" width="200" height="220" rx="6" fill="#FFFFFF" stroke="#D9D2C0" stroke-width="1"/>
+    <rect x="28" y="68" width="200" height="28" rx="6" fill="#1D4ED8" opacity="0.10"/>
+    <rect x="28" y="91" width="200" height="5" fill="#1D4ED8" opacity="0.18"/>
+    <circle cx="44" cy="82" r="3.6" fill="#1D4ED8"/>
+    <text x="56" y="86" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#1D4ED8" letter-spacing="0.10em">C  ·  50 LINES</text>
+    <text x="220" y="86" font-family="JetBrains Mono, monospace" font-size="11" font-weight="800" fill="#7B4A22" text-anchor="end">2.55</text>
+
+    <!-- Greeked code lines -->
+    <g fill="#DDD6C5">
+      <rect x="40" y="108" width="100" height="4" rx="2"/>
+      <rect x="40" y="118" width="148" height="4" rx="2"/>
+      <rect x="40" y="128" width="124" height="4" rx="2"/>
+      <rect x="40" y="138" width="160" height="4" rx="2"/>
+      <rect x="40" y="148" width="92" height="4" rx="2"/>
+      <rect x="40" y="158" width="152" height="4" rx="2"/>
+      <rect x="40" y="168" width="110" height="4" rx="2"/>
+      <rect x="40" y="178" width="170" height="4" rx="2"/>
+      <rect x="40" y="188" width="98" height="4" rx="2"/>
+      <rect x="40" y="198" width="140" height="4" rx="2"/>
+      <rect x="40" y="208" width="120" height="4" rx="2"/>
+      <rect x="40" y="218" width="152" height="4" rx="2"/>
+      <rect x="40" y="228" width="78" height="4" rx="2"/>
+      <rect x="40" y="238" width="144" height="4" rx="2"/>
+      <rect x="40" y="248" width="106" height="4" rx="2"/>
+      <rect x="40" y="258" width="132" height="4" rx="2"/>
+    </g>
+    <text x="128" y="278" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" fill="#9c8d6f" text-anchor="middle">···</text>
+  </g>
+
+  <!-- ── Card 2: MATLAB, 3 lines (right, tilted, highlighted) ── -->
+  <g transform="rotate(2.5 358 170)" filter="url(#ndCard)">
+    <rect x="252" y="106" width="212" height="128" rx="6" fill="#FFFFFF" stroke="#1E6B4A" stroke-width="1.4"/>
+    <rect x="252" y="106" width="212" height="28" rx="6" fill="#B8DFD0" opacity="0.55"/>
+    <rect x="252" y="129" width="212" height="5" fill="#1E6B4A" opacity="0.22"/>
+    <circle cx="268" cy="120" r="3.6" fill="#1E6B4A"/>
+    <text x="280" y="124" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#1E6B4A" letter-spacing="0.10em">MATLAB  ·  3 LINES</text>
+    <text x="456" y="124" font-family="JetBrains Mono, monospace" font-size="11" font-weight="800" fill="#1E6B4A" text-anchor="end">3.27 ★</text>
+
+    <!-- 3 fuller code bars -->
+    <g fill="#B8DFD0">
+      <rect x="264" y="148" width="170" height="7" rx="3.5"/>
+      <rect x="264" y="170" width="186" height="7" rx="3.5"/>
+      <rect x="264" y="192" width="138" height="7" rx="3.5"/>
+    </g>
+
+    <!-- winner check -->
+    <g transform="translate(442 214)">
+      <circle r="13" fill="#1E6B4A"/>
+      <path d="M -5.5 0.5 L -1.5 4.5 L 6 -4" stroke="white" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- "vs" connector -->
+  <g transform="translate(238 178)">
+    <circle r="20" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="2"/>
+    <text font-family="Inter, sans-serif" font-size="14" font-weight="900" fill="#1D4ED8" text-anchor="middle" y="5">vs</text>
+  </g>
+</svg>

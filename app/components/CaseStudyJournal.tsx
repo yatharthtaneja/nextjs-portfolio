@@ -114,7 +114,11 @@ function Journal({ project, index }: { project: JournalProject; index: number })
             {/* ── Media zone ── */}
             <div className="cover-media">
               {project.insetImages && project.insetImages.length > 0 ? (
-                <div className="inset-front">
+                <div
+                  className="inset-front"
+                  data-slug={project.slug}
+                  style={{ background: project.spineColor }}
+                >
                   <Image
                     src={project.insetImages[0]}
                     alt=""
@@ -448,6 +452,16 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
         }
         .inset-img {
           object-fit: cover;
+        }
+
+        /* Inset stickers/screenshots: show whole artwork, no crop. The spine-colored
+           letterbox around the image gives the "sticker pasted on the cover" feel. */
+        .inset-front[data-slug="opc-ua-explorer"] .inset-img,
+        .inset-front[data-slug="ni-daqmx"] .inset-img,
+        .inset-front[data-slug="mqtt-survey"] .inset-img,
+        .inset-front[data-slug="opc-ua-server"] .inset-img {
+          object-fit: contain;
+          object-position: center center;
         }
         .status-tag {
           display: inline-flex;

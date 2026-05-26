@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="opcuaExplorerStickerTitle">
+  <title id="opcuaExplorerStickerTitle">OPC UA Explorer: an address-space tree of factory sensors with one node selected, a node-value card showing live temperature 56.0 degrees with a sparkline, and a footer pill summarizing 27 findings, 4 themes, shipped R2026a.</title>
+
+  <defs>
+    <filter id="oeCard" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#04231a" flood-opacity="0.20"/>
+    </filter>
+  </defs>
+
+  <!-- Paper background -->
+  <rect width="480" height="300" fill="#F4ECDB"/>
+
+  <!-- Faint paper rules -->
+  <g stroke="#CFC4A8" stroke-width="0.6" opacity="0.32">
+    <line x1="0" y1="58" x2="480" y2="58"/>
+    <line x1="0" y1="282" x2="480" y2="282"/>
+  </g>
+
+  <!-- Header eyebrow -->
+  <text x="240" y="32" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#1E6B4A" letter-spacing="0.18em" text-anchor="middle">
+    ADDRESS SPACE · 10,000 NODES
+  </text>
+
+  <!-- ── Card 1: Address-space tree (left, tilted) ──────────────── -->
+  <g transform="rotate(-2.5 130 170)" filter="url(#oeCard)">
+    <rect x="28" y="72" width="204" height="180" rx="6" fill="#FFFFFF" stroke="#D9D2C0" stroke-width="1"/>
+    <rect x="28" y="72" width="204" height="24" rx="6" fill="#1E6B4A" opacity="0.10"/>
+    <rect x="28" y="91" width="204" height="5" fill="#1E6B4A" opacity="0.18"/>
+    <circle cx="44" cy="84" r="3.6" fill="#1E6B4A"/>
+    <text x="56" y="88" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" fill="#1E6B4A" letter-spacing="0.10em">ADDRESS SPACE</text>
+
+    <!-- Tree rows (un-highlighted) -->
+    <g font-family="Inter, sans-serif" font-size="9.5" fill="#374151">
+      <text x="44" y="116">▾ Server</text>
+      <text x="56" y="130">▾ Sensors</text>
+      <text x="72" y="144">▾ Line A</text>
+      <text x="88" y="158">• Temp_01</text>
+      <text x="88" y="186">• Temp_03</text>
+      <text x="72" y="200">▸ Line B</text>
+      <text x="56" y="214">▸ Motors</text>
+      <text x="44" y="228">▸ Alarms</text>
+      <text x="44" y="242">▸ Methods</text>
+    </g>
+
+    <!-- Highlighted selected node (Temp_02) -->
+    <rect x="80" y="161" width="140" height="14" rx="2" fill="#B8DFD0" opacity="0.85"/>
+    <text x="88" y="172" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#0D4F33">• Temp_02</text>
+    <text x="214" y="172" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#0D4F33" text-anchor="end">●</text>
+
+    <!-- footer count -->
+    <text x="224" y="246" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" fill="#9c8d6f" text-anchor="end">+ 9,995 more</text>
+  </g>
+
+  <!-- Connecting dashed arrow from tree to value card -->
+  <g stroke="#1E6B4A" stroke-width="1.4" fill="none" opacity="0.7">
+    <path d="M 236 168 Q 258 158 274 174" stroke-dasharray="2 3"/>
+    <path d="M 268 168 L 276 174 L 268 180" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ── Card 2: Node Function / value reader (right, tilted +1.8°) ── -->
+  <g transform="rotate(1.8 372 178)" filter="url(#oeCard)">
+    <rect x="280" y="106" width="184" height="148" rx="6" fill="#FFFFFF" stroke="#1E6B4A" stroke-width="1.4"/>
+    <rect x="280" y="106" width="184" height="24" rx="6" fill="#B8DFD0" opacity="0.6"/>
+    <rect x="280" y="125" width="184" height="5" fill="#1E6B4A" opacity="0.22"/>
+    <circle cx="296" cy="118" r="3.6" fill="#1E6B4A"/>
+    <text x="308" y="122" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" fill="#1E6B4A" letter-spacing="0.10em">NODE FUNCTION</text>
+
+    <!-- node identity -->
+    <text x="294" y="150" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#111827">Temp_02</text>
+    <text x="294" y="164" font-family="JetBrains Mono, monospace" font-size="8" fill="#6b7280">double · read-only</text>
+
+    <!-- big value -->
+    <text x="294" y="200" font-family="Inter, sans-serif" font-size="30" font-weight="800" fill="#1E6B4A">56.0</text>
+    <text x="370" y="200" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#6b7280">°C</text>
+
+    <!-- mini sparkline -->
+    <g stroke="#1E6B4A" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 294 234 L 308 228 L 320 230 L 332 224 L 344 226 L 356 220 L 370 222 L 384 216 L 398 218 L 412 212 L 426 216 L 440 210"/>
+    </g>
+    <!-- pulse dot on latest sparkline point -->
+    <circle cx="440" cy="210" r="2.6" fill="#1E6B4A"/>
+    <circle cx="440" cy="210" r="6.4" fill="none" stroke="#1E6B4A" stroke-width="1" opacity="0.5"/>
+  </g>
+
+</svg>

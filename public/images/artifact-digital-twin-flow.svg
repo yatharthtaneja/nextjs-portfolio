@@ -15,16 +15,37 @@
     <!-- icon bg -->
     <rect width="180" height="118" rx="14" fill="#E8F7F1"/>
     <rect y="106" width="180" height="12" fill="#E8F7F1"/>
-    <!-- roller-coaster hill track -->
-    <path d="M 24 98 Q 50 28 90 56 Q 116 76 156 36"
-          stroke="#1E6B4A" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <!-- cart -->
-    <rect x="74" y="46" width="28" height="16" rx="4" fill="#1E6B4A"/>
-    <circle cx="80"  cy="64" r="5" fill="#1E6B4A"/>
-    <circle cx="96"  cy="64" r="5" fill="#1E6B4A"/>
-    <!-- vibration waves -->
-    <path d="M 18 90 Q 22 82 26 90 Q 30 98 34 90" stroke="#1E6B4A" stroke-width="2" stroke-linecap="round" fill="none"/>
-    <path d="M 10 90 Q 16 76 22 90 Q 28 104 34 90" stroke="#1E6B4A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+    <!-- ground line -->
+    <line x1="14" y1="92" x2="166" y2="92" stroke="#1E6B4A" stroke-width="1.4" stroke-opacity="0.5" stroke-linecap="round"/>
+    <!-- support struts (vertical posts under the track) -->
+    <line x1="38" y1="92" x2="38" y2="78" stroke="#1E6B4A" stroke-width="1.4" stroke-opacity="0.45" stroke-linecap="round"/>
+    <line x1="56" y1="92" x2="56" y2="44" stroke="#1E6B4A" stroke-width="1.4" stroke-opacity="0.45" stroke-linecap="round"/>
+    <line x1="74" y1="92" x2="74" y2="27" stroke="#1E6B4A" stroke-width="1.6" stroke-opacity="0.55" stroke-linecap="round"/>
+    <line x1="100" y1="92" x2="100" y2="72" stroke="#1E6B4A" stroke-width="1.4" stroke-opacity="0.45" stroke-linecap="round"/>
+    <line x1="124" y1="92" x2="124" y2="62" stroke="#1E6B4A" stroke-width="1.4" stroke-opacity="0.45" stroke-linecap="round"/>
+    <line x1="146" y1="92" x2="146" y2="74" stroke="#1E6B4A" stroke-width="1.4" stroke-opacity="0.45" stroke-linecap="round"/>
+    <!-- X cross-bracing on the main support tower -->
+    <line x1="56" y1="44" x2="74" y2="78" stroke="#1E6B4A" stroke-width="0.9" stroke-opacity="0.35"/>
+    <line x1="56" y1="78" x2="74" y2="44" stroke="#1E6B4A" stroke-width="0.9" stroke-opacity="0.35"/>
+    <line x1="74" y1="60" x2="100" y2="78" stroke="#1E6B4A" stroke-width="0.9" stroke-opacity="0.3"/>
+    <line x1="74" y1="78" x2="100" y2="60" stroke="#1E6B4A" stroke-width="0.9" stroke-opacity="0.3"/>
+    <!-- main roller-coaster track: one big hill + a smaller secondary hump -->
+    <path d="M 14 88 Q 28 88 38 78 Q 50 64 58 44 Q 66 27 74 27 Q 82 27 88 44 Q 96 64 108 72 Q 118 72 124 62 Q 132 54 138 56 Q 146 62 158 82 Q 164 88 166 88"
+          stroke="#1E6B4A" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- cart cresting the peak, passengers with arms raised -->
+    <g transform="translate(76,18)">
+      <!-- passenger heads -->
+      <circle cx="-5" cy="-6" r="2.2" fill="#1E6B4A"/>
+      <circle cx="5" cy="-6" r="2.2" fill="#1E6B4A"/>
+      <!-- raised arms -->
+      <path d="M -5 -8 L -7 -11" stroke="#1E6B4A" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M 5 -8 L 7 -11" stroke="#1E6B4A" stroke-width="1.3" stroke-linecap="round"/>
+      <!-- cart body -->
+      <rect x="-11" y="-2" width="22" height="9" rx="2" fill="#1E6B4A"/>
+      <!-- wheels -->
+      <circle cx="-6" cy="9" r="2.4" fill="#1E6B4A"/>
+      <circle cx="6" cy="9" r="2.4" fill="#1E6B4A"/>
+    </g>
     <!-- labels -->
     <text x="90" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#1E6B4A">Physical Asset</text>
     <text x="90" y="161" text-anchor="middle" font-size="12" fill="#6b7280">Roller coaster</text>
