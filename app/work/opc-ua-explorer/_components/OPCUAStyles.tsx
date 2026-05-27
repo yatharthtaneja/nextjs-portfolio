@@ -365,14 +365,21 @@ export default function OPCUAStyles() {
           position: relative; width: 64px; height: 64px;
           display: flex; align-items: center; justify-content: center;
           margin-bottom: 6px;
+          overflow: visible;
         }
-        .reframe-figure-art svg { width: 64px; height: 64px; }
-        .reframe-figure.wrong { opacity: 0.45; filter: grayscale(1); }
+        .reframe-figure-art > svg { width: 64px; height: 64px; }
+        .reframe-figure.wrong { opacity: 0.5; filter: grayscale(1); }
         .reframe-figure.wrong .reframe-figure-art { color: ${INK3}; }
+        /* Big overlay X — extends ~14px past each side of the 64px figure to
+           visually dominate it as "this is wrong". */
         .reframe-cross {
-          position: absolute; inset: 0;
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          width: 92px; height: 92px;
           display: flex; align-items: center; justify-content: center;
-          color: #c2525a; opacity: 0.95;
+          color: #c2525a;
+          pointer-events: none;
         }
         .reframe-figure.right .reframe-figure-art { color: ${INK2}; }
         .reframe-dot-status {
@@ -408,6 +415,10 @@ export default function OPCUAStyles() {
           border-right: 1.5px solid ${A};
           border-top: 1.5px solid ${A};
           transform: translateY(-50%) rotate(45deg);
+        }
+        /* Want-strip lives inside the reframe card, filling the lower half. */
+        .reframe-want-strip {
+          margin: 28px 0 0;
         }
 
         /* ── Discovery 02: quadrant chart (HTML layout, ported from stitch) ── */

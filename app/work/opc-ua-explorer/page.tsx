@@ -19,7 +19,7 @@ import FactoryHookSVG from './_components/FactoryHookSVG';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
 import OPCUAStyles from './_components/OPCUAStyles';
-import { ArrowLeft, ArrowRight, Check, Cross, Pause, Person } from '@/app/components/icons';
+import { ArrowLeft, ArrowRight, Check, Pause, Person } from '@/app/components/icons';
 
 function OPCUAContent() {
   return (
@@ -509,8 +509,20 @@ function OPCUAContent() {
                 <div className="reframe-figure wrong">
                   <div className="reframe-figure-art">
                     <Person size={64} strokeWidth={1.2} />
+                    {/* Big overlay X — inline SVG so the strokes extend close
+                        to the viewBox edges (Cross component is tuned for
+                        small inline glyphs). */}
                     <span className="reframe-cross">
-                      <Cross size={56} strokeWidth={0.7} />
+                      <svg
+                        width="92"
+                        height="92"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                        <line x1="21" y1="3" x2="3" y2="21" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                      </svg>
                     </span>
                   </div>
                   <span className="reframe-figure-label">OPC UA Expert</span>
@@ -531,41 +543,43 @@ function OPCUAContent() {
                   <span className="reframe-figure-sublabel">(who needs OPC UA data)</span>
                 </div>
               </div>
-            </div>
 
-            <div className="discovery-want-strip">
-              <p className="discovery-want-label">What they actually want</p>
-              <div className="discovery-want-items">
-                <span className="discovery-want-item">
-                  {/* Gauge — echoes the gauge-near-head in the quadrant chart below */}
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M 4 16 A 8 8 0 0 1 20 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none" />
-                    <line x1="12" y1="16" x2="17" y2="9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    <circle cx="12" cy="16" r="1.4" fill="currentColor" />
-                  </svg>
-                  <span>Read a sensor</span>
-                </span>
-                <span className="discovery-want-item">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                    <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                  </svg>
-                  <span>Inspect a value</span>
-                </span>
-                <span className="discovery-want-item">
-                  {/* { } — callback to the {} glyph on the OPC-UA-expert silhouette */}
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M 9 4 C 6.5 4 6.5 7 6.5 9 C 6.5 11 5 12 4 12 C 5 12 6.5 13 6.5 15 C 6.5 17 6.5 20 9 20"
-                      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
-                    />
-                    <path
-                      d="M 15 4 C 17.5 4 17.5 7 17.5 9 C 17.5 11 19 12 20 12 C 19 12 17.5 13 17.5 15 C 17.5 17 17.5 20 15 20"
-                      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
-                    />
-                  </svg>
-                  <span>Generate Script</span>
-                </span>
+              {/* What-they-actually-want strip lives inside the card now,
+                  filling the formerly empty lower half. */}
+              <div className="discovery-want-strip reframe-want-strip">
+                <p className="discovery-want-label">What they actually want</p>
+                <div className="discovery-want-items">
+                  <span className="discovery-want-item">
+                    {/* Gauge — echoes the gauge-near-head in the quadrant chart below */}
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M 4 16 A 8 8 0 0 1 20 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+                      <line x1="12" y1="16" x2="17" y2="9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                      <circle cx="12" cy="16" r="1.4" fill="currentColor" />
+                    </svg>
+                    <span>Read a sensor</span>
+                  </span>
+                  <span className="discovery-want-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                      <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    </svg>
+                    <span>Inspect a value</span>
+                  </span>
+                  <span className="discovery-want-item">
+                    {/* { } — callback to the {} glyph on the OPC-UA-expert silhouette */}
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M 9 4 C 6.5 4 6.5 7 6.5 9 C 6.5 11 5 12 4 12 C 5 12 6.5 13 6.5 15 C 6.5 17 6.5 20 9 20"
+                        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
+                      />
+                      <path
+                        d="M 15 4 C 17.5 4 17.5 7 17.5 9 C 17.5 11 19 12 20 12 C 19 12 17.5 13 17.5 15 C 17.5 17 17.5 20 15 20"
+                        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
+                      />
+                    </svg>
+                    <span>Generate Script</span>
+                  </span>
+                </div>
               </div>
             </div>
 
