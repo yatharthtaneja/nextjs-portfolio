@@ -460,14 +460,23 @@ export default function OPCUAStyles() {
           background: rgba(184, 223, 208, 0.2);
           pointer-events: none;
         }
+        /* Wrapper sits in the 28px-wide left gutter. Flex centers the
+           rotated text vertically + horizontally inside the gutter so its
+           after-rotation bounding box stays clear of the plot area. */
+        .quadrant-y-label-area {
+          position: absolute;
+          left: 0; top: 0; bottom: 28px;
+          width: 28px;
+          display: flex; align-items: center; justify-content: center;
+          pointer-events: none;
+        }
         .quadrant-y-label {
-          position: absolute; left: 8px; top: 50%;
-          transform: translateY(-50%) rotate(-90deg);
-          transform-origin: center;
+          transform: rotate(-90deg);
+          white-space: nowrap;
           font-family: 'JetBrains Mono', monospace;
           font-size: 9px; font-weight: 700;
           letter-spacing: 0.12em; text-transform: uppercase;
-          color: ${INK3}; white-space: nowrap;
+          color: ${INK3};
         }
         .quadrant-y-tick {
           position: absolute; left: 32px;
@@ -526,15 +535,19 @@ export default function OPCUAStyles() {
           width: 6px; height: 6px; border-radius: 50%;
           background: #fff;
         }
+        /* Standalone callout positioned at chart-relative coords (set inline
+           in JSX). The connecting line angles up-left from the text toward
+           the anchor dot above-left of the callout. */
         .quadrant-anchor-callout {
           position: absolute;
           display: flex; align-items: center; gap: 6px;
-          left: 24px; top: 16px;
+          z-index: 3;
         }
         .quadrant-anchor-callout-line {
-          width: 28px; height: 1.5px;
-          background: ${A}; opacity: 0.55;
-          transform: rotate(20deg); transform-origin: left center;
+          width: 26px; height: 1.5px;
+          background: ${A}; opacity: 0.65;
+          transform: rotate(-22deg);
+          transform-origin: right center;
         }
         .quadrant-anchor-callout-text {
           font-family: 'JetBrains Mono', monospace;

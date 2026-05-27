@@ -608,8 +608,11 @@ function OPCUAContent() {
                 <div className="quadrant-y-axis" aria-hidden="true" />
                 <div className="quadrant-x-axis" aria-hidden="true" />
 
-                {/* Axis labels */}
-                <span className="quadrant-y-label">OPC UA Dependency</span>
+                {/* Axis labels — Y-label lives in a flex-centered box in the
+                    gutter so it can't overlap the plot area. */}
+                <div className="quadrant-y-label-area" aria-hidden="true">
+                  <span className="quadrant-y-label">OPC UA Dependency</span>
+                </div>
                 <span className="quadrant-y-tick top">No alt</span>
                 <span className="quadrant-y-tick bottom">Has alt</span>
                 <span className="quadrant-x-label">Frequency in use</span>
@@ -631,13 +634,16 @@ function OPCUAContent() {
                 </div>
 
                 {/* THE ANCHOR — Digital-twin sync, top-left, highlighted */}
-                <div className="quadrant-anchor" style={{ left: '24%', top: '18%' }}>
+                <div className="quadrant-anchor" style={{ left: '24%', top: '20%' }}>
                   <span className="quadrant-anchor-label">Digital-twin sync</span>
                   <span className="quadrant-anchor-dot" />
-                  <div className="quadrant-anchor-callout">
-                    <span className="quadrant-anchor-callout-line" />
-                    <span className="quadrant-anchor-callout-text">The Anchor</span>
-                  </div>
+                </div>
+
+                {/* Callout sits below-right of the anchor dot so it clears
+                    the 30px-diameter dot+ring. Line points up-left at it. */}
+                <div className="quadrant-anchor-callout" style={{ left: '36%', top: '32%' }}>
+                  <span className="quadrant-anchor-callout-line" />
+                  <span className="quadrant-anchor-callout-text">The Anchor</span>
                 </div>
               </div>
             </div>
