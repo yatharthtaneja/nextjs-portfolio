@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Check, Pause } from '@/app/components/icons';
 import { A, INK2 } from './theme';
 
 // Stacked horizontal bar showing what % of the 19-item pipeline shipped,
@@ -21,10 +22,15 @@ export default function DecisionBar() {
     return () => obs.disconnect();
   }, []);
 
-  const segments = [
-    { count: 6,  label: 'SHIPPED',  color: A,         legend: '✓ Shipped in v1' },
-    { count: 2,  label: 'PARTIAL',  color: '#7BA88A', legend: '~ Partially shipped' },
-    { count: 11, label: 'DEFERRED', color: '#C9C4B8', legend: '⏸ Deferred — see table' },
+  const segments: Array<{
+    count: number;
+    label: string;
+    color: string;
+    legend: React.ReactNode;
+  }> = [
+    { count: 6,  label: 'SHIPPED',  color: A,         legend: <><Check style={{ marginRight: 6 }} />Shipped in v1</> },
+    { count: 2,  label: 'PARTIAL',  color: '#7BA88A', legend: <><span style={{ marginRight: 6, fontWeight: 700 }}>~</span>Partially shipped</> },
+    { count: 11, label: 'DEFERRED', color: '#C9C4B8', legend: <><Pause style={{ marginRight: 6 }} />Deferred — see table</> },
   ];
   const total = segments.reduce((s, x) => s + x.count, 0);
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { ArrowLeft, ArrowRight, Lock } from './icons';
 
 const PASSWORD = 'yuxr';
 const STORAGE_KEY = 'portfolio-unlocked';
@@ -130,9 +131,11 @@ export default function PasswordGate({
             alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto 28px',
-            fontSize: 32,
+            color: accentColor,
             border: `1.5px solid ${softColor}`,
-          }}>🔒</div>
+          }}>
+            <Lock size={32} strokeWidth={1.8} />
+          </div>
 
           <h1 style={{
             fontFamily: 'Inter, Roboto, sans-serif',
@@ -209,7 +212,9 @@ export default function PasswordGate({
                 letterSpacing: '0.01em',
               }}
             >
-              Unlock →
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                Unlock<ArrowRight />
+              </span>
             </button>
           </div>
         </div>
@@ -228,7 +233,7 @@ export default function PasswordGate({
             transition: 'opacity 0.18s',
           }}
         >
-          ← Back to portfolio
+          <ArrowLeft style={{ marginRight: 6 }} />Back to portfolio
         </Link>
       </div>
     </div>

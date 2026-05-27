@@ -19,6 +19,7 @@ import FactoryHookSVG from './_components/FactoryHookSVG';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
 import OPCUAStyles from './_components/OPCUAStyles';
+import { ArrowLeft, ArrowRight, Check, Pause } from '@/app/components/icons';
 
 function OPCUAContent() {
   return (
@@ -36,10 +37,10 @@ function OPCUAContent() {
                 background: AS, color: A,
                 fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600,
                 padding: '6px 14px', borderRadius: 20,
-              }}>✓ Shipped · MATLAB R2026a</span>
+              }}><Check />Shipped · MATLAB R2026a</span>
               <a href="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
                  target="_blank" rel="noopener noreferrer" className="docs-link">
-                Read the docs →
+                Read the docs<ArrowRight style={{ marginLeft: 4 }} />
               </a>
             </div>
 
@@ -153,7 +154,7 @@ function OPCUAContent() {
           <a href="#why-mattered" className="skip-ctx" style={{
             display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: 14,
             color: A, textDecoration: 'none', borderBottom: `1px solid ${AS}`,
-          }}>Skip context →</a>
+          }}>Skip context<ArrowRight style={{ marginLeft: 4 }} /></a>
         </div>
         <P>
           OPC UA is <strong>the language industrial machines speak to each other</strong>. A modern factory has thousands of sensors, motors, valves, controllers, and PLCs (programmable logic controllers — the small computers that run real-time hardware). They all need to share data: temperature, pressure, vibration, on/off state, fault codes. OPC UA is the standardized protocol that lets a sensor from one vendor and a controller from another talk without custom integration work.
@@ -164,39 +165,53 @@ function OPCUAContent() {
 
         <div className="glossary-grid" role="list" aria-label="OPC UA vocabulary used throughout this case study">
           <div className="glossary-tile" role="listitem">
+            {/* Tree icon — mirrors the address-space tree shown in screenshots later */}
             <svg viewBox="0 0 48 48" className="glossary-icon" aria-hidden="true">
-              <rect x="7" y="6" width="34" height="36" rx="3" fill="white" stroke={A} strokeWidth="1.4" />
-              <line x1="13" y1="6" x2="13" y2="42" stroke={A} strokeWidth="1.4" strokeOpacity="0.45" />
-              <line x1="17" y1="14" x2="36" y2="14" stroke={A} strokeWidth="1.6" strokeLinecap="round" />
-              <line x1="20" y1="20" x2="33" y2="20" stroke={A} strokeWidth="1.2" strokeOpacity="0.5" strokeLinecap="round" />
-              <line x1="20" y1="25" x2="33" y2="25" stroke={A} strokeWidth="1.2" strokeOpacity="0.5" strokeLinecap="round" />
-              <line x1="17" y1="31" x2="36" y2="31" stroke={A} strokeWidth="1.6" strokeLinecap="round" />
-              <line x1="20" y1="37" x2="30" y2="37" stroke={A} strokeWidth="1.2" strokeOpacity="0.5" strokeLinecap="round" />
+              {/* Root node */}
+              <rect x="6" y="9" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" />
+              {/* Vertical trunk + branches */}
+              <path d="M 12.5 15 L 12.5 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" />
+              <path d="M 12.5 22 L 22 22" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
+              <path d="M 12.5 30 L 22 30" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
+              <path d="M 12.5 38 L 22 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
+              {/* Children */}
+              <rect x="22" y="19" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" />
+              <rect x="22" y="27" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" />
+              <rect x="22" y="35" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" strokeOpacity="0.55" />
+              {/* Sub-branch from middle child */}
+              <path d="M 28.5 33 L 28.5 38 L 35 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.4" strokeLinecap="round" fill="none" />
+              <circle cx="38" cy="38" r="1.4" fill={A} fillOpacity="0.55" />
             </svg>
             <p className="glossary-tag">Address space</p>
             <p className="glossary-def">Table of contents of a factory&rsquo;s data — chapters and sub&#8209;chapters.</p>
           </div>
           <div className="glossary-tile" role="listitem">
+            {/* Node — one highlighted leaf in a small tree of siblings */}
             <svg viewBox="0 0 48 48" className="glossary-icon" aria-hidden="true">
-              <line x1="14" y1="10" x2="14" y2="40" stroke={A} strokeWidth="1.4" strokeOpacity="0.55" />
-              <line x1="14" y1="16" x2="24" y2="16" stroke={A} strokeWidth="1.4" strokeOpacity="0.55" />
-              <line x1="14" y1="26" x2="24" y2="26" stroke={A} strokeWidth="1.4" strokeOpacity="0.55" />
-              <line x1="14" y1="36" x2="24" y2="36" stroke={A} strokeWidth="1.4" strokeOpacity="0.55" />
-              <circle cx="27" cy="16" r="2.4" fill={A} fillOpacity="0.35" />
-              <circle cx="27" cy="36" r="2.4" fill={A} fillOpacity="0.35" />
-              <PulseDot cx={27} cy={26} r={3} ringMax={8} delay={0} />
+              {/* trunk */}
+              <line x1="14" y1="10" x2="14" y2="40" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" />
+              <line x1="14" y1="16" x2="22" y2="16" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
+              <line x1="14" y1="26" x2="22" y2="26" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
+              <line x1="14" y1="36" x2="22" y2="36" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
+              {/* sibling nodes — quiet */}
+              <circle cx="25" cy="16" r="2.2" fill={A} fillOpacity="0.32" />
+              <circle cx="25" cy="36" r="2.2" fill={A} fillOpacity="0.32" />
+              {/* THE node — highlighted with pulse */}
+              <PulseDot cx={28} cy={26} r={3} ringMax={9} delay={0} />
             </svg>
             <p className="glossary-tag">Node</p>
             <p className="glossary-def">One entry — a single sensor value or valve position.</p>
           </div>
           <div className="glossary-tile" role="listitem">
+            {/* Subscription — single source pushing 3 outbound update rings */}
             <svg viewBox="0 0 48 48" className="glossary-icon" aria-hidden="true">
-              <rect x="6" y="13" width="20" height="22" rx="2" fill="white" stroke={A} strokeWidth="1.4" />
-              <line x1="10" y1="19" x2="22" y2="19" stroke={A} strokeWidth="1.2" strokeOpacity="0.55" strokeLinecap="round" />
-              <line x1="10" y1="24" x2="22" y2="24" stroke={A} strokeWidth="1.2" strokeOpacity="0.55" strokeLinecap="round" />
-              <line x1="10" y1="29" x2="18" y2="29" stroke={A} strokeWidth="1.2" strokeOpacity="0.55" strokeLinecap="round" />
-              <DashedFlow d="M 28 24 L 38 24" packets={1} packetDuration={1.6} color={A} strokeOpacity={0.7} />
-              <PulseDot cx={42} cy={24} r={2.6} ringMax={8} delay={0.5} />
+              {/* Source node (center-left) */}
+              <circle cx="16" cy="24" r="4.5" fill={A} />
+              <circle cx="16" cy="24" r="1.6" fill="#fff" fillOpacity="0.85" />
+              {/* Three outbound pulse arcs — pushing updates out */}
+              <path d="M 24 18 Q 30 24 24 30" stroke={A} strokeWidth="1.4" strokeOpacity="0.85" strokeLinecap="round" fill="none" />
+              <path d="M 28 14 Q 38 24 28 34" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" fill="none" />
+              <path d="M 32 10 Q 46 24 32 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.3" strokeLinecap="round" fill="none" />
             </svg>
             <p className="glossary-tag">Subscription</p>
             <p className="glossary-def">Ask once; updates arrive whenever the value changes.</p>
@@ -260,11 +275,21 @@ function OPCUAContent() {
             topFill="#FAFAF7" rightFill="#ECEAE7" leftFill="#DDD9D4"
             stroke={INK3}
           />
-          {/* small vendor cards floating above tile */}
+          {/* small vendor cards floating above tile — each gets a different
+              interior glyph so the "many vendors" idea reads instantly */}
           <g>
+            {/* Vendor A — single dot logo */}
             <rect x={383} y={50} width="14" height="10" rx="1.5" fill="white" stroke={INK3} strokeWidth="0.9" />
+            <circle cx="390" cy="55" r="1.6" fill={INK3} />
+            {/* Vendor B — two stacked bars */}
             <rect x={403} y={47} width="14" height="10" rx="1.5" fill="white" stroke={INK3} strokeWidth="0.9" />
+            <line x1="406" y1="51" x2="414" y2="51" stroke={INK3} strokeWidth="0.9" strokeLinecap="round" />
+            <line x1="406" y1="55" x2="412" y2="55" stroke={INK3} strokeWidth="0.9" strokeLinecap="round" />
+            {/* Vendor C — chevron mark */}
             <rect x={423} y={50} width="14" height="10" rx="1.5" fill="white" stroke={INK3} strokeWidth="0.9" />
+            <path d="M 427 57 L 430 53 L 433 57" fill="none" stroke={INK3} strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round" />
+            {/* "+ more" suggesting the count isn't exhaustive */}
+            <text x="443" y="58" fontFamily="JetBrains Mono, monospace" fontSize="7" fontWeight="700" fill={INK3} letterSpacing="0.05em">+more</text>
           </g>
           <text x={410} y={124} textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK2}>3rd-party OPC UA</text>
           <text x={410} y={222} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill={INK3} letterSpacing="0.08em">EXISTING MARKET</text>
@@ -527,9 +552,11 @@ function OPCUAContent() {
               <p className="discovery-want-label">What they actually want</p>
               <div className="discovery-want-items">
                 <span className="discovery-want-item">
+                  {/* Gauge — echoes the gauge-near-head in the quadrant chart below */}
                   <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M 12 5 C 5 5 1 12 1 12 C 1 12 5 19 12 19 C 19 19 23 12 23 12 C 23 12 19 5 12 5 Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-                    <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    <path d="M 4 16 A 8 8 0 0 1 20 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+                    <line x1="12" y1="16" x2="17" y2="9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    <circle cx="12" cy="16" r="1.4" fill="currentColor" />
                   </svg>
                   <span>Read a sensor</span>
                 </span>
@@ -541,9 +568,16 @@ function OPCUAContent() {
                   <span>Inspect a value</span>
                 </span>
                 <span className="discovery-want-item">
+                  {/* { } — callback to the {} glyph on the OPC-UA-expert silhouette */}
                   <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <line x1="12" y1="20" x2="12" y2="5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    <path d="M 6 11 L 12 5 L 18 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    <path
+                      d="M 9 4 C 6.5 4 6.5 7 6.5 9 C 6.5 11 5 12 4 12 C 5 12 6.5 13 6.5 15 C 6.5 17 6.5 20 9 20"
+                      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
+                    />
+                    <path
+                      d="M 15 4 C 17.5 4 17.5 7 17.5 9 C 17.5 11 19 12 20 12 C 19 12 17.5 13 17.5 15 C 17.5 17 17.5 20 15 20"
+                      stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
+                    />
                   </svg>
                   <span>Generate Script</span>
                 </span>
@@ -737,7 +771,7 @@ function OPCUAContent() {
             <div>
               <div className="recap-headline">
                 <SubLabel>What shipped</SubLabel>
-                <Pill>✓ Shipped</Pill>
+                <Pill><Check />Shipped</Pill>
               </div>
               <p className="insight-body">All four changes landed in the next build. The most consequential move wasn&rsquo;t a rename — it was deleting <strong>Export Log</strong> outright. Its presence was the entire reason &ldquo;logging&rdquo; collided with &ldquo;recording.&rdquo; A rename would have kept the trap; removing it closed it.</p>
             </div>
@@ -781,7 +815,7 @@ function OPCUAContent() {
             <div>
               <div className="recap-headline">
                 <SubLabel>What shipped</SubLabel>
-                <Pill>✓ Shipped</Pill>
+                <Pill><Check />Shipped</Pill>
               </div>
               <p className="insight-body">Panels swapped in the next build. We also added a <strong>Generate Script</strong> button — validated against the historical-data export pattern that surfaced six times across the study. A click produces a MATLAB Live Script that recreates the session as code.</p>
             </div>
@@ -873,7 +907,7 @@ function OPCUAContent() {
             <div>
               <div className="recap-headline">
                 <SubLabel>What shipped</SubLabel>
-                <Pill>✓ Shipped</Pill>
+                <Pill><Check />Shipped</Pill>
               </div>
               <p className="insight-body">The Node Function panel now exposes a <strong>Write</strong> tab only when the selected node permits writing. Read-only nodes show only a <strong>Read</strong> tab — so the user never starts a write the server will reject.</p>
             </div>
@@ -917,7 +951,7 @@ function OPCUAContent() {
             <div>
               <div className="recap-headline">
                 <SubLabel>What shipped</SubLabel>
-                <Pill>✓ Shipped</Pill>
+                <Pill><Check />Shipped</Pill>
               </div>
               <p className="insight-body"><strong>Quality</strong> and <strong>timestamp</strong> shipped as inline columns. <strong>Units</strong> were deliberately kept <em>out</em> of the table; they sit in the Node Information panel as secondary data. Mixing unit strings into the table would force every Generate-Script consumer to strip them before computation — the secondary-data placement preserves both context and the numeric pipeline.</p>
             </div>
@@ -1149,30 +1183,30 @@ function OPCUAContent() {
 
         <div className="lesson-row">
           <svg viewBox="0 0 140 110" className="lesson-svg" role="img" aria-labelledby="lesson2Title">
-            <title id="lesson2Title">Two participant silhouettes representing an early micro-study leading via dashed arrow to five silhouettes representing the full study.</title>
-            {/* left group: 2 silhouettes */}
-            {[0, 14].map((x, i) => (
-              <g key={i} transform={`translate(${10 + x}, 30)`}>
-                <circle cx="6" cy="6" r="4.5" fill={A} fillOpacity="0.85" />
-                <path d="M 0 14 L 12 14 L 13 30 L -1 30 Z" fill={A} fillOpacity="0.85" />
+            <title id="lesson2Title">Two participant silhouettes representing an early micro-study leading via dashed arrow to five silhouettes representing the full study — all silhouettes at the same scale to encode quantity rather than size.</title>
+            {/* left group: 2 silhouettes (accent) — fixed silhouette size */}
+            {[0, 12].map((x, i) => (
+              <g key={i} transform={`translate(${4 + x}, 32)`}>
+                <circle cx="4" cy="4" r="3.2" fill={A} fillOpacity="0.85" />
+                <path d="M -1 10 L 9 10 L 10 24 L -2 24 Z" fill={A} fillOpacity="0.85" />
               </g>
             ))}
-            <text x="24" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK}>2–3</text>
-            <text x="24" y="100" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">MICRO-STUDY</text>
+            <text x="14" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK}>2–3</text>
+            <text x="14" y="100" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">MICRO-STUDY</text>
 
             {/* dashed arrow */}
-            <line x1="50" y1="46" x2="80" y2="46" stroke={A} strokeWidth="1.2" strokeDasharray="3 3" strokeOpacity="0.6" />
-            <path d="M 76 42 L 82 46 L 76 50" fill="none" stroke={A} strokeWidth="1.3" strokeOpacity="0.75" strokeLinecap="round" strokeLinejoin="round" />
+            <line x1="40" y1="46" x2="68" y2="46" stroke={A} strokeWidth="1.2" strokeDasharray="3 3" strokeOpacity="0.6" />
+            <path d="M 64 42 L 70 46 L 64 50" fill="none" stroke={A} strokeWidth="1.3" strokeOpacity="0.75" strokeLinecap="round" strokeLinejoin="round" />
 
-            {/* right group: 5 smaller silhouettes */}
-            {[0, 9, 18, 27, 36].map((x, i) => (
-              <g key={i} transform={`translate(${88 + x}, 34)`}>
+            {/* right group: 5 silhouettes at the SAME scale as the left pair */}
+            {[0, 12, 24, 36, 48].map((x, i) => (
+              <g key={i} transform={`translate(${76 + x}, 32)`}>
                 <circle cx="4" cy="4" r="3.2" fill={INK2} fillOpacity="0.78" />
                 <path d="M -1 10 L 9 10 L 10 24 L -2 24 Z" fill={INK2} fillOpacity="0.78" />
               </g>
             ))}
-            <text x="112" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK}>5</text>
-            <text x="112" y="100" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">FULL STUDY</text>
+            <text x="106" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK}>5</text>
+            <text x="106" y="100" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">FULL STUDY</text>
           </svg>
           <div className="lesson-body">
             <div className="reflection-num">Two.</div>
@@ -1186,12 +1220,12 @@ function OPCUAContent() {
       {/* ── 11. FOOTER ──────────────────────────────────────────────────── */}
       <div className="cs-footer">
         <div className="cs-footer-inner">
-          <Link href="/#work" className="footer-link">← Back to portfolio</Link>
+          <Link href="/#work" className="footer-link"><ArrowLeft style={{ marginRight: 6 }} />Back to portfolio</Link>
           <div style={{ textAlign: 'right' }}>
             <p style={{ fontFamily: 'Inter', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: INK3, margin: '0 0 6px' }}>
               Next case study
             </p>
-            <Link href="/work/ni-daqmx" className="footer-link">NI-DAQmx API Design →</Link>
+            <Link href="/work/ni-daqmx" className="footer-link">NI-DAQmx API Design<ArrowRight style={{ marginLeft: 6 }} /></Link>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: INK3, margin: '6px 0 0', lineHeight: 1.5 }}>
               11 participants · function-based vs. class-based · shipped as calldaqlib in MATLAB R2026a
             </p>

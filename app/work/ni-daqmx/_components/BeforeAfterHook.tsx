@@ -1,4 +1,5 @@
 import { A, INK, INK3 } from './theme';
+import { Check, Cross } from '@/app/components/icons';
 
 // Side-by-side comparison hook: 50-line C → 3-line MATLAB.
 // Class names below (.ba-stack, .ba-row, .ba-block, etc.) are defined in
@@ -95,9 +96,9 @@ DAQmxErrChk(DAQmxReadAnalogF64(
           >
             Considered for the read function
           </p>
-          <div className="naming-row rej"><span className="ic">✗</span>daqRead()</div>
-          <div className="naming-row rej"><span className="ic">✗</span>acquireData()</div>
-          <div className="naming-row chosen"><span className="ic">✓</span>DAQmxReadAnalogF64()</div>
+          <div className="naming-row rej"><span className="ic"><Cross /></span>daqRead()</div>
+          <div className="naming-row rej"><span className="ic"><Cross /></span>acquireData()</div>
+          <div className="naming-row chosen"><span className="ic"><Check /></span>DAQmxReadAnalogF64()</div>
           <p className="naming-caption">
             Tested with 11 engineers across 5 industries. The chosen name was the closest match to the C library they already knew.
           </p>
