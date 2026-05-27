@@ -95,27 +95,25 @@ p {
   border-radius: 2px;
 }
 
-/* Skip-to-content link — hidden until focused, then anchored top-left. */
+/* Skip-to-content link — fully off-screen until keyboard focus pulls it in. */
 .skip-link {
   position: fixed;
-  top: 0;
-  left: 0;
-  transform: translateY(-120%);
+  top: -100px;
+  left: 12px;
   z-index: 1000;
   background: #27174E;
   color: #F0EEF8;
   padding: 12px 18px;
-  margin: 12px;
   border-radius: 8px;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
-  transition: transform 180ms ease-out;
+  transition: top 180ms ease-out;
 }
 .skip-link:focus,
 .skip-link:focus-visible {
-  transform: translateY(0);
+  top: 12px;
 }
 
 html {
