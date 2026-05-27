@@ -80,6 +80,11 @@ export default function PasswordGate({
           .pg-unlock-btn:hover { opacity: 0.85 !important; }
           .pg-back:hover { opacity: 0.7 !important; }
         }
+        /* Input strips its native outline, so restore a focus indicator via
+           box-shadow on the focused state for keyboard users. */
+        .pg-password-input:focus-visible {
+          box-shadow: 0 0 0 3px color-mix(in srgb, ${accentColor} 30%, transparent);
+        }
       `}</style>
 
       {/* Top-left wordmark */}
@@ -156,6 +161,8 @@ export default function PasswordGate({
               onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
               placeholder="Password"
               autoFocus
+              aria-label="Password"
+              className="pg-password-input"
               style={{
                 width: '100%',
                 padding: '13px 16px',
@@ -164,7 +171,7 @@ export default function PasswordGate({
                 fontSize: 15,
                 fontFamily: 'Inter, Roboto, sans-serif',
                 outline: 'none',
-                transition: 'border-color 0.18s',
+                transition: 'border-color 0.18s, box-shadow 0.18s',
                 boxSizing: 'border-box',
                 color: '#111827',
               }}

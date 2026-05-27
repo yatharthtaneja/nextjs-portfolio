@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono , Bowlby_One , Roboto , Playfair_Display , Special_Elite } from "next/font/google";
-import localFont from "next/font/local";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,12 +12,43 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+  "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Yatharth Taneja",
-  description: "Created by Yatharth Taneja, a passionate builder and designer. Explore my portfolio to see my work and projects.",
-icons: {
+  metadataBase: new URL(SITE_URL),
+  title: "Yatharth Taneja — UX Researcher · CS + Design",
+  description:
+    "Portfolio of Yatharth Taneja — a CS-engineer-turned-UX-researcher at MathWorks. Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue.",
+  icons: {
     icon: "/images/ytlogo.ico",
     apple: "/images/ytlogo.ico",
+  },
+  openGraph: {
+    title: "Yatharth Taneja — UX Researcher · CS + Design",
+    description:
+      "Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue for MathWorks.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Yatharth Taneja",
+    images: [
+      {
+        url: "/images/stamp-me.png",
+        width: 600,
+        height: 600,
+        alt: "Yatharth Taneja",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yatharth Taneja — UX Researcher · CS + Design",
+    description:
+      "Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue for MathWorks.",
+    images: ["/images/stamp-me.png"],
   },
 };
 
@@ -32,6 +62,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a href="#hero" className="skip-link">
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

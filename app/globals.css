@@ -29,18 +29,6 @@
     --purpletext: #493972;
   }
 
-/* for light mode, we can override the colors with lighter shades
-
-  @media (prefers-color-scheme: light) {
-  :root {
-    --background:  #ededed;
-    --foreground: #0a0a0a;
-    --purplebackground: #6750A4;
-    --maroontext: #AB4967;
-    --purpletext: #493972;
-  }
-} */
-
 .purplebackground {
   color: var(--purplebackground);
 }
@@ -90,4 +78,46 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Kill orphans in display copy without affecting body text rendering. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* Keyboard focus — visible accent ring tinted to the brand palette. */
+:focus-visible {
+  outline: 2px solid #AB4967;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip-to-content link — hidden until focused, then anchored top-left. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateY(-120%);
+  z-index: 1000;
+  background: #27174E;
+  color: #F0EEF8;
+  padding: 12px 18px;
+  margin: 12px;
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: transform 180ms ease-out;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
 }
