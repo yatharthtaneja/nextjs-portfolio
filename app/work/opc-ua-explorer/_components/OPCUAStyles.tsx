@@ -327,6 +327,66 @@ export default function OPCUAStyles() {
           .lesson-row { flex-direction: column; gap: 14px; padding: 22px; }
         }
         .lesson-svg { width: 140px; height: 110px; flex-shrink: 0; }
+
+        /* Lesson diagrams — clock+arrow+database (lesson 1), people clusters
+           (lesson 2). Replaces the previous full-SVG illustrations with
+           composed icon components. */
+        .lesson-icon-box {
+          width: 192px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .lesson-diagram {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+        }
+        .lesson-icon-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+        }
+        .lesson-dashed-rule {
+          width: 36px;
+          height: 1px;
+          border-top: 1px dashed ${INK3};
+          opacity: 0.55;
+          margin-top: 4px;
+        }
+        .lesson-people-row {
+          display: flex;
+          gap: 1px;
+        }
+        .lesson-icon-num {
+          font-family: Inter, sans-serif;
+          font-weight: 700;
+          font-size: 13px;
+          color: ${INK};
+          line-height: 1;
+          margin-top: 4px;
+        }
+        .lesson-icon-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 8.5px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: ${INK3};
+          line-height: 1.2;
+        }
+        .lesson-icon-sublabel {
+          font-family: Inter, sans-serif;
+          font-size: 9px;
+          font-style: italic;
+          color: ${A};
+          line-height: 1.2;
+        }
+        @media (max-width: 640px) {
+          .lesson-icon-box { width: 100%; padding: 4px 0 12px; }
+        }
         .lesson-body { flex: 1; min-width: 0; }
         .lesson-body p { margin: 0; }
 

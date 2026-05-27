@@ -19,7 +19,7 @@ import FactoryHookSVG from './_components/FactoryHookSVG';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
 import OPCUAStyles from './_components/OPCUAStyles';
-import { ArrowLeft, ArrowRight, Check, Pause, Person } from '@/app/components/icons';
+import { ArrowLeft, ArrowRight, Check, Clock, Database, Pause, Person, TrendingFlat } from '@/app/components/icons';
 
 function OPCUAContent() {
   return (
@@ -1146,29 +1146,24 @@ function OPCUAContent() {
         <H2>What I&rsquo;d do differently</H2>
 
         <div className="lesson-row">
-          <svg viewBox="0 0 140 110" className="lesson-svg" role="img" aria-labelledby="lesson1Title">
-            <title id="lesson1Title">Clock with a counter-clockwise arrow, pointing to a faint silhouette of the next product (OPC UA Server) — the lesson was applied earlier on the follow-up project.</title>
-            {/* clock */}
-            <circle cx="26" cy="50" r="18" fill="white" stroke={A} strokeWidth="1.4" />
-            <line x1="26" y1="50" x2="26" y2="38" stroke={A} strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="26" y1="50" x2="36" y2="55" stroke={A} strokeWidth="1.5" strokeLinecap="round" />
-            {/* rewind arc — quarter-circle above-left of clock */}
-            <path d="M 16 22 Q 4 22 4 36" fill="none" stroke={A} strokeWidth="1.6" strokeOpacity="0.8" strokeLinecap="round" />
-            <path d="M 1 31 L 4 36 L 7 31" fill="none" stroke={A} strokeWidth="1.6" strokeOpacity="0.85" strokeLinecap="round" strokeLinejoin="round" />
-            {/* dashed arrow → */}
-            <line x1="50" y1="50" x2="84" y2="50" stroke={A} strokeWidth="1.2" strokeDasharray="3 3" strokeOpacity="0.6" />
-            <path d="M 80 46 L 86 50 L 80 54" fill="none" stroke={A} strokeWidth="1.3" strokeOpacity="0.75" strokeLinecap="round" strokeLinejoin="round" />
-            {/* faint next-product silhouette */}
-            <g opacity="0.5">
-              <rect x="92" y="34" width="40" height="32" rx="3" fill="white" stroke={INK2} strokeWidth="1.2" />
-              <line x1="97" y1="44" x2="127" y2="44" stroke={INK2} strokeWidth="0.9" />
-              <line x1="97" y1="50" x2="127" y2="50" stroke={INK2} strokeWidth="0.9" />
-              <line x1="97" y1="56" x2="127" y2="56" stroke={INK2} strokeWidth="0.9" />
-              <circle cx="124" cy="44" r="1.5" fill={A} />
-            </g>
-            <text x="112" y="84" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">OPC UA SERVER</text>
-            <text x="112" y="96" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="9" fontStyle="italic" fill={INK3}>(applied next)</text>
-          </svg>
+          <div
+            className="lesson-icon-box"
+            role="img"
+            aria-label="Earlier strategic planning (clock) leads to the next product (database) — the OPC UA Server, applied next."
+          >
+            <div className="lesson-diagram">
+              <div className="lesson-icon-col">
+                <Clock size={36} style={{ color: A }} />
+                <div className="lesson-dashed-rule" />
+              </div>
+              <TrendingFlat size={18} style={{ color: INK3 }} />
+              <div className="lesson-icon-col">
+                <Database size={36} style={{ color: INK2 }} />
+                <span className="lesson-icon-label">OPC UA Server</span>
+                <span className="lesson-icon-sublabel">(applied next)</span>
+              </div>
+            </div>
+          </div>
           <div className="lesson-body">
             <div className="reflection-num">One.</div>
             <P style={{ marginBottom: 0 }}>
@@ -1178,32 +1173,34 @@ function OPCUAContent() {
         </div>
 
         <div className="lesson-row">
-          <svg viewBox="0 0 140 110" className="lesson-svg" role="img" aria-labelledby="lesson2Title">
-            <title id="lesson2Title">Two participant silhouettes representing an early micro-study leading via dashed arrow to five silhouettes representing the full study — all silhouettes at the same scale to encode quantity rather than size.</title>
-            {/* left group: 2 silhouettes (accent) — fixed silhouette size */}
-            {[0, 12].map((x, i) => (
-              <g key={i} transform={`translate(${4 + x}, 32)`}>
-                <circle cx="4" cy="4" r="3.2" fill={A} fillOpacity="0.85" />
-                <path d="M -1 10 L 9 10 L 10 24 L -2 24 Z" fill={A} fillOpacity="0.85" />
-              </g>
-            ))}
-            <text x="14" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK}>2–3</text>
-            <text x="14" y="100" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">MICRO-STUDY</text>
-
-            {/* dashed arrow */}
-            <line x1="40" y1="46" x2="68" y2="46" stroke={A} strokeWidth="1.2" strokeDasharray="3 3" strokeOpacity="0.6" />
-            <path d="M 64 42 L 70 46 L 64 50" fill="none" stroke={A} strokeWidth="1.3" strokeOpacity="0.75" strokeLinecap="round" strokeLinejoin="round" />
-
-            {/* right group: 5 silhouettes at the SAME scale as the left pair */}
-            {[0, 12, 24, 36, 48].map((x, i) => (
-              <g key={i} transform={`translate(${76 + x}, 32)`}>
-                <circle cx="4" cy="4" r="3.2" fill={INK2} fillOpacity="0.78" />
-                <path d="M -1 10 L 9 10 L 10 24 L -2 24 Z" fill={INK2} fillOpacity="0.78" />
-              </g>
-            ))}
-            <text x="106" y="86" textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK}>5</text>
-            <text x="106" y="100" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.08em">FULL STUDY</text>
-          </svg>
+          <div
+            className="lesson-icon-box"
+            role="img"
+            aria-label="Two filled person silhouettes (accent color) for a 2-3 person micro-study, then five filled silhouettes for the full 5-participant study."
+          >
+            <div className="lesson-diagram">
+              <div className="lesson-icon-col">
+                <div className="lesson-people-row" style={{ color: A }}>
+                  <Person size={22} filled />
+                  <Person size={22} filled />
+                </div>
+                <span className="lesson-icon-num">2–3</span>
+                <span className="lesson-icon-label">Micro-study</span>
+              </div>
+              <TrendingFlat size={18} style={{ color: INK3 }} />
+              <div className="lesson-icon-col">
+                <div className="lesson-people-row" style={{ color: INK2 }}>
+                  <Person size={16} filled />
+                  <Person size={16} filled />
+                  <Person size={16} filled />
+                  <Person size={16} filled />
+                  <Person size={16} filled />
+                </div>
+                <span className="lesson-icon-num">5</span>
+                <span className="lesson-icon-label">Full study</span>
+              </div>
+            </div>
+          </div>
           <div className="lesson-body">
             <div className="reflection-num">Two.</div>
             <P style={{ marginBottom: 0 }}>
