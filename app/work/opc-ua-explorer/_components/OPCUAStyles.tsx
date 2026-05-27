@@ -327,11 +327,300 @@ export default function OPCUAStyles() {
           .lesson-row { flex-direction: column; gap: 14px; padding: 22px; }
         }
         .lesson-svg { width: 140px; height: 110px; flex-shrink: 0; }
+
+        /* Lesson diagrams — clock+arrow+database (lesson 1), people clusters
+           (lesson 2). Replaces the previous full-SVG illustrations with
+           composed icon components. */
+        .lesson-icon-box {
+          width: 192px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .lesson-diagram {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+        }
+        .lesson-icon-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+        }
+        .lesson-dashed-rule {
+          width: 36px;
+          height: 1px;
+          border-top: 1px dashed ${INK3};
+          opacity: 0.55;
+          margin-top: 4px;
+        }
+        .lesson-people-row {
+          display: flex;
+          gap: 1px;
+        }
+        .lesson-icon-num {
+          font-family: Inter, sans-serif;
+          font-weight: 700;
+          font-size: 13px;
+          color: ${INK};
+          line-height: 1;
+          margin-top: 4px;
+        }
+        .lesson-icon-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 8.5px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: ${INK3};
+          line-height: 1.2;
+        }
+        .lesson-icon-sublabel {
+          font-family: Inter, sans-serif;
+          font-size: 9px;
+          font-style: italic;
+          color: ${A};
+          line-height: 1.2;
+        }
+        @media (max-width: 640px) {
+          .lesson-icon-box { width: 100%; padding: 4px 0 12px; }
+        }
         .lesson-body { flex: 1; min-width: 0; }
         .lesson-body p { margin: 0; }
 
         /* ── §6b Discovery card visuals ── */
         .discovery-svg { width: 100%; height: auto; display: block; margin: 12px 0 6px; }
+
+        /* ── Discovery 01: persona reframe (HTML layout, ported from stitch) ── */
+        .reframe-card {
+          position: relative;
+          background: #ffffff;
+          border: 1px solid rgba(184, 223, 208, 0.45);
+          border-radius: 12px;
+          padding: 36px 28px 24px;
+          margin: 12px 0;
+          min-height: 320px;
+          overflow: hidden;
+        }
+        .reframe-label {
+          position: absolute;
+          top: 14px; left: 50%;
+          transform: translateX(-50%);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 9.5px; font-weight: 700;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: ${INK3}; opacity: 0.7;
+        }
+        .reframe-row {
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 18px; max-width: 380px; margin: 18px auto 0;
+        }
+        .reframe-figure {
+          display: flex; flex-direction: column; align-items: center;
+          text-align: center; gap: 6px; flex: 0 0 auto;
+        }
+        .reframe-figure-art {
+          position: relative; width: 64px; height: 64px;
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 6px;
+          overflow: visible;
+        }
+        .reframe-figure-art > svg { width: 64px; height: 64px; }
+        .reframe-figure.wrong { opacity: 0.5; filter: grayscale(1); }
+        .reframe-figure.wrong .reframe-figure-art { color: ${INK3}; }
+        /* Big overlay X — extends ~14px past each side of the 64px figure to
+           visually dominate it as "this is wrong". */
+        .reframe-cross {
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          width: 92px; height: 92px;
+          display: flex; align-items: center; justify-content: center;
+          color: #c2525a;
+          pointer-events: none;
+        }
+        .reframe-figure.right .reframe-figure-art { color: ${INK2}; }
+        .reframe-dot-status {
+          position: absolute; top: 4px; right: 8px;
+          width: 10px; height: 10px; border-radius: 50%;
+          background: ${A}; border: 2px solid #fff;
+        }
+        .reframe-dot-accent {
+          position: absolute; bottom: 12px; left: 50%;
+          transform: translateX(-50%);
+          width: 6px; height: 6px; border-radius: 50%; background: ${AS};
+        }
+        .reframe-figure-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          line-height: 1.2;
+        }
+        .reframe-figure.wrong .reframe-figure-label { color: ${INK3}; }
+        .reframe-figure.right .reframe-figure-label { color: ${A}; }
+        .reframe-figure-sublabel {
+          font-family: Inter, sans-serif; font-size: 11px;
+          font-style: italic; color: ${INK3}; line-height: 1.3;
+        }
+        .reframe-arrow {
+          flex: 1 1 auto; position: relative; height: 2px;
+          background: transparent; border-top: 1.5px dashed ${A};
+          opacity: 0.75; max-width: 100px; align-self: center; margin-top: 4px;
+        }
+        .reframe-arrow::after {
+          content: ''; position: absolute; right: -2px; top: 50%;
+          width: 7px; height: 7px;
+          border-right: 1.5px solid ${A};
+          border-top: 1.5px solid ${A};
+          transform: translateY(-50%) rotate(45deg);
+        }
+        /* Want-strip lives inside the reframe card, filling the lower half. */
+        .reframe-want-strip {
+          margin: 28px 0 0;
+        }
+
+        /* ── Discovery 02: quadrant chart (HTML layout, ported from stitch) ── */
+        .quadrant-card {
+          position: relative;
+          background: #ffffff;
+          border: 1px solid rgba(184, 223, 208, 0.45);
+          border-radius: 12px;
+          padding: 28px 28px 20px;
+          margin: 12px 0;
+          min-height: 320px;
+        }
+        .quadrant-chart {
+          position: relative; width: 100%;
+          max-width: 360px; height: 220px;
+          margin: 16px auto 28px;
+          padding: 0 0 0 28px;
+        }
+        .quadrant-y-axis {
+          position: absolute; left: 28px; top: 0; bottom: 28px;
+          width: 1.5px; background: ${INK3}; opacity: 0.5;
+        }
+        .quadrant-x-axis {
+          position: absolute; left: 28px; right: 0; bottom: 28px;
+          height: 1.5px; background: ${INK3}; opacity: 0.5;
+        }
+        .quadrant-y-divider {
+          position: absolute; left: 28px; right: 0; top: calc(50% - 14px);
+          border-top: 1px dashed ${INK3}; opacity: 0.25;
+        }
+        .quadrant-x-divider {
+          position: absolute; top: 0; bottom: 28px;
+          left: calc(50% + 14px);
+          border-left: 1px dashed ${INK3}; opacity: 0.25;
+        }
+        .quadrant-highlight {
+          position: absolute; top: 0; left: 28px;
+          width: calc(50% - 14px); height: calc(50% - 14px);
+          background: rgba(184, 223, 208, 0.2);
+          pointer-events: none;
+        }
+        /* Wrapper sits in the 28px-wide left gutter. Flex centers the
+           rotated text vertically + horizontally inside the gutter so its
+           after-rotation bounding box stays clear of the plot area. */
+        .quadrant-y-label-area {
+          position: absolute;
+          left: 0; top: 0; bottom: 28px;
+          width: 28px;
+          display: flex; align-items: center; justify-content: center;
+          pointer-events: none;
+        }
+        .quadrant-y-label {
+          transform: rotate(-90deg);
+          white-space: nowrap;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 9px; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          color: ${INK3};
+        }
+        .quadrant-y-tick {
+          position: absolute; left: 32px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 8.5px; color: ${INK3};
+        }
+        .quadrant-y-tick.top { top: -4px; }
+        .quadrant-y-tick.bottom { bottom: 32px; }
+        .quadrant-x-label {
+          position: absolute; left: calc(50% + 14px); bottom: -2px;
+          transform: translateX(-50%);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 9px; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          color: ${INK3}; white-space: nowrap;
+        }
+        .quadrant-x-tick {
+          position: absolute; bottom: 14px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 8.5px; color: ${INK3};
+        }
+        .quadrant-x-tick.left { left: 32px; }
+        .quadrant-x-tick.right { right: 4px; }
+        .quadrant-point {
+          position: absolute;
+          display: flex; flex-direction: column; align-items: center; gap: 4px;
+          transform: translate(-50%, -50%);
+        }
+        .quadrant-point-label {
+          font-family: Inter, sans-serif; font-size: 10px;
+          color: ${INK3}; white-space: nowrap;
+        }
+        .quadrant-point-dot {
+          width: 10px; height: 10px; border-radius: 50%;
+          background: ${AS}; border: 1px solid ${A};
+          opacity: 0.65;
+        }
+        .quadrant-anchor {
+          position: absolute;
+          display: flex; flex-direction: column; align-items: center; gap: 6px;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+        }
+        .quadrant-anchor-label {
+          font-family: Inter, sans-serif; font-size: 11.5px;
+          font-weight: 700; color: ${A}; white-space: nowrap;
+        }
+        .quadrant-anchor-dot {
+          position: relative; width: 18px; height: 18px;
+          border-radius: 50%; background: ${A};
+          box-shadow: 0 0 0 6px rgba(184, 223, 208, 0.45);
+          display: flex; align-items: center; justify-content: center;
+        }
+        .quadrant-anchor-dot::after {
+          content: '';
+          width: 6px; height: 6px; border-radius: 50%;
+          background: #fff;
+        }
+        /* Standalone callout positioned at chart-relative coords (set inline
+           in JSX). The connecting line angles up-left from the text toward
+           the anchor dot above-left of the callout. */
+        .quadrant-anchor-callout {
+          position: absolute;
+          display: flex; align-items: center; gap: 6px;
+          z-index: 3;
+        }
+        .quadrant-anchor-callout-line {
+          width: 26px; height: 1.5px;
+          background: ${A}; opacity: 0.65;
+          transform: rotate(-22deg);
+          transform-origin: right center;
+        }
+        .quadrant-anchor-callout-text {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 9px; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          color: ${A};
+        }
+        @media (max-width: 720px) {
+          .reframe-card, .quadrant-card { min-height: 280px; padding: 32px 18px 20px; }
+          .reframe-row { gap: 10px; max-width: 100%; }
+          .quadrant-chart { max-width: 100%; }
+        }
+
         .discovery-want-strip {
           margin: 8px 0 4px;
           padding: 12px 14px;

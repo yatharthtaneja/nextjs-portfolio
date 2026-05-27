@@ -7,6 +7,7 @@ import { A, AS, AB, AD, INK, INK2, INK3, LINE, CARD } from './_components/theme'
 import { Pill, Artifact, EyebrowLabel, H2, P, SubLabel, Divider } from './_components/Typography';
 import BeforeAfterHook from './_components/BeforeAfterHook';
 import NiDaqmxStyles from './_components/NiDaqmxStyles';
+import { ArrowLeft, ArrowRight, Check } from '@/app/components/icons';
 
 function NiDaqmxContent() {
   return (
@@ -19,10 +20,10 @@ function NiDaqmxContent() {
         <div className="hero-grid">
           <div>
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
-              <Pill>✓ Shipped · MATLAB R2026a</Pill>
+              <Pill><Check />Shipped · MATLAB R2026a</Pill>
               <a href="https://www.mathworks.com/help/daq/calldaqlib.html"
                  target="_blank" rel="noopener noreferrer" className="docs-link">
-                Read the docs →
+                Read the docs<ArrowRight style={{ marginLeft: 4 }} />
               </a>
             </div>
 
@@ -228,7 +229,7 @@ function NiDaqmxContent() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ fontFamily: '\'JetBrains Mono\', monospace', fontSize: 10, color: '#6A9955', letterSpacing: '0.06em' }}>MATLAB</span>
-                  <span className="hth-winner">✓ Winner</span>
+                  <span className="hth-winner"><Check style={{ marginRight: 4 }} />Winner</span>
                 </div>
               </div>
               <code className="hth-code">
@@ -524,8 +525,8 @@ function NiDaqmxContent() {
       {/* ── 11. FOOTER ──────────────────────────────────────────────────── */}
       <div className="cs-footer">
         <div className="footer-inner">
-          <Link href="/#work" className="footer-link">← Back to portfolio</Link>
-          <Link href="/work/opc-ua-server" className="footer-link">OPC UA Server →</Link>
+          <Link href="/#work" className="footer-link"><ArrowLeft style={{ marginRight: 6 }} />Back to portfolio</Link>
+          <Link href="/work/opc-ua-server" className="footer-link">OPC UA Server<ArrowRight style={{ marginLeft: 6 }} /></Link>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowLeft } from './components/icons';
 
 export default function NotFound() {
   return (
@@ -72,7 +73,7 @@ export default function NotFound() {
           }}
           className="not-found-cta"
         >
-          ← Back to the portfolio
+          <ArrowLeft style={{ marginRight: 6 }} />Back to the portfolio
         </Link>
 
         <style>{`

@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import PasswordGate from '@/app/components/PasswordGate';
+import { ArrowLeft } from '@/app/components/icons';
 
 type StudyMeta = {
   title: string;
@@ -83,7 +84,7 @@ function ComingSoonContent({ study }: { study: StudyMeta }) {
       {/* Nav */}
       <nav className="cs-nav-plain">
         <div className="cs-nav-plain-inner">
-          <Link href="/#work" className="cs-back-plain">← Back to portfolio</Link>
+          <Link href="/#work" className="cs-back-plain"><ArrowLeft style={{ marginRight: 6 }} />Back to portfolio</Link>
           <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, fontWeight: 600, color: INK }}>
             {study.title}
           </span>
@@ -192,7 +193,7 @@ function ComingSoonContent({ study }: { study: StudyMeta }) {
             paddingBottom: 2,
             transition: 'opacity 0.15s',
           }}>
-            ← Back to portfolio
+            <ArrowLeft style={{ marginRight: 6 }} />Back to portfolio
           </Link>
         </div>
       </div>
@@ -210,7 +211,7 @@ export default function SlugPage() {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Inter, sans-serif' }}>
         <div style={{ textAlign: 'center' }}>
           <p style={{ color: '#6b7280', marginBottom: 16 }}>Case study not found.</p>
-          <Link href="/" style={{ color: '#1E6B4A', textDecoration: 'none' }}>← Back to portfolio</Link>
+          <Link href="/" style={{ color: '#1E6B4A', textDecoration: 'none' }}><ArrowLeft style={{ marginRight: 6 }} />Back to portfolio</Link>
         </div>
       </div>
     );
