@@ -1,8 +1,6 @@
-// File: components/InteractiveName.js
-
 'use client';
 
-import { useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface InteractiveNameProps {
   name: string;
@@ -12,7 +10,6 @@ interface InteractiveNameProps {
 const fonts = [
   'font-family-hover-one',
   'font-family-hover-two',
-  'font-family-hover-three'
 ];
 const defaultFont = 'font-family-default';
 
@@ -20,16 +17,21 @@ export default function InteractiveName({ name, colorIndexes = {} }: Interactive
   const [hoveredIndexes, setHoveredIndexes] = useState<{ [key: number]: boolean }>({});
   const [fontCycleIndexes, setFontCycleIndexes] = useState<{ [key: number]: number }>({});
   const intervalRefs = useRef<{ [key: number]: NodeJS.Timeout | null }>({});
-  const timeoutRefs = useRef<{ [key: number]: NodeJS.Timeout | null }>({});
+  const [canHover, setCanHover] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => setCanHover(mql.matches);
+    update();
+    mql.addEventListener('change', update);
+    return () => mql.removeEventListener('change', update);
+  }, []);
 
   const handleMouseEnter = (index: number) => {
+    if (!canHover) return;
     setHoveredIndexes((prev) => ({ ...prev, [index]: true }));
     setFontCycleIndexes((prev) => ({ ...prev, [index]: 0 }));
 
-    if (timeoutRefs.current[index]) {
-      clearTimeout(timeoutRefs.current[index]!);
-      timeoutRefs.current[index] = null;
-    }
     if (intervalRefs.current[index]) clearInterval(intervalRefs.current[index]!);
 
     intervalRefs.current[index] = setInterval(() => {
@@ -45,27 +47,40 @@ export default function InteractiveName({ name, colorIndexes = {} }: Interactive
       clearInterval(intervalRefs.current[index]!);
       intervalRefs.current[index] = null;
     }
-    // Wait 2 seconds before resetting
-    timeoutRefs.current[index] = setTimeout(() => {
-      setHoveredIndexes((prev) => ({ ...prev, [index]: false }));
-      setFontCycleIndexes((prev) => ({ ...prev, [index]: 0 }));
-    }, 2000);
+    setHoveredIndexes((prev) => ({ ...prev, [index]: false }));
+    setFontCycleIndexes((prev) => ({ ...prev, [index]: 0 }));
   };
 
   return (
     <div className="text-center font-bold font-family-default">
-      {name.split('').map((letter, index) => (
-        <span
-          key={index}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
-          className={`cursor-pointer transition-all duration-300 ${
-            hoveredIndexes[index] ? fonts[fontCycleIndexes[index] || 0] : defaultFont
-          } ${colorIndexes[index] || ''}`}
-        >
-          {letter}
-        </span>
-      ))}
+      <style>{`
+        .interactive-name-letter {
+          display: inline-block;
+          transition: filter 140ms ease-out;
+        }
+        .interactive-name-letter[data-hovered="true"] {
+          filter: blur(1.5px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .interactive-name-letter[data-hovered="true"] { filter: none; }
+        }
+      `}</style>
+      {name.split('').map((letter, index) => {
+        const hovered = !!hoveredIndexes[index];
+        return (
+          <span
+            key={index}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+            data-hovered={hovered}
+            className={`interactive-name-letter cursor-pointer ${
+              hovered ? fonts[fontCycleIndexes[index] || 0] : defaultFont
+            } ${colorIndexes[index] || ''}`}
+          >
+            {letter}
+          </span>
+        );
+      })}
     </div>
   );
 }

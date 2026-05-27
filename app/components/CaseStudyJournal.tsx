@@ -56,7 +56,8 @@ function Journal({ project, index }: { project: JournalProject; index: number })
     return () => observer.disconnect();
   }, []);
 
-  // On touch devices use scroll state, on pointer devices use hover state
+  // Separate hover vs scroll state so touch CTA can light up on scroll-open
+  // without coupling to the hover-only state machine.
   const isOpen = hovered || scrollOpen;
 
   return (
@@ -70,6 +71,8 @@ function Journal({ project, index }: { project: JournalProject; index: number })
       aria-label={`${project.title} case study`}
       style={{ animationDelay: `${index * 140}ms` }}
       className="journal-wrapper"
+      data-hovered={hovered}
+      data-scroll-open={scrollOpen}
     >
       <div className="journal-book" data-hovered={isOpen} data-pressed={pressed}>
         {/* ── FRONT FACE (COVER + SPINE) ── */}
@@ -180,8 +183,16 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
     <>
       <style>{`
         @keyframes journalFadeUp {
-          from { opacity: 0; transform: translateY(32px) rotate(-1.5deg); }
-          to   { opacity: 1; transform: translateY(0)    rotate(0deg); }
+          from {
+            opacity: 0;
+            transform: translateY(32px) rotate(-1.5deg) scale(0.97);
+            filter: blur(2px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg) scale(1);
+            filter: blur(0);
+          }
         }
 
         /* ── WRAPPER ──────────────────────────────────────────────────────── */
@@ -541,7 +552,18 @@ export default function CaseStudyJournals({ projects }: { projects: JournalProje
           border-radius: 0 12px 12px 0;
           pointer-events: none;
         }
-        .journal-wrapper:hover .cover-cta {
+        @media (hover: hover) and (pointer: fine) {
+          .journal-wrapper:hover .cover-cta {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+          }
+        }
+        /* Touch devices: the journal opens 3D-style on scroll. Show the CTA so
+           tap affordance is visible — without this, mobile readers never see
+           the "View Case Study" hint. */
+        .journal-wrapper[data-scroll-open="true"] .cover-cta {
           opacity: 1;
           background: rgba(255,255,255,0.2);
           backdrop-filter: blur(4px);

@@ -126,6 +126,17 @@ function Divider() {
 }
 
 function FactoryHookSVG() {
+  // SMIL bypasses CSS prefers-reduced-motion media queries, so gate the
+  // packet/ring animations in JS and render static dots instead.
+  const [animate, setAnimate] = useState(true);
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setAnimate(!mql.matches);
+    update();
+    mql.addEventListener('change', update);
+    return () => mql.removeEventListener('change', update);
+  }, []);
+
   // ── Coordinate system ──────────────────────────────────────────────
   // viewBox 600 × 440. Floor rhombus corners:
   //   F (front) = (300, 360)  R (right) = (500, 280)
@@ -135,6 +146,10 @@ function FactoryHookSVG() {
   // checked to not overlap in floor-plane coords.
   const serverX = 300;
   const serverY = 95;
+  // Slightly varied per-sensor durations so the 6 staggered loops don't
+  // resolve into a visible "wave" pattern that gives away the trick.
+  const packetDurations = [2.1, 2.5, 2.3, 2.6, 2.2, 2.4];
+  const ringDurations = [2.0, 2.3, 2.1, 2.4, 2.2, 2.5];
 
   // Sensors — one per machine, placed visibly on the machine body.
   const sensors: Array<[number, number]> = [
@@ -340,29 +355,29 @@ function FactoryHookSVG() {
       </g>
 
       {/* ── DATA PACKETS — small dots travel each line, sensor → server.
-            Drawn AFTER machines so they fly visibly above the tank/motor
-            (rather than being clipped behind them) and disappear into the
-            server node below. */}
-      <g className="data-flow">
-        {sensors.map(([px, py], i) => (
-          <circle key={`pkt-${i}`} r="2.4" fill={A} opacity="0">
-            <animateMotion
-              path={`M ${px} ${py} L ${serverX} ${serverY + 16}`}
-              dur="2.4s"
-              repeatCount="indefinite"
-              begin={`${i * 0.38}s`}
-            />
-            <animate
-              attributeName="opacity"
-              values="0;1;1;0"
-              keyTimes="0;0.1;0.9;1"
-              dur="2.4s"
-              repeatCount="indefinite"
-              begin={`${i * 0.38}s`}
-            />
-          </circle>
-        ))}
-      </g>
+            Skipped entirely under prefers-reduced-motion. */}
+      {animate && (
+        <g className="data-flow">
+          {sensors.map(([px, py], i) => (
+            <circle key={`pkt-${i}`} r="2.4" fill={A} opacity="0">
+              <animateMotion
+                path={`M ${px} ${py} L ${serverX} ${serverY + 16}`}
+                dur={`${packetDurations[i]}s`}
+                repeatCount="indefinite"
+                begin={`${i * 0.38}s`}
+              />
+              <animate
+                attributeName="opacity"
+                values="0;1;1;0"
+                keyTimes="0;0.1;0.9;1"
+                dur={`${packetDurations[i]}s`}
+                repeatCount="indefinite"
+                begin={`${i * 0.38}s`}
+              />
+            </circle>
+          ))}
+        </g>
+      )}
 
       {/* ── SERVER NODE + glowing "?" (floating above floor center) ──── */}
       <g>
@@ -412,24 +427,26 @@ function FactoryHookSVG() {
             <g className="sensor-dot" style={{ animationDelay: `${(i % 4) * 0.5}s` }}>
               <circle cx={cx} cy={cy} r="8" fill={A} fillOpacity="0.32" filter="url(#dotGlow)" />
             </g>
-            {/* expanding "data emission" ring */}
-            <circle cx={cx} cy={cy} fill="none" stroke={A} strokeWidth="1.3" className="data-flow">
-              <animate
-                attributeName="r"
-                values="3.5;14"
-                dur="2.2s"
-                repeatCount="indefinite"
-                begin={`${i * 0.4}s`}
-              />
-              <animate
-                attributeName="opacity"
-                values="0;0.75;0"
-                keyTimes="0;0.15;1"
-                dur="2.2s"
-                repeatCount="indefinite"
-                begin={`${i * 0.4}s`}
-              />
-            </circle>
+            {/* expanding "data emission" ring — skipped under reduced motion */}
+            {animate && (
+              <circle cx={cx} cy={cy} fill="none" stroke={A} strokeWidth="1.3" className="data-flow">
+                <animate
+                  attributeName="r"
+                  values="3.5;14"
+                  dur={`${ringDurations[i]}s`}
+                  repeatCount="indefinite"
+                  begin={`${i * 0.4}s`}
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;0.75;0"
+                  keyTimes="0;0.15;1"
+                  dur={`${ringDurations[i]}s`}
+                  repeatCount="indefinite"
+                  begin={`${i * 0.4}s`}
+                />
+              </circle>
+            )}
             {/* solid core + highlight */}
             <circle cx={cx} cy={cy} r="3.2" fill={A} />
             <circle cx={cx} cy={cy} r="1.2" fill="#fff" fillOpacity="0.85" />
@@ -599,7 +616,7 @@ function DecisionBar() {
             style={{
               flexBasis: `${(s.count / total) * 100}%`,
               background: s.color,
-              transitionDelay: `${i * 0.18}s`,
+              transitionDelay: `${i * 0.1}s`,
               color: s.color === '#C9C4B8' ? INK2 : 'white',
             }}
           >
@@ -968,7 +985,7 @@ function OPCUAContent() {
         .decision-segment {
           height: 100%;
           transform: scaleX(0); transform-origin: left center;
-          transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
           display: flex; align-items: center; justify-content: center;
           text-align: center; padding: 0 6px; line-height: 1.15;
           color: white; font-family: 'JetBrains Mono', monospace;
@@ -1074,10 +1091,10 @@ function OPCUAContent() {
           animation: captionLoop 8s infinite;
         }
         @keyframes captionLoop {
-          0%    { opacity: 0; }
+          0%    { opacity: 0; animation-timing-function: ease-out; }
           17.5% { opacity: 0; }
-          25%   { opacity: 0.96; }
-          78%   { opacity: 0.96; }
+          25%   { opacity: 0.96; animation-timing-function: linear; }
+          78%   { opacity: 0.96; animation-timing-function: ease-in; }
           85%   { opacity: 0; }
           100%  { opacity: 0; }
         }
@@ -1094,7 +1111,7 @@ function OPCUAContent() {
 
         /* ── ZoomFrame variant: zoom in on left edge, pan right while zooming deeper ── */
         .zoom-frame.pan-lr.zoomed-in img {
-          animation: zoomPanLR 12s infinite;
+          animation: zoomPanLR 9s infinite;
         }
         @keyframes zoomPanLR {
           0%   { transform: scale(1);                          transform-origin: 50% 50%;             animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
@@ -1104,13 +1121,13 @@ function OPCUAContent() {
           100% { transform: scale(1);                          transform-origin: 50% 50%; }
         }
         .zoom-frame.pan-lr.zoomed-in .zoom-caption {
-          animation: captionLoopLR 12s infinite;
+          animation: captionLoopLR 9s infinite;
         }
         @keyframes captionLoopLR {
-          0%   { opacity: 0; }
+          0%   { opacity: 0; animation-timing-function: ease-out; }
           15%  { opacity: 0; }
-          22%  { opacity: 0.96; }
-          78%  { opacity: 0.96; }
+          22%  { opacity: 0.96; animation-timing-function: linear; }
+          78%  { opacity: 0.96; animation-timing-function: ease-in; }
           85%  { opacity: 0; }
           100% { opacity: 0; }
         }
@@ -1203,9 +1220,12 @@ function OPCUAContent() {
         .pair3-swap { position: relative; }
         .pair3-swap > .zoom-frame:nth-of-type(2) {
           position: absolute; inset: 0; margin: 0;
-          opacity: 0; transition: opacity 0.45s ease;
+          opacity: 0; transition: opacity 220ms ease-out, filter 220ms ease-out;
         }
-        .pair3-swap:hover > .zoom-frame:nth-of-type(2) { opacity: 1; }
+        @media (hover: hover) and (pointer: fine) {
+          .pair3-swap:hover > .zoom-frame:nth-of-type(2) { opacity: 1; }
+          .pair3-swap:hover > .zoom-frame:nth-of-type(1) img { filter: blur(2px); }
+        }
         .pair3-swap::after {
           content: '\\21bb HOVER FOR LOG';
           position: absolute; top: 10px; right: 12px;
@@ -1215,7 +1235,9 @@ function OPCUAContent() {
           padding: 5px 9px; border-radius: 3px;
           pointer-events: none; z-index: 5;
         }
-        .pair3-swap:hover::after { content: '\\21bb LOG ACTIVE'; background: rgba(30, 107, 74, 0.92); }
+        @media (hover: hover) and (pointer: fine) {
+          .pair3-swap:hover::after { content: '\\21bb LOG ACTIVE'; background: rgba(30, 107, 74, 0.92); }
+        }
 
         @keyframes sensorPulse {
           0%, 100% { opacity: 0.55; }
@@ -1262,7 +1284,9 @@ function OPCUAContent() {
           box-shadow:
             0 22px 44px -16px rgba(17, 24, 39, 0.28),
             0 6px 14px -6px rgba(17, 24, 39, 0.12);
-          transition: transform 220ms ease, box-shadow 220ms ease;
+          transition:
+            transform 240ms cubic-bezier(0.23, 1, 0.32, 1),
+            box-shadow 240ms cubic-bezier(0.23, 1, 0.32, 1);
         }
         .bs-card img {
           display: block;
@@ -1302,11 +1326,17 @@ function OPCUAContent() {
           transform: rotate(-1.4deg);
           z-index: 2;
         }
-        .bs-card:hover {
-          transform: rotate(0deg) translateY(-4px);
-          box-shadow:
-            0 30px 56px -16px rgba(17, 24, 39, 0.34),
-            0 10px 20px -6px rgba(17, 24, 39, 0.14);
+        @media (hover: hover) and (pointer: fine) {
+          .bs-card:hover {
+            transform: rotate(0deg) translateY(-4px);
+            box-shadow:
+              0 30px 56px -16px rgba(17, 24, 39, 0.34),
+              0 10px 20px -6px rgba(17, 24, 39, 0.14);
+            z-index: 4;
+          }
+        }
+        .bs-card:active {
+          transform: rotate(0deg) translateY(-2px) scale(0.98);
           z-index: 4;
         }
         .bs-caption-strip {

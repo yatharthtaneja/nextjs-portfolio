@@ -111,6 +111,19 @@ export default function AboutSection() {
           >
             Let&rsquo;s Connect
           </h2>
+          <style>{`
+            .contact-link-arrow {
+              transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+            }
+            @media (hover: hover) and (pointer: fine) {
+              .contact-link:hover .contact-link-arrow {
+                transform: translate(4px, -4px);
+              }
+            }
+            .contact-link:active .contact-link-arrow {
+              transform: translate(2px, -2px) scale(0.95);
+            }
+          `}</style>
           <div className="flex flex-col">
             {contactLinks.map((link, i) => (
               <Link
@@ -118,7 +131,7 @@ export default function AboutSection() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between py-4"
+                className="contact-link group flex items-center justify-between py-4"
                 style={{
                   textDecoration: "none",
                   borderTop: i === 0 ? "1px solid #D0CDE0" : "none",
@@ -141,7 +154,7 @@ export default function AboutSection() {
                   height="20"
                   viewBox="0 0 20 20"
                   fill="none"
-                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="contact-link-arrow"
                 >
                   <path
                     d="M5 15L15 5M15 5H7M15 5V13"
