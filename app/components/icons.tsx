@@ -127,6 +127,29 @@ export function ArrowRight({ size = 14, className, style, strokeWidth = 1.6 }: G
   );
 }
 
+export function Person({ size = 64, className, style, strokeWidth = 1.2 }: GlyphProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'block', ...style }}
+    >
+      <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth={strokeWidth} />
+      <path
+        d="M 5 21 C 5 16 8 13.5 12 13.5 C 16 13.5 19 16 19 21"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
 export function ArrowLeft({ size = 14, className, style, strokeWidth = 1.6 }: GlyphProps) {
   return (
     <svg

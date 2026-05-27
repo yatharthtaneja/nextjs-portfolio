@@ -19,7 +19,7 @@ import FactoryHookSVG from './_components/FactoryHookSVG';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
 import OPCUAStyles from './_components/OPCUAStyles';
-import { ArrowLeft, ArrowRight, Check, Pause } from '@/app/components/icons';
+import { ArrowLeft, ArrowRight, Check, Cross, Pause, Person } from '@/app/components/icons';
 
 function OPCUAContent() {
   return (
@@ -498,55 +498,40 @@ function OPCUAContent() {
             <p className="flank-eyebrow">Discovery 01</p>
             <h4 className="flank-h4">The barrier isn&rsquo;t motivation, it&rsquo;s programming background</h4>
 
-            <svg
-              viewBox="0 0 320 175"
-              className="discovery-svg"
+            <div
+              className="reframe-card"
               role="img"
-              aria-labelledby="d1Title"
+              aria-label="Persona reframe: the audience shifted away from the OPC UA expert (faded, crossed out) toward the domain expert who needs OPC UA data (highlighted)."
             >
-              <title id="d1Title">
-                Persona reframe: the audience shifted away from the OPC UA expert (faded with a red X) toward the domain expert who needs OPC UA data (highlighted with a pulsing accent).
-              </title>
+              <span className="reframe-label">Audience Reframe</span>
+              <div className="reframe-row">
+                {/* WRONG audience — OPC UA expert (faded, with cross overlay) */}
+                <div className="reframe-figure wrong">
+                  <div className="reframe-figure-art">
+                    <Person size={64} strokeWidth={1.2} />
+                    <span className="reframe-cross">
+                      <Cross size={56} strokeWidth={0.7} />
+                    </span>
+                  </div>
+                  <span className="reframe-figure-label">OPC UA Expert</span>
+                  <span className="reframe-figure-sublabel">(wrong audience)</span>
+                </div>
 
-              {/* Reframe label centered above the arrow */}
-              <text x={160} y={26} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fontWeight="600" fill={INK3} letterSpacing="0.14em">AUDIENCE REFRAME</text>
+                {/* Dashed arrow between the two figures */}
+                <div className="reframe-arrow" aria-hidden="true" />
 
-              {/* DashedFlow arrow center */}
-              <DashedFlow d="M 115 75 L 195 75" packets={1} packetDuration={2.0} color={A} strokeOpacity={0.65} />
-              <path d="M 188 70 L 198 75 L 188 80" stroke={A} strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-
-              {/* LEFT silhouette: OPC UA expert (faded) */}
-              <g opacity="0.45">
-                <circle cx={70} cy={62} r="7" fill={INK3} />
-                <path d="M 60 73 L 80 73 L 82 104 L 58 104 Z" fill={INK3} />
-                <path d="M 64 104 L 63 124" stroke={INK3} strokeWidth="4" strokeLinecap="round" />
-                <path d="M 76 104 L 77 124" stroke={INK3} strokeWidth="4" strokeLinecap="round" />
-                <text x={48} y={56} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="12" fontWeight="700" fill={INK3}>{'{ }'}</text>
-              </g>
-              {/* red X overlay */}
-              <line x1={52} y1={58} x2={88} y2={106} stroke="#c2525a" strokeWidth="2" strokeOpacity="0.75" strokeLinecap="round" />
-              <line x1={88} y1={58} x2={52} y2={106} stroke="#c2525a" strokeWidth="2" strokeOpacity="0.75" strokeLinecap="round" />
-
-              <text x={70} y={146} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9" fontWeight="700" fill={INK3} letterSpacing="0.1em">OPC UA EXPERT</text>
-              <text x={70} y={161} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="10" fontStyle="italic" fill={INK3}>(wrong audience)</text>
-
-              {/* RIGHT silhouette: Domain expert (highlighted) */}
-              <g>
-                <circle cx={240} cy={62} r="7" fill={INK2} />
-                <path d="M 230 73 L 250 73 L 252 104 L 228 104 Z" fill={INK2} />
-                <path d="M 234 104 L 233 124" stroke={INK2} strokeWidth="4" strokeLinecap="round" />
-                <path d="M 246 104 L 247 124" stroke={INK2} strokeWidth="4" strokeLinecap="round" />
-                {/* PulseDot accent on chest */}
-                <PulseDot cx={240} cy={84} r={2.6} ringMax={9} delay={0.3} />
-                {/* gauge icon near head */}
-                <circle cx={218} cy={54} r="5.5" fill="white" stroke={A} strokeWidth="1.4" />
-                <line x1={218} y1={54} x2={218} y2={50} stroke={A} strokeWidth="1.3" strokeLinecap="round" />
-                <line x1={218} y1={54} x2={221} y2={56} stroke={A} strokeWidth="1.3" strokeLinecap="round" />
-              </g>
-
-              <text x={240} y={146} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9" fontWeight="700" fill={A} letterSpacing="0.1em">DOMAIN EXPERT</text>
-              <text x={240} y={161} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="10" fontStyle="italic" fill={INK2}>(who needs OPC UA data)</text>
-            </svg>
+                {/* RIGHT audience — domain expert (highlighted) */}
+                <div className="reframe-figure right">
+                  <div className="reframe-figure-art">
+                    <Person size={64} strokeWidth={1.2} />
+                    <span className="reframe-dot-status" />
+                    <span className="reframe-dot-accent" />
+                  </div>
+                  <span className="reframe-figure-label">Domain Expert</span>
+                  <span className="reframe-figure-sublabel">(who needs OPC UA data)</span>
+                </div>
+              </div>
+            </div>
 
             <div className="discovery-want-strip">
               <p className="discovery-want-label">What they actually want</p>
@@ -594,63 +579,54 @@ function OPCUAContent() {
             <p className="flank-eyebrow">Discovery 02</p>
             <h4 className="flank-h4">The strongest pull came from the digital-twin engineer, not the bench technician</h4>
 
-            <svg
-              viewBox="0 0 320 230"
-              className="discovery-svg"
+            <div
+              className="quadrant-card"
               role="img"
-              aria-labelledby="d2Title"
+              aria-label="Two-by-two chart of four use cases plotted by frequency of use (horizontal) and OPC UA dependency (vertical). Bench monitoring, predictive maintenance, and energy dashboards sit in the 'has alternative' row. Digital-twin sync sits alone in the top-left 'no alternative' quadrant — highlighted as the anchor."
             >
-              <title id="d2Title">
-                Two-by-two chart of four use cases plotted by frequency of use (horizontal) and OPC UA dependency (vertical). Bench monitoring, predictive maintenance, and energy dashboards sit in the &quot;has alternative&quot; row. Digital-twin sync sits alone in the top-left &quot;no alternative&quot; quadrant — highlighted as the anchor.
-              </title>
+              <div className="quadrant-chart">
+                {/* Highlighted "anchor" quadrant (top-left = rare + no-alt) */}
+                <div className="quadrant-highlight" />
 
-              {/* anchor quadrant tint (top-left: rare + no alternative) */}
-              <rect x={50} y={36} width={120} height={72} fill={A} fillOpacity="0.08" />
+                {/* Dashed quadrant dividers + solid axes */}
+                <div className="quadrant-y-divider" aria-hidden="true" />
+                <div className="quadrant-x-divider" aria-hidden="true" />
+                <div className="quadrant-y-axis" aria-hidden="true" />
+                <div className="quadrant-x-axis" aria-hidden="true" />
 
-              {/* quadrant divider lines (dashed) */}
-              <line x1={50} y1={108} x2={290} y2={108} stroke={INK3} strokeWidth="0.9" strokeOpacity="0.32" strokeDasharray="2 3" />
-              <line x1={170} y1={36} x2={170} y2={180} stroke={INK3} strokeWidth="0.9" strokeOpacity="0.32" strokeDasharray="2 3" />
+                {/* Axis labels */}
+                <span className="quadrant-y-label">OPC UA Dependency</span>
+                <span className="quadrant-y-tick top">No alt</span>
+                <span className="quadrant-y-tick bottom">Has alt</span>
+                <span className="quadrant-x-label">Frequency in use</span>
+                <span className="quadrant-x-tick left">Rare</span>
+                <span className="quadrant-x-tick right">Common</span>
 
-              {/* axes */}
-              <line x1={50} y1={180} x2={290} y2={180} stroke={INK3} strokeWidth="1.1" />
-              <line x1={50} y1={180} x2={50} y2={36} stroke={INK3} strokeWidth="1.1" />
+                {/* Three faded "has alternative" points — bottom band */}
+                <div className="quadrant-point" style={{ left: '82%', top: '68%' }}>
+                  <span className="quadrant-point-label">Bench monitoring</span>
+                  <span className="quadrant-point-dot" />
+                </div>
+                <div className="quadrant-point" style={{ left: '62%', top: '58%' }}>
+                  <span className="quadrant-point-label">Predictive maint.</span>
+                  <span className="quadrant-point-dot" />
+                </div>
+                <div className="quadrant-point" style={{ left: '78%', top: '48%' }}>
+                  <span className="quadrant-point-label">Energy dashboards</span>
+                  <span className="quadrant-point-dot" />
+                </div>
 
-              {/* Y-axis title (rotated) */}
-              <text x={18} y={108} fontFamily="JetBrains Mono, monospace" fontSize="9" fontWeight="700" fill={INK3} letterSpacing="0.12em" textAnchor="middle" transform="rotate(-90 18 108)">OPC UA DEPENDENCY</text>
-
-              {/* Y-axis tick labels */}
-              <text x={44} y={50} fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.05em" textAnchor="end">No alt</text>
-              <text x={44} y={174} fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.05em" textAnchor="end">Has alt</text>
-
-              {/* X-axis title */}
-              <text x={170} y={210} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9" fontWeight="700" fill={INK3} letterSpacing="0.12em">FREQUENCY IN USE</text>
-
-              {/* X-axis tick labels */}
-              <text x={56} y={194} fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.05em" textAnchor="start">Rare</text>
-              <text x={284} y={194} fontFamily="JetBrains Mono, monospace" fontSize="8" fill={INK3} letterSpacing="0.05em" textAnchor="end">Common</text>
-
-              {/* Three faded use cases (has alternative) */}
-              <g>
-                <circle cx={252} cy={154} r={5} fill={AS} stroke={A} strokeOpacity="0.55" strokeWidth="1" />
-                <text x={252} y={146} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="9.5" fill={INK3}>Bench monitoring</text>
-              </g>
-              <g>
-                <circle cx={210} cy={134} r={5} fill={AS} stroke={A} strokeOpacity="0.55" strokeWidth="1" />
-                <text x={210} y={126} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="9.5" fill={INK3}>Predictive maint.</text>
-              </g>
-              <g>
-                <circle cx={244} cy={120} r={5} fill={AS} stroke={A} strokeOpacity="0.55" strokeWidth="1" />
-                <text x={244} y={112} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="9.5" fill={INK3}>Energy dashboards</text>
-              </g>
-
-              {/* Digital-twin — THE ANCHOR (top-left, highlighted) */}
-              <PulseDot cx={100} cy={68} r={6} ringMax={20} delay={0} color={A} />
-              <text x={100} y={54} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="700" fill={A}>Digital-twin sync</text>
-
-              {/* "the anchor" leader line + label */}
-              <line x1={112} y1={76} x2={146} y2={92} stroke={A} strokeWidth="0.9" strokeOpacity="0.7" strokeLinecap="round" />
-              <text x={150} y={96} fontFamily="JetBrains Mono, monospace" fontSize="9" fontWeight="700" fill={A} letterSpacing="0.1em">THE ANCHOR</text>
-            </svg>
+                {/* THE ANCHOR — Digital-twin sync, top-left, highlighted */}
+                <div className="quadrant-anchor" style={{ left: '24%', top: '18%' }}>
+                  <span className="quadrant-anchor-label">Digital-twin sync</span>
+                  <span className="quadrant-anchor-dot" />
+                  <div className="quadrant-anchor-callout">
+                    <span className="quadrant-anchor-callout-line" />
+                    <span className="quadrant-anchor-callout-text">The Anchor</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <p className="discovery-caption">The anchor isn&rsquo;t the loudest — it&rsquo;s the one with the worst alternative.</p>
 
