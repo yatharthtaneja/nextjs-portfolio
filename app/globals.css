@@ -29,18 +29,6 @@
     --purpletext: #493972;
   }
 
-/* for light mode, we can override the colors with lighter shades
-
-  @media (prefers-color-scheme: light) {
-  :root {
-    --background:  #ededed;
-    --foreground: #0a0a0a;
-    --purplebackground: #6750A4;
-    --maroontext: #AB4967;
-    --purpletext: #493972;
-  }
-} */
-
 .purplebackground {
   color: var(--purplebackground);
 }
@@ -78,4 +66,56 @@ body {
   padding: 0;
   overflow-x: clip;
   overflow-y: visible;
+}
+
+/* Honor motion-sensitivity preference: opacity-only fades stay, position/scale motion is removed. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Kill orphans in display copy without affecting body text rendering. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* Keyboard focus — visible accent ring tinted to the brand palette. */
+:focus-visible {
+  outline: 2px solid #AB4967;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip-to-content link — fully off-screen until keyboard focus pulls it in. */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 12px;
+  z-index: 1000;
+  background: #27174E;
+  color: #F0EEF8;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: top 180ms ease-out;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 12px;
+}
+
+html {
+  scroll-behavior: smooth;
 }

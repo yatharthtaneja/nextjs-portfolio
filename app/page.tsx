@@ -275,12 +275,14 @@ export default function Home() {
               100% { transform: translateY(0);   opacity: 0; }
             }
             .scroll-hint {
-              animation: scrollBob 2s ease-in-out infinite;
+              animation: scrollBob 2.4s ease-in-out infinite;
               opacity: 0.9;
-              transition: opacity 0.2s ease;
+              transition: opacity 200ms ease-out;
             }
-            .scroll-hint:hover { opacity: 1; }
-            .scroll-dot-anim { animation: scrollDot 2s ease-in-out infinite; }
+            @media (hover: hover) and (pointer: fine) {
+              .scroll-hint:hover { opacity: 1; }
+            }
+            .scroll-dot-anim { animation: scrollDot 2.4s ease-in-out infinite; }
           `}</style>
           <div className="scroll-hint">
             <svg width="32" height="50" viewBox="0 0 32 50" fill="none">

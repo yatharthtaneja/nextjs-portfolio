@@ -55,15 +55,36 @@ export default function PasswordGate({
     }}>
       <style>{`
         @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          20%       { transform: translateX(-8px); }
-          40%       { transform: translateX(8px); }
-          60%       { transform: translateX(-5px); }
-          80%       { transform: translateX(5px); }
+          0%, 100% { transform: translateX(0); filter: blur(0); }
+          10%      { transform: translateX(-9px); filter: blur(0.5px); }
+          25%      { transform: translateX(9px);  filter: blur(0.5px); }
+          45%      { transform: translateX(-6px); filter: blur(0.3px); }
+          65%      { transform: translateX(5px); }
+          85%      { transform: translateX(-2px); }
         }
-        .pg-card-shake { animation: shake 0.5s ease; }
-        .pg-unlock-btn:hover { opacity: 0.85 !important; }
-        .pg-back:hover { opacity: 0.7 !important; }
+        .pg-card-shake { animation: shake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+        @media (prefers-reduced-motion: reduce) {
+          .pg-card-shake { animation: none; }
+        }
+        .pg-unlock-btn {
+          transition: opacity 160ms ease-out, transform 140ms ease-out;
+        }
+        .pg-unlock-btn:active {
+          opacity: 0.75 !important;
+          transform: scale(0.98);
+        }
+        .pg-back {
+          transition: opacity 160ms ease-out;
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .pg-unlock-btn:hover { opacity: 0.85 !important; }
+          .pg-back:hover { opacity: 0.7 !important; }
+        }
+        /* Input strips its native outline, so restore a focus indicator via
+           box-shadow on the focused state for keyboard users. */
+        .pg-password-input:focus-visible {
+          box-shadow: 0 0 0 3px color-mix(in srgb, ${accentColor} 30%, transparent);
+        }
       `}</style>
 
       {/* Top-left wordmark */}
@@ -140,6 +161,8 @@ export default function PasswordGate({
               onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
               placeholder="Password"
               autoFocus
+              aria-label="Password"
+              className="pg-password-input"
               style={{
                 width: '100%',
                 padding: '13px 16px',
@@ -148,20 +171,27 @@ export default function PasswordGate({
                 fontSize: 15,
                 fontFamily: 'Inter, Roboto, sans-serif',
                 outline: 'none',
-                transition: 'border-color 0.18s',
+                transition: 'border-color 0.18s, box-shadow 0.18s',
                 boxSizing: 'border-box',
                 color: '#111827',
               }}
             />
-            {error && (
-              <p style={{
+            <p
+              role="alert"
+              aria-live="polite"
+              style={{
                 fontFamily: 'Inter, Roboto, sans-serif',
                 fontSize: 13,
                 color: '#EF4444',
                 margin: 0,
                 textAlign: 'left',
-              }}>Incorrect password. Try again.</p>
-            )}
+                minHeight: error ? undefined : 0,
+                opacity: error ? 1 : 0,
+                transition: 'opacity 140ms ease-out',
+              }}
+            >
+              {error ? 'Incorrect password. Try again.' : ''}
+            </p>
             <button
               className="pg-unlock-btn"
               onClick={handleUnlock}

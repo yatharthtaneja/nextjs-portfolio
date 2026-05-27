@@ -52,7 +52,18 @@ export default function CaseStudyMenu() {
     };
   }, [isOpen]);
 
-  const expanded = isHover || isOpen;
+  const [canHover, setCanHover] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => setCanHover(mql.matches);
+    update();
+    mql.addEventListener('change', update);
+    return () => mql.removeEventListener('change', update);
+  }, []);
+
+  // On touch, jump straight to the open state — pre-expanding on tap before
+  // the menu actually opens creates a half-step that reads as laggy.
+  const expanded = isOpen || (canHover && isHover);
 
   return (
     <div
@@ -81,7 +92,7 @@ export default function CaseStudyMenu() {
             ? '0 16px 48px rgba(0, 0, 0, 0.14)'
             : '0 2px 12px rgba(0, 0, 0, 0.06)',
           transition:
-            'width 380ms cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 320ms ease',
+            'width 280ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 280ms ease',
           overflow: 'hidden',
         }}
       >
@@ -127,7 +138,7 @@ export default function CaseStudyMenu() {
               borderRadius: '50%',
               background: INK,
               transition:
-                'width 360ms cubic-bezier(0.34, 1.56, 0.64, 1), height 360ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+                'width 240ms cubic-bezier(0.23, 1, 0.32, 1), height 240ms cubic-bezier(0.23, 1, 0.32, 1)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -163,14 +174,19 @@ export default function CaseStudyMenu() {
           </span>
         </button>
 
-        {/* Items panel — grows inside the same morphing container */}
+        {/* Items panel — clip-path/scale reveal is compositor-only and snappier
+            than animating max-height, which always feels stretchy on close. */}
         <div
           role="menu"
           aria-hidden={!isOpen}
           style={{
             maxHeight: isOpen ? 520 : 0,
             opacity: isOpen ? 1 : 0,
-            transition: `max-height 520ms cubic-bezier(0.4, 0, 0.2, 1), opacity 260ms ease ${isOpen ? '120ms' : '0ms'}`,
+            clipPath: isOpen ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)',
+            transformOrigin: 'top',
+            transition: isOpen
+              ? 'max-height 240ms cubic-bezier(0.23, 1, 0.32, 1), opacity 200ms ease-out 60ms, clip-path 240ms cubic-bezier(0.23, 1, 0.32, 1)'
+              : 'max-height 200ms cubic-bezier(0.4, 0, 1, 1), opacity 140ms ease-in, clip-path 200ms cubic-bezier(0.4, 0, 1, 1)',
             overflow: 'hidden',
           }}
         >
@@ -202,15 +218,15 @@ export default function CaseStudyMenu() {
                 )}
                 {section.items.map((item) => {
                   const active = pathname === item.href;
-                  const isItemHover = hoverIdx === item.href;
+                  const isItemHover = canHover && hoverIdx === item.href;
                   return (
                     <Link
                       key={item.href}
                       href={item.href}
                       role="menuitem"
                       onClick={() => setIsOpen(false)}
-                      onMouseEnter={() => setHoverIdx(item.href)}
-                      onMouseLeave={() => setHoverIdx(null)}
+                      onMouseEnter={() => canHover && setHoverIdx(item.href)}
+                      onMouseLeave={() => canHover && setHoverIdx(null)}
                       style={{
                         display: 'flex',
                         alignItems: 'center',
