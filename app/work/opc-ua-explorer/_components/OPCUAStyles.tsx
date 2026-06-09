@@ -926,14 +926,25 @@ export default function OPCUAStyles() {
         }
 
         .hook-h1 {
-          font-family: Inter, sans-serif; font-weight: 800;
-          font-size: clamp(28px, 3.6vw, 48px); line-height: 1.1;
-          color: ${INK}; margin: 0 0 22px; letter-spacing: -0.02em;
+          font-family: Inter, sans-serif; font-weight: 600;
+          font-size: clamp(34px, 5vw, 64px); line-height: 1.02;
+          color: ${INK}; margin: 0 0 22px; letter-spacing: -0.03em;
+          text-wrap: balance;
+        }
+        .hook-h1 em {
+          font-family: 'Instrument Serif', Georgia, serif;
+          font-style: italic; font-weight: 400;
+          letter-spacing: -0.01em;
         }
         .hook-kicker {
-          font-family: Inter, sans-serif; font-weight: 700;
-          font-size: clamp(17px, 1.8vw, 21px); line-height: 1.4;
-          color: ${A}; margin: 26px 0 0;
+          font-family: 'Instrument Serif', Georgia, serif;
+          font-style: italic; font-weight: 400;
+          font-size: clamp(20px, 2.2vw, 28px); line-height: 1.3;
+          color: ${INK}; margin: 26px 0 0;
+        }
+        .hook-kicker em {
+          color: ${A};
+          font-style: italic;
         }
         .hook-transition {
           max-width: 640px; margin: 0 auto; padding: 28px 24px 36px;

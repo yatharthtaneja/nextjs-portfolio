@@ -44,9 +44,9 @@ function NiDaqmxContent() {
 
             <Reveal delay={0.05}>
               <h1 className="hook-h1">
-                We replaced 50 lines of C language<br />
-                with three lines of MATLAB.<br />
-                <span style={{ color: AD }}>Then we tested every word.</span>
+                We replaced <em style={{ color: AD }}>50 lines</em> of C language<br />
+                with <em style={{ color: AD }}>three lines</em> of MATLAB.<br />
+                <span style={{ color: AD }}>Then we tested <em>every word</em>.</span>
               </h1>
             </Reveal>
 

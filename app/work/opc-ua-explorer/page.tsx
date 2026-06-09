@@ -54,9 +54,9 @@ function OPCUAContent() {
 
             <Reveal delay={0.05}>
               <h1 className="hook-h1">
-                A factory has 10,000 sensors.<br />
+                A factory has <em style={{ color: A }}>10,000</em> sensors.<br />
                 <span style={{ color: A }}>
-                  Engineers had no way to explore them<br />
+                  Engineers had no way to <em>explore</em> them<br />
                   without writing code.
                 </span>
               </h1>
