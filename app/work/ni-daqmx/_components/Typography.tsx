@@ -32,16 +32,23 @@ export function Artifact({ label, height = 260 }: { label: string; height?: numb
 
 export function EyebrowLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 700,
-      letterSpacing: '0.14em', textTransform: 'uppercase', color: A,
-      margin: '0 0 10px' }}>{children}</p>
+    <p style={{
+      fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 700,
+      letterSpacing: '0.12em', textTransform: 'uppercase', color: A,
+      margin: '0 0 12px',
+    }}>{children}</p>
   );
 }
 
 export function H2({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
-    <h2 style={{ fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 30,
-      color: INK, lineHeight: 1.2, margin: '0 0 24px', letterSpacing: '-0.01em', ...style }}>
+    <h2 style={{
+      fontFamily: 'Inter, sans-serif', fontWeight: 800,
+      fontSize: 'clamp(26px, 3vw, 34px)',
+      color: INK, lineHeight: 1.15, margin: '12px 0 24px',
+      letterSpacing: '-0.02em',
+      ...style,
+    }}>
       {children}
     </h2>
   );
@@ -50,15 +57,17 @@ export function H2({ children, style }: { children: React.ReactNode; style?: Rea
 export function P({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, color: INK2,
-      lineHeight: 1.75, margin: '0 0 20px', ...style }}>{children}</p>
+      lineHeight: 1.7, margin: '0 0 22px', ...style }}>{children}</p>
   );
 }
 
 export function SubLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 700,
-      textTransform: 'uppercase', letterSpacing: '0.1em', color: INK3,
-      margin: '20px 0 6px' }}>{children}</p>
+    <p style={{
+      fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 700,
+      textTransform: 'uppercase', letterSpacing: '0.12em', color: INK3,
+      margin: '24px 0 8px',
+    }}>{children}</p>
   );
 }
 
