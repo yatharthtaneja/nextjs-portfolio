@@ -163,6 +163,39 @@ export default function NiDaqmxStyles() {
           padding: 1.5px 6px; border-radius: 4px;
           overflow-wrap: anywhere; word-break: break-word;
         }
+
+        /* ── Section eyebrow + display H2 ─────────────────────────────── */
+        .cs-eyebrow {
+          display: flex; align-items: center; gap: 12px;
+          margin: 0 0 22px;
+        }
+        .cs-eyebrow-num {
+          font-family: 'JetBrains Mono', monospace; font-size: 12px;
+          font-weight: 500; color: ${A}; opacity: 0.6;
+          letter-spacing: 0.04em;
+        }
+        .cs-eyebrow-label {
+          font-family: Inter, sans-serif; font-size: 12px; font-weight: 700;
+          letter-spacing: 0.16em; text-transform: uppercase; color: ${A};
+        }
+        .cs-eyebrow-rule {
+          flex: 0 0 56px; height: 1px;
+          border-top: 1px dashed ${A};
+          opacity: 0.55;
+        }
+        .cs-h2 {
+          font-family: Inter, sans-serif; font-weight: 800;
+          font-size: clamp(28px, 4vw, 44px);
+          color: ${INK}; line-height: 1.05;
+          margin: 12px 0 28px;
+          letter-spacing: -0.025em;
+        }
+        .cs-h2 em {
+          font-family: 'Playfair', 'Playfair Display', Georgia, serif;
+          font-style: italic; font-weight: 600;
+          color: ${A};
+          letter-spacing: -0.01em;
+        }
         .stat-strip {
           margin-top: 32px; padding: 32px;
           background: linear-gradient(180deg, #eef1ff 0%, #faf8ff 100%);

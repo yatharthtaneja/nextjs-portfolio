@@ -119,8 +119,8 @@ function OPCUAContent() {
       {/* ── 3. MY ROLE ──────────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>My Role</EyebrowLabel>
-          <H2>Strategic partner, not just a study runner</H2>
+          <EyebrowLabel num="01">My Role</EyebrowLabel>
+          <H2>Strategic partner, <em>not just a study runner</em></H2>
         </Reveal>
 
         <RoleTimeline />
@@ -137,9 +137,9 @@ function OPCUAContent() {
       {/* ── 4. WHAT IS OPC UA ───────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Context</EyebrowLabel>
+          <EyebrowLabel num="02">Context</EyebrowLabel>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 8 }}>
-            <H2 style={{ margin: 0 }}>What is OPC UA, in plain terms</H2>
+            <H2 style={{ margin: 0 }}>What is OPC UA, <em>in plain terms</em></H2>
             <a href="#why-mattered" className="skip-ctx" style={{
               display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: 14,
               color: A, textDecoration: 'none', borderBottom: `1px solid ${AS}`,
@@ -181,8 +181,8 @@ function OPCUAContent() {
       {/* ── 5. WHY THIS MATTERED ────────────────────────────────────────── */}
       <div id="why-mattered" className="prose">
         <Reveal>
-          <EyebrowLabel>Motivation</EyebrowLabel>
-          <H2>Why this work mattered</H2>
+          <EyebrowLabel num="03">Motivation</EyebrowLabel>
+          <H2>Why this <em>work mattered</em></H2>
         </Reveal>
         <Reveal delay={0.05}>
           <P>
@@ -212,8 +212,8 @@ function OPCUAContent() {
         <div className="wide" style={{ padding: 0, maxWidth: 1080, margin: '0 auto' }}>
           <Reveal>
             <div style={{ marginBottom: 28 }}>
-              <EyebrowLabel>Process</EyebrowLabel>
-              <H2>How I approached it</H2>
+              <EyebrowLabel num="04">Process</EyebrowLabel>
+              <H2>How I <em>approached it</em></H2>
             </div>
           </Reveal>
 
@@ -261,8 +261,8 @@ function OPCUAContent() {
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: '64px 24px' }}>
         <Reveal>
           <div style={{ marginBottom: 32 }}>
-            <EyebrowLabel>Discovery</EyebrowLabel>
-            <H2>What discovery told us</H2>
+            <EyebrowLabel num="05">Discovery</EyebrowLabel>
+            <H2>What discovery <em>told us</em></H2>
             <P style={{ marginBottom: 0 }}>
               Before we tested anything, four contextual interviews told us <em>why</em> the existing OPC UA workflow was failing engineers — and which engineer to design for first.
             </P>
@@ -309,8 +309,8 @@ function OPCUAContent() {
       <div style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px 48px' }}>
         <Reveal>
           <div style={{ marginBottom: 48 }}>
-            <EyebrowLabel>Findings</EyebrowLabel>
-            <H2>What we learned</H2>
+            <EyebrowLabel num="06">Findings</EyebrowLabel>
+            <H2>What <em>we learned</em></H2>
             <P style={{ marginBottom: 0 }}>
               Five high-priority insight themes from the usability study. Each follows the same shape: observation → insight → recommendation → what shipped.
             </P>
@@ -608,8 +608,8 @@ function OPCUAContent() {
       <div style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px' }}>
         <Reveal>
           <div style={{ marginBottom: 32 }}>
-            <EyebrowLabel>Internal Design Review</EyebrowLabel>
-            <H2>What the design review surfaced</H2>
+            <EyebrowLabel num="07">Internal Design Review</EyebrowLabel>
+            <H2>What the design review <em>surfaced</em></H2>
             <P style={{ marginBottom: 0 }}>
               The Internal Design Review wasn&rsquo;t a checkpoint — it was the round where I had to make decisions about <em>what to ship now, what to defer, and what to push back on</em> with five senior reviewers across engineering and design. These three moments are where the work was less &ldquo;research findings&rdquo; and more &ldquo;strategic partner in project planning.&rdquo;
             </P>
@@ -727,8 +727,8 @@ function OPCUAContent() {
       {/* ── 9. OUTCOME ──────────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Outcome</EyebrowLabel>
-          <H2>What shipped — and what didn&rsquo;t</H2>
+          <EyebrowLabel num="08">Outcome</EyebrowLabel>
+          <H2>What shipped <em>— and what didn&rsquo;t</em></H2>
         </Reveal>
         <Reveal delay={0.05}>
           <P>
@@ -798,8 +798,8 @@ function OPCUAContent() {
       {/* ── 10. WHAT I'D DO DIFFERENTLY ─────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Reflection</EyebrowLabel>
-          <H2>What I&rsquo;d do differently</H2>
+          <EyebrowLabel num="09">Reflection</EyebrowLabel>
+          <H2>What I&rsquo;d do <em>differently</em></H2>
         </Reveal>
 
         <Reveal delay={0.05}>

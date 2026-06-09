@@ -30,25 +30,19 @@ export function Artifact({ label, height = 260 }: { label: string; height?: numb
   );
 }
 
-export function EyebrowLabel({ children }: { children: React.ReactNode }) {
+export function EyebrowLabel({ children, num }: { children: React.ReactNode; num?: string }) {
   return (
-    <p style={{
-      fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 700,
-      letterSpacing: '0.12em', textTransform: 'uppercase', color: A,
-      margin: '0 0 12px',
-    }}>{children}</p>
+    <div className="cs-eyebrow" aria-label={typeof children === 'string' ? children : undefined}>
+      {num && <span className="cs-eyebrow-num">{num}</span>}
+      <span className="cs-eyebrow-label">{children}</span>
+      <span className="cs-eyebrow-rule" aria-hidden="true" />
+    </div>
   );
 }
 
 export function H2({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
-    <h2 style={{
-      fontFamily: 'Inter, sans-serif', fontWeight: 800,
-      fontSize: 'clamp(26px, 3vw, 34px)',
-      color: INK, lineHeight: 1.15, margin: '12px 0 24px',
-      letterSpacing: '-0.02em',
-      ...style,
-    }}>
+    <h2 className="cs-h2" style={style}>
       {children}
     </h2>
   );

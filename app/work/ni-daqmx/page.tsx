@@ -109,8 +109,8 @@ function NiDaqmxContent() {
       {/* ── 3. MY ROLE ──────────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>My Role</EyebrowLabel>
-          <H2>API-design partnership, not a handoff study</H2>
+          <EyebrowLabel num="01">My Role</EyebrowLabel>
+          <H2>API-design partnership, <em>not a handoff study</em></H2>
         </Reveal>
         <RoleTimeline />
         <Reveal delay={0.05}>
@@ -130,9 +130,9 @@ function NiDaqmxContent() {
       {/* ── 4. WHAT IS AN API? ───────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Context</EyebrowLabel>
+          <EyebrowLabel num="02">Context</EyebrowLabel>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 8 }}>
-            <H2 style={{ margin: 0 }}>What is an API, and why is API design UX work?</H2>
+            <H2 style={{ margin: 0 }}>What is an API, <em>and why is API design UX work?</em></H2>
             <a href="#what-we-learned" className="skip-link skip-ctx">
               Skip context →
             </a>
@@ -198,8 +198,8 @@ function NiDaqmxContent() {
       {/* ── 5. WHY THIS MATTERED ────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Stakes</EyebrowLabel>
-          <H2>Why this work mattered</H2>
+          <EyebrowLabel num="03">Stakes</EyebrowLabel>
+          <H2>Why this <em>work mattered</em></H2>
         </Reveal>
         <Reveal delay={0.05}>
           <P>
@@ -234,8 +234,8 @@ function NiDaqmxContent() {
       <div style={{ background: CARD, padding: '64px 24px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <Reveal>
-            <EyebrowLabel>Approach</EyebrowLabel>
-            <H2>How I approached it</H2>
+            <EyebrowLabel num="04">Approach</EyebrowLabel>
+            <H2>How I <em>approached it</em></H2>
             <P style={{ marginBottom: 8 }}>Three phases, sequential, ~6 weeks end to end. Each phase fed the next.</P>
           </Reveal>
 
@@ -277,8 +277,8 @@ function NiDaqmxContent() {
       <div id="head-to-head" style={{ background: 'white', padding: '64px 24px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <Reveal>
-            <EyebrowLabel>The Comparison</EyebrowLabel>
-            <H2>The head-to-head</H2>
+            <EyebrowLabel num="05">The Comparison</EyebrowLabel>
+            <H2>The <em>head-to-head</em></H2>
           </Reveal>
           <P>
             Two prototype wrappers, one C library underneath. To make the comparison fair, every participant ran the same NI-DAQmx C call through each wrapper. The example below uses <span className="mono">DAQmxCfgChangeDetectionTiming</span> — a configuration call that in raw C looks like:
@@ -398,8 +398,8 @@ function NiDaqmxContent() {
       <div id="what-we-learned" style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px 48px' }}>
         <Reveal>
           <div style={{ marginBottom: 48 }}>
-            <EyebrowLabel>Findings</EyebrowLabel>
-            <H2>What we learned</H2>
+            <EyebrowLabel num="06">Findings</EyebrowLabel>
+            <H2>What <em>we learned</em></H2>
             <P style={{ marginBottom: 0 }}>
               Four high-priority insights, each tied to a specific pain point and a specific recommendation. Same pattern as always: observation → insight → recommendation → what shipped.
             </P>
@@ -499,8 +499,8 @@ function NiDaqmxContent() {
       {/* ── 9. WHAT SHIPPED ─────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Outcome</EyebrowLabel>
-          <H2>What shipped</H2>
+          <EyebrowLabel num="07">Outcome</EyebrowLabel>
+          <H2>What <em>shipped</em></H2>
         </Reveal>
         <P>
           The function-based low-level API shipped in <strong>MATLAB R2026a</strong> as <span className="mono">calldaqlib</span>. You can read the public documentation at{' '}
@@ -541,8 +541,8 @@ function NiDaqmxContent() {
       {/* ── BEHIND THE WORK ─────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Process</EyebrowLabel>
-          <H2>Behind the work</H2>
+          <EyebrowLabel num="08">Process</EyebrowLabel>
+          <H2>Behind <em>the work</em></H2>
           <P style={{ maxWidth: 640, marginBottom: 32 }}>
             The artifacts the case-study summary doesn&rsquo;t show — for readers who want to see the craft underneath the outcome.
           </P>
@@ -570,8 +570,8 @@ function NiDaqmxContent() {
       {/* ── 10. REFLECTION ──────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel>Reflection</EyebrowLabel>
-          <H2>What I&rsquo;d do differently</H2>
+          <EyebrowLabel num="09">Reflection</EyebrowLabel>
+          <H2>What I&rsquo;d do <em>differently</em></H2>
         </Reveal>
 
         <Reveal delay={0.05}>
