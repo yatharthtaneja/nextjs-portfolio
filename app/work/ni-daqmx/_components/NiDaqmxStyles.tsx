@@ -164,37 +164,37 @@ export default function NiDaqmxStyles() {
           overflow-wrap: anywhere; word-break: break-word;
         }
 
-        /* ── Section eyebrow + display H2 ─────────────────────────────── */
+        /* ── Section eyebrow + display H2 (Visual Narrative Studio style) ── */
         .cs-eyebrow {
           display: flex; align-items: center; gap: 12px;
-          margin: 0 0 22px;
+          margin: 0 0 20px;
         }
         .cs-eyebrow-num {
-          font-family: 'JetBrains Mono', monospace; font-size: 12px;
+          font-family: 'JetBrains Mono', monospace; font-size: 10px;
           font-weight: 500; color: ${A}; opacity: 0.6;
-          letter-spacing: 0.04em;
         }
         .cs-eyebrow-label {
-          font-family: Inter, sans-serif; font-size: 12px; font-weight: 700;
-          letter-spacing: 0.16em; text-transform: uppercase; color: ${A};
+          font-family: 'JetBrains Mono', monospace; font-size: 11px;
+          font-weight: 600; letter-spacing: 0.14em;
+          text-transform: uppercase; color: ${A};
         }
         .cs-eyebrow-rule {
-          flex: 0 0 56px; height: 1px;
-          border-top: 1px dashed ${A};
-          opacity: 0.55;
+          flex: 0 0 48px; height: 1px;
+          background: ${A}; opacity: 0.4;
         }
         .cs-h2 {
-          font-family: Inter, sans-serif; font-weight: 800;
-          font-size: clamp(28px, 4vw, 44px);
+          font-family: Inter, sans-serif; font-weight: 600;
+          font-size: clamp(30px, 4.5vw, 56px);
           color: ${INK}; line-height: 1.05;
-          margin: 12px 0 28px;
+          margin: 20px 0 32px;
           letter-spacing: -0.025em;
+          text-wrap: balance;
         }
         .cs-h2 em {
-          font-family: 'Playfair', 'Playfair Display', Georgia, serif;
-          font-style: italic; font-weight: 600;
+          font-family: 'Instrument Serif', Georgia, serif;
+          font-style: italic; font-weight: 400;
           color: ${A};
-          letter-spacing: -0.01em;
+          letter-spacing: -0.005em;
         }
         .stat-strip {
           margin-top: 32px; padding: 32px;
