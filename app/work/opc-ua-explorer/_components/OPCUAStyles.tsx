@@ -58,7 +58,7 @@ export default function OPCUAStyles() {
         }
         .cs-h2 em {
           font-family: 'Instrument Serif', Georgia, serif;
-          font-style: italic; font-weight: 400;
+          font-style: italic; font-weight: 700;
           color: ${A};
           letter-spacing: -0.005em;
         }
@@ -933,7 +933,7 @@ export default function OPCUAStyles() {
         }
         .hook-h1 em {
           font-family: 'Instrument Serif', Georgia, serif;
-          font-style: italic; font-weight: 400;
+          font-style: italic; font-weight: 700;
           letter-spacing: -0.01em;
         }
         .hook-kicker {
