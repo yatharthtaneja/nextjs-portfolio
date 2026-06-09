@@ -6,7 +6,6 @@ import CaseStudyMenu from '@/app/components/CaseStudyMenu';
 import { A, AS, AB, INK, INK2, INK3, LINE, CARD } from './_components/theme';
 import {
   Pill,
-  Artifact,
   EyebrowLabel,
   H2,
   P,
@@ -14,12 +13,19 @@ import {
   Divider,
   PullQuote,
 } from './_components/Typography';
-import { PulseDot, DashedFlow, IsoTile } from './_components/SVGPrimitives';
+import { Reveal, StaggerGroup, StaggerItem } from './_components/Reveal';
 import FactoryHookSVG from './_components/FactoryHookSVG';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
 import OPCUAStyles from './_components/OPCUAStyles';
-import { ArrowLeft, ArrowRight, Check, Clock, Database, Pause, Person, TrendingFlat } from '@/app/components/icons';
+import RoleTimeline from './_components/RoleTimeline';
+import GlossaryTiles from './_components/GlossaryTiles';
+import LandscapeSVG from './_components/LandscapeSVG';
+import PhaseFunnel from './_components/PhaseFunnel';
+import BrainstormCollage from './_components/BrainstormCollage';
+import AudienceReframe from './_components/AudienceReframe';
+import AnchorQuadrant from './_components/AnchorQuadrant';
+import { ArrowLeft, ArrowRight, Check, Clock, Database, Person, TrendingFlat } from '@/app/components/icons';
 
 function OPCUAContent() {
   return (
@@ -31,37 +37,47 @@ function OPCUAContent() {
       <div className="hero-wrap">
         <div className="hero-grid">
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                background: AS, color: A,
-                fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600,
-                padding: '6px 14px', borderRadius: 20,
-              }}><Check />Shipped · MATLAB R2026a</span>
-              <a href="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
-                 target="_blank" rel="noopener noreferrer" className="docs-link">
-                Read the docs<ArrowRight style={{ marginLeft: 4 }} />
-              </a>
-            </div>
+            <Reveal>
+              <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 28 }}>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                  background: AS, color: A,
+                  fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600,
+                  padding: '6px 14px', borderRadius: 20,
+                }}><Check />Shipped · MATLAB R2026a</span>
+                <a href="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
+                   target="_blank" rel="noopener noreferrer" className="docs-link">
+                  Read the docs<ArrowRight style={{ marginLeft: 4 }} />
+                </a>
+              </div>
+            </Reveal>
 
-            <h1 className="hook-h1">
-              A factory has 10,000 sensors.<br />
-              <span style={{ color: A }}>
-                Engineers had no way to explore them<br />
-                without writing code.
-              </span>
-            </h1>
+            <Reveal delay={0.05}>
+              <h1 className="hook-h1">
+                A factory has 10,000 sensors.<br />
+                <span style={{ color: A }}>
+                  Engineers had no way to explore them<br />
+                  without writing code.
+                </span>
+              </h1>
+            </Reveal>
 
-            <P>
-              Every conveyor belt, every robotic arm, every temperature probe on a factory floor is constantly broadcasting data — vibration, pressure, heat, fault codes. All of it flows through a single protocol the industrial world agreed on years ago.
-            </P>
-            <P style={{ marginBottom: 0 }}>
-              But the engineers who <em>needed</em> that data — the ones keeping the machines running — couldn&rsquo;t access it without opening a code editor and writing 50 lines of connection logic from memory. Every single time.
-            </P>
+            <Reveal delay={0.1}>
+              <P>
+                Every conveyor belt, every robotic arm, every temperature probe on a factory floor is constantly broadcasting data — vibration, pressure, heat, fault codes. All of it flows through a single protocol the industrial world agreed on years ago.
+              </P>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <P style={{ marginBottom: 0 }}>
+                But the engineers who <em>needed</em> that data — the ones keeping the machines running — couldn&rsquo;t access it without opening a code editor and writing 50 lines of connection logic from memory. Every single time.
+              </P>
+            </Reveal>
 
-            <p className="hook-kicker">
-              We built the tool that let them just <em>look</em>.
-            </p>
+            <Reveal delay={0.2}>
+              <p className="hook-kicker">
+                We built the tool that let them just <em>look</em>.
+              </p>
+            </Reveal>
           </div>
 
           <div className="hero-visual" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -78,250 +94,115 @@ function OPCUAContent() {
 
       {/* ── 2. TL;DR ────────────────────────────────────────────────────── */}
       <div style={{ background: AB, borderTop: `3px solid ${A}`, padding: '40px 24px' }}>
-        <div className="tldr-grid">
-          <div className="tldr-cell">
+        <StaggerGroup className="tldr-grid">
+          <StaggerItem className="tldr-cell">
             <p className="tldr-label">My Role</p>
             <p className="tldr-value">Lead UX researcher and strategic partner in project planning.</p>
-          </div>
-          <div className="tldr-cell" style={{ paddingLeft: 28 }}>
+          </StaggerItem>
+          <StaggerItem className="tldr-cell" style={{ paddingLeft: 28 }}>
             <p className="tldr-label">Methods</p>
             <p className="tldr-value">4 contextual interviews · 5-participant external usability study · 13-area internal design review.</p>
-          </div>
-          <div className="tldr-cell" style={{ paddingLeft: 28 }}>
+          </StaggerItem>
+          <StaggerItem className="tldr-cell" style={{ paddingLeft: 28 }}>
             <p className="tldr-label">Scale</p>
             <p className="tldr-value">18 pain points → 14 requirements → 27 findings → 11 feature requests, distilled into 5 insight themes.</p>
-          </div>
-          <div className="tldr-cell" style={{ paddingLeft: 28 }}>
+          </StaggerItem>
+          <StaggerItem className="tldr-cell" style={{ paddingLeft: 28 }}>
             <p className="tldr-label">Outcome</p>
             <p className="tldr-value">Shipped in MATLAB R2026a, ~15 months from first interview to release.</p>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
       </div>
 
       <Divider />
 
       {/* ── 3. MY ROLE ──────────────────────────────────────────────────── */}
       <div className="prose">
-        <EyebrowLabel>My Role</EyebrowLabel>
-        <H2>Strategic partner, not just a study runner</H2>
+        <Reveal>
+          <EyebrowLabel>My Role</EyebrowLabel>
+          <H2>Strategic partner, not just a study runner</H2>
+        </Reveal>
 
-        <svg
-          viewBox="0 0 700 90"
-          className="timeline-strip"
-          role="img"
-          aria-labelledby="roleTimelineTitle"
-        >
-          <title id="roleTimelineTitle">
-            15-month timeline showing five touchpoints I led: Scope (Dec 2023), Interview (Jan&ndash;Feb 2024), Study (Sep&ndash;Oct 2024), Review (Mar 2025), Ship (R2026a).
-          </title>
-          <line x1="50" y1="32" x2="650" y2="32" stroke={A} strokeWidth="1" strokeOpacity="0.35" strokeDasharray="2 3" />
-          {[
-            { x: 50,  label: 'Scope',     date: 'Dec 2023' },
-            { x: 200, label: 'Interview', date: 'Jan–Feb 2024' },
-            { x: 350, label: 'Study',     date: 'Sep–Oct 2024' },
-            { x: 500, label: 'Review',    date: 'Mar 2025' },
-            { x: 650, label: 'Ship',      date: 'R2026a' },
-          ].map((s, i, arr) => {
-            const isLast = i === arr.length - 1;
-            return (
-              <g key={s.label}>
-                <PulseDot
-                  cx={s.x}
-                  cy={32}
-                  r={isLast ? 5 : 3.6}
-                  ringMax={isLast ? 14 : 10}
-                  delay={i * 0.42}
-                />
-                <text x={s.x} y={58} textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="600" fontSize="11" fill={INK}>{s.label}</text>
-                <text x={s.x} y={72} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9" fill={INK3}>{s.date}</text>
-              </g>
-            );
-          })}
-        </svg>
+        <RoleTimeline />
 
-        <P>
-          I led the research and acted as a strategic partner in project planning — not just running studies, but shaping which problems were worth solving and which weren&rsquo;t. I scoped the discovery phase, ran the contextual interviews, designed and ran the usability study, and presented findings to the developers and the internal design review board. When the team had to choose between competing feature requests, I was the one tying every recommendation back to evidence.
-        </P>
+        <Reveal delay={0.05}>
+          <P>
+            I led the research and acted as a strategic partner in project planning — not just running studies, but shaping which problems were worth solving and which weren&rsquo;t. I scoped the discovery phase, ran the contextual interviews, designed and ran the usability study, and presented findings to the developers and the internal design review board. When the team had to choose between competing feature requests, I was the one tying every recommendation back to evidence.
+          </P>
+        </Reveal>
       </div>
 
       <Divider />
 
       {/* ── 4. WHAT IS OPC UA ───────────────────────────────────────────── */}
       <div className="prose">
-        <EyebrowLabel>Context</EyebrowLabel>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 8 }}>
-          <H2 style={{ margin: 0 }}>What is OPC UA, in plain terms</H2>
-          <a href="#why-mattered" className="skip-ctx" style={{
-            display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: 14,
-            color: A, textDecoration: 'none', borderBottom: `1px solid ${AS}`,
-          }}>Skip context<ArrowRight style={{ marginLeft: 4 }} /></a>
-        </div>
-        <P>
-          OPC UA is <strong>the language industrial machines speak to each other</strong>. A modern factory has thousands of sensors, motors, valves, controllers, and PLCs (programmable logic controllers — the small computers that run real-time hardware). They all need to share data: temperature, pressure, vibration, on/off state, fault codes. OPC UA is the standardized protocol that lets a sensor from one vendor and a controller from another talk without custom integration work.
-        </P>
-        <P>
-          When software like ours connects to a factory&rsquo;s OPC UA server, what it sees is an <strong>address space</strong> — think of it as the table of contents of a factory&rsquo;s data, with every sensor and motor organized like chapters and sub-chapters. Each individual entry — a single temperature reading, a single valve position — is a <strong>node</strong>. To watch a node change in real time, you create a <strong>subscription</strong>: a magazine subscription, basically. You ask for updates, and they arrive when something changes, instead of you having to keep checking.
-        </P>
+        <Reveal>
+          <EyebrowLabel>Context</EyebrowLabel>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 8 }}>
+            <H2 style={{ margin: 0 }}>What is OPC UA, in plain terms</H2>
+            <a href="#why-mattered" className="skip-ctx" style={{
+              display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: 14,
+              color: A, textDecoration: 'none', borderBottom: `1px solid ${AS}`,
+            }}>Skip context<ArrowRight style={{ marginLeft: 4 }} /></a>
+          </div>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            OPC UA is <strong>the language industrial machines speak to each other</strong>. A modern factory has thousands of sensors, motors, valves, controllers, and PLCs (programmable logic controllers — the small computers that run real-time hardware). They all need to share data: temperature, pressure, vibration, on/off state, fault codes. OPC UA is the standardized protocol that lets a sensor from one vendor and a controller from another talk without custom integration work.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            When software like ours connects to a factory&rsquo;s OPC UA server, what it sees is an <strong>address space</strong> — think of it as the table of contents of a factory&rsquo;s data, with every sensor and motor organized like chapters and sub-chapters. Each individual entry — a single temperature reading, a single valve position — is a <strong>node</strong>. To watch a node change in real time, you create a <strong>subscription</strong>: a magazine subscription, basically. You ask for updates, and they arrive when something changes, instead of you having to keep checking.
+          </P>
+        </Reveal>
 
-        <div className="glossary-grid" role="list" aria-label="OPC UA vocabulary used throughout this case study">
-          <div className="glossary-tile" role="listitem">
-            {/* Tree icon — mirrors the address-space tree shown in screenshots later */}
-            <svg viewBox="0 0 48 48" className="glossary-icon" aria-hidden="true">
-              {/* Root node */}
-              <rect x="6" y="9" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" />
-              {/* Vertical trunk + branches */}
-              <path d="M 12.5 15 L 12.5 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" />
-              <path d="M 12.5 22 L 22 22" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
-              <path d="M 12.5 30 L 22 30" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
-              <path d="M 12.5 38 L 22 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
-              {/* Children */}
-              <rect x="22" y="19" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" />
-              <rect x="22" y="27" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" />
-              <rect x="22" y="35" width="13" height="6" rx="1.5" fill="white" stroke={A} strokeWidth="1.4" strokeOpacity="0.55" />
-              {/* Sub-branch from middle child */}
-              <path d="M 28.5 33 L 28.5 38 L 35 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.4" strokeLinecap="round" fill="none" />
-              <circle cx="38" cy="38" r="1.4" fill={A} fillOpacity="0.55" />
-            </svg>
-            <p className="glossary-tag">Address space</p>
-            <p className="glossary-def">Table of contents of a factory&rsquo;s data — chapters and sub&#8209;chapters.</p>
-          </div>
-          <div className="glossary-tile" role="listitem">
-            {/* Node — one highlighted leaf in a small tree of siblings */}
-            <svg viewBox="0 0 48 48" className="glossary-icon" aria-hidden="true">
-              {/* trunk */}
-              <line x1="14" y1="10" x2="14" y2="40" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" />
-              <line x1="14" y1="16" x2="22" y2="16" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
-              <line x1="14" y1="26" x2="22" y2="26" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
-              <line x1="14" y1="36" x2="22" y2="36" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" />
-              {/* sibling nodes — quiet */}
-              <circle cx="25" cy="16" r="2.2" fill={A} fillOpacity="0.32" />
-              <circle cx="25" cy="36" r="2.2" fill={A} fillOpacity="0.32" />
-              {/* THE node — highlighted with pulse */}
-              <PulseDot cx={28} cy={26} r={3} ringMax={9} delay={0} />
-            </svg>
-            <p className="glossary-tag">Node</p>
-            <p className="glossary-def">One entry — a single sensor value or valve position.</p>
-          </div>
-          <div className="glossary-tile" role="listitem">
-            {/* Subscription — single source pushing 3 outbound update rings */}
-            <svg viewBox="0 0 48 48" className="glossary-icon" aria-hidden="true">
-              {/* Source node (center-left) */}
-              <circle cx="16" cy="24" r="4.5" fill={A} />
-              <circle cx="16" cy="24" r="1.6" fill="#fff" fillOpacity="0.85" />
-              {/* Three outbound pulse arcs — pushing updates out */}
-              <path d="M 24 18 Q 30 24 24 30" stroke={A} strokeWidth="1.4" strokeOpacity="0.85" strokeLinecap="round" fill="none" />
-              <path d="M 28 14 Q 38 24 28 34" stroke={A} strokeWidth="1.1" strokeOpacity="0.55" strokeLinecap="round" fill="none" />
-              <path d="M 32 10 Q 46 24 32 38" stroke={A} strokeWidth="1.1" strokeOpacity="0.3" strokeLinecap="round" fill="none" />
-            </svg>
-            <p className="glossary-tag">Subscription</p>
-            <p className="glossary-def">Ask once; updates arrive whenever the value changes.</p>
-          </div>
-        </div>
+        <GlossaryTiles />
 
-        <div style={{
-          borderRadius: 12,
-          overflow: 'hidden',
-          border: `1px solid ${LINE}`,
-          marginTop: 8,
-        }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/artifact-digital-twin-flow.svg"
-            alt="Flow diagram: ride sensors → OPC UA Server → MATLAB Digital Twin → Predictive Alert"
-            style={{ width: '100%', height: 'auto', display: 'block' }}
-          />
-        </div>
+        <Reveal delay={0.1}>
+          <div style={{
+            borderRadius: 12,
+            overflow: 'hidden',
+            border: `1px solid ${LINE}`,
+            marginTop: 8,
+          }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/artifact-digital-twin-flow.svg"
+              alt="Flow diagram: ride sensors → OPC UA Server → MATLAB Digital Twin → Predictive Alert"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
+        </Reveal>
       </div>
 
       <Divider />
 
       {/* ── 5. WHY THIS MATTERED ────────────────────────────────────────── */}
       <div id="why-mattered" className="prose">
-        <EyebrowLabel>Motivation</EyebrowLabel>
-        <H2>Why this work mattered</H2>
-        <P>
-          The protocol our customers had been using for two decades — OPC DA — was being deprecated industry-wide. Sensor manufacturers were dropping support. Our own product was scheduled to drop support too. Engineers in industries from amusement-park ride safety to ship-building to energy-grid monitoring had to migrate to OPC UA, and most of them didn&rsquo;t have the programming background to write OPC UA scripts from scratch.
-        </P>
+        <Reveal>
+          <EyebrowLabel>Motivation</EyebrowLabel>
+          <H2>Why this work mattered</H2>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            The protocol our customers had been using for two decades — OPC DA — was being deprecated industry-wide. Sensor manufacturers were dropping support. Our own product was scheduled to drop support too. Engineers in industries from amusement-park ride safety to ship-building to energy-grid monitoring had to migrate to OPC UA, and most of them didn&rsquo;t have the programming background to write OPC UA scripts from scratch.
+          </P>
+        </Reveal>
 
-        <svg
-          viewBox="0 0 820 260"
-          className="landscape-svg"
-          role="img"
-          aria-labelledby="landscapeTitle"
-        >
-          <title id="landscapeTitle">
-            Three states of the industrial protocol landscape: OPC DA being deprecated, third-party OPC UA clients filling the market, and a MATLAB-native OPC UA app missing.
-          </title>
-          <defs>
-            <filter id="tileGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="6" />
-            </filter>
-          </defs>
+        <LandscapeSVG />
 
-          {/* Tile 1 — OPC DA (deprecated, faded) */}
-          <IsoTile
-            cx={140} cy={120}
-            w={210} h={84} depth={28}
-            topFill="#E8E5DF" rightFill="#CFC9BE" leftFill="#B8B2A6"
-            stroke={INK3} strokeOpacity={0.55} topOpacity={0.85}
-          />
-          <text x={140} y={124} textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK3} opacity="0.75">OPC DA</text>
-          <text x={140} y={222} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill={INK3} letterSpacing="0.08em">DEPRECATED</text>
+        <Reveal delay={0.05}>
+          <P>
+            There was a market full of third-party OPC UA clients already. The question wasn&rsquo;t whether we could build <em>an</em> OPC UA app. It was whether we could build one that would feel like it actually belonged in the hands of an engineer who already lives in MATLAB and Simulink — one that would let them go from &ldquo;I need to read this sensor&rdquo; to &ldquo;I&rsquo;m reading this sensor&rdquo; without writing a line of code.
+          </P>
+        </Reveal>
 
-          {/* Tile 2 — 3rd-party OPC UA clients (neutral) */}
-          <IsoTile
-            cx={410} cy={120}
-            w={210} h={84} depth={28}
-            topFill="#FAFAF7" rightFill="#ECEAE7" leftFill="#DDD9D4"
-            stroke={INK3}
-          />
-          {/* small vendor cards floating above tile — each gets a different
-              interior glyph so the "many vendors" idea reads instantly */}
-          <g>
-            {/* Vendor A — single dot logo */}
-            <rect x={383} y={50} width="14" height="10" rx="1.5" fill="white" stroke={INK3} strokeWidth="0.9" />
-            <circle cx="390" cy="55" r="1.6" fill={INK3} />
-            {/* Vendor B — two stacked bars */}
-            <rect x={403} y={47} width="14" height="10" rx="1.5" fill="white" stroke={INK3} strokeWidth="0.9" />
-            <line x1="406" y1="51" x2="414" y2="51" stroke={INK3} strokeWidth="0.9" strokeLinecap="round" />
-            <line x1="406" y1="55" x2="412" y2="55" stroke={INK3} strokeWidth="0.9" strokeLinecap="round" />
-            {/* Vendor C — chevron mark */}
-            <rect x={423} y={50} width="14" height="10" rx="1.5" fill="white" stroke={INK3} strokeWidth="0.9" />
-            <path d="M 427 57 L 430 53 L 433 57" fill="none" stroke={INK3} strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round" />
-            {/* "+ more" suggesting the count isn't exhaustive */}
-            <text x="443" y="58" fontFamily="JetBrains Mono, monospace" fontSize="7" fontWeight="700" fill={INK3} letterSpacing="0.05em">+more</text>
-          </g>
-          <text x={410} y={124} textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={INK2}>3rd-party OPC UA</text>
-          <text x={410} y={222} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill={INK3} letterSpacing="0.08em">EXISTING MARKET</text>
-
-          {/* Tile 3 — MATLAB-native (mint, highlighted) */}
-          <ellipse cx={680} cy={132} rx={120} ry={56} fill={A} fillOpacity="0.12" filter="url(#tileGlow)" />
-          <IsoTile
-            cx={680} cy={120}
-            w={210} h={84} depth={28}
-            topFill={AS} rightFill="#9CCBB8" leftFill="#82B7A2"
-            stroke={A} strokeOpacity={0.7}
-          />
-          {/* small pulsing accent above the mint tile */}
-          <PulseDot cx={680} cy={62} r={3.4} ringMax={11} delay={0.3} />
-          <text x={680} y={124} textAnchor="middle" fontFamily="Inter, sans-serif" fontWeight="700" fontSize="14" fill={A}>MATLAB-native</text>
-          <text x={680} y={222} textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill={A} letterSpacing="0.08em">THE GAP</text>
-
-          {/* Arrows between tiles */}
-          <DashedFlow d="M 248 118 L 302 118" packets={1} packetDuration={1.8} color={A} strokeOpacity={0.55} />
-          <path d="M 296 114 L 304 118 L 296 122" stroke={A} strokeWidth="1.3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-
-          <DashedFlow d="M 518 118 L 572 118" packets={1} packetDuration={1.8} packetDelay={0.6} color={A} strokeOpacity={0.65} />
-          <path d="M 566 114 L 574 118 L 566 122" stroke={A} strokeWidth="1.3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-
-        <P>
-          There was a market full of third-party OPC UA clients already. The question wasn&rsquo;t whether we could build <em>an</em> OPC UA app. It was whether we could build one that would feel like it actually belonged in the hands of an engineer who already lives in MATLAB and Simulink — one that would let them go from &ldquo;I need to read this sensor&rdquo; to &ldquo;I&rsquo;m reading this sensor&rdquo; without writing a line of code.
-        </P>
-
-        <PullQuote cite="What we needed to figure out next">
-          What were engineers <em>actually</em> trying to do? Not in the abstract — Tuesday&#8209;morning, deadline&#8209;three&#8209;weeks&#8209;out concrete.
-        </PullQuote>
+        <Reveal delay={0.05}>
+          <PullQuote cite="What we needed to figure out next">
+            What were engineers <em>actually</em> trying to do? Not in the abstract — Tuesday&#8209;morning, deadline&#8209;three&#8209;weeks&#8209;out concrete.
+          </PullQuote>
+        </Reveal>
       </div>
 
       <Divider />
@@ -329,93 +210,16 @@ function OPCUAContent() {
       {/* ── 6. HOW I APPROACHED IT ──────────────────────────────────────── */}
       <div style={{ background: CARD, padding: '64px 24px' }}>
         <div className="wide" style={{ padding: 0, maxWidth: 1080, margin: '0 auto' }}>
-          <div style={{ marginBottom: 28 }}>
-            <EyebrowLabel>Process</EyebrowLabel>
-            <H2>How I approached it</H2>
-          </div>
+          <Reveal>
+            <div style={{ marginBottom: 28 }}>
+              <EyebrowLabel>Process</EyebrowLabel>
+              <H2>How I approached it</H2>
+            </div>
+          </Reveal>
 
-          <svg
-            viewBox="0 0 960 180"
-            className="funnel-strip"
-            role="img"
-            aria-labelledby="funnelTitle"
-          >
-            <title id="funnelTitle">
-              Research output across the 15-month process: 18 pain points and 14 requirements from discovery, 27 findings from the usability study, 11 feature requests, distilled into 5 insight themes.
-            </title>
-            {/* baseline */}
-            <line x1="60" y1="120" x2="900" y2="120" stroke={INK3} strokeWidth="1" strokeOpacity="0.28" />
-            {(() => {
-              const bars = [
-                { x: 100, count: 18, label: 'Pain points',     phase: 'Discovery' },
-                { x: 290, count: 14, label: 'Requirements',    phase: 'Discovery' },
-                { x: 480, count: 27, label: 'Findings',        phase: 'Usability' },
-                { x: 670, count: 11, label: 'Feature reqs',    phase: 'Synthesis' },
-                { x: 860, count: 5,  label: 'Themes',          phase: 'Synthesis' },
-              ];
-              const maxCount = 27;
-              const maxH = 88;
-              return bars.map((b, i) => {
-                const h = (b.count / maxCount) * maxH;
-                const isFinal = i === bars.length - 1;
-                const prev = i > 0 ? bars[i - 1] : null;
-                return (
-                  <g key={b.label}>
-                    {prev && (
-                      <g>
-                        <DashedFlow
-                          d={`M ${prev.x + 26} 120 L ${b.x - 30} 120`}
-                          packets={0}
-                          color={A}
-                          strokeOpacity={0.4}
-                        />
-                        <path
-                          d={`M ${b.x - 36} 116 L ${b.x - 28} 120 L ${b.x - 36} 124`}
-                          stroke={A}
-                          strokeWidth="1.1"
-                          strokeOpacity="0.55"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                    )}
-                    <rect
-                      x={b.x - 24}
-                      y={120 - h}
-                      width={48}
-                      height={h}
-                      rx={4}
-                      fill={isFinal ? A : AS}
-                      stroke={A}
-                      strokeWidth={isFinal ? 1.5 : 1}
-                      strokeOpacity={isFinal ? 1 : 0.7}
-                    />
-                    <text
-                      x={b.x} y={120 - h - 8} textAnchor="middle"
-                      fontFamily="Inter, sans-serif" fontWeight="700" fontSize="18"
-                      fill={isFinal ? A : INK}
-                    >{b.count}</text>
-                    <text
-                      x={b.x} y={138} textAnchor="middle"
-                      fontFamily="Inter, sans-serif" fontWeight="600" fontSize="12"
-                      fill={INK2}
-                    >{b.label}</text>
-                    <text
-                      x={b.x} y={156} textAnchor="middle"
-                      fontFamily="JetBrains Mono, monospace" fontSize="9"
-                      fill={INK3} letterSpacing="0.1em"
-                    >{b.phase.toUpperCase()}</text>
-                    {isFinal && (
-                      <PulseDot cx={b.x} cy={120 - h - 30} r={3} ringMax={10} delay={0} />
-                    )}
-                  </g>
-                );
-              });
-            })()}
-          </svg>
+          <PhaseFunnel />
 
-          <div className="phase-grid">
+          <StaggerGroup className="phase-grid">
             {[
               {
                 label: 'Phase 1 — Discovery',
@@ -433,47 +237,17 @@ function OPCUAContent() {
                 body: 'I presented the prototype and findings to a five-person internal design review with senior product and design leadership. Reviewers walked through 13 interface areas. For each, I tracked their feedback and worked with the developer to write an honest design response — what we agreed with and would change, what we disagreed with and why.',
               },
             ].map((phase) => (
-              <div key={phase.label} className="phase-card">
+              <StaggerItem key={phase.label} className="phase-card">
                 <div className="phase-label">{phase.label}</div>
                 <div className="phase-stats" style={{ whiteSpace: 'pre-line' }}>{phase.stats}</div>
                 <div className="phase-divider" />
                 <p className="phase-body">{phase.body}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
+
           <div style={{ marginTop: 48 }}>
-            <div
-              className="brainstorm-collage"
-              role="group"
-              aria-label="Synthesis artifacts from the 15-month process: an affinity-mapping board, a task-flow map, and a competitor-analysis / benchmarking board."
-            >
-              {/* eslint-disable @next/next/no-img-element */}
-              <figure className="bs-card bs-main">
-                <img
-                  src="/images/opcua/OPC%20UA%20Explorer%20Brainstorming-2.jpg"
-                  alt="Affinity-mapping board: 27 usability findings clustered into 5 insight themes, with surrounding context notes."
-                  loading="lazy"
-                />
-                <figcaption>Affinity board · 27 findings → 5 themes</figcaption>
-              </figure>
-              <figure className="bs-card bs-tl">
-                <img
-                  src="/images/opcua/OPC%20UA%20Explorer%20Brainstorming.jpg"
-                  alt="Task-flow map covering eight engineer tasks across the OPC UA workflow, from server setup to script export."
-                  loading="lazy"
-                />
-                <figcaption>Task-flow map · 8 tasks</figcaption>
-              </figure>
-              <figure className="bs-card bs-br">
-                <img
-                  src="/images/opcua/OPC%20UA%20Explorer%20Brainstorming-3.jpg"
-                  alt="Competitor analysis and benchmarking: annotated screens from existing OPC UA clients covering running methods, extending signal panels, alarms, and external logging."
-                  loading="lazy"
-                />
-                <figcaption>Competitor analysis · benchmarking</figcaption>
-              </figure>
-              {/* eslint-enable @next/next/no-img-element */}
-            </div>
+            <BrainstormCollage />
             <p className="bs-caption-strip">
               Synthesis artifacts — affinity mapping, task flows, and competitor benchmarking across the 15-month process
             </p>
@@ -485,190 +259,63 @@ function OPCUAContent() {
 
       {/* ── 6b. WHAT DISCOVERY TOLD US ──────────────────────────────────── */}
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: '64px 24px' }}>
-        <div style={{ marginBottom: 32 }}>
-          <EyebrowLabel>Discovery</EyebrowLabel>
-          <H2>What discovery told us</H2>
-          <P style={{ marginBottom: 0 }}>
-            Before we tested anything, four contextual interviews told us <em>why</em> the existing OPC UA workflow was failing engineers — and which engineer to design for first.
-          </P>
-        </div>
+        <Reveal>
+          <div style={{ marginBottom: 32 }}>
+            <EyebrowLabel>Discovery</EyebrowLabel>
+            <H2>What discovery told us</H2>
+            <P style={{ marginBottom: 0 }}>
+              Before we tested anything, four contextual interviews told us <em>why</em> the existing OPC UA workflow was failing engineers — and which engineer to design for first.
+            </P>
+          </div>
+        </Reveal>
         <div className="flank-grid">
           {/* Discovery 01 */}
-          <div className="flank-card">
-            <p className="flank-eyebrow">Discovery 01</p>
-            <h4 className="flank-h4">The barrier isn&rsquo;t motivation, it&rsquo;s programming background</h4>
+          <Reveal delay={0.05}>
+            <div className="flank-card">
+              <p className="flank-eyebrow">Discovery 01</p>
+              <h4 className="flank-h4">The barrier isn&rsquo;t motivation, it&rsquo;s programming background</h4>
 
-            <div
-              className="reframe-card"
-              role="img"
-              aria-label="Persona reframe: the audience shifted away from the OPC UA expert (faded, crossed out) toward the domain expert who needs OPC UA data (highlighted)."
-            >
-              <span className="reframe-label">Audience Reframe</span>
-              <div className="reframe-row">
-                {/* WRONG audience — OPC UA expert (faded, with cross overlay) */}
-                <div className="reframe-figure wrong">
-                  <div className="reframe-figure-art">
-                    <Person size={64} strokeWidth={1.2} />
-                    {/* Big overlay X — inline SVG so the strokes extend close
-                        to the viewBox edges (Cross component is tuned for
-                        small inline glyphs). */}
-                    <span className="reframe-cross">
-                      <svg
-                        width="92"
-                        height="92"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                        <line x1="21" y1="3" x2="3" y2="21" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                      </svg>
-                    </span>
-                  </div>
-                  <span className="reframe-figure-label">OPC UA Expert</span>
-                  <span className="reframe-figure-sublabel">(wrong audience)</span>
-                </div>
+              <AudienceReframe />
 
-                {/* Dashed arrow between the two figures */}
-                <div className="reframe-arrow" aria-hidden="true" />
-
-                {/* RIGHT audience — domain expert (highlighted) */}
-                <div className="reframe-figure right">
-                  <div className="reframe-figure-art">
-                    <Person size={64} strokeWidth={1.2} />
-                    <span className="reframe-dot-status" />
-                    <span className="reframe-dot-accent" />
-                  </div>
-                  <span className="reframe-figure-label">Domain Expert</span>
-                  <span className="reframe-figure-sublabel">(who needs OPC UA data)</span>
-                </div>
-              </div>
-
-              {/* What-they-actually-want strip lives inside the card now,
-                  filling the formerly empty lower half. */}
-              <div className="discovery-want-strip reframe-want-strip">
-                <p className="discovery-want-label">What they actually want</p>
-                <div className="discovery-want-items">
-                  <span className="discovery-want-item">
-                    {/* Gauge — echoes the gauge-near-head in the quadrant chart below */}
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M 4 16 A 8 8 0 0 1 20 16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none" />
-                      <line x1="12" y1="16" x2="17" y2="9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                      <circle cx="12" cy="16" r="1.4" fill="currentColor" />
-                    </svg>
-                    <span>Read a sensor</span>
-                  </span>
-                  <span className="discovery-want-item">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                      <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    </svg>
-                    <span>Inspect a value</span>
-                  </span>
-                  <span className="discovery-want-item">
-                    {/* { } — callback to the {} glyph on the OPC-UA-expert silhouette */}
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        d="M 9 4 C 6.5 4 6.5 7 6.5 9 C 6.5 11 5 12 4 12 C 5 12 6.5 13 6.5 15 C 6.5 17 6.5 20 9 20"
-                        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
-                      />
-                      <path
-                        d="M 15 4 C 17.5 4 17.5 7 17.5 9 C 17.5 11 19 12 20 12 C 19 12 17.5 13 17.5 15 C 17.5 17 17.5 20 15 20"
-                        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"
-                      />
-                    </svg>
-                    <span>Generate Script</span>
-                  </span>
-                </div>
+              <div className="flank-row" style={{ marginTop: 16 }}>
+                <p className="flank-label impact-label">Impact →</p>
+                <p className="flank-body">Locked the primary persona; established a hard design-review rule — every interaction discoverable without reading docs.</p>
               </div>
             </div>
+          </Reveal>
 
-            <div className="flank-row" style={{ marginTop: 16 }}>
-              <p className="flank-label impact-label">Impact →</p>
-              <p className="flank-body">Locked the primary persona; established a hard design-review rule — every interaction discoverable without reading docs.</p>
-            </div>
-          </div>
           {/* Discovery 02 */}
-          <div className="flank-card">
-            <p className="flank-eyebrow">Discovery 02</p>
-            <h4 className="flank-h4">The strongest pull came from the digital-twin engineer, not the bench technician</h4>
+          <Reveal delay={0.15}>
+            <div className="flank-card">
+              <p className="flank-eyebrow">Discovery 02</p>
+              <h4 className="flank-h4">The strongest pull came from the digital-twin engineer, not the bench technician</h4>
 
-            <div
-              className="quadrant-card"
-              role="img"
-              aria-label="Two-by-two chart of four use cases plotted by frequency of use (horizontal) and OPC UA dependency (vertical). Bench monitoring, predictive maintenance, and energy dashboards sit in the 'has alternative' row. Digital-twin sync sits alone in the top-left 'no alternative' quadrant — highlighted as the anchor."
-            >
-              <div className="quadrant-chart">
-                {/* Highlighted "anchor" quadrant (top-left = rare + no-alt) */}
-                <div className="quadrant-highlight" />
+              <AnchorQuadrant />
 
-                {/* Dashed quadrant dividers + solid axes */}
-                <div className="quadrant-y-divider" aria-hidden="true" />
-                <div className="quadrant-x-divider" aria-hidden="true" />
-                <div className="quadrant-y-axis" aria-hidden="true" />
-                <div className="quadrant-x-axis" aria-hidden="true" />
+              <p className="discovery-caption">The anchor isn&rsquo;t the loudest — it&rsquo;s the one with the worst alternative.</p>
 
-                {/* Axis labels — Y-label lives in a flex-centered box in the
-                    gutter so it can't overlap the plot area. */}
-                <div className="quadrant-y-label-area" aria-hidden="true">
-                  <span className="quadrant-y-label">OPC UA Dependency</span>
-                </div>
-                <span className="quadrant-y-tick top">No alt</span>
-                <span className="quadrant-y-tick bottom">Has alt</span>
-                <span className="quadrant-x-label">Frequency in use</span>
-                <span className="quadrant-x-tick left">Rare</span>
-                <span className="quadrant-x-tick right">Common</span>
-
-                {/* Three faded "has alternative" points — bottom band */}
-                <div className="quadrant-point" style={{ left: '82%', top: '68%' }}>
-                  <span className="quadrant-point-label">Bench monitoring</span>
-                  <span className="quadrant-point-dot" />
-                </div>
-                <div className="quadrant-point" style={{ left: '62%', top: '58%' }}>
-                  <span className="quadrant-point-label">Predictive maint.</span>
-                  <span className="quadrant-point-dot" />
-                </div>
-                <div className="quadrant-point" style={{ left: '78%', top: '48%' }}>
-                  <span className="quadrant-point-label">Energy dashboards</span>
-                  <span className="quadrant-point-dot" />
-                </div>
-
-                {/* THE ANCHOR — Digital-twin sync, top-left, highlighted */}
-                <div className="quadrant-anchor" style={{ left: '24%', top: '20%' }}>
-                  <span className="quadrant-anchor-label">Digital-twin sync</span>
-                  <span className="quadrant-anchor-dot" />
-                </div>
-
-                {/* Callout sits below-right of the anchor dot so it clears
-                    the 30px-diameter dot+ring. Line points up-left at it. */}
-                <div className="quadrant-anchor-callout" style={{ left: '36%', top: '32%' }}>
-                  <span className="quadrant-anchor-callout-line" />
-                  <span className="quadrant-anchor-callout-text">The Anchor</span>
-                </div>
+              <div className="flank-row" style={{ marginTop: 16 }}>
+                <p className="flank-label impact-label">Impact →</p>
+                <p className="flank-body">Amusement-park digital-twin scenario became the canonical demo flow — the connect &rarr; browse &rarr; subscribe &rarr; see-it-update path users meet first.</p>
               </div>
             </div>
-
-            <p className="discovery-caption">The anchor isn&rsquo;t the loudest — it&rsquo;s the one with the worst alternative.</p>
-
-            <div className="flank-row" style={{ marginTop: 16 }}>
-              <p className="flank-label impact-label">Impact →</p>
-              <p className="flank-body">Amusement-park digital-twin scenario became the canonical demo flow — the connect &rarr; browse &rarr; subscribe &rarr; see-it-update path users meet first.</p>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </div>
 
       <Divider />
 
       {/* ── 7. WHAT WE LEARNED ──────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '64px 24px' }}>
-        <div style={{ marginBottom: 48 }}>
-          <EyebrowLabel>Findings</EyebrowLabel>
-          <H2>What we learned</H2>
-          <P style={{ marginBottom: 0 }}>
-            Five high-priority insight themes from the usability study. Each follows the same shape: observation → insight → recommendation → what shipped.
-          </P>
-        </div>
+      <div style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px 48px' }}>
+        <Reveal>
+          <div style={{ marginBottom: 48 }}>
+            <EyebrowLabel>Findings</EyebrowLabel>
+            <H2>What we learned</H2>
+            <P style={{ marginBottom: 0 }}>
+              Five high-priority insight themes from the usability study. Each follows the same shape: observation → insight → recommendation → what shipped.
+            </P>
+          </div>
+        </Reveal>
 
         {/* Theme 1 — Terminology debt */}
         <div className="insight-block">
@@ -958,14 +605,16 @@ function OPCUAContent() {
       <Divider />
 
       {/* ── 8. WHAT THE DESIGN REVIEW SURFACED ──────────────────────────── */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '64px 24px' }}>
-        <div style={{ marginBottom: 32 }}>
-          <EyebrowLabel>Internal Design Review</EyebrowLabel>
-          <H2>What the design review surfaced</H2>
-          <P style={{ marginBottom: 0 }}>
-            The Internal Design Review wasn&rsquo;t a checkpoint — it was the round where I had to make decisions about <em>what to ship now, what to defer, and what to push back on</em> with five senior reviewers across engineering and design. These three moments are where the work was less &ldquo;research findings&rdquo; and more &ldquo;strategic partner in project planning.&rdquo;
-          </P>
-        </div>
+      <div style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px' }}>
+        <Reveal>
+          <div style={{ marginBottom: 32 }}>
+            <EyebrowLabel>Internal Design Review</EyebrowLabel>
+            <H2>What the design review surfaced</H2>
+            <P style={{ marginBottom: 0 }}>
+              The Internal Design Review wasn&rsquo;t a checkpoint — it was the round where I had to make decisions about <em>what to ship now, what to defer, and what to push back on</em> with five senior reviewers across engineering and design. These three moments are where the work was less &ldquo;research findings&rdquo; and more &ldquo;strategic partner in project planning.&rdquo;
+            </P>
+          </div>
+        </Reveal>
         <div className="idr-stack">
           {/* IDR 01 */}
           <div className="flank-card">
@@ -1077,18 +726,24 @@ function OPCUAContent() {
 
       {/* ── 9. OUTCOME ──────────────────────────────────────────────────── */}
       <div className="prose">
-        <EyebrowLabel>Outcome</EyebrowLabel>
-        <H2>What shipped — and what didn&rsquo;t</H2>
-        <P>
-          The OPC UA Explorer shipped in <strong>MATLAB R2026a</strong>, ~15 months after the first contextual interview. You can read its public documentation at{' '}
-          <a href="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
-             target="_blank" rel="noopener noreferrer" className="docs-link">
-            mathworks.com/help/icomm/ug/opcuaexplorer-app.html
-          </a>.
-        </P>
-        <P>
-          Beyond the headline shipped features, the research generated an <strong>11-item feature-request pipeline</strong> that has shaped the next two releases. As a strategic partner in project planning, I helped the team decide what <em>not</em> to ship in v1 just as much as what to ship.
-        </P>
+        <Reveal>
+          <EyebrowLabel>Outcome</EyebrowLabel>
+          <H2>What shipped — and what didn&rsquo;t</H2>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            The OPC UA Explorer shipped in <strong>MATLAB R2026a</strong>, ~15 months after the first contextual interview. You can read its public documentation at{' '}
+            <a href="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
+               target="_blank" rel="noopener noreferrer" className="docs-link">
+              mathworks.com/help/icomm/ug/opcuaexplorer-app.html
+            </a>.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            Beyond the headline shipped features, the research generated an <strong>11-item feature-request pipeline</strong> that has shaped the next two releases. As a strategic partner in project planning, I helped the team decide what <em>not</em> to ship in v1 just as much as what to ship.
+          </P>
+        </Reveal>
 
         <div className="hero-break">
           <div className="screenshot-card full-bleed">
@@ -1142,10 +797,13 @@ function OPCUAContent() {
 
       {/* ── 10. WHAT I'D DO DIFFERENTLY ─────────────────────────────────── */}
       <div className="prose">
-        <EyebrowLabel>Reflection</EyebrowLabel>
-        <H2>What I&rsquo;d do differently</H2>
+        <Reveal>
+          <EyebrowLabel>Reflection</EyebrowLabel>
+          <H2>What I&rsquo;d do differently</H2>
+        </Reveal>
 
-        <div className="lesson-row">
+        <Reveal delay={0.05}>
+          <div className="lesson-row">
           <div
             className="lesson-icon-box"
             role="img"
@@ -1171,7 +829,9 @@ function OPCUAContent() {
             </P>
           </div>
         </div>
+        </Reveal>
 
+        <Reveal delay={0.1}>
         <div className="lesson-row">
           <div
             className="lesson-icon-box"
@@ -1208,6 +868,7 @@ function OPCUAContent() {
             </P>
           </div>
         </div>
+        </Reveal>
       </div>
 
       {/* ── 11. FOOTER ──────────────────────────────────────────────────── */}

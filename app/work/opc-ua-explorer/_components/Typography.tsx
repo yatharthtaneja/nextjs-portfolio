@@ -52,16 +52,16 @@ export function Artifact({ label, height = 260 }: { label: string; height?: numb
   );
 }
 
-export function EyebrowLabel({ children }: { children: string }) {
+export function EyebrowLabel({ children }: { children: React.ReactNode }) {
   return (
     <p style={{
       fontFamily: 'Inter, sans-serif',
       fontWeight: 700,
-      fontSize: 11,
-      letterSpacing: '0.14em',
-      textTransform: 'uppercase' as const,
+      fontSize: 12,
+      letterSpacing: '0.12em',
+      textTransform: 'uppercase',
       color: A,
-      margin: '0 0 8px',
+      margin: '0 0 12px',
     }}>{children}</p>
   );
 }
@@ -70,12 +70,12 @@ export function H2({ children, style }: { children: React.ReactNode; style?: Rea
   return (
     <h2 style={{
       fontFamily: 'Inter, sans-serif',
-      fontWeight: 700,
-      fontSize: 30,
-      lineHeight: 1.2,
+      fontWeight: 800,
+      fontSize: 'clamp(26px, 3vw, 34px)',
+      lineHeight: 1.15,
       color: INK,
-      margin: '0 0 24px',
-      letterSpacing: '-0.01em',
+      margin: '12px 0 24px',
+      letterSpacing: '-0.02em',
       ...style,
     }}>{children}</h2>
   );
@@ -86,24 +86,24 @@ export function P({ children, style }: { children: React.ReactNode; style?: Reac
     <p style={{
       fontFamily: 'Inter, sans-serif',
       fontSize: 17,
-      lineHeight: 1.75,
+      lineHeight: 1.7,
       color: INK2,
-      margin: '0 0 20px',
+      margin: '0 0 22px',
       ...style,
     }}>{children}</p>
   );
 }
 
-export function SubLabel({ children }: { children: string }) {
+export function SubLabel({ children }: { children: React.ReactNode }) {
   return (
     <p style={{
       fontFamily: 'Inter, sans-serif',
       fontSize: 11,
       fontWeight: 700,
-      letterSpacing: '0.1em',
-      textTransform: 'uppercase' as const,
+      letterSpacing: '0.12em',
+      textTransform: 'uppercase',
       color: INK3,
-      margin: '20px 0 6px',
+      margin: '24px 0 8px',
     }}>{children}</p>
   );
 }

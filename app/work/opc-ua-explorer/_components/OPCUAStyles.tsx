@@ -20,8 +20,35 @@ export default function OPCUAStyles() {
         .stat-item { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: ${INK2}; }
         .stat-sep { color: ${INK3}; padding: 0 8px; }
 
-        .prose { max-width: 720px; margin: 0 auto; padding: 64px 24px; }
-        .wide { max-width: 1080px; margin: 0 auto; padding: 64px 24px; }
+        .prose { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
+        .wide { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
+
+        .mono {
+          font-family: 'JetBrains Mono', monospace; font-size: 0.85em;
+          background: #e9f5ef; color: ${A};
+          padding: 1.5px 6px; border-radius: 4px;
+          overflow-wrap: anywhere; word-break: break-word;
+        }
+
+        .stat-strip {
+          margin-top: 32px; padding: 32px;
+          background: linear-gradient(180deg, #f0faf6 0%, #ffffff 100%);
+          border-radius: 16px; border: 1px solid rgba(30, 107, 74, 0.15);
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: center;
+        }
+        @media (max-width: 600px) {
+          .stat-strip { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
+        }
+        .stat-num {
+          margin: 0;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: clamp(28px, 3.2vw, 36px); font-weight: 800;
+          color: ${A}; line-height: 1; letter-spacing: -0.01em;
+        }
+        .stat-label {
+          margin: 8px 0 0;
+          font-family: Inter, sans-serif; font-size: 14px; color: ${INK3};
+        }
 
         .tldr-grid {
           max-width: 1080px; margin: 0 auto;
@@ -99,10 +126,20 @@ export default function OPCUAStyles() {
           .recap-grid { grid-template-columns: 1fr; column-gap: 0; row-gap: 18px; }
         }
 
-        .insight-block { padding: 48px 0; border-bottom: 1px solid ${LINE}; }
-        .insight-block:last-child { border-bottom: none; }
+        .insight-block { padding: 56px 0; border-bottom: 1px solid ${LINE}; }
+        .insight-block:last-child { border-bottom: none; padding-bottom: 24px; }
         .insight-grid {
           display: grid; grid-template-columns: 0.85fr 1.6fr; gap: 56px; align-items: start;
+        }
+        .insight-grid > * { min-width: 0; }
+        .artifact-col { min-width: 0; }
+        .artifact-col > * { max-width: 100%; }
+        @media (min-width: 769px) {
+          .artifact-col {
+            position: sticky;
+            top: 96px;
+            align-self: start;
+          }
         }
         @media (max-width: 1100px) {
           .insight-grid { grid-template-columns: 1fr 1.4fr; gap: 40px; }
@@ -112,17 +149,21 @@ export default function OPCUAStyles() {
           .artifact-col { order: -1; }
         }
         .insight-eyebrow {
-          font-family: Inter, sans-serif; font-size: 11px; font-weight: 700;
-          letter-spacing: 0.12em; text-transform: uppercase; color: ${A}; margin-bottom: 10px;
+          font-family: Inter, sans-serif; font-size: 12px; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase; color: ${A};
+          margin: 0 0 12px;
         }
         .insight-h3 {
-          font-family: Inter, sans-serif; font-weight: 700; font-size: 21px;
-          color: ${INK}; line-height: 1.3; margin: 0 0 24px;
+          font-family: Inter, sans-serif; font-weight: 800;
+          font-size: clamp(22px, 2.4vw, 30px);
+          color: ${INK}; line-height: 1.15; letter-spacing: -0.02em;
+          margin: 0 0 28px;
         }
         .insight-body {
-          font-family: Inter, sans-serif; font-size: 16px;
-          color: ${INK2}; line-height: 1.7; margin: 0 0 8px;
+          font-family: Inter, sans-serif; font-size: 15.5px;
+          color: ${INK3}; line-height: 1.7; margin: 0 0 24px;
         }
+        .insight-body:last-child { margin-bottom: 0; }
 
         /* ── Flanking insight cards (Discovery + IDR) ── */
         .flank-grid {
