@@ -394,9 +394,7 @@ export default function OPCUAStyles() {
           display: flex; gap: 28px; align-items: flex-start;
           background: ${CARD}; border: 1px solid ${LINE};
           border-radius: 14px; padding: 24px 26px;
-          margin-bottom: 32px;
         }
-        .lesson-row:last-child { margin-bottom: 0; }
         @media (max-width: 640px) {
           .lesson-row { flex-direction: column; gap: 14px; padding: 22px; }
         }

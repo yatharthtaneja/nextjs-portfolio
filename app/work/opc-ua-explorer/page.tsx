@@ -802,6 +802,7 @@ function OPCUAContent() {
           <H2>What I&rsquo;d do <em>differently</em></H2>
         </Reveal>
 
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
         <Reveal delay={0.05}>
           <div className="lesson-row">
           <div
@@ -869,6 +870,7 @@ function OPCUAContent() {
           </div>
         </div>
         </Reveal>
+        </div>
       </div>
 
       {/* ── 11. FOOTER ──────────────────────────────────────────────────── */}
