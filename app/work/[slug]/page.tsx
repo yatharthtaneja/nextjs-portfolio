@@ -2,7 +2,6 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import PasswordGate from '@/app/components/PasswordGate';
 import { ArrowLeft } from '@/app/components/icons';
 
 type StudyMeta = {
@@ -43,7 +42,7 @@ const STUDIES: Record<string, StudyMeta> = {
   'opc-ua-server': {
     title: 'OPC UA Server',
     type: 'Strategic Planning · Workshop · MathWorks',
-    status: 'In Development · Beta H2 2026',
+    status: 'In Development',
     statusBg: '#FEF3C7',
     statusColor: '#92400e',
     accentColor: '#0D6E6B',
@@ -217,9 +216,5 @@ export default function SlugPage() {
     );
   }
 
-  return (
-    <PasswordGate accentColor={study.accentColor} softColor={study.softColor}>
-      <ComingSoonContent study={study} />
-    </PasswordGate>
-  );
+  return <ComingSoonContent study={study} />;
 }

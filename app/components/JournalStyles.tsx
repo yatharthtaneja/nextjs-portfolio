@@ -207,17 +207,6 @@ export default function JournalStyles() {
           flex-shrink: 0;
           opacity: 0.82;
         }
-        .nda-pill {
-          font-family: 'Roboto', sans-serif;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          background: rgba(10,10,30,0.14);
-          color: rgba(10,10,30,0.6);
-          padding: 4px 9px;
-          border-radius: 12px;
-          white-space: nowrap;
-        }
         .cover-readtime {
           font-family: 'Roboto', sans-serif;
           font-size: 13px;

@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import PasswordGate from '@/app/components/PasswordGate';
 import CaseStudyMenu from '@/app/components/CaseStudyMenu';
 import { A, AS, AB, INK, INK2, INK3, LINE, CARD } from './_components/theme';
 import {
@@ -893,9 +892,5 @@ function OPCUAContent() {
 }
 
 export default function OPCUAExplorerPage() {
-  return (
-    <PasswordGate accentColor="#1E6B4A" softColor="#B8DFD0">
-      <OPCUAContent />
-    </PasswordGate>
-  );
+  return <OPCUAContent />;
 }

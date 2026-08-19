@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import PasswordGate from '@/app/components/PasswordGate';
 import CaseStudyMenu from '@/app/components/CaseStudyMenu';
 import { A, AS, AB, AD, INK, INK2, INK3, LINE, CARD } from './_components/theme';
 import { Pill, EyebrowLabel, H2, P, SubLabel, Divider } from './_components/Typography';
@@ -607,9 +606,5 @@ function NiDaqmxContent() {
 }
 
 export default function NiDaqmxPage() {
-  return (
-    <PasswordGate accentColor={A} softColor={AS}>
-      <NiDaqmxContent />
-    </PasswordGate>
-  );
+  return <NiDaqmxContent />;
 }

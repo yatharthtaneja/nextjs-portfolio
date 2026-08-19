@@ -52,7 +52,6 @@ app/
     ├── CaseStudyJournal.tsx    # 3D book grid component
     ├── JournalStyles.tsx       # Extracted CSS for CaseStudyJournal
     ├── CaseStudyMenu.tsx       # Fixed-position morphing nav menu (used on case-study pages)
-    ├── PasswordGate.tsx        # NDA password gate wrapping case-study content
     ├── InteractiveName.tsx     # Letter-by-letter font crossfade on the hero ("YATHARTH")
     ├── FloatingImage.tsx       # Floating stamp images (CSS keyframes; Framer Motion only for hover)
     ├── Rotatingtagline.tsx     # 3-item rotating tagline carousel (4.5s interval, hover-pause)
@@ -68,7 +67,7 @@ public/images/                   # Stamps, logos, stickers, decorative borders
 
 Each case study under `app/work/<slug>/` follows the same structure:
 
-- `page.tsx` — imports from `./_components/`, holds only the case-study JSX content and the `PasswordGate` wrapper at the bottom
+- `page.tsx` — imports from `./_components/`, holds only the case-study JSX content
 - `_components/theme.ts` — case-study-specific palette constants (each case study has its own accent + soft + bg)
 - `_components/Typography.tsx` — `Pill`, `Artifact`, `EyebrowLabel`, `H2`, `P`, `SubLabel`, `Divider` — same signatures across case studies, palette-specific
 - `_components/<CaseStudy>Styles.tsx` — single `<style>` block component holding all CSS for the case study, importing palette constants from `theme.ts` so styled-jsx interpolation works
@@ -83,8 +82,8 @@ The `_` prefix tells Next.js the folder is not a route. When adding a new case s
 | `/`                         | Complete    | Hero + 3D case study journals + About & Connect          |
 | `/about`                    | Redirect    | → `/#about`                                              |
 | `/work`                     | Redirect    | → `/#work`                                               |
-| `/work/opc-ua-explorer`     | Complete    | Industrial IoT case study, NDA-gated                     |
-| `/work/ni-daqmx`            | Complete    | API design study, NDA-gated                              |
+| `/work/opc-ua-explorer`     | Complete    | Industrial IoT case study                                |
+| `/work/ni-daqmx`            | Complete    | API design study                                         |
 | `/work/[slug]`              | Fallback    | Generic "coming soon" template for unbuilt case studies  |
 | `/not-found`                | Complete    | Branded 404                                              |
 
@@ -139,13 +138,6 @@ Three `<section>` elements with ids `hero`, `work`, and `about`. Case-study data
 - Caption uses per-segment easing inside its keyframe (`ease-out` rise / `linear` hold / `ease-in` fall)
 - IntersectionObserver triggers the `zoomed-in` class — runs once then disconnects
 - Honors `prefers-reduced-motion` by snapping to the zoomed-in frame
-
-### PasswordGate.tsx
-
-- Wraps NDA-gated case studies (`PASSWORD = 'yuxr'`, stored in `localStorage['portfolio-unlocked']`)
-- Sharper shake easing on wrong password with brief apex blur; honors `prefers-reduced-motion`
-- Error message uses `role="alert"` + `aria-live="polite"`
-- Input has visible focus via tinted `box-shadow` (its native outline is suppressed for the design)
 
 ## Commands
 

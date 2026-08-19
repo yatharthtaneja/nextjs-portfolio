@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import JournalStyles from "./JournalStyles";
-import { ArrowRight, Lock } from "./icons";
+import { ArrowRight } from "./icons";
 
 export interface JournalProject {
   slug: string;
@@ -18,7 +18,6 @@ export interface JournalProject {
   spineColor: string;
   coverImage: string;
   insetImages?: string[];
-  nda: boolean;
   statusTag?: string;
 }
 
@@ -102,12 +101,6 @@ function Journal({ project, index }: { project: JournalProject; index: number })
                 <div className="cover-logo-dot" style={{ background: project.spineColor }} />
               )}
               <div className="cover-topbar-right">
-                {project.nda && (
-                  <span className="nda-pill">
-                    <Lock size={11} strokeWidth={1.8} style={{ marginRight: 4 }} />
-                    NDA
-                  </span>
-                )}
                 <span className="cover-readtime">{project.readTime}</span>
               </div>
             </div>
@@ -153,7 +146,7 @@ function Journal({ project, index }: { project: JournalProject; index: number })
 
             {/* ── Hover overlay ── */}
             <div className="cover-cta" aria-hidden="true">
-              {project.nda ? "Request Access" : "View Case Study"}
+              View Case Study
               <ArrowRight style={{ marginLeft: 6 }} />
             </div>
           </div>

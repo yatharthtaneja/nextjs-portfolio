@@ -4,6 +4,7 @@ import InteractiveName from './components/InteractiveName';
 import OverlappingTitle from "./components/OverlappingTitle";
 import RotatingTagline from "./components/Rotatingtagline";
 import CaseStudyJournals, { JournalProject } from "./components/CaseStudyJournal";
+import BehancePostcard from "./components/BehancePostcard";
 import AboutSection from "./components/AboutSection";
 
 const projects: JournalProject[] = [
@@ -19,7 +20,6 @@ const projects: JournalProject[] = [
     spineColor:     "#1E6B4A",
     coverImage:     "",
     insetImages:    ["/images/stickers/opc-ua-explorer-sticker.svg"],
-    nda:            true,
     statusTag:      "✓ Shipped · MATLAB R2026a",
   },
   {
@@ -34,7 +34,6 @@ const projects: JournalProject[] = [
     spineColor:     "#1D4ED8",
     coverImage:     "",
     insetImages:    ["/images/stickers/ni-daqmx-sticker.svg"],
-    nda:            true,
     statusTag:      "✓ Shipped · MATLAB R2026a",
   },
   {
@@ -49,7 +48,6 @@ const projects: JournalProject[] = [
     spineColor:     "#B45309",
     coverImage:     "",
     insetImages:    ["/images/stickers/mqtt-survey-sticker.svg"],
-    nda:            true,
     statusTag:      "✓ Research Complete",
   },
   {
@@ -64,8 +62,24 @@ const projects: JournalProject[] = [
     spineColor:     "#0D6E6B",
     coverImage:     "",
     insetImages:    ["/images/stickers/opc-ua-server-sticker.svg"],
-    nda:            true,
     statusTag:      "In Development",
+  },
+];
+
+const earlierWork = [
+  {
+    title: "LAGOM",
+    label: "College Project · 2021",
+    year: "2021",
+    behanceUrl: "https://www.behance.net/gallery/119361791/LAGOM-App-Design-UI-Design-UX-Research",
+    imageSrc: "/images/behance/lagom-cover.jpg",
+  },
+  {
+    title: "CheckMate",
+    label: "College Project · 2022",
+    year: "2022",
+    behanceUrl: "https://www.behance.net/gallery/136224389/CheckMate-A-Bucket-List-App-UXUI-CASE-STUDY",
+    imageSrc: "/images/behance/checkmate-cover.jpg",
   },
 ];
 
@@ -356,6 +370,54 @@ export default function Home() {
 {/* Journals — full width, no max-w clipping */}
 <div style={{ width: "100%", overflow: "visible", paddingBottom: "80px" }}>
   <CaseStudyJournals projects={projects} />
+</div>
+
+{/* Earlier Work — college Behance projects, kept visually distinct from the shipped case studies above */}
+<div className="max-w-5xl mx-auto px-6 md:px-8" style={{ paddingBottom: 100 }}>
+  <div style={{ marginBottom: 32, textAlign: "center" }}>
+    <p style={{
+      fontFamily: "'Roboto', sans-serif",
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: "0.18em",
+      textTransform: "uppercase" as const,
+      color: "#AB4967",
+      marginBottom: 8,
+    }}>
+      From the Archives
+    </p>
+    <p style={{
+      fontFamily: "'Roboto', sans-serif",
+      fontWeight: 700,
+      fontSize: "clamp(0.85rem, 1.5vw, 1.1rem)",
+      lineHeight: 1.0,
+      color: "#27174E",
+      margin: 0,
+      letterSpacing: "0.18em",
+      textTransform: "uppercase" as const,
+    }}>
+      Earlier Work
+    </p>
+    <p style={{
+      fontFamily: "'Roboto', sans-serif",
+      fontSize: 15,
+      lineHeight: 1.65,
+      color: "#171717",
+      opacity: 0.75,
+      marginTop: 16,
+      marginBottom: 0,
+      maxWidth: 560,
+      marginLeft: "auto",
+      marginRight: "auto",
+    }}>
+      Two UI/UX projects from college, before MathWorks — kept here for context on where this all started. Full case studies live on Behance.
+    </p>
+  </div>
+  <div style={{ display: "flex", gap: 32, flexWrap: "wrap", justifyContent: "center" }}>
+    {earlierWork.map((project, i) => (
+      <BehancePostcard key={project.title} {...project} tilt={i % 2 === 0 ? -3 : 3} />
+    ))}
+  </div>
 </div>
       </section>
 

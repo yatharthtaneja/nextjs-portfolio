@@ -249,6 +249,28 @@ export function TrendingFlat({ size = 18, className, style, strokeWidth = 1.5 }:
   );
 }
 
+export function ArrowUpRight({ size = 14, className, style, strokeWidth = 1.6 }: GlyphProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+      style={{ display: 'inline-block', verticalAlign: '-2px', ...style }}
+    >
+      <path
+        d="M5 15L15 5M15 5H7M15 5V13"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ArrowLeft({ size = 14, className, style, strokeWidth = 1.6 }: GlyphProps) {
   return (
     <svg
