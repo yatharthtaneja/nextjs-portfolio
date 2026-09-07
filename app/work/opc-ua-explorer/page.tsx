@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import CaseStudyMenu from '@/app/components/CaseStudyMenu';
 import { A, AS, AB, INK, INK2, INK3, LINE, CARD } from './_components/theme';
 import {
@@ -13,7 +14,6 @@ import {
   PullQuote,
 } from './_components/Typography';
 import { Reveal, StaggerGroup, StaggerItem } from './_components/Reveal';
-import FactoryHookSVG from './_components/FactoryHookSVG';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
 import OPCUAStyles from './_components/OPCUAStyles';
@@ -80,7 +80,15 @@ function OPCUAContent() {
           </div>
 
           <div className="hero-visual" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <FactoryHookSVG />
+            <Image
+              src="/images/opcua/opc-hero.png"
+              alt="Collage of factory equipment — robotic arm, valves, conveyor, pressure gauge — around an engineer at a workstation, with the OPC UA logo at center."
+              width={2659}
+              height={1839}
+              priority
+              sizes="(max-width: 768px) 92vw, (max-width: 1280px) 50vw, 700px"
+              style={{ width: '100%', height: 'auto' }}
+            />
           </div>
         </div>
       </div>
