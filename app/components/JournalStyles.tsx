@@ -372,16 +372,6 @@ export default function JournalStyles() {
             -webkit-backdrop-filter: blur(4px);
           }
         }
-        /* Touch devices: the journal opens 3D-style on scroll. Show the CTA so
-           tap affordance is visible — without this, mobile readers never see
-           the "View Case Study" hint. */
-        .journal-wrapper[data-scroll-open="true"] .cover-cta {
-          opacity: 1;
-          background: rgba(255,255,255,0.2);
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
-        }
-
         /* ── GRID — centered ──────────────────────────────────────────────── */
         .journals-grid {
           display: flex;
@@ -392,24 +382,13 @@ export default function JournalStyles() {
           overflow: visible;
           /* Extra side padding absorbs the perspective rotation bleed */
           padding: 0 20px 20px 20px;
+          padding-bottom: 80px;
         }
-        /* Stack vertically on mobile, side-by-side on desktop */
+        /* Mobile shows the index-card stack instead — one screen, all four
+           studies readable at once. See CaseStudyIndexCards.tsx. */
         @media (max-width: 768px) {
           .journals-grid {
-            flex-direction: column;
-            align-items: center;
-            gap: 28px;
-            /* Enough horizontal room for the rotated cover not to clip */
-            padding: 0 24px;
-            overflow: visible;
-          }
-          /* Remove stagger offset on mobile — all same size */
-          .journals-grid .journal-wrapper:nth-child(2) {
-            margin-top: 0 !important;
-          }
-          /* On mobile, scroll-open is subtle — less rotation to avoid overflow */
-          .journal-book[data-hovered="true"] {
-            transform: translateY(-8px) rotateY(-12deg) rotateX(4deg) !important;
+            display: none;
           }
         }
         /* Laptop (769–1639px): cap grid to 2 columns, journals keep natural width */

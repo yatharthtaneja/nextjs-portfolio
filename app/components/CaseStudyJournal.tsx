@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import JournalStyles from "./JournalStyles";
@@ -21,49 +21,14 @@ export interface JournalProject {
   statusTag?: string;
 }
 
+// Desktop-only (>=769px): the mobile breakpoint renders CaseStudyIndexCards
+// instead, so this component carries no touch/scroll handling.
 function Journal({ project, index }: { project: JournalProject; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
-  const [scrollOpen, setScrollOpen] = useState(false);
-  const wrapperRef = useRef<HTMLAnchorElement>(null);
-
-  // Scroll-triggered open — MOBILE ONLY (no pointer/hover device)
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return;
-    // Only activate on touch/mobile — skip on desktop (pointer: fine = mouse)
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    if (!isTouchDevice) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const ratio = entry.intersectionRatio;
-        // Open when mostly in view, close as soon as less than half is visible.
-        // Simple hysteresis prevents rapid toggling at the boundary.
-        if (ratio >= 0.6) {
-          setScrollOpen(true);
-        } else if (ratio < 0.5) {
-          setScrollOpen(false);
-        }
-      },
-      {
-        // Dense thresholds so the callback fires frequently while scrolling
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-        // Fire slightly before element fully exits to animate the reset in time
-        rootMargin: '0px 0px -5% 0px',
-      }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // Separate hover vs scroll state so touch CTA can light up on scroll-open
-  // without coupling to the hover-only state machine.
-  const isOpen = hovered || scrollOpen;
 
   return (
     <Link
-      ref={wrapperRef}
       href={`/work/${project.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setPressed(false); }}
@@ -73,9 +38,8 @@ function Journal({ project, index }: { project: JournalProject; index: number })
       style={{ animationDelay: `${index * 140}ms` }}
       className="journal-wrapper"
       data-hovered={hovered}
-      data-scroll-open={scrollOpen}
     >
-      <div className="journal-book" data-hovered={isOpen} data-pressed={pressed}>
+      <div className="journal-book" data-hovered={hovered} data-pressed={pressed}>
         {/* ── FRONT FACE (COVER + SPINE) ── */}
         <div className="journal-front">
           <div className="journal-spine" style={{ background: project.spineColor }} />

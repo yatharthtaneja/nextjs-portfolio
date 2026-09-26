@@ -4,6 +4,7 @@ import InteractiveName from './components/InteractiveName';
 import OverlappingTitle from "./components/OverlappingTitle";
 import RotatingTagline from "./components/Rotatingtagline";
 import CaseStudyJournals, { JournalProject } from "./components/CaseStudyJournal";
+import CaseStudyIndexCards from "./components/CaseStudyIndexCards";
 import BehancePostcard from "./components/BehancePostcard";
 import AboutSection from "./components/AboutSection";
 
@@ -367,9 +368,11 @@ export default function Home() {
         </div>
       </div>
 
-{/* Journals — full width, no max-w clipping */}
-<div style={{ width: "100%", overflow: "visible", paddingBottom: "80px" }}>
+{/* Full width, no max-w clipping. Journals on desktop, index-card stack on
+    mobile — the swap is CSS-only at 768px (JournalStyles / IndexCardStyles). */}
+<div style={{ width: "100%", overflow: "visible" }}>
   <CaseStudyJournals projects={projects} />
+  <CaseStudyIndexCards projects={projects} />
 </div>
 
 {/* Earlier Work — college Behance projects, kept visually distinct from the shipped case studies above */}
