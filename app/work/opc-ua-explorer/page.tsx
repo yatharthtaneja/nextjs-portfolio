@@ -15,7 +15,7 @@ import {
 } from './_components/Typography';
 import { Reveal, StaggerGroup, StaggerItem } from './_components/Reveal';
 import DecisionBar from './_components/DecisionBar';
-import ZoomFrame from './_components/ZoomFrame';
+import Annotated from './_components/Annotated';
 import Detail from './_components/Detail';
 import OPCUAStyles from './_components/OPCUAStyles';
 import RoleTimeline from './_components/RoleTimeline';
@@ -512,8 +512,8 @@ function OPCUAContent() {
           open
         >
         <div className="insight-block">
-          <div className="insight-grid">
-            <div>
+          <div className="insight-stack">
+            <div className="insight-stack-text">
 
               <SubLabel>Observation</SubLabel>
               <p className="insight-body">
@@ -529,31 +529,37 @@ function OPCUAContent() {
                 Terminology debt compounds silently. Each label was defensible in isolation; together they formed a vocabulary that didn&rsquo;t survive contact with a working engineer. The worst part of the failure mode: users didn&rsquo;t say &ldquo;I&rsquo;m confused.&rdquo; They confidently took the wrong action and assumed they&rsquo;d succeeded.
               </p>
             </div>
-            <div className="artifact-col">
-              <div className="screenshot-card full-bleed">
-                <h5 className="screenshot-title">Before: original labels</h5>
-                <ZoomFrame
+
+            <div className="insight-stack-figs">
+                <Annotated
+                  label="Before"
                   src="/images/opcua/opcua-figma-wireframe-1.png"
-                  alt="OPC UA Explorer original wireframe. Toolstrip showing Configure, Connect, Disconnect, Start Monitoring, Stop Monitoring, Record, Export Log; right pane showing Node Information with Hierarchy Information and Variable Information collapsed behind disclosure arrows."
-                  focalX="0%"
-                  focalY="0%"
-                  zoom={2.0}
-                  panLR
-                  caption="Before: pan across the toolstrip. Configure on the left, Start/Stop Monitoring and Export Log on the right, all four problem surfaces in one strip."
+                  alt="The original OPC UA Explorer wireframe. Toolstrip reads Configure, Connect, Disconnect, Start Monitoring, Stop Monitoring, Record, Export Log. The right pane shows Node Information with Variable Information collapsed behind a disclosure arrow."
+                  width={2560}
+                  height={1370}
+                  pins={[
+                    { x: 14.5, y: 11.0, note: <><span className="mono">Configure</span> read as &ldquo;set up the nodes&rdquo; or &ldquo;the place for user ID and password.&rdquo; Nobody read it as connection settings.</> },
+                    { x: 29.8, y: 10.3, note: <><span className="mono">Start Monitoring</span> and <span className="mono">Stop Monitoring</span> read as connect and disconnect from the session.</> },
+                    { x: 66.3, y: 11.0, note: <><span className="mono">Export Log</span> pulled &ldquo;logging&rdquo; toward the engineer&rsquo;s meaning: recording sensor values. People clicked it expecting their captured data.</> },
+                    { x: 81.9, y: 41.4, note: <><span className="mono">Variable Information</span> held the Data Type field engineers cared about most, collapsed behind a disclosure nobody opened.</> },
+                  ]}
+                  caption="Four problem surfaces, each defensible on its own, in one screen."
                 />
-              </div>
-              <div className="screenshot-card full-bleed">
-                <h5 className="screenshot-title">After: renamed and re-grouped</h5>
-                <ZoomFrame
-                  src="/images/opcua/opcua-hero-fullwindow.png"
-                  alt="OPC UA Explorer shipped UI. Toolstrip with Connection Settings, Add to Table, Remove from Table; right pane with Node Information and Variable Information expanded by default; bottom dock with Activity Log tab."
-                  focalX="0%"
-                  focalY="0%"
-                  zoom={2.0}
-                  panLR
-                  caption="After: same pan. Connection Settings replaces Configure, Add to Table / Remove from Table replace Start/Stop Monitoring, Export Log is gone."
+
+                <Annotated
+                  label="After"
+                  src="/images/opcua/opcua-shot-toolstrip.png"
+                  alt="The shipped OPC UA Explorer toolstrip. Session group with New, Open, Save. Connection group with Connection Settings and Disconnect. Node Monitor group with Add to Table and Remove from Table. Code Generation group with Generate Script. Close group with Close Session."
+                  width={3488}
+                  height={488}
+                  pins={[
+                    { x: 18.1, y: 40.5, note: <>Renamed to <strong>Connection Settings</strong>. The button now carries the meaning it always implied.</> },
+                    { x: 35.4, y: 40.5, note: <>Renamed to <strong>Add to Table</strong>. The verb describes the effect on the visible UI, not the abstract subscription.</> },
+                    { x: 46.4, y: 40.5, note: <>Renamed to <strong>Remove from Table</strong>, its exact opposite.</> },
+                    { x: 59.1, y: 40.5, note: <><strong>Export Log is gone.</strong> What people actually wanted from it is <strong>Generate Script</strong>, in its own Code Generation group.</> },
+                  ]}
+                  caption="Same strip, shipped. The most consequential change is the button that is no longer there."
                 />
-              </div>
             </div>
           </div>
 
@@ -632,14 +638,16 @@ function OPCUAContent() {
             </div>
             <div className="artifact-col">
               <div className="screenshot-card full-bleed">
-                <h5 className="screenshot-title">Detail pane after the swap</h5>
-                <ZoomFrame
-                  src="/images/opcua/opcua-theme1-panel-order-after.png"
-                  alt="OPC UA Explorer detail pane. Node Function (Read tab) sits above Node Information."
-                  focalX="100%"
-                  focalY="28%"
-                  zoom={1.8}
-                  caption="Right panel column, shipped: Node Function (top) → Node Information (below). Generate Script in the toolbar."
+                <Annotated
+                  src="/images/opcua/opcua-shot-panels.png"
+                  alt="The shipped right-hand column. Node Function sits at the top with its Read tab, showing the selected node and its current value. Node Information sits below it with the node's metadata."
+                  width={1256}
+                  height={2600}
+                  pins={[
+                    { x: 18.9, y: 1.2, note: <><strong>Node Function</strong> now sits on top. What can I do here?</> },
+                    { x: 21.3, y: 48.7, note: <><strong>Node Information</strong> moved below it. What is this?</> },
+                  ]}
+                  caption="Shipped order: action above metadata. The draft had these the other way round."
                 />
               </div>
             </div>
@@ -685,14 +693,16 @@ function OPCUAContent() {
             </div>
             <div className="artifact-col">
               <div className="screenshot-card full-bleed">
-                <h5 className="screenshot-title">Address Space tree, dense and unsearchable</h5>
-                <ZoomFrame
-                  src="/images/opcua/opcua-theme2-address-space-no-search.png"
-                  alt="OPC UA Explorer address space. A dense tree expanded several levels deep, with no search bar above it."
-                  focalX="14%"
-                  focalY="22%"
-                  zoom={1.8}
-                  caption="Address Space pane, shipped: a tree of hundreds of nodes, and no search input above the header."
+                <Annotated
+                  src="/images/opcua/opcua-shot-tree.png"
+                  alt="The Address Space pane. A tree of factory nodes expanded several levels deep under PaintShop and AssemblyLine, with no search input above it."
+                  width={1496}
+                  height={2000}
+                  pins={[
+                    { x: 50, y: 4.2, note: <>Nothing here. Participants who had used UA Expert kept reaching for a search bar that did not exist.</> },
+                    { x: 17, y: 86.2, note: <>Finding one node means hand-expanding branches. Real factory address spaces run to thousands.</> },
+                  ]}
+                  caption="Shipped as it stands: the tree is correct, and there is no way into it."
                 />
               </div>
             </div>
@@ -734,14 +744,24 @@ function OPCUAContent() {
             </div>
             <div className="artifact-col">
               <div className="screenshot-card full-bleed">
-                <h5 className="screenshot-title">Node Function, with Read and Write tabs</h5>
-                <ZoomFrame
-                  src="/images/opcua/opcua-theme3-readonly-cells-after.png"
-                  alt="OPC UA Explorer Node Function panel showing both Read and Write tabs for a writable node, ConveyorSpeed_Setpoint."
-                  focalX="86%"
-                  focalY="22%"
-                  zoom={1.7}
-                  caption="Node Function panel, shipped: Write tab appears only when the node permits it. Read-only nodes show Read alone."
+                <Annotated
+                  src="/images/opcua/opcua-shot-nf-readonly.png"
+                  alt="Node Function panel with the read-only node StationOccupancy selected. The tab strip holds a single Read tab; there is no Write tab."
+                  width={1256}
+                  height={1200}
+                  pins={[
+                    { x: 30.1, y: 7.2, note: <><strong>No Write tab here.</strong> <span className="mono">StationOccupancy</span> is read-only, so the app never offers a write the server is going to reject. On a writable node the tab appears in this space.</> },
+                  ]}
+                  caption="Shipped: the panel answers the permission question before you act on it, instead of after."
+                />
+
+                <Annotated
+                  label="What they saw before"
+                  src="/images/opcua/opcua-shot-write-error.png"
+                  alt="A MATLAB error dialog reading: Converting value abc to numeric is not supported."
+                  width={1676}
+                  height={760}
+                  caption="Two of five participants read an error like this as their own typing mistake and tried again."
                 />
               </div>
             </div>
@@ -783,14 +803,17 @@ function OPCUAContent() {
             </div>
             <div className="artifact-col">
               <div className="screenshot-card full-bleed">
-                <h5 className="screenshot-title">Monitoring table with Quality &amp; Timestamp inline</h5>
-                <ZoomFrame
-                  src="/images/opcua/opcua-theme4-inline-metadata-after.png"
-                  alt="OPC UA Explorer monitoring table showing Node, Value, Quality, and Timestamp columns inline."
-                  focalX="58%"
-                  focalY="24%"
-                  zoom={1.7}
-                  caption="Monitoring table, shipped: Quality and Timestamp inline beside every Value. Units live in Node Information."
+                <Annotated
+                  src="/images/opcua/opcua-shot-monitor.png"
+                  alt="The Node Monitoring Table with Node, Value, Quality and Timestamp columns, five subscribed nodes updating live."
+                  width={2948}
+                  height={1032}
+                  pins={[
+                    { x: 36.4, y: 10.6, note: <>The <strong>Value</strong>, which was never the problem.</> },
+                    { x: 66.3, y: 10.6, note: <><strong>Quality</strong> inline. Is this reading trustworthy right now?</> },
+                    { x: 90.1, y: 10.6, note: <><strong>Timestamp</strong> inline. How fresh is this number?</> },
+                  ]}
+                  caption="Units were deliberately left out and kept in Node Information, so the numeric pipeline into Generate Script stays clean."
                 />
               </div>
             </div>
@@ -887,15 +910,14 @@ function OPCUAContent() {
               <p className="flank-label">Outcome</p>
               <p className="flank-body">Shipped in R2026a. The Generate-Script button sits in the toolbar under CODE GENERATION; a click produces a MATLAB Live Script with the session reconstructed as code.</p>
             </div>
-            <div className="screenshot-card" style={{ marginTop: 18 }}>
-              <h5 className="screenshot-title">The Generate Script artifact</h5>
-              <ZoomFrame
-                src="/images/opcua/opcua-export-to-matlab.png"
-                alt="The MATLAB Live Script auto-generated by Generate Script, with sections Create OPC UA Client, Connect OPC UA Client, and Subscribe to OPC UA Nodes."
-                focalX="50%"
-                focalY="40%"
-                zoom={1.6}
-                caption="The artifact: a Live Script that reconstructs the user's session as runnable MATLAB."
+            <div style={{ marginTop: 18 }}>
+              <Annotated
+                label="The artifact"
+                src="/images/opcua/opcua-shot-genscript.png"
+                alt="The MATLAB script generated by the Generate Script button, with sections for creating the OPC UA client, connecting it, and subscribing to the selected nodes."
+                width={2912}
+                height={2092}
+                caption="One click, and the session comes out as runnable MATLAB. This is the moment the app stops being a viewer."
               />
             </div>
           </div>
@@ -959,12 +981,11 @@ function OPCUAContent() {
                   <div className="ba-label">After</div>
                   <div className="screenshot-card full-bleed">
                     <h5 className="screenshot-title">Function on top, Information below</h5>
-                    <ZoomFrame
-                      src="/images/opcua/opcua-theme1-panel-order-after.png"
-                      alt="OPC UA Explorer right pane. Node Function on top, Node Information below."
-                      focalX="86%"
-                      focalY="32%"
-                      zoom={1.6}
+                    <Annotated
+                      src="/images/opcua/opcua-shot-panels.png"
+                      alt="OPC UA Explorer right pane as shipped. Node Function on top, Node Information below."
+                      width={1256}
+                      height={2600}
                     />
                   </div>
                 </div>

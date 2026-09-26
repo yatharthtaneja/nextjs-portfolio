@@ -1435,6 +1435,79 @@ export default function OPCUAStyles() {
           padding: 12px 16px; border-top: 1px solid ${LINE}; margin: 0;
         }
 
+
+        /* ══ ANNOTATED SCREENSHOTS ════════════════════════════════════════ */
+        .annot { margin: 0 0 8px; }
+        .annot-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: ${A}; margin: 0 0 10px;
+        }
+        .annot-frame {
+          position: relative;
+          border: 1px solid ${LINE};
+          border-radius: 10px;
+          overflow: hidden;
+          background: #ffffff;
+          box-shadow: 0 6px 24px rgba(17, 24, 39, 0.08);
+        }
+        .annot-pin {
+          position: absolute;
+          transform: translate(-50%, -50%);
+          min-width: 22px; height: 22px;
+          padding: 0 5px;
+          border-radius: 11px;
+          border: 2px solid #ffffff;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+          color: #ffffff;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12px; font-weight: 700; line-height: 18px;
+          text-align: center;
+          pointer-events: none;
+        }
+        .annot-legend {
+          list-style: none; padding: 0;
+          margin: 16px 0 0;
+          display: grid; gap: 9px;
+        }
+        .annot-legend li {
+          display: flex; align-items: flex-start; gap: 10px;
+        }
+        .annot-legend-num {
+          flex-shrink: 0;
+          width: 20px; height: 20px; border-radius: 10px;
+          color: #ffffff;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 700; line-height: 20px;
+          text-align: center;
+          margin-top: 1px;
+        }
+        .annot-legend-note {
+          font-family: Inter, sans-serif;
+          font-size: 14.5px; line-height: 1.55; color: ${INK2};
+        }
+        .annot-caption {
+          font-family: Inter, sans-serif;
+          font-size: 14px; font-style: italic; line-height: 1.55;
+          color: ${INK3}; margin: 14px 0 0;
+        }
+        @media (max-width: 600px) {
+          .annot-pin { min-width: 18px; height: 18px; border-radius: 9px;
+                       font-size: 10px; line-height: 15px; border-width: 1.5px; }
+          .annot-legend-note { font-size: 13.5px; }
+        }
+
+
+        /* Stacked variant of .insight-grid, for a theme whose artefacts are too
+           wide to sit in the 65% artifact column. Text keeps a reading measure;
+           the figures get the full width. */
+        .insight-stack-text { max-width: 660px; }
+        .insight-stack-figs {
+          margin-top: 34px;
+          display: grid; gap: 34px;
+        }
+
       `}</style>
   );
 }
