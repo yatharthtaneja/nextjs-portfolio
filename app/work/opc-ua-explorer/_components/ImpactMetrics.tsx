@@ -42,7 +42,7 @@ export default function ImpactMetrics() {
         <p className="impact-measure-label" style={{ color: A }}>How we know it is working</p>
         <p className="impact-measure-body" style={{ color: INK }}>
           We track the customer escalations that come in asking what code to write to connect to
-          their hardware. <span className="hl-a">Since the app shipped, that number has come down.</span>
+          their hardware. <span className="hl">Since the app shipped, that number has come down.</span>
         </p>
         <p className="impact-measure-note" style={{ color: INK3 }}>
           {/* TODO(yt): drop the exact figures in here when you have them. */}

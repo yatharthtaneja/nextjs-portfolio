@@ -1375,41 +1375,48 @@ export default function OPCUAStyles() {
 
         /* ══ HIGHLIGHTER + MARGIN NOTES ═══════════════════════════════════ */
         /* A skimmer should be able to read only the highlighted phrases and
-           still come away with the argument. box-decoration-break keeps the
-           marker stroke intact when a phrase wraps across lines. */
+           still come away with the argument. Green rather than yellow because
+           the whole case study is green. The gradient is the marker: denser
+           where the pen lands and lifts, fading out past each end, covering the
+           full line rather than underlining it. box-decoration-break keeps the
+           stroke intact when a phrase wraps. */
         .hl {
           background-image: linear-gradient(
-            180deg,
-            transparent 52%,
-            rgba(255, 213, 92, 0.58) 52%,
-            rgba(255, 213, 92, 0.58) 94%,
-            transparent 94%
+            90deg,
+            rgba(30, 107, 74, 0.02) 0%,
+            rgba(30, 107, 74, 0.30) 1.4%,
+            rgba(30, 107, 74, 0.155) 5%,
+            rgba(30, 107, 74, 0.155) 95%,
+            rgba(30, 107, 74, 0.30) 98.6%,
+            rgba(30, 107, 74, 0.02) 100%
           );
-          padding: 0 3px;
-          margin: 0 -3px;
-          box-decoration-break: clone;
-          -webkit-box-decoration-break: clone;
-        }
-        /* Second, cooler marker for the moments that are about the product
-           rather than about me. Keeps the yellow meaning one thing. */
-        .hl-a {
-          background-image: linear-gradient(
-            180deg,
-            transparent 52%,
-            rgba(30, 107, 74, 0.16) 52%,
-            rgba(30, 107, 74, 0.16) 94%,
-            transparent 94%
-          );
-          padding: 0 3px;
-          margin: 0 -3px;
+          padding: 0.14em 0.42em;
+          margin: 0 -0.22em;
+          border-radius: 2px;
           box-decoration-break: clone;
           -webkit-box-decoration-break: clone;
         }
 
-        .scrawl {
+        /* ══ MARGIN NOTES ═════════════════════════════════════════════════ */
+        /* Handwritten one-liners with a glyph, used to pre-chew a section that
+           is otherwise a wall of prose. */
+        .scrawl-notes {
+          display: flex; flex-direction: column;
+          align-items: flex-start; gap: 10px;
+          margin: 30px 0 30px;
+        }
+        .scrawl-note { display: flex; align-items: center; gap: 12px; }
+        .scrawl-note-icon { flex-shrink: 0; color: ${A}; }
+        .scrawl-note-text {
           font-family: Caveat, 'Bradley Hand', cursive;
           font-weight: 600;
-          letter-spacing: 0.005em;
+          font-size: clamp(22px, 2.9vw, 30px);
+          line-height: 1.3;
+          color: ${INK};
+        }
+        @media (max-width: 600px) {
+          .scrawl-note { align-items: flex-start; gap: 10px; }
+          .scrawl-note-icon { margin-top: 3px; }
         }
 
         /* ══ TL;DR ════════════════════════════════════════════════════════ */
@@ -1426,25 +1433,6 @@ export default function OPCUAStyles() {
           font-family: 'JetBrains Mono', monospace;
           font-size: 11.5px; line-height: 1.5; color: ${INK3};
           padding: 12px 16px; border-top: 1px solid ${LINE}; margin: 0;
-        }
-
-        .tldr-notes {
-          display: flex; flex-direction: column;
-          align-items: flex-start; gap: 10px;
-          margin: 34px 0 4px;
-        }
-        .tldr-note { display: flex; align-items: center; gap: 12px; }
-        .tldr-note-icon { flex-shrink: 0; color: ${A}; }
-        .tldr-note-text {
-          font-family: Caveat, 'Bradley Hand', cursive;
-          font-weight: 600;
-          font-size: clamp(23px, 3.1vw, 32px);
-          line-height: 1.25;
-          color: ${INK};
-        }
-        @media (max-width: 600px) {
-          .tldr-note { align-items: flex-start; gap: 10px; }
-          .tldr-note-icon { margin-top: 3px; }
         }
 
       `}</style>

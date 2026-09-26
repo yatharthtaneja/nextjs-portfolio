@@ -104,57 +104,8 @@ function OPCUAContent() {
         </p>
       </div>
 
-      {/* ── 2. TL;DR ────────────────────────────────────────────────────── */}
-      <div style={{ background: AB, borderTop: `3px solid ${A}`, padding: '48px 24px 52px' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <Reveal>
-            <EyebrowLabel>TL;DR</EyebrowLabel>
-          </Reveal>
-
-          <Reveal delay={0.05}>
-            <figure className="tldr-shot">
-              <Image
-                src="/images/opcua/opcua-app-tldr.png"
-                alt="OPC UA Explorer in MATLAB. Toolstrip across the top with Connection Settings, Add to Table, Remove from Table and Generate Script. Address space tree on the left, node monitoring table in the middle showing live values with quality and timestamp, Node Function and Node Information panels on the right, plot and activity log along the bottom."
-                width={3360}
-                height={2020}
-                sizes="(max-width: 768px) 92vw, 1080px"
-                style={{ width: '100%', height: 'auto' }}
-              />
-              <figcaption>
-                OPC UA Explorer, MATLAB R2026a. Connect, browse the factory, watch values update, then press Generate Script to leave with runnable MATLAB.
-              </figcaption>
-            </figure>
-          </Reveal>
-
-          <div className="tldr-notes">
-            <Reveal delay={0.05}>
-              <div className="tldr-note">
-                <span className="tldr-note-icon"><Hammer size={24} /></span>
-                <span className="tldr-note-text">
-                  <span className="hl">Explore the factory, then walk away with the code.</span>
-                </span>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="tldr-note">
-                <span className="tldr-note-icon"><Bulb size={24} /></span>
-                <span className="tldr-note-text">
-                  <span className="hl">Two senior forums disagreed. Five users settled it.</span>
-                </span>
-              </div>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <div className="tldr-note">
-                <span className="tldr-note-icon"><Speech size={24} /></span>
-                <span className="tldr-note-text">
-                  <span className="hl">Fewer tools, fewer escalations, customers in early.</span>
-                </span>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
+      {/* ── 2. AT A GLANCE ─────────────────────────────────────────────── */}
+      <div style={{ background: AB, borderTop: `3px solid ${A}`, padding: '40px 24px' }}>
         <StaggerGroup className="tldr-grid">
           <StaggerItem className="tldr-cell">
             <p className="tldr-label">My Role</p>
@@ -173,6 +124,37 @@ function OPCUAContent() {
             <p className="tldr-value">Customers enter our ecosystem early instead of starting in a third-party tool. Measured by the drop in &ldquo;what code do I write to connect?&rdquo; escalations.</p>
           </StaggerItem>
         </StaggerGroup>
+      </div>
+
+      {/* ── 2b. TL;DR ───────────────────────────────────────────────────── */}
+      {/* Outside the green box on purpose: the box is metadata, this is the
+          story in one paragraph, and it should read as prose. */}
+      <div className="prose" style={{ paddingTop: 56, paddingBottom: 40 }}>
+        <Reveal>
+          <EyebrowLabel>TL;DR</EyebrowLabel>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <figure className="tldr-shot">
+            <Image
+              src="/images/opcua/opcua-app-plot.png"
+              alt="OPC UA Explorer in MATLAB. Toolstrip across the top with Connection Settings, Add to Table, Remove from Table and Generate Script. Address space tree on the left, node monitoring table in the middle showing live values with quality and timestamp, Node Function and Node Information panels on the right, and the Plot pane along the bottom charting three subscribed sensors over time."
+              width={3360}
+              height={2020}
+              sizes="(max-width: 768px) 92vw, 1080px"
+              style={{ width: '100%', height: 'auto' }}
+            />
+            <figcaption>
+              OPC UA Explorer, MATLAB R2026a. Three subscribed nodes plotting live off the Vehicle Production Factory demo server.
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 32, marginBottom: 0 }}>
+            We built OPC UA Explorer: <span className="hl">connect to a factory, browse what is in it, watch values update, then press one button and leave with the whole session as runnable MATLAB.</span> We built it because that work was scattered across five separate tools, and whatever you worked out by clicking had to be rebuilt as code before it was worth anything to your team. It shipped in MATLAB R2026a. <span className="hl">Customers now enter our ecosystem at the start of that workflow rather than through a third-party client,</span> and we measure that by the support escalations asking what code to write to connect to hardware, which have come down since release.
+          </P>
+        </Reveal>
       </div>
 
       <Divider />
@@ -271,7 +253,7 @@ function OPCUAContent() {
         </Reveal>
         <Reveal delay={0.05}>
           <P>
-            So the app has a specific shape. <span className="hl-a"><strong>Explore the factory in the app, then export the session as MATLAB code.</strong></span> You do the fiddly interactive part where interaction is cheap: connecting, browsing, subscribing, checking a value is what you think it is. Then you take the result out as a script you can scale, schedule, or hand to whoever comes next. The Generate Script button in <a href="#ship" className="docs-link">Stage 4</a> is where that shows up in the product.
+            So the app has a specific shape. <span className="hl"><strong>Explore the factory in the app, then export the session as MATLAB code.</strong></span> You do the fiddly interactive part where interaction is cheap: connecting, browsing, subscribing, checking a value is what you think it is. Then you take the result out as a script you can scale, schedule, or hand to whoever comes next. The Generate Script button in <a href="#ship" className="docs-link">Stage 4</a> is where that shows up in the product.
           </P>
         </Reveal>
         <Reveal delay={0.05}>
@@ -862,6 +844,33 @@ function OPCUAContent() {
             </P>
           </div>
         </Reveal>
+        <div className="scrawl-notes">
+          <Reveal delay={0.05}>
+            <div className="scrawl-note">
+              <span className="scrawl-note-icon"><Hammer size={24} /></span>
+              <span className="scrawl-note-text">
+                <span className="hl">I argued for Generate Script before anyone asked for it.</span>
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="scrawl-note">
+              <span className="scrawl-note-icon"><Bulb size={24} /></span>
+              <span className="scrawl-note-text">
+                <span className="hl">I defended deferring search, with five reviewers against me.</span>
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="scrawl-note">
+              <span className="scrawl-note-icon"><Speech size={24} /></span>
+              <span className="scrawl-note-text">
+                <span className="hl">I pushed back on the panel order, and the panels moved.</span>
+              </span>
+            </div>
+          </Reveal>
+        </div>
+
         <div className="idr-stack">
           {/* IDR 01 */}
           <div className="flank-card">
@@ -1053,7 +1062,7 @@ function OPCUAContent() {
                 The six-panel layout was fixed. It wasn&rsquo;t ours to change, so the design had to be good inside it.
               </li>
               <li>
-                Drag-and-drop and contextual menus weren&rsquo;t supported by the underlying infrastructure, so we designed around them. That limitation became the <strong>contextual menu project</strong>, picked up as a company-wide Tier&nbsp;1 effort by the core MATLAB workflows team, and currently in continuous research and prototyping. <span className="hl-a">A constraint we had to design around on one app turned into a platform problem worth solving for everybody.</span>
+                Drag-and-drop and contextual menus weren&rsquo;t supported by the underlying infrastructure, so we designed around them. That limitation became the <strong>contextual menu project</strong>, picked up as a company-wide Tier&nbsp;1 effort by the core MATLAB workflows team, and currently in continuous research and prototyping. <span className="hl">A constraint we had to design around on one app turned into a platform problem worth solving for everybody.</span>
               </li>
             </ul>
           </div>
