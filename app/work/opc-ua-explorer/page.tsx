@@ -408,7 +408,7 @@ function OPCUAContent() {
 
         <Reveal delay={0.05}>
           <P>
-            We combined the sketches into design cases — a preferred direction and an alternate — and took both to two forums. One was the App Design Review: the VP of MATLAB and the customer-facing engineers. The other was the Hardware Design Review: senior UX VPs and principal designers. Between them, more than eight senior reviewers.
+            We combined the sketches into design cases — a preferred direction and an alternate — and took both to two forums. One was the App Design Review: senior UX VPs and principal designers. The other was the Hardware Design Review: the VP of MATLAB and the customer-facing engineers. Between them, more than eight senior reviewers.
           </P>
         </Reveal>
         <Reveal delay={0.05}>
@@ -421,8 +421,10 @@ function OPCUAContent() {
           <ForumConflict />
         </Reveal>
 
-        {/* TODO(yt): which forum argued for which placement? Worth naming —
-            it makes the disagreement concrete rather than abstract. */}
+        {/* TODO(yt): the only thing still unnamed here is WHICH placement each
+            forum argued for — toolstrip, right panel or pop-up. We say at the
+            end of Stage 3 that Hardware's preference is what users took to;
+            saying what that preference actually was would finish the thread. */}
 
         <Reveal delay={0.05}>
           <P style={{ marginTop: 36, marginBottom: 0 }}>
@@ -794,10 +796,11 @@ function OPCUAContent() {
             <p className="flank-body">
               Nobody in either forum was wrong about their own reasoning — they were reasoning about different users. The study replaced the argument with evidence. Participants read toolstrip labels as descriptions of what would happen to the thing in front of them, which is why <span className="mono">Start Monitoring</span> became <strong>Add to Table</strong>. They looked for the action beside the node they had selected, not above it, which is why the panels were swapped. And the workflows nobody could place cleanly stayed out of v1 rather than being forced into a pop-up to end the debate.
             </p>
-            {/* TODO(yt): name which forum's position the study vindicated, and
-                whether what shipped was a third answer neither had proposed. */}
             <p className="flank-body" style={{ marginTop: 14 }}>
-              That is the part I would defend hardest. The disagreement was real and expensive, and the way out of it was not seniority — it was five people and a task list.
+              On the placement question itself, the direction the Hardware Design Review had preferred was the one participants took to. That forum was the VP of MATLAB and the customer-facing engineers — the people who sit closest to customers all day. They turned out to be right about customers. But they were right in a room where they could not prove it, next to a forum of senior UX VPs and principal designers who were arguing just as reasonably from the platform side. Seniority could not separate those two positions. Five participants and a task list could.
+            </p>
+            <p className="flank-body" style={{ marginTop: 14 }}>
+              That is the part I would defend hardest. The disagreement was real and expensive, and the way out of it was not picking whoever outranked me.
             </p>
           </div>
         </Reveal>

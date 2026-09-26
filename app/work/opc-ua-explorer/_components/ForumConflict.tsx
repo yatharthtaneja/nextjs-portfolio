@@ -1,22 +1,23 @@
 // The disagreement at the end of Stage 2.
 //
-// Deliberately does NOT attribute a position to a named forum — see TODO(yt) in
-// page.tsx. What is stated here is what I can source: who sat in each forum,
-// and that the three candidate placements were live and unreconciled when the
-// design left review.
+// Deliberately does NOT attribute a specific placement to a named forum — see
+// TODO(yt) in page.tsx. What is stated here is what I can source: who sat in
+// each forum, and that the three candidate placements were live and
+// unreconciled when the design left review. Which forum the study went on to
+// vindicate is stated in the callback at the end of Stage 3.
 
 import { A, AS, AB, INK, INK2, INK3, LINE } from './theme';
 
 const FORUMS = [
   {
     name: 'App Design Review',
-    who: ['VP of MATLAB', 'Customer-facing engineers'],
-    lens: 'Closest to what customers ask for out loud.',
+    who: ['Senior UX VPs', 'Principal designers'],
+    lens: 'Closest to the platform and its conventions.',
   },
   {
     name: 'Hardware Design Review',
-    who: ['Senior UX VPs', 'Principal designers'],
-    lens: 'Closest to the platform and its conventions.',
+    who: ['VP of MATLAB', 'Customer-facing engineers'],
+    lens: 'Closest to what customers ask for out loud.',
   },
 ];
 
