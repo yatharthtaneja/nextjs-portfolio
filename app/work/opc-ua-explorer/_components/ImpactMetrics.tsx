@@ -41,12 +41,12 @@ export default function ImpactMetrics() {
       <div className="impact-measure" style={{ background: AB, borderColor: AS }}>
         <p className="impact-measure-label" style={{ color: A }}>How we know it is working</p>
         <p className="impact-measure-body" style={{ color: INK }}>
-          We track the number of customer escalations that come in asking what code to write to
-          connect to their hardware. That number coming down is the measure.
+          We track the customer escalations that come in asking what code to write to connect to
+          their hardware. Since the app shipped, that number has come down.
         </p>
         <p className="impact-measure-note" style={{ color: INK3 }}>
-          {/* TODO(yt): baseline or current figure, if you can share one. */}
-          Tracked from R2026a onward.
+          {/* TODO(yt): drop the exact figures in here when you have them. */}
+          Tracked from R2026a onward. Happy to talk through the actual numbers.
         </p>
       </div>
     </div>

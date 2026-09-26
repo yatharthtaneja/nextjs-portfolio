@@ -7,9 +7,13 @@ import { A, INK, INK3, LINE, CARD } from './theme';
 const STEPS = [
   { title: 'Scope',     date: 'Dec 2023' },
   { title: 'Interview', date: 'Jan–Feb 2024' },
-  { title: 'Study',     date: 'Sep–Oct 2024' },
-  { title: 'Review',    date: 'Mar 2025' },
-  { title: 'Ship',      date: 'R2026a' },
+  // TODO(yt): exact months for Design and Review — these two are inferred from
+  // the gap between the last interview and the first test session.
+  { title: 'Design',    date: 'Mar–Jul 2024' },
+  { title: 'Review',    date: 'Aug 2024' },
+  { title: 'Testing',   date: 'Sep–Oct 2024' },
+  { title: 'Sign-off',  date: 'Mar 2025' },
+  { title: 'Shipped',   date: 'R2026a' },
 ];
 
 export default function RoleTimeline() {
@@ -60,7 +64,7 @@ export default function RoleTimeline() {
       </div>
 
       <style jsx global>{`
-        .rt-wrap { width: 100%; max-width: 760px; margin: 24px auto 32px; }
+        .rt-wrap { width: 100%; max-width: 900px; margin: 24px auto 32px; }
         .rt-head {
           margin: 0 0 16px; text-align: center;
           font-family: 'JetBrains Mono', monospace; font-size: 11px;
@@ -77,7 +81,7 @@ export default function RoleTimeline() {
         }
         .rt-grid {
           position: relative;
-          display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+          display: grid; grid-template-columns: repeat(7, 1fr); gap: 0;
         }
         .rt-col {
           display: flex; flex-direction: column; align-items: center; text-align: center;
@@ -101,6 +105,12 @@ export default function RoleTimeline() {
           font-family: 'JetBrains Mono', monospace; font-size: 10px;
           line-height: 1.45; color: ${INK3};
           margin: 4px 0 0; padding: 0 4px;
+        }
+        @media (max-width: 768px) {
+          .rt-grid { grid-template-columns: repeat(4, 1fr); row-gap: 22px; }
+          .rt-rail-base, .rt-rail-fill { display: none; }
+          .rt-title { font-size: 12.5px; margin-top: 10px; }
+          .rt-note { font-size: 9.5px; padding: 0 2px; }
         }
       `}</style>
     </div>

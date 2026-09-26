@@ -1007,8 +1007,7 @@ function OPCUAContent() {
                 The six-panel layout was fixed. It wasn&rsquo;t ours to change, so the design had to be good inside it.
               </li>
               <li>
-                Drag-and-drop and contextual menus weren&rsquo;t supported by the underlying infrastructure, so we designed around them. That limitation has since been picked up as a company-wide Tier&nbsp;1 project.
-                {/* TODO(yt): name the Tier 1 project and its status, if you can. */}
+                Drag-and-drop and contextual menus weren&rsquo;t supported by the underlying infrastructure, so we designed around them. That limitation became the <strong>contextual menu project</strong> — picked up as a company-wide Tier&nbsp;1 effort by the core MATLAB workflows team, and currently in continuous research and prototyping. A constraint we had to design around on one app turned into a platform problem worth solving for everybody.
               </li>
             </ul>
           </div>
