@@ -248,7 +248,7 @@ function OPCUAContent() {
 
         <Reveal delay={0.05}>
           <P>
-            Three things came out of discovery and pointed the same way. The workflow was spread across several different tools. If you were not an OPC UA expert, you depended on someone who was, and waited for them. And whatever you worked out by clicking around, you then had to reproduce in code before it was worth anything to the rest of your team.
+            Three things came out of discovery and pointed the same way. <span className="hl">The workflow was spread across several different tools.</span> <span className="hl">If you were not an OPC UA expert, you depended on someone who was, and waited for them.</span> And whatever you worked out by clicking around, you then had to reproduce in code before it was worth anything to the rest of your team.
           </P>
         </Reveal>
         <Reveal delay={0.05}>
