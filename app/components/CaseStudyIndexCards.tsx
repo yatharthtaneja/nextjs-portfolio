@@ -43,7 +43,6 @@ function IndexCard({ project, index }: { project: JournalProject; index: number 
               {project.statusTag}
             </span>
           )}
-          <span className="ic-readtime">{project.readTime}</span>
         </div>
 
         <h3 className="ic-title">{project.title}</h3>

@@ -9,7 +9,7 @@ const contactLinks = [
 export default function AboutSection() {
   return (
     <section
-      id="about"
+      id="connect"
       className="relative w-full"
       style={{ background: "linear-gradient(180deg, #F0EEF8 0%, #EAE5F2 50%, #E5DFF5 100%)" }}
     >
@@ -20,51 +20,8 @@ export default function AboutSection() {
       />
 
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-16 md:py-24">
-        {/* ── Hello ──────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-16">
-          <h2
-            style={{
-              fontFamily: "'Roboto', sans-serif",
-              fontSize: "clamp(2.5rem, 5vw, 3.5rem)",  /* ← adjust Hello size here */
-              fontWeight: 800,
-              color: "#27174E",
-              lineHeight: 1.1,
-              margin: 0,
-            }}
-          >
-            Hello.
-          </h2>
-          <p
-            style={{
-              fontFamily: "Roboto, sans-serif",
-              fontSize: "clamp(1.4rem, 2.5vw, 1.75rem)",
-              lineHeight: 1.5,
-              color: "#171717",
-              margin: 0,
-              fontWeight: 500,
-            }}
-          >
-            I&rsquo;m Yatharth. I&rsquo;m a CS-engineer-turned-UXR at{" "}
-            <Link
-              href="https://mathworks.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "#493972",
-                textDecoration: "none",
-                fontWeight: 400,
-              }}
-            >
-              MathWorks
-            </Link>{" "}
-            who believes the most elegant code fails without a human story.
-            With 4+ years of experience, I bridge technical complexity and
-            user empathy to build products that actually resonate.
-          </p>
-        </div>
-
         {/* ── How I Can Help ─────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-16 mt-16 md:mt-24">
+        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-16">
           <h2
             style={{
               fontFamily: "'Roboto', sans-serif",

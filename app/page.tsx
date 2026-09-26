@@ -6,13 +6,13 @@ import RotatingTagline from "./components/Rotatingtagline";
 import CaseStudyJournals, { JournalProject } from "./components/CaseStudyJournal";
 import CaseStudyIndexCards from "./components/CaseStudyIndexCards";
 import BehancePostcard from "./components/BehancePostcard";
+import IntroSection from "./components/IntroSection";
 import AboutSection from "./components/AboutSection";
 
 const projects: JournalProject[] = [
   {
     slug:           "opc-ua-explorer",
     title:          "A factory has 10,000 sensors. Engineers had no way to explore them without writing code.",
-    readTime:       "12 min read",
     type:           "Industrial IoT · B2B · MathWorks",
     problem:        "When engineers have never asked for an app, how do you decide what it should actually do?",
     highlight:      "27 findings · 4 insight themes · shipped R2026a",
@@ -26,7 +26,6 @@ const projects: JournalProject[] = [
   {
     slug:           "ni-daqmx",
     title:          "We replaced 50 lines of C language with three lines of MATLAB. Then we tested every word.",
-    readTime:       "10 min read",
     type:           "API Design · Comparative Study · MathWorks",
     problem:        "Which API style do hardware engineers prefer — and why does it matter for a decade?",
     highlight:      "3.27 vs 2.55 ease-of-use — decision made",
@@ -40,7 +39,6 @@ const projects: JournalProject[] = [
   {
     slug:           "mqtt-survey",
     title:          "A research study that turned 57 survey responses into 4 product roadmap candidates.",
-    readTime:       "10 min read",
     type:           "Survey Research · Strategy · MathWorks",
     problem:        "What do MQTT engineers actually struggle with, and what should we build next?",
     highlight:      "4 roadmap candidates, 57 respondents",
@@ -54,7 +52,6 @@ const projects: JournalProject[] = [
   {
     slug:           "opc-ua-server",
     title:          "A discovery-to-workshop process that decided which form factor to build for OPC UA Server.",
-    readTime:       "14 min read",
     type:           "Strategic Planning · Workshop · MathWorks",
     problem:        "With three viable form factors and weeks of team debate, how do we decide what to build?",
     highlight:      "Simulink block: criteria-first decision",
@@ -313,14 +310,17 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ── SECTION 2: CASE STUDIES ──────────────────────────────────────── */}
+      {/* ── SECTION 2: ABOUT ME ──────────────────────────────────────────── */}
+      {/* Context on who I am before the work — the purple rule that used to
+          open #work now opens this section instead. */}
+      <IntroSection />
+
+      {/* ── SECTION 3: CASE STUDIES ──────────────────────────────────────── */}
       <section
         id="work"
         className="relative w-full min-h-screen"
         style={{ background: "linear-gradient(180deg, #ffffff 0%, #F8F6FC 50%, #F0EEF8 100%)" }}
       >
-        <div style={{ height: 3, background: "#4030C3" }} />
-
         {/* Corner glow */}
         <div className="absolute top-0 right-0 pointer-events-none" aria-hidden="true" style={{
           width: '42%', height: '340px',
@@ -363,7 +363,7 @@ export default function Home() {
             marginTop: 16,
             marginBottom: 0,
           }}>
-            Heads up! These case studies are a bit lengthy. I share a lot about my approach and design thinking. Not a ton of pictures, but hopefully plenty of insights. Two are NDA-protected. Thanks for stopping by—I hope you find something useful.
+            Four studies from my work at MathWorks. Each one starts with a decision that needed making, and ends with what shipped.
           </p>
         </div>
       </div>
@@ -424,7 +424,7 @@ export default function Home() {
 </div>
       </section>
 
-      {/* ── SECTION 3: ABOUT & CONNECT ──────────────────────────────────── */}
+      {/* ── SECTION 4: HOW I CAN HELP & CONNECT ──────────────────────────── */}
       <AboutSection />
 
     </main>

@@ -16,7 +16,10 @@ const sections: MenuSection[] = [
       { label: 'OPC UA Explorer', href: '/work/opc-ua-explorer' },
     ],
   },
-  { items: [{ label: 'About', href: '/#about' }] },
+  { items: [
+    { label: 'About', href: '/#about' },
+    { label: 'Connect', href: '/#connect' },
+  ] },
 ];
 
 const INK = '#111827';

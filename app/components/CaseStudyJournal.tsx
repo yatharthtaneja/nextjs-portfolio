@@ -9,7 +9,6 @@ import { ArrowRight } from "./icons";
 export interface JournalProject {
   slug: string;
   title: string;
-  readTime: string;
   type: string;
   problem: string;
   highlight: string;
@@ -48,7 +47,7 @@ function Journal({ project, index }: { project: JournalProject; index: number })
             className="journal-cover"
             style={{ background: project.coverColor }}
           >
-            {/* ── Row 1: status tag + NDA + readtime ── */}
+            {/* ── Row 1: status tag ── */}
             <div className="cover-topbar">
               {project.statusTag ? (
                 <span
@@ -64,9 +63,6 @@ function Journal({ project, index }: { project: JournalProject; index: number })
               ) : (
                 <div className="cover-logo-dot" style={{ background: project.spineColor }} />
               )}
-              <div className="cover-topbar-right">
-                <span className="cover-readtime">{project.readTime}</span>
-              </div>
             </div>
 
             <div className="cover-divider" />

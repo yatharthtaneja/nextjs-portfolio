@@ -194,12 +194,6 @@ export default function JournalStyles() {
           margin-bottom: 12px;
           gap: 8px;
         }
-        .cover-topbar-right {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-shrink: 0;
-        }
         .cover-logo-dot {
           width: 38px;
           height: 38px;
@@ -207,15 +201,6 @@ export default function JournalStyles() {
           flex-shrink: 0;
           opacity: 0.82;
         }
-        .cover-readtime {
-          font-family: 'Roboto', sans-serif;
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 0.02em;
-          color: rgba(10,10,30,0.6);
-          white-space: nowrap;
-        }
-
         .cover-divider {
           height: 1.5px;
           background: rgba(10,10,30,0.16);

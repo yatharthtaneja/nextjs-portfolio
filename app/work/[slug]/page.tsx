@@ -12,7 +12,6 @@ type StudyMeta = {
   statusColor: string;
   accentColor: string;
   softColor: string;
-  readTime: string;
   blurb: string;
 };
 
@@ -25,7 +24,6 @@ const STUDIES: Record<string, StudyMeta> = {
     statusColor: '#92400e',
     accentColor: '#B45309',
     softColor: '#FDE8C8',
-    readTime: '10 min read',
     blurb: 'Strategic-partner research at its loudest. 57 respondents, statistical analysis, and an interactive dashboard as the deliverable — not a slide deck.',
   },
   'ni-daqmx': {
@@ -36,7 +34,6 @@ const STUDIES: Record<string, StudyMeta> = {
     statusColor: '#1e40af',
     accentColor: '#1D4ED8',
     softColor: '#C4D9F7',
-    readTime: '10 min read',
     blurb: 'Comparative usability of two API styles — function-based (3.27 ease-of-use) vs. class-based (2.55). Research-led API design, rare in UXR portfolios.',
   },
   'opc-ua-server': {
@@ -47,7 +44,6 @@ const STUDIES: Record<string, StudyMeta> = {
     statusColor: '#92400e',
     accentColor: '#0D6E6B',
     softColor: '#B2EDE8',
-    readTime: '14 min read',
     blurb: 'Discovery + an 8-hour, 3-day form-factor workshop (app vs. API vs. Simulink block). The senior strategic-planning case — honest about being unfinished.',
   },
 };
@@ -165,19 +161,6 @@ function ComingSoonContent({ study }: { study: StudyMeta }) {
             lineHeight: 1.7,
             margin: '0 0 32px',
           }}>{study.blurb}</p>
-
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 6,
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: 13,
-            color: INK3,
-            marginBottom: 32,
-          }}>
-            <span>{study.readTime}</span>
-          </div>
 
           <Link href="/#work" style={{
             display: 'inline-flex',

@@ -132,15 +132,6 @@ export default function IndexCardStyles() {
           overflow: hidden;
           text-overflow: ellipsis;
         }
-        .ic-readtime {
-          font-family: 'Roboto', sans-serif;
-          font-size: 10.5px;
-          font-weight: 600;
-          letter-spacing: 0.02em;
-          color: rgba(10,10,30,0.6);
-          white-space: nowrap;
-          flex-shrink: 0;
-        }
 
         /* ── TEXT ─────────────────────────────────────────────────────────── */
         .ic-title {
