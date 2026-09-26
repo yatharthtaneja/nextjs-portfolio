@@ -138,7 +138,7 @@
     Canonical use-case: vibration data from a roller-coaster feeds a MATLAB digital twin, which triggers a maintenance alert before a failure occurs.
   </text>
   <text x="600" y="400" text-anchor="middle" font-size="13" fill="#9ca3af">
-    OPC UA Explorer closes the gap between the physical asset and the engineering model — without writing a single line of connection code.
+    OPC UA Explorer closes the gap between the physical asset and the engineering model, without writing a single line of connection code.
   </text>
 
 </svg>

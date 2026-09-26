@@ -19,7 +19,7 @@ const ARCHETYPES = [
   },
   {
     job: 'Digital twins',
-    body: 'Simulates the factory to test which components to buy and how they behave together — without risking the real hardware. Virtual commissioning.',
+    body: 'Simulates the factory to test which components to buy and how they behave together, without risking the real hardware. Virtual commissioning.',
   },
   {
     job: 'HMI / SCADA',

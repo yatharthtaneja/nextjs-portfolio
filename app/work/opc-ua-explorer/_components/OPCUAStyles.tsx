@@ -1062,6 +1062,7 @@ export default function OPCUAStyles() {
           border: 1px solid ${LINE};
           border-radius: 14px;
           background: #ffffff;
+          margin-top: 28px;
           margin-bottom: 18px;
           overflow: hidden;
           transition: border-color 220ms cubic-bezier(0.23, 1, 0.32, 1),
@@ -1125,6 +1126,7 @@ export default function OPCUAStyles() {
         }
         .detail[open] .detail-chevron { transform: rotate(90deg); color: ${A}; }
 
+        .detail-body > p:first-child { margin-top: 0; }
         .detail-body {
           padding: 4px 26px 28px;
           border-top: 1px solid ${LINE};
@@ -1369,6 +1371,81 @@ export default function OPCUAStyles() {
           font-size: 15px; line-height: 1.6; color: ${INK2};
         }
         @media (max-width: 720px) { .rq-grid { grid-template-columns: 1fr; } }
+
+
+        /* ══ HIGHLIGHTER + MARGIN NOTES ═══════════════════════════════════ */
+        /* A skimmer should be able to read only the highlighted phrases and
+           still come away with the argument. box-decoration-break keeps the
+           marker stroke intact when a phrase wraps across lines. */
+        .hl {
+          background-image: linear-gradient(
+            180deg,
+            transparent 52%,
+            rgba(255, 213, 92, 0.58) 52%,
+            rgba(255, 213, 92, 0.58) 94%,
+            transparent 94%
+          );
+          padding: 0 3px;
+          margin: 0 -3px;
+          box-decoration-break: clone;
+          -webkit-box-decoration-break: clone;
+        }
+        /* Second, cooler marker for the moments that are about the product
+           rather than about me. Keeps the yellow meaning one thing. */
+        .hl-a {
+          background-image: linear-gradient(
+            180deg,
+            transparent 52%,
+            rgba(30, 107, 74, 0.16) 52%,
+            rgba(30, 107, 74, 0.16) 94%,
+            transparent 94%
+          );
+          padding: 0 3px;
+          margin: 0 -3px;
+          box-decoration-break: clone;
+          -webkit-box-decoration-break: clone;
+        }
+
+        .scrawl {
+          font-family: Caveat, 'Bradley Hand', cursive;
+          font-weight: 600;
+          letter-spacing: 0.005em;
+        }
+
+        /* ══ TL;DR ════════════════════════════════════════════════════════ */
+        .tldr-shot {
+          border: 1px solid ${LINE};
+          border-radius: 14px;
+          overflow: hidden;
+          background: #ffffff;
+          box-shadow: 0 10px 40px rgba(17, 24, 39, 0.10);
+          margin: 0 0 8px;
+        }
+        .tldr-shot img { width: 100%; height: auto; display: block; }
+        .tldr-shot figcaption {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11.5px; line-height: 1.5; color: ${INK3};
+          padding: 12px 16px; border-top: 1px solid ${LINE}; margin: 0;
+        }
+
+        .tldr-notes {
+          display: flex; flex-direction: column;
+          align-items: flex-start; gap: 10px;
+          margin: 34px 0 4px;
+        }
+        .tldr-note { display: flex; align-items: center; gap: 12px; }
+        .tldr-note-icon { flex-shrink: 0; color: ${A}; }
+        .tldr-note-text {
+          font-family: Caveat, 'Bradley Hand', cursive;
+          font-weight: 600;
+          font-size: clamp(23px, 3.1vw, 32px);
+          line-height: 1.25;
+          color: ${INK};
+        }
+        @media (max-width: 600px) {
+          .tldr-note { align-items: flex-start; gap: 10px; }
+          .tldr-note-icon { margin-top: 3px; }
+        }
 
       `}</style>
   );

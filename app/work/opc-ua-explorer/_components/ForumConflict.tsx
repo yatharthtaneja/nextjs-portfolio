@@ -63,7 +63,7 @@ export default function ForumConflict() {
       <div className="fc-unresolved">
         <span className="fc-unresolved-dot" style={{ background: '#c2525a' }} aria-hidden="true" />
         <p style={{ color: INK2 }}>
-          Eight-plus senior reviewers, two forums, no agreement — and every one of them had a
+          Eight-plus senior reviewers, two forums, no agreement, and every one of them had a
           defensible case. This is where Stage 2 ended.
         </p>
       </div>

@@ -20,15 +20,15 @@ const SITE_URL =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Yatharth Taneja — UX Researcher · CS + Design",
+  title: "Yatharth Taneja · UX Researcher · CS + Design",
   description:
-    "Portfolio of Yatharth Taneja — a CS-engineer-turned-UX-researcher at MathWorks. Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue.",
+    "Portfolio of Yatharth Taneja, a CS-engineer-turned-UX-researcher at MathWorks. Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue.",
   icons: {
     icon: "/images/ytlogo.ico",
     apple: "/images/ytlogo.ico",
   },
   openGraph: {
-    title: "Yatharth Taneja — UX Researcher · CS + Design",
+    title: "Yatharth Taneja · UX Researcher · CS + Design",
     description:
       "Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue for MathWorks.",
     type: "website",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yatharth Taneja — UX Researcher · CS + Design",
+    title: "Yatharth Taneja · UX Researcher · CS + Design",
     description:
       "Industrial IoT case studies, API design research, and tools generating $2M+ quarterly revenue for MathWorks.",
     images: ["/images/stamp-me.png"],

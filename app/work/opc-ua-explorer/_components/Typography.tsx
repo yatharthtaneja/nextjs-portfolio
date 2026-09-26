@@ -105,7 +105,7 @@ export function PullQuote({ children, cite }: { children: React.ReactNode; cite?
   return (
     <figure className="big-quote">
       <blockquote>{children}</blockquote>
-      {cite && <figcaption>— {cite}</figcaption>}
+      {cite && <figcaption>{cite}</figcaption>}
     </figure>
   );
 }

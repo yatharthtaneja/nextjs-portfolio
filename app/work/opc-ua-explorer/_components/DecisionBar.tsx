@@ -30,13 +30,13 @@ export default function DecisionBar() {
   }> = [
     { count: 6,  label: 'SHIPPED',  color: A,         legend: <><Check style={{ marginRight: 6 }} />Shipped in v1</> },
     { count: 2,  label: 'PARTIAL',  color: '#7BA88A', legend: <><span style={{ marginRight: 6, fontWeight: 700 }}>~</span>Partially shipped</> },
-    { count: 11, label: 'DEFERRED', color: '#C9C4B8', legend: <><Pause style={{ marginRight: 6 }} />Deferred — see table</> },
+    { count: 11, label: 'DEFERRED', color: '#C9C4B8', legend: <><Pause style={{ marginRight: 6 }} />Deferred, see table</> },
   ];
   const total = segments.reduce((s, x) => s + x.count, 0);
 
   return (
     <div className="decision-bar-wrap" ref={ref} aria-label="Research-driven decisions across the 19-item pipeline">
-      <div className="decision-bar" role="img" aria-label={`6 shipped, 2 partial, 11 deferred — ${total} total decisions`}>
+      <div className="decision-bar" role="img" aria-label={`6 shipped, 2 partial, 11 deferred, ${total} total decisions`}>
         {segments.map((s, i) => (
           <div
             key={s.label}

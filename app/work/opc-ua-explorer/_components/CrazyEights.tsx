@@ -15,7 +15,7 @@ const ROOM = [
 const STEPS = [
   {
     label: 'I put the workflow up',
-    body: 'One consolidated user workflow, built from the requirements — so everyone sketched against the same steps.',
+    body: 'One consolidated user workflow, built from the requirements, so everyone sketched against the same steps.',
   },
   {
     label: 'Everyone sketched',

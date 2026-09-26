@@ -5,9 +5,9 @@ import { A, AS, AB, INK, INK2, INK3, LINE } from './theme';
 
 const USER = [
   'Fewer touchpoints to get from "I need this sensor" to having the data.',
-  'A steep OPC UA learning curve flattened — you no longer have to be an expert to start.',
+  'A steep OPC UA learning curve flattened. You no longer have to be an expert to start.',
   'No more waiting on the one person on the team who knows the protocol.',
-  'Attention back on the actual job — the business logic — instead of on OPC UA itself.',
+  'Attention back on the actual job, the business logic, instead of on OPC UA itself.',
 ];
 
 const BUSINESS = [
@@ -42,7 +42,7 @@ export default function ImpactMetrics() {
         <p className="impact-measure-label" style={{ color: A }}>How we know it is working</p>
         <p className="impact-measure-body" style={{ color: INK }}>
           We track the customer escalations that come in asking what code to write to connect to
-          their hardware. Since the app shipped, that number has come down.
+          their hardware. <span className="hl-a">Since the app shipped, that number has come down.</span>
         </p>
         <p className="impact-measure-note" style={{ color: INK3 }}>
           {/* TODO(yt): drop the exact figures in here when you have them. */}
