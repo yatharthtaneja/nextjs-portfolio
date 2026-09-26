@@ -116,7 +116,7 @@ export default function OPCUAStyles() {
         }
 
         .phase-grid {
-          display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+          display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
         }
         @media (max-width: 768px) { .phase-grid { grid-template-columns: 1fr; } }
         .phase-card {
@@ -1056,6 +1056,320 @@ export default function OPCUAStyles() {
           .bs-card:nth-child(2) { transform: rotate(1deg); }
           .bs-card:nth-child(3) { transform: rotate(-0.6deg); }
         }
+
+        /* ══ DETAIL / ACCORDION ═══════════════════════════════════════════ */
+        .detail {
+          border: 1px solid ${LINE};
+          border-radius: 14px;
+          background: #ffffff;
+          margin-bottom: 18px;
+          overflow: hidden;
+          transition: border-color 220ms cubic-bezier(0.23, 1, 0.32, 1),
+                      box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .detail[open] {
+          border-color: ${AS};
+          box-shadow: 0 6px 26px rgba(30, 107, 74, 0.07);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .detail:not([open]):hover { border-color: ${AS}; }
+        }
+
+        .detail-summary {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 24px 26px;
+          cursor: pointer;
+          list-style: none;
+        }
+        .detail-summary::-webkit-details-marker { display: none; }
+        .detail-summary:focus-visible {
+          outline: 2px solid ${A};
+          outline-offset: -2px;
+          border-radius: 14px;
+        }
+        .detail-summary-main { min-width: 0; }
+
+        .detail-eyebrow {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: ${A}; margin-bottom: 10px;
+        }
+        .detail-title {
+          font-family: Inter, sans-serif;
+          font-weight: 600;
+          font-size: clamp(19px, 2.2vw, 25px);
+          line-height: 1.25;
+          letter-spacing: -0.015em;
+          color: ${INK};
+          margin: 0;
+          text-wrap: balance;
+        }
+        .detail-teaser {
+          font-family: Inter, sans-serif;
+          font-size: 15px; line-height: 1.6;
+          color: ${INK3};
+          margin: 10px 0 0;
+        }
+
+        .detail-summary-aside {
+          display: flex; align-items: center; gap: 14px;
+          flex-shrink: 0; padding-top: 2px;
+        }
+        .detail-chevron {
+          display: inline-flex; color: ${INK3};
+          transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1), color 240ms ease;
+        }
+        .detail[open] .detail-chevron { transform: rotate(90deg); color: ${A}; }
+
+        .detail-body {
+          padding: 4px 26px 28px;
+          border-top: 1px solid ${LINE};
+          margin-top: 2px;
+          padding-top: 26px;
+        }
+        @media (max-width: 720px) {
+          .detail-summary { padding: 20px 18px; gap: 12px; }
+          .detail-body { padding: 22px 18px 24px; }
+          .detail-summary-aside { flex-direction: column-reverse; align-items: flex-end; gap: 10px; }
+        }
+
+        /* ══ USER ARCHETYPES ══════════════════════════════════════════════ */
+        .archetype-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+          margin: 34px 0 8px;
+        }
+        .archetype-tile {
+          border: 1px solid ${LINE};
+          border-radius: 12px;
+          padding: 20px 20px 22px;
+          background: #ffffff;
+        }
+        .archetype-num {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+          display: block; margin-bottom: 12px; opacity: 0.75;
+        }
+        .archetype-job {
+          font-family: Inter, sans-serif;
+          font-size: 16px; font-weight: 600; line-height: 1.3;
+          margin: 0 0 8px; letter-spacing: -0.01em;
+        }
+        .archetype-body {
+          font-family: Inter, sans-serif;
+          font-size: 14px; line-height: 1.6; margin: 0;
+        }
+        @media (max-width: 900px) { .archetype-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .archetype-grid { grid-template-columns: 1fr; gap: 14px; } }
+
+        /* ══ CRAZY 8's WORKSHOP ═══════════════════════════════════════════ */
+        .c8-wrap { margin: 36px 0 8px; }
+        .c8-room {
+          border: 1px solid ${LINE};
+          border-radius: 14px;
+          padding: 24px 26px;
+          background: ${CARD};
+          margin-bottom: 28px;
+        }
+        .c8-room-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: ${A}; margin: 0 0 16px;
+        }
+        .c8-room-chips { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+        .c8-chip { display: inline-flex; align-items: center; gap: 8px; }
+        .c8-chip-count {
+          display: inline-flex; align-items: center; justify-content: center;
+          width: 26px; height: 26px; border-radius: 7px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12px; font-weight: 700;
+        }
+        .c8-chip-role {
+          font-family: Inter, sans-serif; font-size: 14px; font-weight: 500;
+        }
+        .c8-room-note {
+          font-family: Inter, sans-serif; font-size: 14px;
+          font-style: italic; line-height: 1.6; margin: 16px 0 0;
+        }
+
+        .c8-steps {
+          list-style: none; padding: 0; margin: 0;
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+        }
+        .c8-step { display: flex; gap: 14px; align-items: flex-start; }
+        .c8-step-num {
+          flex-shrink: 0;
+          width: 30px; height: 30px; border-radius: 50%;
+          border: 1.5px solid; display: inline-flex;
+          align-items: center; justify-content: center;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 13px; font-weight: 700;
+        }
+        .c8-step-label {
+          font-family: Inter, sans-serif;
+          font-size: 15px; font-weight: 600; line-height: 1.3;
+          margin: 4px 0 7px; letter-spacing: -0.01em;
+        }
+        .c8-step-body {
+          font-family: Inter, sans-serif;
+          font-size: 14px; line-height: 1.6; margin: 0;
+        }
+        @media (max-width: 860px) { .c8-steps { grid-template-columns: 1fr; gap: 18px; } }
+
+        /* ══ FORUM CONFLICT ═══════════════════════════════════════════════ */
+        .fc-wrap { margin: 36px 0 8px; }
+        .fc-forums {
+          position: relative;
+          display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .fc-forum {
+          border: 1px solid; border-radius: 14px;
+          padding: 24px 26px; background: #ffffff;
+        }
+        .fc-forum-name {
+          font-family: Inter, sans-serif;
+          font-size: 17px; font-weight: 600; line-height: 1.3;
+          margin: 0 0 14px; letter-spacing: -0.01em;
+        }
+        .fc-forum-who { list-style: none; padding: 0; margin: 0 0 14px; }
+        .fc-forum-who li {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12.5px; line-height: 1.9;
+        }
+        .fc-forum-lens {
+          font-family: Inter, sans-serif;
+          font-size: 14px; font-style: italic; line-height: 1.6; margin: 0;
+        }
+        .fc-vs {
+          position: absolute; top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          width: 38px; height: 38px; border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12px; font-weight: 700; color: #ffffff;
+          border: 3px solid #ffffff;
+        }
+
+        .fc-question {
+          border: 1px solid; border-radius: 14px;
+          padding: 26px; margin-top: 22px;
+        }
+        .fc-question-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          margin: 0 0 12px;
+        }
+        .fc-question-body {
+          font-family: 'Instrument Serif', Georgia, serif;
+          font-size: clamp(24px, 3.4vw, 36px);
+          font-style: italic; line-height: 1.2;
+          margin: 0 0 22px;
+        }
+        .fc-placements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .fc-placement {
+          background: #ffffff; border-radius: 10px;
+          padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;
+        }
+        .fc-placement-where {
+          font-family: Inter, sans-serif; font-size: 15px; font-weight: 600;
+        }
+        .fc-placement-note {
+          font-family: Inter, sans-serif; font-size: 13.5px; line-height: 1.55;
+        }
+
+        .fc-unresolved {
+          display: flex; align-items: flex-start; gap: 12px;
+          margin-top: 22px; padding-left: 2px;
+        }
+        .fc-unresolved-dot {
+          width: 9px; height: 9px; border-radius: 50%;
+          flex-shrink: 0; margin-top: 7px;
+        }
+        .fc-unresolved p {
+          font-family: Inter, sans-serif;
+          font-size: 16px; line-height: 1.65; margin: 0;
+        }
+        @media (max-width: 860px) {
+          .fc-forums { grid-template-columns: 1fr; gap: 14px; }
+          .fc-vs { display: none; }
+          .fc-placements { grid-template-columns: 1fr; }
+        }
+
+        /* ══ IMPACT ═══════════════════════════════════════════════════════ */
+        .impact-wrap { margin: 34px 0 8px; }
+        .impact-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .impact-col {
+          border: 1px solid; border-radius: 14px;
+          padding: 24px 26px; background: #ffffff;
+        }
+        .impact-col-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          margin: 0 0 16px;
+        }
+        .impact-list { list-style: none; padding: 0; margin: 0; }
+        .impact-list li {
+          font-family: Inter, sans-serif;
+          font-size: 15px; line-height: 1.65;
+          padding-left: 20px; position: relative; margin-bottom: 14px;
+        }
+        .impact-list li:last-child { margin-bottom: 0; }
+        .impact-list li::before {
+          content: ''; position: absolute;
+          left: 0; top: 10px;
+          width: 7px; height: 1.5px; background: ${A}; opacity: 0.6;
+        }
+
+        .impact-measure {
+          border: 1px solid; border-radius: 14px;
+          padding: 26px; margin-top: 20px;
+        }
+        .impact-measure-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          margin: 0 0 12px;
+        }
+        .impact-measure-body {
+          font-family: Inter, sans-serif;
+          font-size: clamp(17px, 2vw, 20px);
+          line-height: 1.55; margin: 0; letter-spacing: -0.01em;
+        }
+        .impact-measure-note {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12.5px; margin: 14px 0 0;
+        }
+        @media (max-width: 860px) { .impact-cols { grid-template-columns: 1fr; gap: 14px; } }
+
+
+        /* ══ RESEARCH QUESTIONS ═══════════════════════════════════════════ */
+        .rq-grid {
+          display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+        }
+        .rq-item {
+          display: flex; flex-direction: column; gap: 7px;
+          border: 1px solid ${LINE}; border-radius: 12px;
+          padding: 18px 20px; background: #ffffff;
+        }
+        .rq-name {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase; color: ${A};
+        }
+        .rq-q {
+          font-family: Inter, sans-serif;
+          font-size: 15px; line-height: 1.6; color: ${INK2};
+        }
+        @media (max-width: 720px) { .rq-grid { grid-template-columns: 1fr; } }
+
       `}</style>
   );
 }

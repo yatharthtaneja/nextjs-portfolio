@@ -16,6 +16,7 @@ import {
 import { Reveal, StaggerGroup, StaggerItem } from './_components/Reveal';
 import DecisionBar from './_components/DecisionBar';
 import ZoomFrame from './_components/ZoomFrame';
+import Detail from './_components/Detail';
 import OPCUAStyles from './_components/OPCUAStyles';
 import RoleTimeline from './_components/RoleTimeline';
 import GlossaryTiles from './_components/GlossaryTiles';
@@ -24,6 +25,10 @@ import PhaseFunnel from './_components/PhaseFunnel';
 import BrainstormCollage from './_components/BrainstormCollage';
 import AudienceReframe from './_components/AudienceReframe';
 import AnchorQuadrant from './_components/AnchorQuadrant';
+import UserArchetypes from './_components/UserArchetypes';
+import CrazyEights from './_components/CrazyEights';
+import ForumConflict from './_components/ForumConflict';
+import ImpactMetrics from './_components/ImpactMetrics';
 import { ArrowLeft, ArrowRight, Check, Clock, Database, Person, TrendingFlat } from '@/app/components/icons';
 
 function OPCUAContent() {
@@ -95,7 +100,7 @@ function OPCUAContent() {
 
       <div style={{ background: AB }}>
         <p className="hook-transition">
-          OPC UA is that protocol. This is the story of how we figured out what the tool should do — and shipped it.
+          OPC UA is that protocol. My job was to work out whether we should build the tool at all — and if so, what it should do.
         </p>
       </div>
 
@@ -104,74 +109,71 @@ function OPCUAContent() {
         <StaggerGroup className="tldr-grid">
           <StaggerItem className="tldr-cell">
             <p className="tldr-label">My Role</p>
-            <p className="tldr-value">Lead UX researcher and strategic partner in project planning.</p>
+            <p className="tldr-value">Lead UX researcher, and a strategic partner in deciding what we built.</p>
           </StaggerItem>
           <StaggerItem className="tldr-cell" style={{ paddingLeft: 28 }}>
-            <p className="tldr-label">Methods</p>
-            <p className="tldr-value">4 contextual interviews · 5-participant external usability study · 13-area internal design review.</p>
+            <p className="tldr-label">The Question</p>
+            <p className="tldr-value">Is it worth building our own GUI app, when third-party OPC UA clients already exist?</p>
           </StaggerItem>
           <StaggerItem className="tldr-cell" style={{ paddingLeft: 28 }}>
-            <p className="tldr-label">Scale</p>
-            <p className="tldr-value">18 pain points → 14 requirements → 27 findings → 11 feature requests, distilled into 5 insight themes.</p>
+            <p className="tldr-label">What Shipped</p>
+            <p className="tldr-value">OPC UA Explorer, in MATLAB R2026a. Explore the factory in the app, then export the session as MATLAB code.</p>
           </StaggerItem>
           <StaggerItem className="tldr-cell" style={{ paddingLeft: 28 }}>
-            <p className="tldr-label">Outcome</p>
-            <p className="tldr-value">Shipped in MATLAB R2026a, ~15 months from first interview to release.</p>
+            <p className="tldr-label">Business Impact</p>
+            <p className="tldr-value">Customers enter our ecosystem early instead of starting in a third-party tool. Measured by the drop in &ldquo;what code do I write to connect?&rdquo; escalations.</p>
           </StaggerItem>
         </StaggerGroup>
       </div>
 
       <Divider />
 
-      {/* ── 3. MY ROLE ──────────────────────────────────────────────────── */}
+      {/* ── 3. WHO THIS IS FOR ──────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel num="01">My Role</EyebrowLabel>
-          <H2>Strategic partner, <em>not just a study runner</em></H2>
+          <EyebrowLabel num="01">Who this is for</EyebrowLabel>
+          <H2>Six kinds of engineer, <em>one first step</em></H2>
         </Reveal>
-
-        <RoleTimeline />
 
         <Reveal delay={0.05}>
           <P>
-            I led the research and acted as a strategic partner in project planning — not just running studies, but shaping which problems were worth solving and which weren&rsquo;t. I scoped the discovery phase, ran the contextual interviews, designed and ran the usability study, and presented findings to the developers and the internal design review board. When the team had to choose between competing feature requests, I was the one tying every recommendation back to evidence.
-          </P>
-        </Reveal>
-      </div>
-
-      <Divider />
-
-      {/* ── 4. WHAT IS OPC UA ───────────────────────────────────────────── */}
-      <div className="prose">
-        <Reveal>
-          <EyebrowLabel num="02">Context</EyebrowLabel>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 8 }}>
-            <H2 style={{ margin: 0 }}>What is OPC UA, <em>in plain terms</em></H2>
-            <a href="#why-mattered" className="skip-ctx" style={{
-              display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: 14,
-              color: A, textDecoration: 'none', borderBottom: `1px solid ${AS}`,
-            }}>Skip context<ArrowRight style={{ marginLeft: 4 }} /></a>
-          </div>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <P>
-            OPC UA is <strong>the language industrial machines speak to each other</strong>. A modern factory has thousands of sensors, motors, valves, controllers, and PLCs (programmable logic controllers — the small computers that run real-time hardware). They all need to share data: temperature, pressure, vibration, on/off state, fault codes. OPC UA is the standardized protocol that lets a sensor from one vendor and a controller from another talk without custom integration work.
+            MathWorks sells the nuts and bolts. Engineers and data scientists use our toolboxes to talk to hardware, get data out of it, and build something with it — for themselves or for their own customers. The Industrial Communication Toolbox is the part that does the talking: it acquires data from industrial machines over whatever protocol they speak.
           </P>
         </Reveal>
         <Reveal delay={0.05}>
           <P>
-            When software like ours connects to a factory&rsquo;s OPC UA server, what it sees is an <strong>address space</strong> — think of it as the table of contents of a factory&rsquo;s data, with every sensor and motor organized like chapters and sub-chapters. Each individual entry — a single temperature reading, a single valve position — is a <strong>node</strong>. To watch a node change in real time, you create a <strong>subscription</strong>: a magazine subscription, basically. You ask for updates, and they arrive when something changes, instead of you having to keep checking.
+            OPC UA is one of those protocols. The hardware companies settled on it as a common language so that anyone could communicate with their machines without a custom integration for every vendor.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P style={{ marginBottom: 0 }}>
+            The people who end up in our toolbox are doing six fairly different jobs. What they share is the first step: get the data out of the factory.
           </P>
         </Reveal>
 
-        <GlossaryTiles />
+        <Reveal delay={0.05}>
+          <UserArchetypes />
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 40 }}>
+            When our software connects to a factory&rsquo;s OPC UA server, what it sees is an <strong>address space</strong> — the table of contents of everything that factory is broadcasting. Each entry is a <strong>node</strong>: one temperature reading, one valve position. To watch a node change over time, you create a <strong>subscription</strong>.
+          </P>
+        </Reveal>
+
+        <Detail
+          title={<>The rest of the OPC UA vocabulary, if you want it</>}
+          teaser="Address space, node, subscription, browse path — the terms that show up later in the findings."
+        >
+          <GlossaryTiles />
+        </Detail>
 
         <Reveal delay={0.1}>
           <div style={{
             borderRadius: 12,
             overflow: 'hidden',
             border: `1px solid ${LINE}`,
-            marginTop: 8,
+            marginTop: 28,
           }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -181,34 +183,76 @@ function OPCUAContent() {
             />
           </div>
         </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 40, marginBottom: 0 }}>
+            There was also a deadline none of us set. OPC DA — the protocol our customers had relied on for two decades — was being deprecated industry-wide. Sensor manufacturers were dropping support, and our own product was scheduled to drop it too. Engineers everywhere from amusement-park ride safety to ship-building to energy-grid monitoring had to move to OPC UA, and most of them did not have the programming background to write OPC UA scripts from scratch.
+          </P>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <LandscapeSVG />
+        </Reveal>
       </div>
 
       <Divider />
 
-      {/* ── 5. WHY THIS MATTERED ────────────────────────────────────────── */}
-      <div id="why-mattered" className="prose">
+      {/* ── 4. THE QUESTION ─────────────────────────────────────────────── */}
+      <div className="prose">
         <Reveal>
-          <EyebrowLabel num="03">Motivation</EyebrowLabel>
-          <H2>Why this <em>work mattered</em></H2>
+          <EyebrowLabel num="02">The question</EyebrowLabel>
+          <H2>Was it worth building <em>our own app at all?</em></H2>
         </Reveal>
-        <Reveal delay={0.05}>
-          <P>
-            The protocol our customers had been using for two decades — OPC DA — was being deprecated industry-wide. Sensor manufacturers were dropping support. Our own product was scheduled to drop support too. Engineers in industries from amusement-park ride safety to ship-building to energy-grid monitoring had to migrate to OPC UA, and most of them didn&rsquo;t have the programming background to write OPC UA scripts from scratch.
-          </P>
-        </Reveal>
-
-        <LandscapeSVG />
 
         <Reveal delay={0.05}>
           <P>
-            There was a market full of third-party OPC UA clients already. The question wasn&rsquo;t whether we could build <em>an</em> OPC UA app. It was whether we could build one that would feel like it actually belonged in the hands of an engineer who already lives in MATLAB and Simulink — one that would let them go from &ldquo;I need to read this sensor&rdquo; to &ldquo;I&rsquo;m reading this sensor&rdquo; without writing a line of code.
+            That was the research goal, and it was a real question — not a formality on the way to a yes. There was already a market full of third-party OPC UA clients, some paid, some open source, all of them able to read from and write to a server. We also already shipped an API: a MATLAB user could write the code today and get the same result.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            So the honest version of the question was narrower. <strong>What would our app do that those two things don&rsquo;t?</strong> If the answer was &ldquo;nothing much,&rdquo; the right recommendation was to not build it.
           </P>
         </Reveal>
 
         <Reveal delay={0.05}>
-          <PullQuote cite="What we needed to figure out next">
-            What were engineers <em>actually</em> trying to do? Not in the abstract — Tuesday&#8209;morning, deadline&#8209;three&#8209;weeks&#8209;out concrete.
+          <PullQuote cite="Where the research landed">
+            Yes, build it — because the work is scattered across five tools, and everything you learn by clicking has to be rebuilt as code afterwards.
           </PullQuote>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P>
+            Three things came out of discovery and pointed the same way. The workflow was spread across several different tools. If you were not an OPC UA expert, you depended on someone who was — and waited for them. And whatever you worked out by clicking around, you then had to reproduce in code before it was worth anything to the rest of your team.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            So the app has a specific shape. <strong>Explore the factory in the app, then export the session as MATLAB code.</strong> You do the fiddly interactive part where interaction is cheap — connecting, browsing, subscribing, checking a value is what you think it is — and then take the result out as a script you can scale, schedule, or hand to whoever comes next. The Generate Script button in <a href="#ship" className="docs-link">Stage 4</a> is where that shows up in the product.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P style={{ marginBottom: 0 }}>
+            Instead of struggling with five different tools, they rarely have to leave MATLAB.
+          </P>
+        </Reveal>
+      </div>
+
+      <Divider />
+
+      {/* ── 5. MY ROLE ──────────────────────────────────────────────────── */}
+      <div className="prose">
+        <Reveal>
+          <EyebrowLabel num="03">My Role</EyebrowLabel>
+          <H2>Strategic partner, <em>not just a study runner</em></H2>
+        </Reveal>
+
+        <RoleTimeline />
+
+        <Reveal delay={0.05}>
+          <P style={{ marginBottom: 0 }}>
+            I led the research and acted as a strategic partner in planning — not just running studies, but shaping which problems were worth solving and which weren&rsquo;t. I scoped discovery, ran the contextual interviews, facilitated the design workshop, designed and ran the usability study, and presented to both design review forums. When the team had to choose between competing feature requests, I was the one tying every recommendation back to evidence.
+          </P>
         </Reveal>
       </div>
 
@@ -220,28 +264,31 @@ function OPCUAContent() {
           <Reveal>
             <div style={{ marginBottom: 28 }}>
               <EyebrowLabel num="04">Process</EyebrowLabel>
-              <H2>How I <em>approached it</em></H2>
+              <H2>Four stages, <em>fifteen months</em></H2>
             </div>
           </Reveal>
-
-          <PhaseFunnel />
 
           <StaggerGroup className="phase-grid">
             {[
               {
-                label: 'Phase 1 — Discovery',
-                stats: 'Dec 2023 – Feb 2024\n4 contextual interviews · 4 industries\n18 pain points · 14 requirements',
-                body: 'I scoped a four-week discovery sprint with engineers across four industries: a controls engineer at an automotive supplier, a systems engineer building digital twins of amusement-park rides, an automation engineer doing virtual commissioning of PLCs, and a control engineer at a ship-building company. I built the screener, interview guide, and requirements document, and led synthesis with the developer and design lead.',
+                label: 'Stage 1 — Discovery',
+                stats: 'Dec 2023 – Feb 2024\n4 external contextual interviews + our support engineers\n18 pain points · 14 requirements',
+                body: 'A four-week discovery sprint with engineers across four industries — automotive controls, amusement-park digital twins, PLC virtual commissioning, ship-building — plus contextual inquiry with our own Advanced Support Group, who field these problems from customers every day. I built the screener, the interview guide and the requirements document, and led synthesis with the developer and design lead.',
               },
               {
-                label: 'Phase 2 — Usability Study',
+                label: 'Stage 2 — Design',
+                stats: 'Mar – Aug 2024\n9-person Crazy 8\u2019s workshop\n2 review forums · 8+ senior reviewers',
+                body: 'I ran a cross-functional sketching workshop off the back of the requirements, compiled the results into a preferred and an alternate design, and took both to two senior review forums. The forums did not agree with each other — which is what set up the study that followed.',
+              },
+              {
+                label: 'Stage 3 — Validation',
                 stats: 'Sep – Oct 2024\n5 external participants · 27 findings\n5 insight themes · 11 feature requests',
-                body: 'Six months later, the team had a working prototype. I designed a task-based study with 5 external participants from four industries. The scenario: help a systems engineer at an amusement-park operator read ride vibration sensors and inspect their values. Each session was a contextual inquiry. Twenty-seven findings emerged, distilled into four high-priority themes.',
+                body: 'A task-based study with 5 external participants from four industries. The scenario: help a systems engineer at an amusement-park operator read ride vibration sensors and inspect their values. Each session was a contextual inquiry. Twenty-seven findings came out, distilled into five high-priority themes — and an answer to the disagreement from Stage 2.',
               },
               {
-                label: 'Phase 3 — Design Review',
-                stats: 'Mar 2025\n5 senior reviewers · 13 interface areas\npaired feedback + design responses',
-                body: 'I presented the prototype and findings to a five-person internal design review with senior product and design leadership. Reviewers walked through 13 interface areas. For each, I tracked their feedback and worked with the developer to write an honest design response — what we agreed with and would change, what we disagreed with and why.',
+                label: 'Stage 4 — Ship',
+                stats: 'Mar 2025 – R2026a\n13 interface areas reviewed\nhandover, change readout, green flag',
+                body: 'I presented the prototype and findings to the internal design review, tracked feedback across 13 interface areas, and worked with the developer on an honest response to each — what we agreed with and would change, what we disagreed with and why. Then handover to development, a readout of what changed and why, and a final review run as a usability session to get the go-ahead to ship.',
               },
             ].map((phase) => (
               <StaggerItem key={phase.label} className="phase-card">
@@ -271,7 +318,7 @@ function OPCUAContent() {
             <EyebrowLabel num="05">Discovery</EyebrowLabel>
             <H2>What discovery <em>told us</em></H2>
             <P style={{ marginBottom: 0 }}>
-              Before we tested anything, four contextual interviews told us <em>why</em> the existing OPC UA workflow was failing engineers — and which engineer to design for first.
+              Before we tested anything, four external contextual interviews — plus time with our own Advanced Support Group, the engineers who field these problems from customers — told us <em>why</em> the existing workflow was failing, and which engineer to design for first. We benchmarked the third-party clients alongside it, so we knew what we would be judged against.
             </P>
           </div>
         </Reveal>
@@ -308,6 +355,80 @@ function OPCUAContent() {
             </div>
           </Reveal>
         </div>
+
+        <Reveal delay={0.05}>
+          <div className="flank-card" style={{ marginTop: 40 }}>
+            <p className="flank-eyebrow">The hard part</p>
+            <h4 className="flank-h4">Earning the right to ask the next question</h4>
+            <p className="flank-body">
+              I was onboarding into this domain at the same time as I was researching it, and the people I was interviewing had been in it for twenty-five years. Some worked in defence and could share almost nothing — no context, no screenshots, no names, because their rules said so. Others were startup founders working with mid-scale factories, or ran multiple PSU plants, or built commercial mobile manufacturing lines, adventure-park rides, submarines.
+            </p>
+            <p className="flank-body" style={{ marginTop: 14 }}>
+              Every one of them had a different problem on the surface. My job was to find the part underneath that was the same, stay honest about where my toolbox&rsquo;s responsibility ended, and sound competent enough in the room that an engineer of twenty-five years would keep talking to me. That last part was most of the work in the first few weeks.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 40, marginBottom: 0 }}>
+            Stage 1 ended with functional and non-functional requirements, and a readout where we prioritised them together as a team — what ships in v1, what parks for v2, and what sits outside what we should be doing at all. That was the point we committed to building it.
+          </P>
+        </Reveal>
+      </div>
+
+      <Divider />
+
+      {/* ── 6c. STAGE 2 — DESIGN ────────────────────────────────────────── */}
+      <div style={{ maxWidth: 1080, margin: '0 auto', padding: '64px 24px' }}>
+        <Reveal>
+          <div style={{ marginBottom: 8 }}>
+            <EyebrowLabel num="06">Design</EyebrowLabel>
+            <H2>Getting the best design out <em>of nine people</em></H2>
+            <P>
+              With requirements agreed, the question changed from <em>should we build this</em> to <em>what should it look like</em>. I ran a Crazy 8&rsquo;s workshop rather than designing it myself — the domain knowledge in that room was spread across nine people and none of them was me.
+            </P>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <CrazyEights />
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 40 }}>
+            The thing I had to manage was who dominated. The developers who knew OPC UA deeply could have decided every screen by default, and the designers and the developers who didn&rsquo;t know the domain would have deferred to them — which would have given us a design that was technically correct and unusable by the people we&rsquo;d just interviewed.
+          </P>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <PullQuote cite="How I think about facilitation">
+            My job is not to make the best design. It is to get the best design out.
+          </PullQuote>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P>
+            We combined the sketches into design cases — a preferred direction and an alternate — and took both to two forums. One was the App Design Review: the VP of MATLAB and the customer-facing engineers. The other was the Hardware Design Review: senior UX VPs and principal designers. Between them, more than eight senior reviewers.
+          </P>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P>
+            They did not agree with each other.
+          </P>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <ForumConflict />
+        </Reveal>
+
+        {/* TODO(yt): which forum argued for which placement? Worth naming —
+            it makes the disagreement concrete rather than abstract. */}
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 36, marginBottom: 0 }}>
+            I could have picked a side and defended it. Both sides outranked me, both had a real argument, and whichever one I chose, I would have been choosing on taste. So I did the other thing available to me: I turned the disagreement into something testable.
+          </P>
+        </Reveal>
       </div>
 
       <Divider />
@@ -315,21 +436,57 @@ function OPCUAContent() {
       {/* ── 7. WHAT WE LEARNED ──────────────────────────────────────────── */}
       <div style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px 48px' }}>
         <Reveal>
-          <div style={{ marginBottom: 48 }}>
-            <EyebrowLabel num="06">Findings</EyebrowLabel>
-            <H2>What <em>we learned</em></H2>
+          <div style={{ marginBottom: 40 }}>
+            <EyebrowLabel num="07">Validation</EyebrowLabel>
+            <H2>I made the argument <em>testable</em></H2>
+            <P>
+              I went back and watched every recording from both forums. Out of that I wrote more than fifty specific research questions — one for each thing a reviewer had actually doubted, including every version of &ldquo;where should this action live.&rdquo; Then I condensed them into hypotheses and four high-level research questions, so the study covered the whole disagreement rather than the parts I happened to find interesting.
+            </P>
             <P style={{ marginBottom: 0 }}>
-              Five high-priority insight themes from the usability study. Each follows the same shape: observation → insight → recommendation → what shipped.
+              All the feedback was valid. That was the problem — and the reason this had to be settled with users rather than in a room.
             </P>
           </div>
         </Reveal>
 
+        <Reveal delay={0.05}>
+          <div className="rq-grid">
+            {[
+              ['Comprehension', 'Do users understand and navigate the interface and its functionality?'],
+              ['Usefulness', 'Does the app actually support the workflows they came with?'],
+              ['Intuitiveness', 'Do the flows match the mental model they already have?'],
+              ['Affordance', 'Do the interface elements communicate what they do and what will happen?'],
+            ].map(([name, q]) => (
+              <div className="rq-item" key={name}>
+                <span className="rq-name">{name}</span>
+                <span className="rq-q">{q}</span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <div style={{ margin: '44px 0 8px' }}>
+            <PhaseFunnel />
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 32, marginBottom: 40 }}>
+            Five participants, four industries, task-based sessions run as contextual inquiries. Twenty-seven findings came out; five themes carried the weight. Each one below follows the same shape — observation, insight, recommendation, what shipped. Open any of them for the detail.
+          </P>
+        </Reveal>
+
         {/* Theme 1 — Terminology debt */}
+        <Detail
+          eyebrow="Theme 1"
+          title={<>Configure didn&rsquo;t mean configure. Logging didn&rsquo;t mean logging.</>}
+          teaser="Four renames — and Export Log deleted outright rather than renamed."
+          badge={<Pill><Check />Shipped</Pill>}
+          open
+        >
         <div className="insight-block">
           <div className="insight-grid">
             <div>
-              <div className="insight-eyebrow">Theme 1</div>
-              <h3 className="insight-h3">Configure didn&rsquo;t mean configure. Logging didn&rsquo;t mean logging.</h3>
 
               <SubLabel>Observation</SubLabel>
               <p className="insight-body">
@@ -427,13 +584,19 @@ function OPCUAContent() {
             </div>
           </div>
         </div>
+        </Detail>
 
         {/* Theme 2 — Panel order */}
+        <Detail
+          eyebrow="Theme 2"
+          title={<>Engineers expected the action panel above the metadata, not below it</>}
+          teaser="Panels swapped: action above metadata. Generate Script added."
+          badge={<Pill><Check />Shipped</Pill>}
+          open
+        >
         <div className="insight-block">
           <div className="insight-grid">
             <div>
-              <div className="insight-eyebrow">Theme 2</div>
-              <h3 className="insight-h3">Engineers expected the action panel above the metadata, not below it</h3>
 
               <SubLabel>Observation</SubLabel>
               <p className="insight-body">Every participant who tried to read a sensor value scrolled past the &ldquo;Node Function&rdquo; panel without seeing it. They were drawn to the larger &ldquo;Node Information&rdquo; panel — which only displays metadata — and then asked, &ldquo;Where do I read the value?&rdquo;</p>
@@ -471,13 +634,18 @@ function OPCUAContent() {
             </div>
           </div>
         </div>
+        </Detail>
 
         {/* Theme 3 */}
+        <Detail
+          eyebrow="Theme 3"
+          title={<>The address space was a tree without a search box, and engineers got lost</>}
+          teaser="API-side search shipped; in-app search deliberately deferred."
+          badge={<Pill shipped={false}>~ Partially shipped</Pill>}
+        >
         <div className="insight-block">
           <div className="insight-grid">
             <div>
-              <div className="insight-eyebrow">Theme 3</div>
-              <h3 className="insight-h3">The address space was a tree without a search box, and engineers got lost</h3>
 
               <SubLabel>Observation</SubLabel>
               <p className="insight-body">Real factory address spaces have thousands of nodes. Participants spent 30–90 seconds per task hunting for nodes by hand-expanding tree branches.</p>
@@ -519,13 +687,18 @@ function OPCUAContent() {
             </div>
           </div>
         </div>
+        </Detail>
 
         {/* Theme 4 */}
+        <Detail
+          eyebrow="Theme 4"
+          title={<>Engineers wrote to read-only nodes and got cryptic errors</>}
+          teaser="The Write tab now appears only when the node actually allows writing."
+          badge={<Pill><Check />Shipped</Pill>}
+        >
         <div className="insight-block">
           <div className="insight-grid">
             <div>
-              <div className="insight-eyebrow">Theme 4</div>
-              <h3 className="insight-h3">Engineers wrote to read-only nodes and got cryptic errors</h3>
 
               <SubLabel>Observation</SubLabel>
               <p className="insight-body">Three of the five participants tried to write a value to a node that was server-side read-only. The app accepted the input, sent the write, and surfaced a vague <span className="mono">BadWriteNotSupported</span> error from the server. Two participants assumed they&rsquo;d typed the value wrong and tried again. One walked away frustrated.</p>
@@ -563,13 +736,18 @@ function OPCUAContent() {
             </div>
           </div>
         </div>
+        </Detail>
 
         {/* Theme 5 */}
+        <Detail
+          eyebrow="Theme 5"
+          title={<>Critical metadata was missing where engineers looked for it</>}
+          teaser="Quality and timestamp inline. Units deliberately kept out of the table."
+          badge={<Pill><Check />Shipped</Pill>}
+        >
         <div className="insight-block">
           <div className="insight-grid">
             <div>
-              <div className="insight-eyebrow">Theme 5</div>
-              <h3 className="insight-h3">Critical metadata was missing where engineers looked for it</h3>
 
               <SubLabel>Observation</SubLabel>
               <p className="insight-body">When a participant inspected a node, they expected to see four things together: the value, the unit (°C or psi or m/s²), the data quality (is this reading trustworthy right now?), and the sampling frequency (how fresh is this number?). The app showed value and partial metadata; the rest required clicking into a separate panel.</p>
@@ -607,18 +785,34 @@ function OPCUAContent() {
             </div>
           </div>
         </div>
+        </Detail>
+
+        <Reveal delay={0.05}>
+          <div className="flank-card" style={{ marginTop: 48 }}>
+            <p className="flank-eyebrow">Back to the disagreement</p>
+            <h4 className="flank-h4">The study answered the question the forums couldn&rsquo;t</h4>
+            <p className="flank-body">
+              Nobody in either forum was wrong about their own reasoning — they were reasoning about different users. The study replaced the argument with evidence. Participants read toolstrip labels as descriptions of what would happen to the thing in front of them, which is why <span className="mono">Start Monitoring</span> became <strong>Add to Table</strong>. They looked for the action beside the node they had selected, not above it, which is why the panels were swapped. And the workflows nobody could place cleanly stayed out of v1 rather than being forced into a pop-up to end the debate.
+            </p>
+            {/* TODO(yt): name which forum's position the study vindicated, and
+                whether what shipped was a third answer neither had proposed. */}
+            <p className="flank-body" style={{ marginTop: 14 }}>
+              That is the part I would defend hardest. The disagreement was real and expensive, and the way out of it was not seniority — it was five people and a task list.
+            </p>
+          </div>
+        </Reveal>
       </div>
 
       <Divider />
 
-      {/* ── 8. WHAT THE DESIGN REVIEW SURFACED ──────────────────────────── */}
-      <div style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px' }}>
+      {/* ── 8. STAGE 4 — SHIP ───────────────────────────────────────────── */}
+      <div id="ship" style={{ maxWidth: 1140, margin: '0 auto', padding: '80px 24px', scrollMarginTop: 24 }}>
         <Reveal>
           <div style={{ marginBottom: 32 }}>
-            <EyebrowLabel num="07">Internal Design Review</EyebrowLabel>
-            <H2>What the design review <em>surfaced</em></H2>
+            <EyebrowLabel num="08">Ship</EyebrowLabel>
+            <H2>Where I had to <em>take a position</em></H2>
             <P style={{ marginBottom: 0 }}>
-              The Internal Design Review wasn&rsquo;t a checkpoint — it was the round where I had to make decisions about <em>what to ship now, what to defer, and what to push back on</em> with five senior reviewers across engineering and design. These three moments are where the work was less &ldquo;research findings&rdquo; and more &ldquo;strategic partner in project planning.&rdquo;
+              The design review wasn&rsquo;t a checkpoint. It was the round where I had to decide what to ship now, what to defer, and what to push back on — in front of senior reviewers across engineering and design, across thirteen interface areas. These three moments are the ones where the job was less &ldquo;here are the findings&rdquo; and more &ldquo;here is what I think we should do, and why.&rdquo;
             </P>
           </div>
         </Reveal>
@@ -734,8 +928,7 @@ function OPCUAContent() {
       {/* ── 9. OUTCOME ──────────────────────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel num="08">Outcome</EyebrowLabel>
-          <H2>What shipped <em>— and what didn&rsquo;t</em></H2>
+          <H2 style={{ marginTop: 0 }}>What shipped <em>— and what didn&rsquo;t</em></H2>
         </Reveal>
         <Reveal delay={0.05}>
           <P>
@@ -798,6 +991,57 @@ function OPCUAContent() {
         <p style={{ fontFamily: 'Inter', fontSize: 15, fontStyle: 'italic', color: INK3, margin: '16px 0 0', lineHeight: 1.6 }}>
           Saying no with reasons is part of the job. Every deferral above traces back to a specific finding from the usability study or design review — not to engineering fatigue.
         </p>
+
+        <Reveal delay={0.05}>
+          <div className="flank-card" style={{ marginTop: 48 }}>
+            <p className="flank-eyebrow">What we traded away</p>
+            <h4 className="flank-h4">Four decisions that cost us something</h4>
+            <ul className="impact-list" style={{ marginTop: 16 }}>
+              <li>
+                We dropped workflows at the requirements stage, before anyone had designed them. Cheaper to cut an idea than a screen.
+              </li>
+              <li>
+                Configuration, read and write went into v1. Methods waited. That call came from code telemetry alongside the interview data — we could see what people actually reached for in the API, and it matched what they had told us.
+              </li>
+              <li>
+                The six-panel layout was fixed. It wasn&rsquo;t ours to change, so the design had to be good inside it.
+              </li>
+              <li>
+                Drag-and-drop and contextual menus weren&rsquo;t supported by the underlying infrastructure, so we designed around them. That limitation has since been picked up as a company-wide Tier&nbsp;1 project.
+                {/* TODO(yt): name the Tier 1 project and its status, if you can. */}
+              </li>
+            </ul>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 40, marginBottom: 0 }}>
+            Then it went to development to be built for real. I presented what had changed since the last time each group had seen it and why, and we ran the final design review as a usability session rather than a slideshow — put the working product in front of the people signing it off, and let them try it. That was the green flag.
+          </P>
+        </Reveal>
+      </div>
+
+      <Divider />
+
+      {/* ── 9b. IMPACT ──────────────────────────────────────────────────── */}
+      <div className="prose">
+        <Reveal>
+          <EyebrowLabel num="09">Impact</EyebrowLabel>
+          <H2>What actually <em>changed</em></H2>
+          <P>
+            The app shipped in MATLAB R2026a, about fifteen months after the first interview. Two things changed as a result — one for the engineer using it, one for us.
+          </P>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <ImpactMetrics />
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P style={{ marginTop: 40, marginBottom: 0 }}>
+            There is a quieter one too. Because every &ldquo;what do we skip&rdquo; conversation happened before the code got written, the team avoided a round of rework it would otherwise have paid for. That is harder to put a number on, and it is the part I would argue mattered most.
+          </P>
+        </Reveal>
       </div>
 
       <Divider />
@@ -805,7 +1049,7 @@ function OPCUAContent() {
       {/* ── 10. WHAT I'D DO DIFFERENTLY ─────────────────────────────────── */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel num="09">Reflection</EyebrowLabel>
+          <EyebrowLabel num="10">Reflection</EyebrowLabel>
           <H2>What I&rsquo;d do <em>differently</em></H2>
         </Reveal>
 
