@@ -619,7 +619,6 @@ function OPCUAContent() {
           title={<>Engineers expected the action panel above the metadata, not below it</>}
           teaser="Panels swapped: action above metadata. Generate Script added."
           badge={<Pill><Check />Shipped</Pill>}
-          open
         >
         <div className="insight-block">
           <div className="insight-grid">
