@@ -90,6 +90,11 @@ export default function FeaturedCaseStudy({
                 <ArrowRight style={{ marginLeft: 4 }} />
               </a>
             )}
+
+            <Link href={`/work/${project.slug}`} className="featured-cta" style={{ color: accent }}>
+              Read the case study
+              <ArrowRight style={{ marginLeft: 6 }} />
+            </Link>
           </div>
 
           {shot && (
@@ -104,11 +109,6 @@ export default function FeaturedCaseStudy({
               />
             </figure>
           )}
-
-          <Link href={`/work/${project.slug}`} className="featured-cta" style={{ color: accent }}>
-            Read the case study
-            <ArrowRight style={{ marginLeft: 6 }} />
-          </Link>
         </div>
       </div>
 
@@ -224,7 +224,7 @@ export default function FeaturedCaseStudy({
         }
 
         .featured-shot {
-          margin: 0 0 26px;
+          margin: 0;
           border: 1px solid;
           border-radius: 12px;
           overflow: hidden;
