@@ -83,13 +83,14 @@ export default function OPCUAStyles() {
           font-family: Inter, sans-serif; font-size: 14px; color: ${INK3};
         }
 
+        /* Three cells, not four: the old "Business Impact" cell restated the
+           TL;DR, which restated the Impact beat. */
         .tldr-grid {
           max-width: 1080px; margin: 0 auto;
-          display: grid; grid-template-columns: repeat(4, 1fr);
+          display: grid; grid-template-columns: repeat(3, 1fr);
           gap: 0;
         }
-        @media (max-width: 900px) { .tldr-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 540px) { .tldr-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .tldr-grid { grid-template-columns: 1fr; } }
         .tldr-cell {
           padding: 28px 28px 28px 0;
           border-right: 1px solid ${AS};
@@ -97,15 +98,25 @@ export default function OPCUAStyles() {
         .tldr-cell:first-child { padding-left: 0; }
         .tldr-cell:last-child { border-right: none; padding-right: 0; }
         @media (max-width: 900px) {
-          .tldr-cell:nth-child(2) { border-right: none; padding-right: 0; }
-          .tldr-cell:nth-child(3) { padding-left: 0; border-right: 1px solid ${AS}; }
-          .tldr-cell { padding-bottom: 24px; padding-top: 24px; }
-          .tldr-cell:nth-child(1),
-          .tldr-cell:nth-child(2) { border-bottom: 1px solid ${AS}; }
-        }
-        @media (max-width: 540px) {
           .tldr-cell { border-right: none !important; border-bottom: 1px solid ${AS}; padding: 20px 0; }
           .tldr-cell:last-child { border-bottom: none; }
+        }
+
+        /* The outcome, stated once, at the top. Matches the home page band. */
+        .hook-outcome {
+          font-family: Inter, sans-serif;
+          font-weight: 800;
+          font-size: clamp(30px, 4.6vw, 56px);
+          line-height: 1.04;
+          letter-spacing: -0.028em;
+          color: ${INK};
+          margin: 0 0 30px;
+          text-wrap: balance;
+        }
+        .hook-outcome em {
+          font-family: 'Instrument Serif', Georgia, serif;
+          font-style: italic; font-weight: 400;
+          color: ${A};
         }
         .tldr-label {
           font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
@@ -1261,24 +1272,6 @@ export default function OPCUAStyles() {
         /* ══ MARGIN NOTES ═════════════════════════════════════════════════ */
         /* Handwritten one-liners with a glyph, used to pre-chew a section that
            is otherwise a wall of prose. */
-        .scrawl-notes {
-          display: flex; flex-direction: column;
-          align-items: flex-start; gap: 10px;
-          margin: 30px 0 30px;
-        }
-        .scrawl-note { display: flex; align-items: center; gap: 12px; }
-        .scrawl-note-icon { flex-shrink: 0; color: ${A}; }
-        .scrawl-note-text {
-          font-family: Caveat, 'Bradley Hand', cursive;
-          font-weight: 600;
-          font-size: clamp(22px, 2.9vw, 30px);
-          line-height: 1.3;
-          color: ${INK};
-        }
-        @media (max-width: 600px) {
-          .scrawl-note { align-items: flex-start; gap: 10px; }
-          .scrawl-note-icon { margin-top: 3px; }
-        }
 
         /* ══ TL;DR ════════════════════════════════════════════════════════ */
         .tldr-shot {
