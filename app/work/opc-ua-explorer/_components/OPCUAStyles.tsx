@@ -749,6 +749,21 @@ export default function OPCUAStyles() {
           border-right: 0;
           border-bottom: 0;
         }
+        /* full-bleed zeroes the card padding so the screenshot can reach the
+           edges, and only .screenshot-title got its padding back. Annotated's
+           legend and caption are text, not bleed, so they were sitting 1px
+           from the card border. Match the title's 18px gutter. */
+        .screenshot-card.full-bleed .annot-legend,
+        .screenshot-card.full-bleed .annot-caption {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+        .screenshot-card.full-bleed .annot-caption:last-child {
+          padding-bottom: 18px;
+        }
+        .screenshot-card.full-bleed .annot-legend:last-child {
+          padding-bottom: 18px;
+        }
 
         /* ── §9 hero shot — escapes .prose so it can be as wide as the other screenshot sections ── */
         .hero-break {
