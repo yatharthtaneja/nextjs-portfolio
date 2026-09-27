@@ -22,7 +22,11 @@ export interface JournalProject {
 
 // Desktop-only (>=769px): the mobile breakpoint renders CaseStudyIndexCards
 // instead, so this component carries no touch/scroll handling.
-function Journal({ project, index }: { project: JournalProject; index: number }) {
+//
+// Exported because FeaturedCaseStudy renders a single Journal outside the grid.
+// The 3D geometry is hard-coded (60px depth in five CSS rules, 1.47 aspect
+// ratio) so it must be reused, never forked.
+export function Journal({ project, index }: { project: JournalProject; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
 

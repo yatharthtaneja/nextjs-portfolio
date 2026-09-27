@@ -5,6 +5,7 @@ import OverlappingTitle from "./components/OverlappingTitle";
 import RotatingTagline from "./components/Rotatingtagline";
 import CaseStudyJournals, { JournalProject } from "./components/CaseStudyJournal";
 import CaseStudyIndexCards from "./components/CaseStudyIndexCards";
+import FeaturedCaseStudy from "./components/FeaturedCaseStudy";
 import BehancePostcard from "./components/BehancePostcard";
 import IntroSection from "./components/IntroSection";
 import AboutSection from "./components/AboutSection";
@@ -15,8 +16,8 @@ const projects: JournalProject[] = [
     title:          "A factory has 10,000 sensors. Engineers had no way to explore them without writing code.",
     type:           "Industrial IoT · B2B · MathWorks",
     problem:        "When engineers have never asked for an app, how do you decide what it should actually do?",
-    highlight:      "27 findings · 4 insight themes · shipped R2026a",
-    highlightLabel: "Key Result",
+    highlight:      "Five tools → one · engineers rarely leave MATLAB",
+    highlightLabel: "Outcome",
     coverColor:     "#B8DFD0",
     spineColor:     "#1E6B4A",
     coverImage:     "",
@@ -28,8 +29,8 @@ const projects: JournalProject[] = [
     title:          "We replaced 50 lines of C language with three lines of MATLAB. Then we tested every word.",
     type:           "API Design · Comparative Study · MathWorks",
     problem:        "Which API style do hardware engineers prefer — and why does it matter for a decade?",
-    highlight:      "3.27 vs 2.55 ease-of-use — decision made",
-    highlightLabel: "Key Result",
+    highlight:      "The API MATLAB will live with for a decade",
+    highlightLabel: "Decision",
     coverColor:     "#C4D9F7",
     spineColor:     "#1D4ED8",
     coverImage:     "",
@@ -41,8 +42,8 @@ const projects: JournalProject[] = [
     title:          "A research study that turned 57 survey responses into 4 product roadmap candidates.",
     type:           "Survey Research · Strategy · MathWorks",
     problem:        "What do MQTT engineers actually struggle with, and what should we build next?",
-    highlight:      "4 roadmap candidates, 57 respondents",
-    highlightLabel: "Key Result",
+    highlight:      "Four things worth building, ranked by 57 engineers",
+    highlightLabel: "What it decided",
     coverColor:     "#FDE8C8",
     spineColor:     "#B45309",
     coverImage:     "",
@@ -54,8 +55,8 @@ const projects: JournalProject[] = [
     title:          "A discovery-to-workshop process that decided which form factor to build for OPC UA Server.",
     type:           "Strategic Planning · Workshop · MathWorks",
     problem:        "With three viable form factors and weeks of team debate, how do we decide what to build?",
-    highlight:      "Simulink block: criteria-first decision",
-    highlightLabel: "Strategic Decision",
+    highlight:      "Chose a Simulink block before anyone built one",
+    highlightLabel: "Decision",
     coverColor:     "#B2EDE8",
     spineColor:     "#0D6E6B",
     coverImage:     "",
@@ -90,6 +91,11 @@ export default function Home() {
         id="hero"
         className="relative flex min-h-screen w-full items-center justify-center purplebackground p-4 md:p-8"
       >
+        {/* The visible name is decorative: it is split across two DOM trees
+            (mobile/desktop) and rendered as spans so InteractiveName can swap
+            fonts per letter. This carries the actual document heading, so the
+            page has exactly one h1 without duplicating heading semantics. */}
+        <h1 className="sr-only">Yatharth Taneja — UX Researcher</h1>
         {/*
           DESKTOP: fixed h-[600px] with absolute children — your original layout
           MOBILE:  auto height, flex column layout matching Image 2
@@ -371,7 +377,21 @@ export default function Home() {
 {/* Full width, no max-w clipping. Journals on desktop, index-card stack on
     mobile — the swap is CSS-only at 768px (JournalStyles / IndexCardStyles). */}
 <div style={{ width: "100%", overflow: "visible" }}>
-  <CaseStudyJournals projects={projects} />
+  {/* The lead study gets its own band; the rest stay in the grid. Mobile index
+      cards still carry all four — that layout is already a ranked list. */}
+  <FeaturedCaseStudy
+    project={projects[0]}
+    outcome="Five tools became one."
+    body="Engineers can now explore a factory floor and leave with working MATLAB code, without opening a code editor."
+    docsUrl="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
+    shot={{
+      src: "/images/opcua/opcua-app-plot.png",
+      alt: "OPC UA Explorer in MATLAB: address space tree on the left, a monitoring table of live sensor values in the middle, and a plot of three subscribed sensors along the bottom.",
+      width: 3360,
+      height: 2020,
+    }}
+  />
+  <CaseStudyJournals projects={projects.slice(1)} />
   <CaseStudyIndexCards projects={projects} />
 </div>
 
