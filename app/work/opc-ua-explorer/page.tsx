@@ -106,7 +106,10 @@ function OPCUAContent() {
           "five tools" formulation is stated here and nowhere else on the page. */}
       <div className="prose" style={{ paddingTop: 56, paddingBottom: 44 }}>
         <Reveal>
-          <EyebrowLabel>What shipped</EyebrowLabel>
+          {/* "The outcome", not "What shipped": what sits under it is the
+              result, and the metadata strip below already uses "What Shipped"
+              as a label. */}
+          <EyebrowLabel>The outcome</EyebrowLabel>
         </Reveal>
 
         <Reveal delay={0.05}>
