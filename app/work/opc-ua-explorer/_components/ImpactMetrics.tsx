@@ -1,18 +1,25 @@
 // What the project changed — for the engineer using it, and for the business.
 // The case study had no business impact section at all before this.
 
+import type { ReactNode } from 'react';
 import { A, AS, AB, INK, INK2, INK3, LINE } from './theme';
 
-const USER = [
-  'Fewer touchpoints to get from "I need this sensor" to having the data.',
-  'A steep OPC UA learning curve flattened. You no longer have to be an expert to start.',
-  'No more waiting on the one person on the team who knows the protocol.',
-  'Attention back on the actual job, the business logic, instead of on OPC UA itself.',
+// One highlighted phrase per point: the claim itself, not the qualifier
+// around it. Highlighting whole bullets would read as no highlighting at all.
+
+const USER: ReactNode[] = [
+  <><span className="hl">Fewer touchpoints</span> to get from &ldquo;I need this sensor&rdquo; to having the data.</>,
+  <>A steep OPC UA learning curve flattened. <span className="hl">You no longer have to be an expert to start.</span></>,
+  <><span className="hl">No more waiting on the one person</span> on the team who knows the protocol.</>,
+  <>Attention back on <span className="hl">the actual job, the business logic,</span> instead of on OPC UA itself.</>,
 ];
 
-const BUSINESS = [
-  'Customers enter the MathWorks ecosystem early, instead of starting in a third-party client and moving on to vendor-specific platforms or open-source alternatives.',
-  'The team stopped building the wrong thing. Every "what do we skip" conversation happened before the code, not after.',
+const BUSINESS: ReactNode[] = [
+  <>Customers <span className="hl">enter the MathWorks ecosystem early,</span> instead of starting in a third-party client and moving on to vendor-specific platforms or open-source alternatives.</>,
+  // Absorbed the standalone "there is a quieter one too" paragraph that used
+  // to sit below this box. It made the same point in different words: the
+  // skip conversations happened before the code got written.
+  <><span className="hl">The team stopped building the wrong thing.</span> Every &ldquo;what do we skip&rdquo; conversation happened before the code got written, so we avoided a round of rework we would otherwise have paid for. Harder to put a number on, and the part I would argue mattered most.</>,
 ];
 
 export default function ImpactMetrics() {
@@ -22,8 +29,8 @@ export default function ImpactMetrics() {
         <div className="impact-col" style={{ borderColor: LINE }}>
           <p className="impact-col-label" style={{ color: A }}>For the engineer</p>
           <ul className="impact-list">
-            {USER.map((t) => (
-              <li key={t} style={{ color: INK2 }}>{t}</li>
+            {USER.map((t, i) => (
+              <li key={i} style={{ color: INK2 }}>{t}</li>
             ))}
           </ul>
         </div>
@@ -31,8 +38,8 @@ export default function ImpactMetrics() {
         <div className="impact-col" style={{ borderColor: LINE }}>
           <p className="impact-col-label" style={{ color: A }}>For MathWorks</p>
           <ul className="impact-list">
-            {BUSINESS.map((t) => (
-              <li key={t} style={{ color: INK2 }}>{t}</li>
+            {BUSINESS.map((t, i) => (
+              <li key={i} style={{ color: INK2 }}>{t}</li>
             ))}
           </ul>
         </div>
