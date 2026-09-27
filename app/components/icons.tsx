@@ -294,3 +294,45 @@ export function ArrowLeft({ size = 14, className, style, strokeWidth = 1.6 }: Gl
     </svg>
   );
 }
+
+// Hammer, bulb and speech bubble — the "what I built / what I learned / why it
+// matters" trio used as margin-note markers on case studies.
+export function Hammer({ size = 22, className, style, strokeWidth = 1.6 }: GlyphProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true"
+      className={className} style={{ display: 'block', ...style }}>
+      <path d="M13.5 6.5 17 3l4 4-3.5 3.5" stroke="currentColor" strokeWidth={strokeWidth}
+        strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M11 9 15 13" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" />
+      <path d="M12.8 7.2 9.2 10.8a1.4 1.4 0 0 0 0 2l2 2a1.4 1.4 0 0 0 2 0l3.6-3.6"
+        stroke="currentColor" strokeWidth={strokeWidth} strokeLinejoin="round" />
+      <path d="M10 13 3.8 19.2a1.7 1.7 0 0 0 2.4 2.4L12.4 15.4" stroke="currentColor"
+        strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function Bulb({ size = 22, className, style, strokeWidth = 1.6 }: GlyphProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true"
+      className={className} style={{ display: 'block', ...style }}>
+      <path d="M9 17a6.2 6.2 0 1 1 6 0v1.6a1.4 1.4 0 0 1-1.4 1.4h-3.2A1.4 1.4 0 0 1 9 18.6Z"
+        stroke="currentColor" strokeWidth={strokeWidth} strokeLinejoin="round" />
+      <path d="M10 20.6h4" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" />
+      <path d="M12 8.6v4.6" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function Speech({ size = 22, className, style, strokeWidth = 1.6 }: GlyphProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true"
+      className={className} style={{ display: 'block', ...style }}>
+      <path d="M20 13.4a2.6 2.6 0 0 1-2.6 2.6H9.4L5 19.4V6.6A2.6 2.6 0 0 1 7.6 4h9.8A2.6 2.6 0 0 1 20 6.6Z"
+        stroke="currentColor" strokeWidth={strokeWidth} strokeLinejoin="round" />
+      <circle cx="9.4" cy="10" r="1" fill="currentColor" />
+      <circle cx="12.6" cy="10" r="1" fill="currentColor" />
+      <circle cx="15.8" cy="10" r="1" fill="currentColor" />
+    </svg>
+  );
+}

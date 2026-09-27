@@ -15,7 +15,7 @@ export default function IntroSection() {
       {/* Divider off the hero — moved here from the top of #work */}
       <div style={{ height: 3, background: "#4030C3" }} />
 
-      <div className="max-w-5xl mx-auto px-6 md:px-8 pt-12 md:pt-20 pb-10 md:pb-16">
+      <div className="max-w-5xl mx-auto px-6 md:px-8 pt-12 md:pt-20 pb-6 md:pb-8">
         <p style={{
           fontFamily: "'Roboto', sans-serif",
           fontSize: 11,
@@ -51,7 +51,7 @@ export default function IntroSection() {
               fontWeight: 500,
             }}
           >
-            I&rsquo;m Yatharth. I&rsquo;m a CS-engineer-turned-UXR at{" "}
+            I&rsquo;m Yatharth, a CS engineer who became a UX researcher at{" "}
             <Link
               href="https://mathworks.com"
               target="_blank"
@@ -63,10 +63,38 @@ export default function IntroSection() {
               }}
             >
               MathWorks
-            </Link>{" "}
-            who believes the most elegant code fails without a human story.
-            With 4+ years of experience, I bridge technical complexity and
-            user empathy to build products that actually resonate.
+            </Link>. I work on the industrial toolboxes, the ones engineers use
+            to pull data out of factories, submarines and amusement-park rides.
+            The people I interview have usually been doing the job for
+            twenty-five years, and some work in defence and can&rsquo;t tell me
+            anything at all, so the work starts with earning the right to ask a
+            second question.
+          </p>
+        </div>
+      </div>
+
+      {/* The hard numbers, fixed. They used to live only inside the 4.5s
+          rotating tagline in the hero, where they scrolled away unread. */}
+      <div className="max-w-5xl mx-auto px-6 md:px-8 pb-10 md:pb-14">
+        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4 md:gap-16">
+          <div aria-hidden="true" />
+          <p style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontSize: 13,
+            fontWeight: 700,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase" as const,
+            color: "#493972",
+            margin: 0,
+            lineHeight: 1.9,
+          }}>
+          {/* nowrap per fact so the line breaks between facts, never inside
+              one ("MATLAB / R2026a"). */}
+          <span style={{ whiteSpace: "nowrap" as const }}>4+ years of mixed-methods UX</span>
+          <span style={{ opacity: 0.4, margin: "0 10px" }}>·</span>
+          <span style={{ whiteSpace: "nowrap" as const }}>2 products shipped in MATLAB R2026a</span>
+          <span style={{ opacity: 0.4, margin: "0 10px" }}>·</span>
+          <span style={{ whiteSpace: "nowrap" as const }}>toolboxes generating $2M+ quarterly</span>
           </p>
         </div>
       </div>

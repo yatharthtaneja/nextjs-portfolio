@@ -21,6 +21,11 @@ export default function JournalStyles() {
         /* ── WRAPPER ──────────────────────────────────────────────────────── */
         .journal-wrapper {
           position: relative;
+          /* It is an <a>. Inside .journals-grid the flex container blockifies
+             it, but FeaturedCaseStudy renders one outside any flex parent, and
+             width/height do not apply to an inline box — it collapsed to 0x0.
+             Declared here so the card sizes itself in any context. */
+          display: block;
           /* Fluid on mobile, fixed on desktop */
           width: min(380px, 88vw);
           height: calc(min(380px, 88vw) * 1.47);
@@ -376,21 +381,20 @@ export default function JournalStyles() {
             display: none;
           }
         }
-        /* Laptop (769–1639px): cap grid to 2 columns, journals keep natural width */
-        @media (min-width: 769px) and (max-width: 1639px) {
+        /* The grid holds the three non-featured studies; the lead study sits in
+           its own band above (FeaturedCaseStudy.tsx). Three cards need
+           380*3 + 40*2 = 1220px plus the 40px bleed padding to sit in one row. */
+        /* Laptop: two per row, the third wraps. */
+        @media (min-width: 769px) and (max-width: 1299px) {
           .journals-grid {
             max-width: 840px;
             margin-left: auto;
             margin-right: auto;
           }
-          /* stagger even columns in both rows */
-          .journals-grid .journal-wrapper:nth-child(2),
-          .journals-grid .journal-wrapper:nth-child(4) {
-            margin-top: -20px;
-          }
         }
-        /* Large monitor (≥1640px): 4 in a row, natural flex */
-        @media (min-width: 1640px) {
+        /* One row of three from 1300px up. Lifting the middle card keeps the
+           staggered, dropped-on-a-desk rhythm in both arrangements. */
+        @media (min-width: 769px) {
           .journals-grid .journal-wrapper:nth-child(2) {
             margin-top: -20px;
           }

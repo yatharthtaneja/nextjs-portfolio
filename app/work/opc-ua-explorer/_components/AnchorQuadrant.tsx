@@ -14,7 +14,7 @@ export default function AnchorQuadrant() {
       ref={ref}
       className="quadrant-card"
       role="img"
-      aria-label="Two-by-two chart of four use cases plotted by frequency of use (horizontal) and OPC UA dependency (vertical). Bench monitoring, predictive maintenance, and energy dashboards sit in the 'has alternative' row. Digital-twin sync sits alone in the top-left 'no alternative' quadrant — highlighted as the anchor."
+      aria-label="Two-by-two chart of four use cases plotted by frequency of use (horizontal) and OPC UA dependency (vertical). Bench monitoring, predictive maintenance, and energy dashboards sit in the 'has alternative' row. Digital-twin sync sits alone in the top-left 'no alternative' quadrant, highlighted as the anchor."
     >
       <div className="quadrant-chart">
         <motion.div

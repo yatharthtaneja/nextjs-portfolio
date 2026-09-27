@@ -8,11 +8,11 @@ import { A, AD, INK, INK2, INK3, OUTLINE_SOFT, SURFACE_LOW } from './theme';
 const VOCAB: { n: string; term: string; def: ReactNode; Icon: LucideIcon }[] = [
   {
     n: '1', term: 'Address space', Icon: Network,
-    def: 'Table of contents of a factory’s data — chapters and sub‑chapters.',
+    def: 'Table of contents of a factory’s data, in chapters and sub‑chapters.',
   },
   {
     n: '2', term: 'Node', Icon: Circle,
-    def: 'One entry — a single sensor value or valve position.',
+    def: 'One entry: a single sensor value or valve position.',
   },
   {
     n: '3', term: 'Subscription', Icon: Radio,

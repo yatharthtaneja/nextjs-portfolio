@@ -34,10 +34,17 @@ app/
 │   │   └── _components/        # Extracted pieces (prefix `_` keeps them out of the route tree)
 │   │       ├── theme.ts           # Palette constants (A, AS, AB, INK, INK2, INK3, LINE, CARD)
 │   │       ├── Typography.tsx     # Pill, Artifact, EyebrowLabel, H2, P, SubLabel, Divider, PullQuote
+│   │       ├── Detail.tsx         # Native <details> accordion — keeps collapsed text reachable by Cmd+F
+│   │       ├── Reveal.tsx         # Reveal / StaggerGroup / StaggerItem (framer-motion, useInView once)
+│   │       ├── Annotated.tsx      # Numbered callout pins on a screenshot + matching ordered legend
+│   │       ├── PaperTexture.tsx   # PaperDefs / PaperGrid / Wash — graph-paper + watercolour filters
 │   │       ├── SVGPrimitives.tsx  # PulseDot, DashedFlow, IsoTile
-│   │       ├── FactoryHookSVG.tsx # Isometric factory illustration (SMIL gated on reduced motion)
-│   │       ├── DecisionBar.tsx    # Scroll-triggered horizontal stacked bar
-│   │       ├── ZoomFrame.tsx      # Scroll-triggered screenshot zoom + caption loop
+│   │       ├── DecisionBar.tsx    # Scroll-triggered stacked bar (19 decisions), on paper texture
+│   │       ├── PhaseFunnel.tsx    # Narrowing bar chart, 18→14→27→11→5, on paper texture
+│   │       ├── UserArchetypes.tsx, GlossaryTiles.tsx, LandscapeSVG.tsx     # Beat 1
+│   │       ├── AudienceReframe.tsx, AnchorQuadrant.tsx, BrainstormCollage.tsx,
+│   │       ├── CrazyEights.tsx, ForumConflict.tsx                          # Beat 2
+│   │       ├── ImpactMetrics.tsx  # Beat 3 — escalation claim is deliberately unnumbered (TODO(yt))
 │   │       └── OPCUAStyles.tsx    # All inline CSS for this case study
 │   │
 │   └── ni-daqmx/
@@ -49,14 +56,20 @@ app/
 │           └── NiDaqmxStyles.tsx  # All inline CSS for this case study
 │
 └── components/                 # Shared across routes
-    ├── CaseStudyJournal.tsx    # 3D book grid component
+    ├── CaseStudyJournal.tsx    # 3D book grid; also exports <Journal> for the featured band
     ├── JournalStyles.tsx       # Extracted CSS for CaseStudyJournal
+    ├── FeaturedCaseStudy.tsx   # Lead study pulled out of the grid, with the outcome as the headline
+    ├── CaseStudyIndexCards.tsx # Mobile (<=768px) index-card stack — all 4 studies on one screen
+    ├── IndexCardStyles.tsx     # Extracted CSS for CaseStudyIndexCards
+    ├── IntroSection.tsx        # Server component — "Hello." + the fixed facts line (#about)
+    ├── BehancePostcard.tsx     # Earlier (college) work cards
+    ├── icons.tsx               # Shared inline SVG glyphs
     ├── CaseStudyMenu.tsx       # Fixed-position morphing nav menu (used on case-study pages)
     ├── InteractiveName.tsx     # Letter-by-letter font crossfade on the hero ("YATHARTH")
     ├── FloatingImage.tsx       # Floating stamp images (CSS keyframes; Framer Motion only for hover)
     ├── Rotatingtagline.tsx     # 3-item rotating tagline carousel (4.5s interval, hover-pause)
     ├── OverlappingTitle.tsx    # Absolute-positioned rotated decorative text
-    ├── AboutSection.tsx        # Server component — Hello + How I Can Help + Let's Connect + footer
+    ├── AboutSection.tsx        # Server component — How I Can Help + Let's Connect + footer (#connect)
     ├── AboutButton.tsx         # Nav link wrapper
     └── ProductCard.tsx         # Wrapper around AboutButton
 
@@ -102,7 +115,12 @@ The `_` prefix tells Next.js the folder is not a route. When adding a new case s
 
 ### Home Page (`app/page.tsx`)
 
-Three `<section>` elements with ids `hero`, `work`, and `about`. Case-study data is a hardcoded `JournalProject[]` array at the top of `page.tsx` — 4 projects (opc-ua-explorer, ni-daqmx, mqtt-survey, opc-ua-server). The About & Connect section is rendered via `<AboutSection />` (server component — no `'use client'`).
+Section order is **hero → about → work → connect**. Case-study data is a hardcoded `JournalProject[]` array at the top of `page.tsx` — 4 projects (opc-ua-explorer, ni-daqmx, mqtt-survey, opc-ua-server).
+
+- The hero carries one `sr-only` `<h1>`. The visible name is decorative: it is split across separate mobile and desktop DOM trees and rendered as spans so `InteractiveName` can swap fonts per letter, so it cannot be the heading.
+- `projects[0]` renders through `<FeaturedCaseStudy>` above the grid; `projects.slice(1)` goes to `<CaseStudyJournals>`. Mobile keeps all four in `<CaseStudyIndexCards>`.
+- `highlight` / `highlightLabel` are the **outcome** of each study, not its volume of research. Keep them that way when editing.
+- `coverImage` is declared on `JournalProject` but unused — `insetImages[0]` is what renders.
 
 ### 3D Book Effect (`CaseStudyJournal.tsx` + `JournalStyles.tsx`)
 
@@ -125,19 +143,22 @@ Three `<section>` elements with ids `hero`, `work`, and `about`. Case-study data
 - Pauses on hover, snaps to visible when paused mid-transition
 - Accepts `mobile` boolean prop — removes absolute positioning for flow layout
 
-### FactoryHookSVG (`app/work/opc-ua-explorer/_components/FactoryHookSVG.tsx`)
+### FeaturedCaseStudy.tsx
 
-- Isometric factory floor with 6 sensors connecting to a question-marked server node
-- Per-sensor packet duration is staggered (2.1s, 2.5s, 2.3s, 2.6s, 2.2s, 2.4s) to break the "wave" effect of identical loops
-- SMIL `<animateMotion>` + `<animate>` are rendered conditionally — CSS `prefers-reduced-motion` doesn't reach SMIL, so the gate happens in JS via `window.matchMedia` + state
+- A band above `.journals-grid` carrying the lead study's outcome as the largest type on the page, plus the shipped pill, the docs link and a screenshot of the product.
+- Reuses the exported `<Journal>` rather than forking it. `.journals-grid` is **flexbox**, so `grid-column: span 2` is inert, and the book geometry hard-codes a 60px depth across five CSS rules plus a locked 1.47 aspect ratio — hierarchy comes from position and type size instead.
+- `.journal-wrapper` declares `display: block` because it is an `<a>`: inside the flex grid it was blockified for free, but outside one it collapses to 0×0.
+- Desktop only (`hidden md:block`). It depends on `<JournalStyles>` being mounted by `CaseStudyJournals` on the same page.
 
-### ZoomFrame (`app/work/opc-ua-explorer/_components/ZoomFrame.tsx`)
+### Annotated.tsx (`app/work/opc-ua-explorer/_components/`)
 
-- `<figure>` with a single `<img>` driven by CSS keyframes
-- Two variants: standard `zoomLoop` (8s) and `pan-lr` (9s, panning + deeper zoom)
-- Caption uses per-segment easing inside its keyframe (`ease-out` rise / `linear` hold / `ease-in` fall)
-- IntersectionObserver triggers the `zoomed-in` class — runs once then disconnects
-- Honors `prefers-reduced-motion` by snapping to the zoomed-in frame
+- Numbered green pins on a static screenshot with a matching ordered legend beneath. Pins are `aria-hidden`; the legend carries the text.
+- Replaced `ZoomFrame`, which animated a zoom and pan — motion rather than explanation, since the reader still had to find the thing being discussed. `ZoomFrame` and its CSS have been deleted.
+
+### Detail.tsx (`app/work/opc-ua-explorer/_components/`)
+
+- Native `<details>`/`<summary>` on purpose: no JS state, works with scripting off, and find-in-page still reaches collapsed text. A JS accordion would hide it from Cmd+F, which is the whole reason the long-form detail stays on-page.
+- Theme 1 and only Theme 1 is `open` by default, so the pattern reads. It is ~2,700px of the page's height — the single biggest lever if the study needs shortening.
 
 ## Commands
 
