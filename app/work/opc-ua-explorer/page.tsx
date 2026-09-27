@@ -141,8 +141,8 @@ function OPCUAContent() {
           changed is what earns the scroll. */}
       <div className="prose" style={{ paddingBottom: 52 }}>
         <Reveal>
-          <EyebrowLabel>What changed</EyebrowLabel>
-          <H2 style={{ marginTop: 0 }}>What actually <em>changed</em></H2>
+          <EyebrowLabel>Impact</EyebrowLabel>
+          <H2 style={{ marginTop: 0 }}>What is <em>different now</em></H2>
         </Reveal>
 
         <Reveal delay={0.05}>
@@ -155,14 +155,6 @@ function OPCUAContent() {
           <ImpactMetrics />
         </Reveal>
 
-        <Reveal delay={0.05}>
-          <H2>The rework that <em>never happened</em></H2>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <P style={{ marginBottom: 0 }}>
-            There is a quieter one too. <span className="hl">Because every &ldquo;what do we skip&rdquo; conversation happened before the code got written, the team avoided a round of rework it would otherwise have paid for.</span> That is harder to put a number on, and it is the part I would argue mattered most.
-          </P>
-        </Reveal>
       </div>
 
       {/* Metadata, deliberately after the outcome rather than before it. */}
