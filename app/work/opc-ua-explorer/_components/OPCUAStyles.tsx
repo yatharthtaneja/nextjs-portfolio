@@ -361,32 +361,9 @@ export default function OPCUAStyles() {
         .landscape-svg { width: 100%; max-width: 820px; margin: 8px auto 32px; display: block; }
 
         /* ── §6 Funnel strip ── */
-        .funnel-strip { width: 100%; max-width: 1080px; margin: 0 auto 40px; display: block; }
 
-        /* ── §9 Decision bar ── */
-        .decision-bar-wrap { margin: 8px 0 28px; }
-        .decision-bar {
-          display: flex; width: 100%; height: 44px; border-radius: 8px;
-          overflow: hidden; background: ${LINE};
-        }
-        .decision-segment {
-          height: 100%;
-          transform: scaleX(0); transform-origin: left center;
-          transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
-          display: flex; align-items: center; justify-content: center;
-          text-align: center; padding: 0 6px; line-height: 1.15;
-          color: white; font-family: 'JetBrains Mono', monospace;
-          font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
-        }
-        .decision-segment.in-view { transform: scaleX(1); }
-        .decision-legend {
-          display: flex; flex-wrap: wrap; gap: 18px;
-          margin-top: 14px; font-family: Inter, sans-serif; font-size: 13px;
-          color: ${INK2};
-        }
-        .decision-legend-dot {
-          display: inline-block; width: 10px; height: 10px;
-          border-radius: 50%; margin-right: 8px; vertical-align: middle;
+        /* ── §9 Decision bar ── */;
+        };
         }
 
         /* ── §10 Lesson cards ── */
@@ -1506,6 +1483,47 @@ export default function OPCUAStyles() {
         .insight-stack-figs {
           margin-top: 34px;
           display: grid; gap: 34px;
+        }
+
+
+        /* ══ PAPER CHARTS ═════════════════════════════════════════════════ */
+        .paper-chart {
+          margin: 34px 0 8px;
+          border: 1px solid ${LINE};
+          border-radius: 12px;
+          overflow: hidden;
+          background: #F7F6F2;
+        }
+        .paper-chart-svg { display: block; width: 100%; height: auto; }
+        /* The chart scales with its viewBox, so at phone width the labels would
+           render at about 6px. Scroll it sideways instead, the same way the
+           wide tables on this page are handled. */
+        @media (max-width: 720px) {
+          .paper-chart { overflow-x: auto; overflow-y: hidden; }
+          .paper-chart-svg { min-width: 640px; }
+          .pc-caption { position: sticky; left: 0; }
+        }
+        .pc-title {
+          font-family: Inter, sans-serif; font-size: 15px; font-weight: 700;
+          fill: ${INK};
+        }
+        .pc-figure {
+          font-family: 'Instrument Serif', Georgia, serif;
+          font-size: 30px; fill: ${INK};
+        }
+        .pc-note {
+          font-family: Inter, sans-serif; font-size: 12.5px; fill: ${INK3};
+        }
+        .pc-axis {
+          font-family: 'JetBrains Mono', monospace; font-size: 10px;
+          letter-spacing: 0.1em; fill: ${INK3};
+        }
+        .pc-caption {
+          font-family: Inter, sans-serif; font-size: 14px; font-style: italic;
+          line-height: 1.55; color: ${INK3};
+          margin: 0; padding: 14px 18px 16px;
+          border-top: 1px solid ${LINE};
+          background: #ffffff;
         }
 
       `}</style>
