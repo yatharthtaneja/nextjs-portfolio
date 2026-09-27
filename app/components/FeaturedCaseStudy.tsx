@@ -43,7 +43,7 @@ export default function FeaturedCaseStudy({
   return (
     <section
       aria-labelledby="featured-outcome"
-      className="featured-band hidden md:block"
+      className="featured-band"
     >
       <div className="featured-inner">
         {/* ── Left: the card itself, geometry untouched ── */}
@@ -113,9 +113,19 @@ export default function FeaturedCaseStudy({
       </div>
 
       <style>{`
+        /* Hidden by default and shown from 769px, deliberately NOT Tailwind's
+           "hidden md:block". Tailwind's md is min-width:768px, but
+           .journals-grid hides at max-width:768px and .indexcard-stack shows
+           at max-width:768px — so at exactly 768px the band and the mobile
+           index cards both rendered, OPC UA appeared twice, and the three
+           desktop journals disappeared. This matches the grid's boundary. */
         .featured-band {
+          display: none;
           width: 100%;
           padding: 8px 24px 64px;
+        }
+        @media (min-width: 769px) {
+          .featured-band { display: block; }
         }
         .featured-inner {
           max-width: 1180px;
