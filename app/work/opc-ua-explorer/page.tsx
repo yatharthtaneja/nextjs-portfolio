@@ -298,7 +298,7 @@ function OPCUAContent() {
               {
                 label: 'Stage 1 · Discovery',
                 stats: 'Dec 2023 – Feb 2024\n4 external contextual interviews + our support engineers\n18 pain points · 14 requirements',
-                body: 'A four-week discovery sprint with engineers across four industries (automotive controls, amusement-park digital twins, PLC virtual commissioning, ship-building), plus contextual inquiry with our own Advanced Support Group, who field these problems from customers every day. I built the screener, the interview guide and the requirements document, and led synthesis with the developer and design lead.',
+                body: 'A discovery sprint with engineers across four industries (automotive controls, amusement-park digital twins, PLC virtual commissioning, ship-building), plus contextual inquiry with our own Advanced Support Group, who field these problems from customers every day. I built the screener, the interview guide and the requirements document, and led synthesis with the developer and design lead.',
               },
               {
                 label: 'Stage 2 · Design',
@@ -1052,7 +1052,7 @@ function OPCUAContent() {
                 ['Cross-correlation plots between two nodes', 'Deferred to a later release', 'Strong signal but small sample of users requesting it'],
                 ['Custom alarms on monitoring values', 'Deferred, covered by Simulink workflow today', 'Use case existed but had a viable workaround'],
                 ['Save/load app session layout', 'Deferred, enhancement request to platform', 'Required Hardware Manager–level change'],
-                ['Five other smaller asks', 'Deferred or absorbed into existing features', 'Mix of low frequency, high cost, or already in the roadmap'],
+                ['Six other smaller asks', 'Deferred or absorbed into existing features', 'Mix of low frequency, high cost, or already in the roadmap'],
               ].map(([feat, dec, rat]) => (
                 <tr key={feat}>
                   <td style={{ fontWeight: 500, color: INK, maxWidth: 200 }}>{feat}</td>

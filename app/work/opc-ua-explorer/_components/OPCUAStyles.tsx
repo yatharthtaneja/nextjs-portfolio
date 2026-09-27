@@ -700,97 +700,6 @@ export default function OPCUAStyles() {
         }
         .impact-label { color: ${A} !important; }
 
-        /* ── ZoomFrame: scroll-triggered dramatic zoom on screenshots ── */
-        .zoom-frame {
-          position: relative; overflow: hidden;
-          width: 100%;
-          margin: 14px 0 8px;
-          border: 1px solid ${LINE};
-          border-radius: 12px;
-          background: #0f1f1a;
-          --focal-x: 50%;
-          --focal-y: 50%;
-          --zoom: 1.8;
-        }
-        .zoom-frame img {
-          width: 100%; height: 100%;
-          object-fit: cover; display: block;
-          transform: scale(1);
-          transform-origin: var(--focal-x) var(--focal-y);
-        }
-        .zoom-frame.zoomed-in img {
-          animation: zoomLoop 8s infinite;
-        }
-        @keyframes zoomLoop {
-          0%    { transform: scale(1);             animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
-          17.5% { transform: scale(var(--zoom));   animation-timing-function: linear; }
-          80%   { transform: scale(var(--zoom));   animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0); }
-          92.5% { transform: scale(1); }
-          100%  { transform: scale(1); }
-        }
-        .zoom-caption {
-          position: absolute; left: 0; right: 0; bottom: 0;
-          padding: 14px 18px 12px;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
-          color: white;
-          font-family: Inter, sans-serif; font-size: 12.5px; line-height: 1.45;
-          letter-spacing: 0.01em;
-          opacity: 0;
-          pointer-events: none;
-        }
-        .zoom-frame.zoomed-in .zoom-caption {
-          animation: captionLoop 8s infinite;
-        }
-        @keyframes captionLoop {
-          0%    { opacity: 0; animation-timing-function: ease-out; }
-          17.5% { opacity: 0; }
-          25%   { opacity: 0.96; animation-timing-function: linear; }
-          78%   { opacity: 0.96; animation-timing-function: ease-in; }
-          85%   { opacity: 0; }
-          100%  { opacity: 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .zoom-frame.zoomed-in img {
-            animation: none;
-            transform: scale(var(--zoom));
-          }
-          .zoom-frame.zoomed-in .zoom-caption {
-            animation: none;
-            opacity: 0.96;
-          }
-        }
-
-        /* ── ZoomFrame variant: zoom in on left edge, pan right while zooming deeper ── */
-        .zoom-frame.pan-lr.zoomed-in img {
-          animation: zoomPanLR 9s infinite;
-        }
-        @keyframes zoomPanLR {
-          0%   { transform: scale(1);                          transform-origin: 50% 50%;             animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
-          15%  { transform: scale(var(--zoom));                transform-origin: 0% var(--focal-y);   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
-          70%  { transform: scale(calc(var(--zoom) * 1.25));   transform-origin: 100% var(--focal-y); animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0); }
-          85%  { transform: scale(1);                          transform-origin: 100% var(--focal-y); }
-          100% { transform: scale(1);                          transform-origin: 50% 50%; }
-        }
-        .zoom-frame.pan-lr.zoomed-in .zoom-caption {
-          animation: captionLoopLR 9s infinite;
-        }
-        @keyframes captionLoopLR {
-          0%   { opacity: 0; animation-timing-function: ease-out; }
-          15%  { opacity: 0; }
-          22%  { opacity: 0.96; animation-timing-function: linear; }
-          78%  { opacity: 0.96; animation-timing-function: ease-in; }
-          85%  { opacity: 0; }
-          100% { opacity: 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .zoom-frame.pan-lr.zoomed-in img {
-            animation: none;
-            transform: scale(var(--zoom));
-            transform-origin: 0% var(--focal-y);
-          }
-        }
-
-        /* ── Title + screenshot card ── */
         .screenshot-card {
           background: ${CARD};
           border: 1px solid ${LINE};
@@ -808,7 +717,6 @@ export default function OPCUAStyles() {
           letter-spacing: -0.008em;
           line-height: 1.35;
         }
-        .screenshot-card .zoom-frame,
         .screenshot-card .wireframe-frame,
         .screenshot-card .hero-shot {
           margin: 0;
@@ -823,7 +731,6 @@ export default function OPCUAStyles() {
           padding: 11px 18px 10px;
           margin: 0;
         }
-        .screenshot-card.full-bleed .zoom-frame,
         .screenshot-card.full-bleed .wireframe-frame,
         .screenshot-card.full-bleed .hero-shot {
           border-radius: 0;
@@ -866,29 +773,6 @@ export default function OPCUAStyles() {
           position: relative; overflow: hidden;
         }
         .wireframe-frame svg { width: 100%; height: 100%; display: block; }
-
-        /* ── §8 Pair 3 hover-swap (plot ↔ log) ── */
-        .pair3-swap { position: relative; }
-        .pair3-swap > .zoom-frame:nth-of-type(2) {
-          position: absolute; inset: 0; margin: 0;
-          opacity: 0; transition: opacity 220ms ease-out, filter 220ms ease-out;
-        }
-        @media (hover: hover) and (pointer: fine) {
-          .pair3-swap:hover > .zoom-frame:nth-of-type(2) { opacity: 1; }
-          .pair3-swap:hover > .zoom-frame:nth-of-type(1) img { filter: blur(2px); }
-        }
-        .pair3-swap::after {
-          content: '\\21bb HOVER FOR LOG';
-          position: absolute; top: 10px; right: 12px;
-          font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
-          font-weight: 700; letter-spacing: 0.1em;
-          color: white; background: rgba(0, 0, 0, 0.55);
-          padding: 5px 9px; border-radius: 3px;
-          pointer-events: none; z-index: 5;
-        }
-        @media (hover: hover) and (pointer: fine) {
-          .pair3-swap:hover::after { content: '\\21bb LOG ACTIVE'; background: rgba(30, 107, 74, 0.92); }
-        }
 
         @keyframes sensorPulse {
           0%, 100% { opacity: 0.55; }

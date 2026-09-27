@@ -1,7 +1,8 @@
 // A static screenshot with numbered pins on the things being discussed, and a
 // matching legend underneath.
 //
-// This replaces ZoomFrame for the findings. ZoomFrame animated a zoom and pan
+// This replaced ZoomFrame for the findings (ZoomFrame has since been deleted,
+// along with its CSS). ZoomFrame animated a zoom and pan
 // across the image, which is motion rather than explanation: the reader still
 // had to work out which part of the interface the paragraph was about. Theme 1
 // is the clearest case — four separate problem surfaces sit in one toolstrip,
