@@ -136,6 +136,35 @@ function OPCUAContent() {
         </Reveal>
       </div>
 
+      {/* The impact, up front. It used to sit in Beat 3, well past the point
+          where a reader decides whether to keep going. Leading with what
+          changed is what earns the scroll. */}
+      <div className="prose" style={{ paddingBottom: 52 }}>
+        <Reveal>
+          <EyebrowLabel>What changed</EyebrowLabel>
+          <H2 style={{ marginTop: 0 }}>What actually <em>changed</em></H2>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <P>
+            Two things changed as a result: one for the engineer using it, one for us.
+          </P>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <ImpactMetrics />
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <H2>The rework that <em>never happened</em></H2>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <P style={{ marginBottom: 0 }}>
+            There is a quieter one too. <span className="hl">Because every &ldquo;what do we skip&rdquo; conversation happened before the code got written, the team avoided a round of rework it would otherwise have paid for.</span> That is harder to put a number on, and it is the part I would argue mattered most.
+          </P>
+        </Reveal>
+      </div>
+
       {/* Metadata, deliberately after the outcome rather than before it. */}
       <div style={{ background: AB, borderTop: `3px solid ${A}`, padding: '40px 24px' }}>
         <StaggerGroup className="tldr-grid">
@@ -888,15 +917,16 @@ function OPCUAContent() {
 
       <Divider />
 
-      {/* ── BEAT 3 · WHAT CHANGED ─────────────────────────────────────────
-          Outcome and Impact were two sections saying overlapping things; they
-          are one beat now, and it opens with the result rather than with the
-          release note. "What we traded away" moved to Beat 4, where the
-          constraints belong. */}
+      {/* ── BEAT 3 · WHAT SHIPPED, AND WHAT DIDN'T ────────────────────────
+          The impact half of this beat moved up into the hook, where it does
+          the work of getting someone to keep reading. What is left is the
+          scope story: what we shipped, what we deferred, and why. */}
       <div className="prose">
         <Reveal>
-          <EyebrowLabel num="03">What changed</EyebrowLabel>
-          <H2>What actually <em>changed</em></H2>
+          {/* Not "What shipped" — Beat 0's eyebrow already uses that for the
+              product reveal. This beat is the scope story. */}
+          <EyebrowLabel num="03">Scope</EyebrowLabel>
+          <H2>What shipped, <em>and what didn&rsquo;t</em></H2>
         </Reveal>
 
         <Reveal delay={0.05}>
@@ -905,33 +935,7 @@ function OPCUAContent() {
             <a href="https://www.mathworks.com/help/icomm/ug/opcuaexplorer-app.html"
                target="_blank" rel="noopener noreferrer" className="docs-link">
               mathworks.com/help/icomm/ug/opcuaexplorer-app.html
-            </a>. Two things changed as a result: one for the engineer using it, one for us.
-          </P>
-        </Reveal>
-
-        {/* The second full-window screenshot of the same app lived here. Beat 0
-            already shows it, from the newer prototype capture rather than the
-            older one this used, so a reader was being shown the product twice. */}
-
-
-        <Reveal delay={0.05}>
-          <ImpactMetrics />
-        </Reveal>
-
-        <Reveal delay={0.05}>
-          <ImpactMetrics />
-        </Reveal>
-
-        <Reveal delay={0.05}>
-          <P style={{ marginTop: 40, marginBottom: 0 }}>
-            There is a quieter one too. <span className="hl">Because every &ldquo;what do we skip&rdquo; conversation happened before the code got written, the team avoided a round of rework it would otherwise have paid for.</span> That is harder to put a number on, and it is the part I would argue mattered most.
-          </P>
-        </Reveal>
-
-        <Reveal delay={0.05}>
-          <H2>What shipped, <em>and what didn&rsquo;t</em></H2>
-          <P>
-            The research also generated an <strong>11-item feature-request pipeline</strong> that has shaped the next two releases. As a strategic partner in project planning, I helped the team decide what <em>not</em> to ship in v1 just as much as what to ship.
+            </a>. The research also generated an <strong>11-item feature-request pipeline</strong> that has shaped the next two releases. As a strategic partner in project planning, I helped the team decide what <em>not</em> to ship in v1 just as much as what to ship.
           </P>
         </Reveal>
 
