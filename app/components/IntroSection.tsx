@@ -88,12 +88,22 @@ export default function IntroSection() {
             margin: 0,
             lineHeight: 1.9,
           }}>
-          {/* nowrap per fact so the line breaks between facts, never inside
-              one ("MATLAB / R2026a"). */}
+          {/* nowrap per fact so a line never breaks inside one
+              ("MATLAB / R2026a"). The revenue claim gets its own line rather
+              than trailing off the end of the second. */}
           <span style={{ whiteSpace: "nowrap" as const }}>4+ years of mixed-methods UX</span>
-          <span style={{ opacity: 0.4, margin: "0 10px" }}>·</span>
-          <span style={{ whiteSpace: "nowrap" as const }}>2 products shipped in MATLAB R2026a</span>
-          <span style={{ opacity: 0.4, margin: "0 10px" }}>·</span>
+          {/* Explicit spaces: JSX drops whitespace between elements that sits
+              across a newline, and with every fact set to nowrap that left the
+              line with no break opportunity at all — it overflowed on a phone. */}
+          {' '}
+          {/* The separator lives inside the nowrap span of the fact it
+              introduces, so it can never be left dangling at the end of a
+              wrapped line. The break happens at the space before it. */}
+          <span style={{ whiteSpace: "nowrap" as const }}>
+            <span style={{ opacity: 0.4, marginRight: 6 }}>·</span>
+            2 products shipped in MATLAB R2026a
+          </span>
+          <br />
           <span style={{ whiteSpace: "nowrap" as const }}>toolboxes generating $2M+ quarterly</span>
           </p>
         </div>
