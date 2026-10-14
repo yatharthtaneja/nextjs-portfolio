@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import CaseStudyMenu from '@/app/components/CaseStudyMenu';
+import SectionRail from '@/app/components/SectionRail';
 import { A, AS, AB, AD, INK, INK2, INK3, LINE, CARD } from './_components/theme';
 import { Pill, EyebrowLabel, H2, P, SubLabel, Divider } from './_components/Typography';
 import { Reveal, StaggerGroup, StaggerItem } from './_components/Reveal';
@@ -26,6 +27,7 @@ function NiDaqmxContent() {
     <div style={{ background: '#ffffff', color: INK, minHeight: '100vh' }}>
       <CaseStudyMenu />
       <NiDaqmxStyles />
+      <SectionRail accent={A} />
 
       {/* ── 1. OPENING HOOK ──────────────────────────────────────────────── */}
       <div className="hero-wrap">

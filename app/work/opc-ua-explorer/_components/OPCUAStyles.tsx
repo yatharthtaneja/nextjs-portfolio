@@ -48,6 +48,7 @@ export default function OPCUAStyles() {
           flex: 0 0 48px; height: 1px;
           background: ${A}; opacity: 0.4;
         }
+
         .cs-h2 {
           font-family: Inter, sans-serif; font-weight: 600;
           font-size: clamp(30px, 4.5vw, 56px);

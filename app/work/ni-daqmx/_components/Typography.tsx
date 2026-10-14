@@ -30,9 +30,20 @@ export function Artifact({ label, height = 260 }: { label: string; height?: numb
   );
 }
 
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+// Every eyebrow is a section start: it carries an id to scroll to and the
+// data-rail name that SectionRail pins at the top of the page.
 export function EyebrowLabel({ children, num }: { children: React.ReactNode; num?: string }) {
+  const label = typeof children === 'string' ? children : undefined;
   return (
-    <div className="cs-eyebrow" aria-label={typeof children === 'string' ? children : undefined}>
+    <div
+      className="cs-eyebrow"
+      aria-label={label}
+      id={label ? slug(label) : undefined}
+      data-rail={label}
+      data-rail-num={num}
+    >
       {num && <span className="cs-eyebrow-num">{num}</span>}
       <span className="cs-eyebrow-label">{children}</span>
       <span className="cs-eyebrow-rule" aria-hidden="true" />

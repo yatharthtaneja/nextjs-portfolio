@@ -18,6 +18,7 @@ import DecisionBar from './_components/DecisionBar';
 import Annotated from './_components/Annotated';
 import Detail from './_components/Detail';
 import OPCUAStyles from './_components/OPCUAStyles';
+import SectionRail from '@/app/components/SectionRail';
 import GlossaryTiles from './_components/GlossaryTiles';
 import LandscapeSVG from './_components/LandscapeSVG';
 import PhaseFunnel from './_components/PhaseFunnel';
@@ -35,6 +36,7 @@ function OPCUAContent() {
     <div style={{ background: '#ffffff', color: '#111827', minHeight: '100vh' }}>
       <CaseStudyMenu />
       <OPCUAStyles />
+      <SectionRail accent={A} />
 
       {/* ── BEAT 0 · THE HOOK ─────────────────────────────────────────────
           Ten seconds: the problem, then the thing itself, then the outcome.

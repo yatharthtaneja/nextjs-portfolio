@@ -65,6 +65,8 @@ app/
     ├── BehancePostcard.tsx     # Earlier (college) work cards
     ├── icons.tsx               # Shared inline SVG glyphs
     ├── CaseStudyMenu.tsx       # Fixed-position morphing nav menu (used on case-study pages)
+    ├── SectionRail.tsx         # Case-study section titles: queue bottom-right, letters fly up the edge into the top-right heading
+    ├── SectionRailStyles.tsx   # Extracted CSS for SectionRail (+ eyebrow slide-in, proximity scroll-snap)
     ├── InteractiveName.tsx     # Letter-by-letter font crossfade on the hero ("YATHARTH")
     ├── FloatingImage.tsx       # Floating stamp images (CSS keyframes; Framer Motion only for hover)
     ├── Rotatingtagline.tsx     # 3-item rotating tagline carousel (4.5s interval, hover-pause)
@@ -149,6 +151,14 @@ Section order is **hero → about → work → connect**. Case-study data is a h
 - Reuses the exported `<Journal>` rather than forking it. `.journals-grid` is **flexbox**, so `grid-column: span 2` is inert, and the book geometry hard-codes a 60px depth across five CSS rules plus a locked 1.47 aspect ratio — hierarchy comes from position and type size instead.
 - `.journal-wrapper` declares `display: block` because it is an `<a>`: inside the flex grid it was blockified for free, but outside one it collapses to 0×0.
 - Desktop only (`hidden md:block`). It depends on `<JournalStyles>` being mounted by `CaseStudyJournals` on the same page.
+
+### SectionRail.tsx (`app/components/`)
+
+- Mounted once per case study (`<SectionRail accent={A} />`). Sections come from the DOM: every `EyebrowLabel` with a string child renders `id` + `data-rail`, so adding an eyebrow adds a section.
+- Scroll-scrubbed, not timed: the next title's letters ride one shared track (queue → right edge → up), then each hops over the heading row into its slot. Start/end positions are measured from two hidden copies of the word (queue item + `.rail-slot`), so hand-offs are invisible.
+- Section offsets use `offsetTop`, not `getBoundingClientRect`, because eyebrows sit inside `Reveal`s that start translated.
+- Flight is desktop only (>768px) and off under `prefers-reduced-motion`; there the heading just swaps.
+- Sizes are the `--rail-*` vars in `SectionRailStyles.tsx`.
 
 ### Annotated.tsx (`app/work/opc-ua-explorer/_components/`)
 
